@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 15:00:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/04 15:15:30 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 #endif

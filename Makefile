@@ -6,17 +6,17 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/04 12:59:59 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/04 16:26:56 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc -Wall -Werror -Wextra -fsanitize=address -g3
+USER = mdesoeuv
 
-SRCS = main.c
+CC = gcc -Wall -Werror -Wextra
 
-SRCS_PATH = srcs/
+SRCS = readline_tests.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 
@@ -24,17 +24,19 @@ OBJS = $(SRCS:.c=.o)
 
 OBJS_FILES = $(addprefix objs/, $(OBJS))
 
-objs/%.o :	srcs/%.c	srcs/minishell.h libft/libft.h
+LIB = libft/libft.a
+
+all : libft $(NAME)
+
+$(NAME)	:	$(OBJS_FILES) $(LIB)
+			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include
+
+$(LIB)	:	
+			$(MAKE) -C libft
+
+objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			@mkdir -p objs
 			$(CC) -c $< -o $@
-
-all : $(NAME) libft
-
-libft : 
-		make -C libft
-
-$(NAME) :	$(OBJS_FILES) libft/libft.a
-			$(CC) $(OBJS_FILES) libft/libft.a
 			
 clean	:
 			rm -rf objs/
