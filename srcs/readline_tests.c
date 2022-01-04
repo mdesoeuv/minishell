@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 16:28:28 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/04 17:42:04 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ int	main(void)
 {
 	char	*line;
 
-	while (ft_strcmp(line, "exit") != 0)
+	line = readline("prompt? ");
+	while (line && ft_strcmp(line, "exit") != 0)
 	{
-		line = readline("prompt? ");
 		add_history(line);
-		free(line);
 		printf("command entered = %s\n", line);
+		if (ft_strcmp(line, "pwd") == 0)
+			print_working_directory();
+		free(line);
+		line = readline("prompt? ");
 	}
 	free(line);
 	return (0);

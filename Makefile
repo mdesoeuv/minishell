@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/04 16:26:56 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/04 17:42:46 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ USER = mdesoeuv
 
 CC = gcc -Wall -Werror -Wextra
 
-SRCS = readline_tests.c
+SRCS =	readline_tests.c \
+		built_in1.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 

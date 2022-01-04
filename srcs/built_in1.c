@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   built_in1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 17:40:43 by mdesoeuv         ###   ########lyon.fr   */
+/*   Created: 2022/01/04 16:43:20 by mdesoeuv          #+#    #+#             */
+/*   Updated: 2022/01/04 18:36:52 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <dirent.h>
-# include <termios.h>
-# include "../libft/libft.h"
+/*
+**	MAX_PATH = 1024 in OSX
+*/
 
-void	print_working_directory(void);
+void	print_working_directory(void)
+{
+	char	path[1025];
+	char	*result;
 
-#endif
+	result = getcwd(path, 1024);
+	ft_putendl_fd(result, 1);
+}
