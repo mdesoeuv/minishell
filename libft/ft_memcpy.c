@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 15:00:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Created: 2021/10/11 10:47:40 by mdesoeuv          #+#    #+#             */
+/*   Updated: 2021/11/03 12:16:36 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <dirent.h>
-# include "libft.h"
+void	*ft_memcpy(void *dest, const void *src, size_t size)
+{
+	const unsigned char	*tab_src;
+	unsigned char		*tab_dest;
+	size_t				i;
 
-#endif
+	i = 0;
+	if (!src)
+		return (dest);
+	tab_dest = (unsigned char *)dest;
+	tab_src = (const unsigned char *)src;
+	while (i < size)
+	{
+		tab_dest[i] = tab_src[i];
+		i++;
+	}
+	return (dest);
+}

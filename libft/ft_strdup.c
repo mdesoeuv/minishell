@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 15:00:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Created: 2021/10/11 15:12:00 by mdesoeuv          #+#    #+#             */
+/*   Updated: 2021/11/03 10:14:52 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <dirent.h>
-# include "libft.h"
+char	*ft_strdup(const char *s1)
+{
+	int		size;
+	int		i;
+	char	*copy;
 
-#endif
+	size = ft_strlen(s1);
+	copy = (char *)malloc(sizeof(char) * (size + 1));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		copy[i] = s1[i];
+		i++;
+	}
+	copy[i] = 0;
+	return (copy);
+}

@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 15:00:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Created: 2021/10/12 14:19:25 by mdesoeuv          #+#    #+#             */
+/*   Updated: 2021/11/03 17:08:39 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <dirent.h>
-# include "libft.h"
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int				i;
+	unsigned char	*un_s1;
+	unsigned char	*un_s2;
 
-#endif
+	i = 0;
+	un_s1 = (unsigned char *)s1;
+	un_s2 = (unsigned char *)s2;
+	while (un_s1[i])
+	{
+		if (un_s1[i] - un_s2[i] != 0)
+			return (un_s1[i] - un_s2[i]);
+		i++;
+	}
+	return (un_s1[i] - un_s2[i]);
+}

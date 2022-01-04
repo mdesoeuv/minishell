@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline_tests.c                                   :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 15:02:20 by mdesoeuv         ###   ########lyon.fr   */
+/*   Created: 2021/10/11 11:13:22 by mdesoeuv          #+#    #+#             */
+/*   Updated: 2021/11/03 16:53:10 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(void)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*line;
-	int		i;
+	const char	*tab_src;
+	char		*tab_dest;
+	size_t		i;
 
-	while (ft_strcmp(line, "exit") != 0)
+	if (!src || len == 0 || src == dst)
+		return (dst);
+	tab_src = (const char *)src;
+	tab_dest = (char *)dst;
+	if (tab_src > tab_dest)
 	{
-		line = readline("prompt?");
-		add_history(line);
-		printf("command entered = %s\n", line);
+		i = -1;
+		while (++i < len)
+			tab_dest[i] = tab_src[i];
 	}
-	return (0);
+	else
+	{
+		i = len;
+		while (i-- > 0)
+			tab_dest[i] = tab_src[i];
+	}
+	return (dst);
 }

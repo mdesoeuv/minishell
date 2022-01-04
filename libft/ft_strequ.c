@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 15:00:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Created: 2021/10/06 15:27:31 by mdesoeuv          #+#    #+#             */
+/*   Updated: 2021/11/05 16:47:28 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <dirent.h>
-# include "libft.h"
+int	ft_strequ(char const *s1, char const *s2)
+{
+	int	i;
 
-#endif
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] - s2[i] != 0)
+			return (0);
+		i++;
+	}
+	if (s1[i] - s2[i] != 0)
+		return (0);
+	else
+		return (1);
+}
