@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/04 17:42:46 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/05 11:33:42 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ all : libft $(NAME)
 $(NAME)	:	$(OBJS_FILES) $(LIB)
 			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include
 
-$(LIB)	:	
+libft	:	
 			$(MAKE) -C libft
 
 objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
@@ -49,5 +49,5 @@ fclean	:	clean
 
 re		:	fclean all
 
-.PHONY	:	all, clean, re, libft, fclean
+.PHONY	:	all clean re fclean libft
 			
