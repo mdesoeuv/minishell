@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 13:55:31 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/06 19:05:43 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(void)
 	while (line && ft_strcmp(line, "exit") != 0)
 	{
 		add_history(line);
+		ft_parsing(line);
 		printf("command entered = %s\n", line);
 		if (ft_strcmp(line, "pwd") == 0)
 			print_working_directory();
