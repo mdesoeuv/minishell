@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/04 17:42:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/06 13:01:54 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	char	*line;
 
+	change_directory("../test");
 	line = readline("prompt? ");
 	while (line && ft_strcmp(line, "exit") != 0)
 	{

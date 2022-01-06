@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/05 11:47:00 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/06 11:58:22 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ typedef struct s_cmd
 }	t_cmd;
 
 void	print_working_directory(void);
+char	*return_working_directory(void);
+int		change_directory(char *arg);
 
 #endif

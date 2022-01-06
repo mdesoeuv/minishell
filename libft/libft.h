@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2021/12/23 18:44:59 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/06 11:56:11 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	ft_swap_p(void **a, void **b);
 void	ft_putnbr_base(int nbr, char *base);
 char	*ft_strjoin_free_s1(char *s1, char *s2);
 char	*ft_strjoin_free_s2(char *s1, char *s2);
+char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strndup(const char *s1, size_t len);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
