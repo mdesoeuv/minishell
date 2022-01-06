@@ -6,14 +6,14 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 13:03:22 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/06 15:05:51 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-**	building absolute path
+**	parsing cd cmd
 */
 
 char	*offset_dup(char *s, size_t offset)
@@ -33,57 +33,17 @@ char	*offset_dup(char *s, size_t offset)
 	return (path);
 }
 
-char	*trim_path(char *s)
-{
-	int		i;
-	int		count;
-	int		len;
-	char	*trim_path;
-
-	len = ft_strlen(s);
-	count = 0;
-	i = len - 1;
-	while (s[i] && s[i] != '/')
-	{
-		i--;
-		count++;
-	}
-	if (i < 0)
-		return (NULL);
-	trim_path = ft_strndup(s, len - count - 1);
-	printf("trim_path = %s\n", trim_path);
-	return (trim_path);
-}
-
-char	*up_directory_build(char *path)
-{
-	char	*new_path;
-
-	new_path = trim_path(return_working_directory());
-	if (!new_path)
-		return (NULL);
-	new_path = ft_strjoin_free(new_path, offset_dup(path, 2));
-	return (new_path);
-}
-
-char	*build_path(char *arg)
-{
-	if (arg[0] != '.')
-		return (arg);
-	else if (arg[1] != '.')
-		return (ft_strjoin_free(return_working_directory(), \
-			offset_dup(arg, 1)));
-	else
-		return (up_directory_build(arg));
-}
-
 int	change_directory(char *arg)
 {
-	char	*path;
+	int		ret_value;
+	char	*trimmed_arg;
 
-	path = build_path(arg);
-	if (!path)
+	trimmed_arg = offset_dup(arg, 3);
+	if (!trimmed_arg)
 		return (-1);
-	dprintf(1, "new_path = %s\n", path);
-	return (chdir(path));
+	ret_value = chdir(trimmed_arg);
+	if (ret_value < 0)
+		perror("cd");
+	free(trimmed_arg);
+	return (ret_value);
 }
