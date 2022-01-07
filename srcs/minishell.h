@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 19:25:41 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:34:04 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,13 @@ typedef struct s_list_semicolons
 
 typedef struct s_list_pipes
 {
-	char					**name;
-	struct s_list_pipe_args	**args;
-	char					**filein;
-	char					**fileout;
-	struct s_list_pipes		*next;
+	char				**command;
+	char				file_in;
+	int					file_in_over_write;
+	char				**file_out;
+	int					file_out_over_write;
+	struct s_list_pipes	*next;
 }	t_list_pipes;
-
-typedef struct s_list_pipe_args
-{
-	char					**name;
-	struct s_list_pipe_args	*next;
-}	t_list_pipe_args;
 
 void	print_working_directory(void);
 char	*return_working_directory(void);
