@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 19:05:43 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:20:41 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 int	main(void)
 {
 	char	*line;
-
+	t_shell	shell;
+	
 	line = readline("prompt? ");
 	while (line && ft_strcmp(line, "exit") != 0)
 	{
 		add_history(line);
-		ft_parsing(line);
+		ft_parsing(line, &shell);
 		printf("command entered = %s\n", line);
 		if (ft_strcmp(line, "pwd") == 0)
 			print_working_directory();

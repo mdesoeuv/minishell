@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/07 11:35:21 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 12:19:34 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,11 @@ typedef struct s_cmd
 	char	*cmd_out;
 }	t_cmd;
 
-typedef struct s_cmd
+typedef struct s_shell
 {
-	char	*cmd_path;
-	char	**cmd_arg;
-	char	*cmd_in;
-	char	*cmd_out;
-}	t_cmd;
-
-typedef struct s_list_semicolons
-{
-	struct s_list_pipes			*pipes_list;
-	struct s_list_semicolons	*next;
-}	t_list_semicolons;
+	int					pipes_nbr;
+	struct s_list_pipes	*list_start;
+}	t_shell;
 
 typedef struct s_list_pipes
 {
