@@ -6,11 +6,16 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/07 12:29:41 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 17:38:52 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void ft_print_shell_struct(t_shell	*shell)
+{
+	;
+}
 
 int	main(void)
 {
@@ -22,6 +27,7 @@ int	main(void)
 	{
 		add_history(line);
 		ft_parsing(line, &shell);
+		ft_print_shell_struct(&shell);
 		printf("command entered = %s\n", line);
 		if (ft_strcmp(line, "pwd") == 0)
 			print_working_directory();
