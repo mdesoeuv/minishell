@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/07 12:19:34 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 16:25:13 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ typedef struct s_list_pipes
 {
 	char				**command;
 	char				**file_in;
-	int					file_in_over_write;
+	int					chevron_nbr_in;
 	char				**file_out;
-	int					file_out_over_write;
+	int					chevron_nbr_out;
 	struct s_list_pipes	*next;
 }	t_list_pipes;
 
