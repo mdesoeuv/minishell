@@ -6,20 +6,26 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/07 17:09:30 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 17:34:36 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-cat -e test > lol
+
+void	ft_new_pipe_name_args(char *command, t_list_pipes	*new_pipe)
+{
+	new_pipe->command = ft_split_quotes(command, " ");
+}
+
 void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 		int chevron_type, int *i)
 {
 	t_list_pipes	new_pipe;
 	char			*file_name;
 
-	i++;
-	if (command[i] == '\'') // gerer l'erreur de sil y a une succession de "" puis ''
+	while (command[i] != ' ')
+			i++;
+	if (command[i] == '\'')
 		while (command[++i])
 			if (command[i] == '\'')
 				break ;
@@ -31,6 +37,7 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 		while (command[i] != ' ')
 			i++;
 	file_name = ft_substr(command, i - index_start, i); // checker les variables d'env dans des guillemets
+	ft_memmove(&line[i], &line[i + 1], i - index_start);
 	if (chevron_type == 1)
 	{
 		new_pipe->file_in = file_name;

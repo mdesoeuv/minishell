@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 11:56:11 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 17:32:34 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 int		ft_abs(int n);
 int		ft_if(int condition, int true, int false);
+char	**ft_split_quotes(char const *s, char c);
 
 #endif

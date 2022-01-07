@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2021/11/26 09:31:44 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 17:33:27 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,45 @@ char	**ft_split(char const *s, char c)
 			size = 0;
 			while (s[i] && s[i] != c && i >= size++)
 				i++;
+			tab[j] = ft_split_strdup(s, i - size, size);
+			if (tab[j++] == NULL)
+				return (free_return_null(tab, --j));
+		}
+		else
+			i++;
+	}
+	tab[j] = 0;
+	return (tab);
+}
+
+char	**ft_split_quotes(char const *s, char c)
+{
+	int		i;
+	int		j;
+	char	**tab;
+	int		size;
+
+	if (malloc_return(&tab, s, c) == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			size = 0;
+			while (s[i] && s[i] != c && i >= size++)
+			{
+				if (s[i] == '\'')
+					while (s[++i] && i >= size++)
+						if (s[i] == '\'')
+							break ;
+				else if (s[i] == '\"')
+					while (s[++i] && i >= size++)
+						if (s[i] == '\"')
+							break ;
+				i++;
+			}		
 			tab[j] = ft_split_strdup(s, i - size, size);
 			if (tab[j++] == NULL)
 				return (free_return_null(tab, --j));
