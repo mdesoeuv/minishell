@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/07 12:27:34 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 12:32:44 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,15 @@
 void	ft_new_pipe(char *command, t_list_pipes	*pipes_list)
 {
 	int				i;
-	t_list_pipes	pipes_list;
+	t_list_pipes	new_pipe;
 
 	i = 0;
-	while (line[i])
+	while (command[i]) // chevrons simple et double / split des args + nom / checker les variables d'env
 	{
-		if (line[i] == '\'')
-			while (line[i] == '\'')
-				if (line[i] == '\'')
-					break ;
-		if (line[i] == '\"')
-			while (line[i] == '\"')
-				if (line[i] == '\'')
-					break ;
-		if (line[i] == '|')
-		{
-			// new pipe
-		}
+		if (command[i] == '<')
+			NULL;
 	}
-	// new pipe
+	ft_lstadd_back(&pipes_list, &new_pipe);
 }
 
 void	ft_parsing(char *line, t_shell	*shell)
