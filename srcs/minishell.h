@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 11:58:22 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/07 15:55:09 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ typedef struct s_cmd
 	char	*cmd_in;
 	char	*cmd_out;
 }	t_cmd;
+
+typedef struct s_shell
+{
+	int		pipe_nbr;
+	int		*pipe_fd[2];
+	pid_t	*pid;
+}	t_shell;
 
 void	print_working_directory(void);
 char	*return_working_directory(void);
