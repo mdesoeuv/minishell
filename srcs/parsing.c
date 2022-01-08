@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/08 16:37:24 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:14:44 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	ft_new_pipe_name_args(char *command, t_list_pipes	*new_pipe)
 {
-	int i = -1;
+	char	**cmd;
 
-	new_pipe->command = ft_split_quotes(command, ' ');
-	while (new_pipe->command[++i])
-		printf("%s/", new_pipe->command[i]);
-	printf("\n");
+	cmd = ft_split_quotes(command, ' ');
+	dprintf(1,"ddddd %i", new_pipe->chevron_nbr_in);
+	new_pipe->command = cmd;
 }
 
 void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
@@ -53,6 +52,10 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 	}
 	file_name = ft_substr(command, i - index_start, i); // checker les variables d'env dans des guillemets
 	ft_memmove(&command[i], &command[i + 1], i - index_start);
+	if (chevron_nbr == 0)
+	{
+		new_pipe->chevron_nbr_in = 0;
+	}
 	if (chevron_nbr == 1)
 	{
 		new_pipe->file_in = file_name;
@@ -93,10 +96,9 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 	}
 }
 
-void	ft_new_pipe_chevron2(char *command, t_list_pipes	*pipes_list)
+void	ft_new_pipe_chevron2(char *command, t_list_pipes	*new_pipe)
 {
 	int				i;
-	t_list_pipes	new_pipe;
 	int				count_chevron;
 
 	i = -1;
@@ -112,15 +114,14 @@ void	ft_new_pipe_chevron2(char *command, t_list_pipes	*pipes_list)
 	while (command[++i])
 		if (command[i] == '>')
 			return; //parse errror near > exit
-	ft_file_in_out(command, &new_pipe, count_chevron, i);
-	ft_new_pipe_name_args(command, &new_pipe);
-	ft_lstadd_back_pipes(&pipes_list, &new_pipe);
+	ft_file_in_out(command, new_pipe, count_chevron, i);
+	ft_new_pipe_name_args(command, new_pipe);
+	ft_lstadd_back_pipes(&new_pipe, new_pipe);
 }
 
-void	ft_new_pipe_chevron1(char *command, t_list_pipes	*pipes_list)
+void	ft_new_pipe_chevron1(char *command, t_list_pipes	*new_pipe)
 {
 	int				i;
-	t_list_pipes	new_pipe;
 	int				count_chevron;
 
 	dprintf(1,"commande entiere = %s\n", command);
@@ -137,21 +138,21 @@ void	ft_new_pipe_chevron1(char *command, t_list_pipes	*pipes_list)
 	while (command[++i])
 		if (command[i] == '<')
 			return;//parse errror near < exit
-	ft_file_in_out(command, &new_pipe, count_chevron, i);
-	ft_new_pipe_chevron2(command, pipes_list);
+	ft_file_in_out(command, new_pipe, count_chevron, i);
+	ft_new_pipe_chevron2(command, new_pipe);
 }
 
 void	ft_parsing(char *line, t_shell	*shell)
 {
 	int				i;
 	int				start;
-	t_list_pipes	*pipes_list;
+	t_list_pipes	pipes_list;
 	int				start_quote_index;
 
 	i = -1;
 	start = 0;
-	pipes_list = NULL;
-	shell->list_start = pipes_list;
+	//pipes_list = NULL;
+	shell->list_start = &pipes_list;
 	while (line[++i])
 	{
 		if (!line[i + 1])
@@ -190,9 +191,13 @@ void	ft_parsing(char *line, t_shell	*shell)
 		}
 		if (line[i] == '|')
 		{
-			ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), pipes_list);
+			ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), &pipes_list);
 			start = i;
 		}
 	}
-	ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), pipes_list);
+	ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), &pipes_list);
+	i = -1;
+	while (pipes_list.command[++i])
+		printf("%s/", pipes_list.command[i]);
+	printf("\n");
 }
