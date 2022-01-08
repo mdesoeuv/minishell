@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/08 17:14:44 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:18:16 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	ft_new_pipe_chevron2(char *command, t_list_pipes	*new_pipe)
 	{
 		if (command[i] == '>')
 		{
+			count_chevron--;
 			while (command[++i] && command[i] == '>')
 				count_chevron--;
 		}
@@ -131,6 +132,7 @@ void	ft_new_pipe_chevron1(char *command, t_list_pipes	*new_pipe)
 	{
 		if (command[i] == '<')
 		{
+			count_chevron++;
 			while (command[++i] && command[i] == '<')
 				count_chevron++;
 		}
