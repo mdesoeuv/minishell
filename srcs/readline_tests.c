@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 15:55:05 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 16:35:27 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void ft_print_shell_struct(t_shell	*shell)
 	while (shell->list_start != NULL)
 	{
 		while (shell->list_start->command[++i])
-			printf("nbr pipes %s", shell->list_start->command[i]);
+			printf("%s/", shell->list_start->command[i]);
+			printf("\n");
 		printf("file_in %s", shell->list_start->file_in);
 		printf("chevron_nbr_in %i", shell->list_start->chevron_nbr_in);
 		printf("file_out %s", shell->list_start->file_out);

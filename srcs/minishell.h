@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 15:56:19 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 16:13:45 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@ typedef struct s_shell
 	int					pipes_nbr;
 	struct s_list_pipes	*list_start;
 }	t_shell;
-
-typedef struct s_list_pipes
-{
-	char				**command;
-	char				*file_in;
-	int					chevron_nbr_in;
-	char				*file_out;
-	int					chevron_nbr_out;
-	struct s_list_pipes	*next;
-}	t_list_pipes;
 
 void	print_working_directory(void);
 char	*return_working_directory(void);

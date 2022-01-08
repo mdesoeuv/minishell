@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:24:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2021/11/03 09:30:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/08 16:11:27 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,13 +6,13 @@
 #    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/08 15:56:43 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/08 16:17:51 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-USER = mdesoeuv
+USER = victorchevillotte
 
 CC = gcc -Wall -Werror -Wextra
 

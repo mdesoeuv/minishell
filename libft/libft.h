@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/07 17:32:34 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/08 16:32:28 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,23 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_list_pipes
+{
+	char				**command;
+	char				*file_in;
+	int					chevron_nbr_in;
+	char				*file_out;
+	int					chevron_nbr_out;
+	struct s_list_pipes	*next;
+}	t_list_pipes;
 
 void	*ft_memalloc(size_t size);
 void	ft_memdel(void **ap);
@@ -81,6 +92,7 @@ t_list	*ft_lstnew(void *content);
 void	ft_lstdelone(t_list *alst, void (*del)(void *));
 void	ft_lstclear(t_list **alst, void (*del)(void *));
 void	ft_lstadd_front(t_list **alst, t_list *new_elem);
+void	ft_lstadd_back_pipes(t_list_pipes **alst, t_list_pipes *new_elem);
 void	ft_lstadd_back(t_list **alst, t_list *new_elem);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
