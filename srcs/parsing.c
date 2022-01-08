@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/08 21:42:02 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 22:17:08 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void	ft_new_pipe_chevron1(char *command, t_list_pipes	**list_pipe_start)
 			break;
 		}
 	}
-	printf("yooo %s\n", command);
 	while (command[++i])
 	{
 		if (command[i] == '<')
@@ -252,10 +251,9 @@ void	ft_parsing(char *line, t_shell	*shell)
 		if (line[i] == '|')
 		{
 			shell->pipes_nbr++;
-			ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), &(shell->list_start));
-			start = i;
+			ft_new_pipe_chevron1(ft_substr(line, start, i - start), &(shell->list_start));
+			start = i + 1;
 		}
 	}
-		printf("dhhdhh %s\n", line);
 	ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), &(shell->list_start));
 }
