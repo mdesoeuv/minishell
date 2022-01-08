@@ -6,27 +6,36 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 18:12:44 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 20:18:19 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_print_shell_struct(t_shell	*shell)
+void	ft_print_shell_struct(t_shell	*shell)
 {
 	int	i;
 
-	i = -1;
 	printf("nbr pipes = %i \n", shell->pipes_nbr);
+	printf("args_command =");
+	i = -1;
+	while (shell->list_start->command[++i])
+		printf("%s/", shell->list_start->command[i]);
+	printf("\n");
+	printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
+	printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
+	if (shell->list_start->chevron_nbr_in != 0)
+		printf("file_in = %s\n", shell->list_start->file_in);
+	if (shell->list_start->chevron_nbr_out != 0)
+		printf("file_out = %s\n", shell->list_start->file_out);
 	while (shell->list_start->next)
 	{
-		while (shell->list_start->command[++i])
-			printf("%s/", shell->list_start->command[i]);
-		printf("\n");
-		printf("file_in %s", shell->list_start->file_in);
-		printf("chevron_nbr_in %i", shell->list_start->chevron_nbr_in);
-		printf("file_out %s", shell->list_start->file_out);
-		printf("chevron_nbr_out %i", shell->list_start->chevron_nbr_out);
+		printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
+		printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
+		if (shell->list_start->chevron_nbr_in != 0)
+			printf("file_in = %s\n", shell->list_start->file_in);
+		if (shell->list_start->chevron_nbr_out != 0)
+			printf("file_out = %s\n", shell->list_start->file_out);
 		shell->list_start = shell->list_start->next;
 	}
 }
@@ -35,14 +44,13 @@ int	main(void)
 {
 	char	*line;
 	t_shell	shell;
-	
+
 	line = readline("prompt? ");
 	while (line && ft_strcmp(line, "exit") != 0)
 	{
 		add_history(line);
 		ft_parsing(line, &shell);
 		ft_print_shell_struct(&shell);
-		printf("command entered = %s\n", line);
 		if (ft_strcmp(line, "pwd") == 0)
 			print_working_directory();
 		if (ft_strncmp(line, "cd", 2) == 0)
