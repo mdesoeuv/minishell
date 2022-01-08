@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/08 20:49:26 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 20:51:03 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 		while (command[i] && command[i] != ' ')
 			i++;
 	}
-			dprintf(1,"ié = %i\n", i);
+	/*dprintf(1,"ié = %i\n", i);
 	dprintf(1,"char index_start = %i\n", index_start);
 	dprintf(1,"char index_end = %i\n", i - index_start);	
 	dprintf(1,"char index_start = %c\n", command[index_start]);
-	dprintf(1,"char index_end = %c\n", command[i - index_start]);
+	dprintf(1,"char index_end = %c\n", command[i - index_start]);*/
 	file_name = ft_substr(command, index_start, i - index_start); // checker les variables d'env dans des guillemets
-	dprintf(1,"file_name = %s\n", file_name);
+	//dprintf(1,"file_name = %s\n", file_name);
 	ft_memmove(&command[index_start], &command[i], ft_strlen(command) - index_start);
 	if (chevron_nbr > 0)
 	{
@@ -78,7 +78,7 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 			exit(1);
 		}
 		new_pipe->file_out = file_name;
-		new_pipe->chevron_nbr_out = chevron_nbr;
+		new_pipe->chevron_nbr_out = chevron_nbr * -1;
 	}
 }
 
