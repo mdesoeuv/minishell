@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/08 18:00:25 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 18:58:10 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_new_pipe_name_args(char *command, t_list_pipes	*new_pipe)
 	char	**cmd;
 
 	cmd = ft_split_quotes(command, ' ');
-	dprintf(1,"ddddd %i", new_pipe->chevron_nbr_in);
 	new_pipe->command = cmd;
 }
 
@@ -26,16 +25,17 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 {
 	char	*file_name;
 	int		index_start;
-
-	dprintf(1,"nbr chevrons = %i\n", chevron_nbr);
+	
 	if (chevron_nbr == 0)
 	{
 		new_pipe->chevron_nbr_in = 0;
 		return;
 	}
-	while (command[i] != ' ')
-		i++;
-	index_start = i;
+	while (command[i] == ' '){
+		ft_memmove(&command[i], &command[i + 1], ft_strlen(command) - i);
+		index_start = i;
+	}
+	dprintf(1,"i = %i\n", i);
 	if (command[i] == '\'')
 	{
 		while (command[++i])
@@ -50,11 +50,17 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 	}
 	else
 	{
-		while (command[i] != ' ')
+		while (command[i] && command[i] != ' ')
 			i++;
 	}
+			dprintf(1,"ié = %i\n", i);
+	dprintf(1,"char index_start = %i\n", index_start);
+	dprintf(1,"char index_end = %i\n", i - index_start);	
+	dprintf(1,"char index_start = %c\n", command[index_start]);
+	dprintf(1,"char index_end = %c\n", command[i - index_start]);
 	file_name = ft_substr(command, index_start, i - index_start); // checker les variables d'env dans des guillemets
-	ft_memmove(&command[i], &command[i + 1], i - index_start);
+	dprintf(1,"file_name = %s\n", file_name);
+	ft_memmove(&command[i], &command[i + 1], ft_strlen(command) - i);
 	if (chevron_nbr == 1)
 	{
 		new_pipe->file_in = file_name;
@@ -98,6 +104,7 @@ void	ft_file_in_out(char *command, t_list_pipes	*new_pipe,
 void	ft_new_pipe_chevron2(char *command, t_list_pipes	*new_pipe)
 {
 	int				i;
+	int				index_start;
 	int				count_chevron;
 
 	i = -1;
@@ -107,20 +114,25 @@ void	ft_new_pipe_chevron2(char *command, t_list_pipes	*new_pipe)
 		if (command[i] == '>')
 		{
 			count_chevron--;
-			while (command[++i] && command[i] == '>')
+			index_start = i;
+			ft_memmove(&command[i], &command[i + 1], ft_strlen(command) - i);
+			while (command[i] && command[i] == '>'){
+				ft_memmove(&command[i], &command[i + 1], ft_strlen(command) - i);
 				count_chevron--;
+			}
 		}
 	}
 	while (command[++i])
 		if (command[i] == '>')
 			return; //parse errror near > exit
-	ft_file_in_out(command, new_pipe, count_chevron, i);
+	ft_file_in_out(command, new_pipe, count_chevron, index_start);
 	ft_new_pipe_name_args(command, new_pipe);
 }
 
 void	ft_new_pipe_chevron1(char *command, t_list_pipes	**list_pipe_start)
 {
 	int				i;
+	int				index_start;
 	int				count_chevron;
 	t_list_pipes	*new_pipe;
 
@@ -133,15 +145,19 @@ void	ft_new_pipe_chevron1(char *command, t_list_pipes	**list_pipe_start)
 	{
 		if (command[i] == '<')
 		{
+			index_start = i;
 			count_chevron++;
-			while (command[++i] && command[i] == '<')
+			ft_memmove(&command[i], &command[i + 1], ft_strlen(command) - i);
+			while (command[++i] && command[i] == '<'){
+				ft_memmove(&command[i], &command[i + 1], ft_strlen(command) - i);
 				count_chevron++;
+			}
 		}
 	}
 	while (command[++i])
 		if (command[i] == '<')
 			return;//parse errror near < exit
-	ft_file_in_out(command, new_pipe, count_chevron, i);
+	ft_file_in_out(command, new_pipe, count_chevron, index_start);
 	ft_new_pipe_chevron2(command, new_pipe);
 }
 
@@ -154,6 +170,7 @@ void	ft_parsing(char *line, t_shell	*shell)
 	i = -1;
 	start = 0;
 	shell->list_start = NULL;
+	shell->pipes_nbr = 1;
 	while (line[++i])
 	{
 		if (!line[i + 1])
@@ -192,6 +209,7 @@ void	ft_parsing(char *line, t_shell	*shell)
 		}
 		if (line[i] == '|')
 		{
+			shell->pipes_nbr++;
 			ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), &(shell->list_start));
 			start = i;
 		}
