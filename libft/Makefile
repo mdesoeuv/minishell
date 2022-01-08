@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 15:49:39 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/06 11:53:30 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/08 15:54:46 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,32 +29,27 @@ SRCS=	ft_isblank.c ft_isspace.c ft_calloc.c ft_strlcpy.c ft_toupper.c \
 		ft_isprint.c ft_isdigit.c ft_isascii.c ft_isalpha.c ft_isalnum.c \
 		ft_bzero.c ft_atoi.c ft_swap.c ft_putnbr_base.c \
 		ft_strjoin_free_s1.c ft_strndup.c ft_strjoin_free_s2.c ft_is_duplicate.c \
-		ft_min.c ft_max.c ft_abs.c ft_if.c ft_strjoin_free.c
-
-BONUS_SRCS=	ft_lstlast.c ft_lstsize.c ft_lstadd_back.c ft_lstadd_front.c \
-			ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstnew.c ft_lstmap.c
+		ft_min.c ft_max.c ft_abs.c ft_if.c ft_strjoin_free.c \
+		ft_lstlast.c ft_lstsize.c ft_lstadd_back.c ft_lstadd_front.c \
+		ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstnew.c ft_lstmap.c
 
 OBJS= $(SRCS:.c=.o)
 
-BONUS_OBJS= $(BONUS_SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME):	$(OBJS)
 			ar rcs $(NAME) $(OBJS)
 
-bonus:		$(BONUS_OBJS)
-			ar rcs $(NAME) $(BONUS_OBJS)
-
 %.o:	%.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:		
-			rm -f $(OBJS) $(BONUS_OBJS)
+			rm -f $(OBJS)
 
 fclean:		clean
 			rm -f $(NAME)
 
 re:			fclean all
 			
-.PHONY: all, re, clean, fclean, bonus
+.PHONY: all, re, clean, fclean

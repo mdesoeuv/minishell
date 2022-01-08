@@ -3,22 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/06 15:08:42 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/08 18:08:36 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-USER = mdesoeuv
+USER = victorchevillotte
 
 CC = gcc -Wall -Werror -Wextra
 
 SRCS =	readline_tests.c \
 		built_in_pwd.c \
-		built_in_cd.c
+		built_in_cd.c \
+		parsing.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 
@@ -31,7 +32,7 @@ LIB = libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB)
-			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include
+			$(CC) -fsanitize=address -g3 $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
 
 libft	:	
 			$(MAKE) -C libft

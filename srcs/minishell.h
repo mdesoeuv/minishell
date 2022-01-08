@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 11:58:22 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/08 16:13:45 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,14 @@ typedef struct s_cmd
 	char	*cmd_out;
 }	t_cmd;
 
+typedef struct s_shell
+{
+	int					pipes_nbr;
+	struct s_list_pipes	*list_start;
+}	t_shell;
+
 void	print_working_directory(void);
 char	*return_working_directory(void);
 int		change_directory(char *arg);
-
+void	ft_parsing(char *line, t_shell	*shell);
 #endif
