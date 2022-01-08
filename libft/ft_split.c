@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 20:55:45 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:56:22 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ char	**ft_split_quotes(char const *s, char c)
 	int		j;
 	char	**tab;
 	int		size;
+	int		is_quote;
 
 	if (malloc_return(&tab, s, c) == NULL)
 		return (NULL);
@@ -122,24 +123,30 @@ char	**ft_split_quotes(char const *s, char c)
 	{
 		if (s[i] != c)
 		{
+			is_quote = 0;
 			size = 0;
 			while (s[i] && s[i] != c && i >= size++)
 			{
 				if (s[i] == '\'')
 				{
+					is_quote = 1;
 					while (s[++i] && i >= size++)
 						if (s[i] == '\'')
 							break ;
 				}
 				else if (s[i] == '\"')
 				{
+					is_quote = 1;
 					while (s[++i] && i >= size++)
 						if (s[i] == '\"')
 							break ;
 				}
 				i++;
-			}		
-			tab[j] = ft_split_strdup(s, i - size, size);
+			}
+			if (is_quote == 1)
+				tab[j] = ft_split_strdup(s, i - size + 1, size - 2);
+			else
+				tab[j] = ft_split_strdup(s, i - size, size);
 			if (tab[j++] == NULL)
 				return (free_return_null(tab, --j));
 		}

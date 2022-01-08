@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/08 20:51:03 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:42:02 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,33 +175,77 @@ void	ft_parsing(char *line, t_shell	*shell)
 			break ;
 		if (line[i] == '\'')
 		{
-			start_quote_index = i;
-			i++;
-			while (line[++i])
+			if (i == 0 || line[i - 1] == ' ')
 			{
-				if (line[i] == '\'' && (line[i + 1] || line[i + 1] == ' '))
-					break ;
-				else if (line[i] == '\'')
+				start_quote_index = i;
+				while (line[++i])
 				{
-					ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
-					ft_memmove(&line[start_quote_index], &line[start_quote_index + 1], ft_strlen(line) - start_quote_index);
-					break ;
+					if (line[i] == '\'' && (!line[i + 1] || line[i + 1] == ' '))
+						break ;
+					else if (line[i] == '\'')
+					{
+						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+						ft_memmove(&line[start_quote_index], &line[start_quote_index + 1], ft_strlen(line) - start_quote_index);
+						break ;
+					}
+				}
+			}
+			else if (line[i - 1] != ' ')
+			{
+				ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+				if (!line[i + 1])
+				{
+					//unclosed quote
+				}
+				while (line[++i])
+				{
+					if (!line[i + 1])
+					{
+						//unclosed quote
+					}
+					if (line[i] == '\'')
+					{
+						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+						break ;
+					}
 				}
 			}
 		}
 		if (line[i] == '\"')
 		{
-			start_quote_index = i;
-			i++;
-			while (line[++i])
+			if (i == 0 || line[i - 1] == ' ')
 			{
-				if (line[i] == '\"' && (line[i + 1] || line[i + 1] == ' '))
-					break ;
-				else if (line[i] == '\"')
+				start_quote_index = i;
+				while (line[++i])
 				{
-					ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
-					ft_memmove(&line[start_quote_index], &line[start_quote_index + 1], ft_strlen(line) - start_quote_index);
-					break ;
+					if (line[i] == '\"' && (!line[i + 1] || line[i + 1] == ' '))
+						break ;
+					else if (line[i] == '\"')
+					{
+						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+						ft_memmove(&line[start_quote_index], &line[start_quote_index + 1], ft_strlen(line) - start_quote_index);
+						break ;
+					}
+				}
+			}
+			else if (line[i - 1] != ' ')
+			{
+				ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+				if (!line[i + 1])
+				{
+					//unclosed quote
+				}
+				while (line[++i])
+				{
+					if (!line[i + 1])
+					{
+						//unclosed quote
+					}
+					if (line[i] == '\"')
+					{
+						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+						break ;
+					}
 				}
 			}
 		}
@@ -212,5 +256,6 @@ void	ft_parsing(char *line, t_shell	*shell)
 			start = i;
 		}
 	}
+		printf("dhhdhh %s\n", line);
 	ft_new_pipe_chevron1(ft_substr(line, start, i - start + 1), &(shell->list_start));
 }
