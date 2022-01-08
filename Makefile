@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/06 15:08:42 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/08 15:56:43 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CC = gcc -Wall -Werror -Wextra
 
 SRCS =	readline_tests.c \
 		built_in_pwd.c \
-		built_in_cd.c
+		built_in_cd.c \
+		parsing.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 

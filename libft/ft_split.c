@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/07 17:33:27 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/08 15:54:23 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,17 @@ char	**ft_split_quotes(char const *s, char c)
 			while (s[i] && s[i] != c && i >= size++)
 			{
 				if (s[i] == '\'')
+				{
 					while (s[++i] && i >= size++)
 						if (s[i] == '\'')
 							break ;
+				}
 				else if (s[i] == '\"')
+				{
 					while (s[++i] && i >= size++)
 						if (s[i] == '\"')
 							break ;
+				}
 				i++;
 			}		
 			tab[j] = ft_split_strdup(s, i - size, size);
