@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 04:23:25 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 21:35:21 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,14 @@ char	**ft_split(char const *s, char c)
 	return (tab);
 }
 
-char *	ft_variable_replace(char *command, int i, t_shell *shell)
+char	*ft_variable_replace(char *command, int i, t_shell *shell)
 {
 	int		index_start;
 	char	*variable_name;
 	char	*variable_result;
 	char	*tmp;
 	char	*new_command;
-	
+
 	index_start = i + 1;
 	while (command[i] && command[i] != ' ' && command[i] != '\"')
 		i++;
@@ -140,9 +140,11 @@ char *	ft_variable_replace(char *command, int i, t_shell *shell)
 		free(tmp);
 		return (new_command);
 	}
-	ft_memmove(&command[index_start], &command[i], ft_strlen(command) - index_start);
+	ft_memmove(&command[index_start - 1], &command[i],
+		ft_strlen(command) - index_start - 1);
 	return (command);
 }
+
 char	**ft_split_quotes(char *s, char c, t_shell *shell)
 {
 	int		i;
@@ -174,10 +176,12 @@ char	**ft_split_quotes(char *s, char c, t_shell *shell)
 				{
 					is_quote = 1;
 					while (s[++i] && i >= size++)
+					{
 						if (s[i] == '$')
 							s = ft_variable_replace(s, i, shell);
-						else if (s[i] == '\"')
+						if (s[i] == '\"')
 							break ;
+					}
 				}
 				else if (s[i] == '$')
 					s = ft_variable_replace(s, i, shell);
