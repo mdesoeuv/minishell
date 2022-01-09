@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 01:41:32 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 03:30:15 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_print_shell_struct(t_shell	*shell)
 	printf("args_command =");
 	i = -1;
 	while (shell->list_start->command[++i])
-		printf("%s/", shell->list_start->command[i]);
+		printf("%s|", shell->list_start->command[i]);
 	printf("\n");
 	//printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
 	//printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
@@ -34,7 +34,7 @@ void	ft_print_shell_struct(t_shell	*shell)
 		printf("args_command =");
 		i = -1;
 		while (shell->list_start->command[++i])
-			printf("%s/", shell->list_start->command[i]);
+			printf("%s|", shell->list_start->command[i]);
 		printf("\n");
 		//printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
 		//printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
@@ -63,7 +63,7 @@ int	main(void)
 		free(line);
 		line = readline("prompt? ");
 	}
-	ft_free("", shell, 0);
+	ft_free("", &shell, 0);
 	free(line);
 	return (0);
 }
