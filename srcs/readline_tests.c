@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 14:35:59 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 15:30:57 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ int	main(void)
 {
 	char	*line;
 	t_shell	shell;
+	int		is_exit;
 
+	is_exit = 1;
 	line = readline("prompt? ");
-	while (line && ft_strcmp(line, "exit") != 0)
+	while (line)
 	{
 		add_history(line);
 		ft_parsing(line, &shell);
@@ -62,10 +64,15 @@ int	main(void)
 			change_directory(line);
 		else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
 			ft_echo(&shell);
+		else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
+		{
+			is_exit = ft_exit(&shell);
+			if (is_exit == 0)
+				break ;
+		}
 		free(line);
 		line = readline("prompt? ");
 	}
-	ft_free("", &shell, 0);
 	free(line);
 	return (0);
 }
