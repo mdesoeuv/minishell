@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/09 02:28:59 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:34:46 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,6 @@ void	ft_parsing(char *line, t_shell	*shell)
 	shell->pipes_nbr = 1;
 	while (line[++i])
 	{
-		if (!line[i + 1])
-			break ;
 		if (line[i] == '\'')
 		{
 			if (i == 0 || line[i - 1] == ' ')
@@ -166,26 +164,28 @@ void	ft_parsing(char *line, t_shell	*shell)
 						break ;
 					else if (line[i] == '\'')
 					{
-						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
 						ft_memmove(&line[start_quote_index], &line[start_quote_index + 1], ft_strlen(line) - start_quote_index);
+						i--;
+						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+						i--;
 						break ;
 					}
 				}
 			}
 			else if (line[i - 1] != ' ')
 			{
-				ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+				ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i); 
 				if (!line[i + 1])
 					ft_free("Error : unclosed quote\n", shell, 1);
 				while (line[++i])
 				{
-					if (!line[i + 1])
-					ft_free("Error : unclosed quote\n", shell, 1);
 					if (line[i] == '\'')
 					{
 						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
 						break ;
 					}
+					else if (!line[i + 1])
+						ft_free("Error : unclosed quote\n", shell, 1);
 				}
 			}
 		}
@@ -200,26 +200,28 @@ void	ft_parsing(char *line, t_shell	*shell)
 						break ;
 					else if (line[i] == '\"')
 					{
-						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
 						ft_memmove(&line[start_quote_index], &line[start_quote_index + 1], ft_strlen(line) - start_quote_index);
+						i--;
+						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+						i--;
 						break ;
 					}
 				}
 			}
 			else if (line[i - 1] != ' ')
 			{
-				ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
+				ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i); 
 				if (!line[i + 1])
-				ft_free("Error : unclosed quote\n", shell, 1);
+					ft_free("Error : unclosed quote\n", shell, 1);
 				while (line[++i])
 				{
-					if (!line[i + 1])
-					ft_free("Error : unclosed quote\n", shell, 1);
 					if (line[i] == '\"')
 					{
 						ft_memmove(&line[i], &line[i + 1], ft_strlen(line) - i);
 						break ;
 					}
+					else if (!line[i + 1])
+						ft_free("Error : unclosed quote\n", shell, 1);
 				}
 			}
 		}
