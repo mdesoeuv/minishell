@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/09 22:34:46 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:57:19 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,16 @@ void	ft_parsing(char *line, t_shell	*shell)
 	start = 0;
 	shell->list_start = NULL;
 	shell->pipes_nbr = 1;
+	while (line[i + 1])
+	{
+		if ((line[i] == '\'' && line[i + 1] == '\'' ) || (line[i] == '\"' && line[i + 1] == '\"' ))
+		{
+			ft_memmove(&line[i], &line[i + 2], ft_strlen(line) - i);
+			i = i - 2;
+		}
+		i++;
+	}
+	i = -1;
 	while (line[++i])
 	{
 		if (line[i] == '\'')
