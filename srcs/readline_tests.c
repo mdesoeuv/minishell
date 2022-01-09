@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 03:30:15 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 14:35:59 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ int	main(void)
 		add_history(line);
 		ft_parsing(line, &shell);
 		ft_print_shell_struct(&shell);
-		if (ft_strcmp(line, "pwd") == 0)
+		if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
 			print_working_directory();
-		if (ft_strncmp(line, "cd", 2) == 0)
+		else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
 			change_directory(line);
+		else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
+			ft_echo(&shell);
 		free(line);
 		line = readline("prompt? ");
 	}
