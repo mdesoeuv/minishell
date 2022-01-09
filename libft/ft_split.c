@@ -6,11 +6,12 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 21:56:22 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 03:43:22 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../srcs/minishell.h"
 
 static char	*ft_split_strdup(char const *s, int i, int len)
 {
@@ -107,7 +108,45 @@ char	**ft_split(char const *s, char c)
 	return (tab);
 }
 
-char	**ft_split_quotes(char const *s, char c)
+char *	ft_variable_replace(char *command, int i, t_shell *shell)
+{
+	int		index_start;
+	char	*variable_name;
+	char	*variable_result;
+	char	*tmp;
+	char	*new_command;
+	
+	index_start = i + 1;
+	while (command[i] && command[i] != ' ' && command[i] != '\"')
+		i++;
+	variable_name = ft_substr(command, index_start, i - index_start);// checker les variables d'env dans des guillemets
+	if (!variable_name)
+		ft_free("Error : malloc error\n", shell, 1);
+	variable_result = getenv(variable_name);
+	free(variable_name);
+	if (variable_result)
+	{
+		ft_memmove(&command[index_start - 1], &command[i],
+			ft_strlen(command) - index_start - 1);
+		tmp = ft_strndup(command, index_start - 1);
+		if (!tmp)
+			ft_free("Error : malloc error\n", shell, 1);
+		new_command = ft_strjoin(tmp, variable_result);
+		if (!new_command)
+			ft_free("Error : malloc error\n", shell, 1);
+		new_command = ft_strjoin(new_command, ft_substr(command, index_start - 1, ft_strlen(command) - index_start + 1));
+		if (!new_command)
+			ft_free("Error : malloc error\n", shell, 1);
+		free(tmp);
+		dprintf(1,"new_command = %s\n", new_command);
+		return (new_command);
+	}
+	ft_memmove(&command[index_start - 1], &command[i],
+		ft_strlen(command) - index_start - 1);
+	return (command);
+}
+
+char	**ft_split_quotes(char *s, char c, t_shell *shell)
 {
 	int		i;
 	int		j;
@@ -138,9 +177,13 @@ char	**ft_split_quotes(char const *s, char c)
 				{
 					is_quote = 1;
 					while (s[++i] && i >= size++)
-						if (s[i] == '\"')
+						if (s[i] == '$')
+							s = ft_variable_replace(s, i, shell);
+						else if (s[i] == '\"')
 							break ;
 				}
+				else if (s[i] == '$')
+					s = ft_variable_replace(s, i, shell);
 				i++;
 			}
 			if (is_quote == 1)

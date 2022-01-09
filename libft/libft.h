@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 17:48:25 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 02:10:33 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_list
 {
-	void				*content;
+	void			*content;
 	struct s_list	*next;
 }							t_list;
 
@@ -31,8 +31,14 @@ typedef struct s_list_pipes
 	int							chevron_nbr_in;
 	char						*file_out;
 	int							chevron_nbr_out;
-	struct s_list_pipes	*next;
+	struct s_list_pipes			*next;
 }	t_list_pipes;
+
+typedef struct s_shell
+{
+	int					pipes_nbr;
+	struct s_list_pipes	*list_start;
+}	t_shell;
 
 void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
@@ -113,6 +119,6 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_abs(int n);
 int				ft_if(int condition, int true, int false);
-char			**ft_split_quotes(char const *s, char c);
+char			**ft_split_quotes(char *s, char c, t_shell *shell);
 
 #endif
