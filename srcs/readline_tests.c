@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 22:17:35 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 01:41:32 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(void)
 		free(line);
 		line = readline("prompt? ");
 	}
-	// free pipes
+	ft_free("", shell, 0);
 	free(line);
 	return (0);
 }
