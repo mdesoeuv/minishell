@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 03:43:22 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 04:23:25 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,11 @@ char *	ft_variable_replace(char *command, int i, t_shell *shell)
 		if (!new_command)
 			ft_free("Error : malloc error\n", shell, 1);
 		free(tmp);
-		dprintf(1,"new_command = %s\n", new_command);
 		return (new_command);
 	}
-	ft_memmove(&command[index_start - 1], &command[i],
-		ft_strlen(command) - index_start - 1);
+	ft_memmove(&command[index_start], &command[i], ft_strlen(command) - index_start);
 	return (command);
 }
-
 char	**ft_split_quotes(char *s, char c, t_shell *shell)
 {
 	int		i;
@@ -186,12 +183,18 @@ char	**ft_split_quotes(char *s, char c, t_shell *shell)
 					s = ft_variable_replace(s, i, shell);
 				i++;
 			}
-			if (is_quote == 1)
+			if (is_quote == 1 && size - 2 > 1)
+			{
 				tab[j] = ft_split_strdup(s, i - size + 1, size - 2);
-			else
+				if (tab[j++] == NULL)
+					return (free_return_null(tab, --j));
+			}
+			else if (size > 1)
+			{
 				tab[j] = ft_split_strdup(s, i - size, size);
-			if (tab[j++] == NULL)
-				return (free_return_null(tab, --j));
+				if (tab[j++] == NULL)
+					return (free_return_null(tab, --j));
+			}
 		}
 		else
 			i++;
