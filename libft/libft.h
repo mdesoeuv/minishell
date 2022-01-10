@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 16:28:35 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:02:43 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ int				ft_abs(int n);
 int				ft_if(int condition, int true, int false);
 char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
+void			ft_variable_replace(int i, t_shell *shell);
 
 #endif

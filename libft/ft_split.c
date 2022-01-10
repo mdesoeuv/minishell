@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 16:28:25 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:03:13 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ char	**ft_split_quotes(char c, t_shell *shell)
 			start_index = i;
 			while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != c)
 			{
+				if (shell->cmd_tmp[i] == '$')
+					ft_variable_replace(i, shell);
 				if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
 					i = ft_parse_quotes(i, start_index, shell->cmd_tmp[i], shell);
 				i++;
