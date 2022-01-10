@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 11:21:17 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 15:21:01 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 		dup2(pipe_lst->pipe_fd[0], 0);
 	if (pipe_lst->file_out != NULL)
 		dup2(pipe_lst->fd_file_out, 0);
-	else if (i != shell->pipes_nbr + 1)
+	else if (i != shell->pipes_nbr)
 		dup2(pipe_lst->pipe_fd[1], 1);
 	return (0);
 }
@@ -123,21 +123,31 @@ int	close_all_pipes(t_shell *shell)
 	}
 }
 
+int	wait_all_pid(t_shell *shell)
+{
+	while (shell->list_start)
+	{
+		waitpid(shell->list_start->pid, NULL, 0);
+		shell->list_start = shell->list_start->next;
+	}
+	return (0);
+}
+
 int	cmd_process(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	int	i;
 
 	i = 0;
-	while (i < shell->pipes_nbr + 1) // while (pipe_lst != NULL)
+	while (i < shell->pipes_nbr) // while (pipe_lst != NULL)
 	{
 		pipe(pipe_lst->pipe_fd);
-		shell->pid[i] = fork();
-		if (shell->pid[i] < 0)
+		pipe_lst->pid = fork();
+		if (pipe_lst->pid < 0)
 		{
 			perror("minishell");
 			exit(EXIT_FAILURE); // to replace with ft_exit
 		}
-		else if (shell->pid[i] == 0)
+		else if (pipe_lst->pid == 0)
 		{
 			manage_file_fd(pipe_lst);
 			manage_dup_fd(shell, pipe_lst, i);
