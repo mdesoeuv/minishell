@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:29:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/09 14:42:08 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:10:43 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_echo(t_shell *shell)
 		}
 		while (shell->list_start->command[i])
 		{
-			ft_putstr(shell->list_start->command[i]);
+			ft_putstr(shell->list_start->command[i]); //TO DO : verser dans un fichier si file out
 			if (shell->list_start->command[i + 1]
 				&& shell->list_start->command[i][0] != '\0')
 				ft_putchar(' ');
