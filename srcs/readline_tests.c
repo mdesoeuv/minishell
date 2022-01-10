@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:20:28 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 17:27:44 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int	main(int argc, char **argv, char **envp)
 				if (is_exit == 0)
 					break ;
 			}
+			else
+				cmd_process(&shell);
 		}
-		else
-			cmd_process(&shell);
 		free(line);
 		line = readline("prompt? ");
 	}

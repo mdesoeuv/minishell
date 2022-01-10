@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:02:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 17:48:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	concatenate_path(t_list_pipes *pipe_lst, char *path)
 {
-	pipe_lst->cmd_path = ft_strjoin_free_s2("", path);
+	pipe_lst->cmd_path = ft_strjoin("", path);
 	if (!(pipe_lst->cmd_path))
 		exit(EXIT_FAILURE); // to replace with built_in function
 	pipe_lst->cmd_path = ft_strjoin_free_s1(pipe_lst->cmd_path, "/");
@@ -24,6 +24,7 @@ void	concatenate_path(t_list_pipes *pipe_lst, char *path)
 		pipe_lst->command[0]);
 	if (!(pipe_lst->cmd_path))
 		exit(EXIT_FAILURE); // to replace with built_in function
+	dprintf(1, "concatened path = %s\n", pipe_lst->cmd_path);
 }
 
 void	error_cmd_not_found(char **cmd)
@@ -49,10 +50,12 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	possible_paths = ft_split(getenv("PATH"), ':');
 	if (!possible_paths)
 		return ;
+	print_split(possible_paths);
 	i = 0;
 	while (possible_paths[i])
 	{
 		concatenate_path(pipe_lst, possible_paths[i]);
+		dprintf(1, "path tested = %s\n", pipe_lst->cmd_path);
 		if (access(pipe_lst->cmd_path, F_OK) == -1)
 		{
 			free(pipe_lst->cmd_path);
@@ -66,6 +69,7 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		error_cmd_not_found(pipe_lst->command);
 	else if (execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp) == -1)
 		perror("minishell");
+	free(pipe_lst->cmd_path);
 }
 
 int	manage_file_fd(t_list_pipes *pipe_lst)
@@ -74,7 +78,7 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 	{
 		if (pipe_lst->chevron_nbr_in == 1)
 			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
-		else
+		else if (pipe_lst->chevron_nbr_in > 1)
 		{
 			ft_putstr("<< not yet managed\n");
 			pipe_lst->fd_file_in = 0;

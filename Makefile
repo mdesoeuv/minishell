@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/10 17:03:03 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/10 17:39:07 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS =	readline_tests.c \
 		ft_free.c \
 		built_in_echo.c \
 		built_in_exit.c \
-		pipe.c
+		pipe.c \
+		print_split.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 
