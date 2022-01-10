@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/10 17:03:06 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:07:22 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_variable_replace(int i, t_shell *shell)
 }
 
 int	ft_parse_quotes(int i, int index_start,
-	char quote_type, t_shell *shell)// mettre shell en variable globale
+	char quote_type, t_shell *shell)
 {
 	int	start_quote_index;
 
