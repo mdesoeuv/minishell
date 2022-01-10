@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 13:29:06 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 16:10:24 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	ft_parsing(char *line, t_shell	*shell);
 void	ft_free(char *message, t_shell	*shell, int is_error);
 void	ft_echo(t_shell *shell);
 int		ft_exit(t_shell *shell);
-int		ft_parse_quotes(int i, int index_start, char *command,
+int		ft_parse_quotes(int i, int index_start,
 			char quote_type, t_shell *shell);
 #endif

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 14:57:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:56:13 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_shell
 {
 	int					pipes_nbr;
 	struct s_list_pipes	*list_start;
+	char				*cmd_tmp;
 }	t_shell;
 
 void			*ft_memalloc(size_t size);
