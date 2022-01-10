@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 15:21:30 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 16:59:03 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ typedef struct s_list
 typedef struct s_list_pipes
 {
 	pid_t						pid;
+	int							pipe_fd[2];
 	char						**command;
+	char						*cmd_path;
 	char						*file_in;
+	int							fd_file_in;
 	int							chevron_nbr_in;
 	char						*file_out;
+	int							fd_file_out;
 	int							chevron_nbr_out;
 	struct s_list_pipes			*next;
 }	t_list_pipes;
@@ -38,6 +42,7 @@ typedef struct s_list_pipes
 typedef struct s_shell
 {
 	int					pipes_nbr;
+	char				**envp;
 	struct s_list_pipes	*list_start;
 }	t_shell;
 

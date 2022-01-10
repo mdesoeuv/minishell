@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 15:19:36 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 16:59:40 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@ typedef struct s_cmd
 	char	*cmd_out;
 }	t_cmd;
 
+/*
+
 typedef struct s_shell
 {
 	int						pipes_nbr;
-	pid_t					*pid;
 	struct s_list_pipes		*list_start;
 }	t_shell;
+
+*/
 
 /*
 
@@ -64,6 +67,8 @@ typedef struct s_list_pipes
 
 */
 
+/* BUILT-IN */
+
 void	print_working_directory(void);
 char	*return_working_directory(void);
 int		change_directory(char *arg);
@@ -71,4 +76,18 @@ void	ft_parsing(char *line, t_shell	*shell);
 void	ft_free(char *message, t_shell	*shell, int is_error);
 void	ft_echo(t_shell *shell);
 int		ft_exit(t_shell *shell);
+
+/* PIPES */
+
+int		cmd_process(t_shell *shell);
+int		manage_file_fd(t_list_pipes *pipe_lst);
+int		manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
+void	concatenate_path(t_list_pipes *pipe_lst, char *path);
+void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
+int		close_all_pipes(t_shell *shell);
+int		wait_all_pid(t_shell *shell);
+void	error_cmd_not_found(char **cmd);
+void	free_split(char **split);
+
+
 #endif
