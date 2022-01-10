@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/10 18:58:30 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:05:53 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_variable_replace(int i, t_shell *shell)
 	index_start = i + 1;
 	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != ' ' && shell->cmd_tmp[i] != '\"')
 		i++;
-	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);// checker les variables d'env dans des guillemets
+	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!variable_name)
 		ft_free("Error : malloc error\n", shell, 1);
 	variable_result = getenv(variable_name);
@@ -111,11 +111,13 @@ char	*ft_file_in_out(t_shell *shell, int i)
 	}
 	while (shell->cmd_tmp[i] != ' ' && shell->cmd_tmp[i])
 	{
+		if (shell->cmd_tmp[i] == '$')
+			ft_variable_replace(i, shell);
 		if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
 			i = ft_parse_quotes(i, index_start, shell->cmd_tmp[i], shell);
 		i++;
 	}
-	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);// checker les variables d'env dans des guillemets
+	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!file_name)
 		ft_free("Error : malloc error\n", shell, 1);
 	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
