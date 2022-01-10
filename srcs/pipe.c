@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 10:31:47 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 11:21:17 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,59 @@ void	cmd_test_execute(t_list_pipes *pipe_lst, char **envp)
 		perror("minishell");
 }
 
-int	manage_cmd_fd(t_list_pipes *pipe_lst)
+int	manage_file_fd(t_list_pipes *pipe_lst)
 {
-	
+	if (pipe_lst->file_in != NULL)
+	{
+		if (pipe_lst->file_in_overwrite == 0)
+			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
+		else
+		{
+			ft_putstr("<< not yet managed\n");
+			pipe_lst->fd_file_in == 0;
+		}
+	}
+	if (pipe_lst->fd_file_in == -1)
+		perror("minishell");
+	if (pipe_lst->file_out != NULL)
+	{
+		if (pipe_lst->file_out_overwrite == 0)
+			pipe_lst->fd_file_out = open(pipe_lst->file_in, \
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else
+			pipe_lst->fd_file_out = open(pipe_lst->file_in, \
+				O_WRONLY | O_CREAT | O_APPEND, 0644);
+	}
+	if (pipe_lst->fd_file_in == -1)
+		perror("minishell");
+	return (0);
+}
+
+int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
+{
+	if (pipe_lst->file_in != NULL)
+		dup2(pipe_lst->fd_file_in, 0);
+	else if (i != 0)
+		dup2(pipe_lst->pipe_fd[0], 0);
+	if (pipe_lst->file_out != NULL)
+		dup2(pipe_lst->fd_file_out, 0);
+	else if (i != shell->pipes_nbr + 1)
+		dup2(pipe_lst->pipe_fd[1], 1);
+	return (0);
+}
+
+int	close_all_pipes(t_shell *shell)
+{
+	while (shell->list_start != NULL)
+	{
+		close(shell->list_start->pipe_fd[0]);
+		close(shell->list_start->pipe_fd[1]);
+		if (shell->list_start->file_in != NULL)
+			close(shell->list_start->fd_file_in);
+		if (shell->list_start->file_out != NULL)
+			close(shell->list_start->fd_file_out);
+		shell->list_start = shell->list_start->next;
+	}
 }
 
 int	cmd_process(t_shell *shell, t_list_pipes *pipe_lst)
@@ -80,7 +130,7 @@ int	cmd_process(t_shell *shell, t_list_pipes *pipe_lst)
 	i = 0;
 	while (i < shell->pipes_nbr + 1) // while (pipe_lst != NULL)
 	{
-		pipe(shell->pipe_fd[i]);
+		pipe(pipe_lst->pipe_fd);
 		shell->pid[i] = fork();
 		if (shell->pid[i] < 0)
 		{
@@ -89,7 +139,8 @@ int	cmd_process(t_shell *shell, t_list_pipes *pipe_lst)
 		}
 		else if (shell->pid[i] == 0)
 		{
-			manage_cmd_fd(pipe_lst);
+			manage_file_fd(pipe_lst);
+			manage_dup_fd(shell, pipe_lst, i);
 			test_execute_cmd(pipe_lst->command[i]);
 			return (0);
 		}
