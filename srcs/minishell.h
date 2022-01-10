@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/07 16:11:06 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 10:09:18 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_shell
 typedef struct s_list_pipes
 {
 	char				**command;
+	char				*cmd_path;
 	char				**file_in;
 	int					file_in_overwrite;
 	char				**file_out;
