@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/10 17:07:22 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 18:58:30 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*ft_file_in_out(t_shell *shell, int i)
 	char	*file_name;
 	int		index_start;
 
-	index_start = ++i;
+	index_start = i++;
 	while (shell->cmd_tmp[i] == ' ')
 	{
 		ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]), ft_strlen(shell->cmd_tmp) - i);
