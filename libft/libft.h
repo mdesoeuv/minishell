@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 16:59:03 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 17:18:09 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_shell
 	int					pipes_nbr;
 	char				**envp;
 	struct s_list_pipes	*list_start;
+	char				*cmd_tmp;
 }	t_shell;
 
 void			*ft_memalloc(size_t size);
@@ -125,7 +126,8 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_abs(int n);
 int				ft_if(int condition, int true, int false);
-char			**ft_split_quotes(char *s, char c, t_shell *shell);
+char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
+void			ft_variable_replace(int i, t_shell *shell);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:00:44 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 17:20:28 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,20 @@ int	main(int argc, char **argv, char **envp)
 		add_history(line);
 		ft_parsing(line, &shell);
 		ft_print_shell_struct(&shell);
-		if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
-			print_working_directory();
-		else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
-			change_directory(line);
-		else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
-			ft_echo(&shell);
-		else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
+		if (shell.list_start->command[0])
 		{
-			is_exit = ft_exit(&shell);
-			if (is_exit == 0)
-				break ;
+			if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
+				print_working_directory();
+			else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
+				change_directory(line);
+			else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
+				ft_echo(&shell);
+			else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
+			{
+				is_exit = ft_exit(&shell);
+				if (is_exit == 0)
+					break ;
+			}
 		}
 		else
 			cmd_process(&shell);

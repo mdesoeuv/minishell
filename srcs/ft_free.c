@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/10 16:51:45 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 17:17:54 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_free(char *message, t_shell	*shell, int is_error)
 	int	i;
 
 	i = -1;
+	if (shell->cmd_tmp)
+		free(shell->cmd_tmp);
 	if (shell->list_start->command[0])
 		while (shell->list_start->command[++i])
 			free(shell->list_start->command[i]);

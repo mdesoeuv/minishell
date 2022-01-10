@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 16:59:40 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 17:20:59 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,6 @@ void	ft_parsing(char *line, t_shell	*shell);
 void	ft_free(char *message, t_shell	*shell, int is_error);
 void	ft_echo(t_shell *shell);
 int		ft_exit(t_shell *shell);
-
-/* PIPES */
-
-int		cmd_process(t_shell *shell);
-int		manage_file_fd(t_list_pipes *pipe_lst);
-int		manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
-void	concatenate_path(t_list_pipes *pipe_lst, char *path);
-void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
-int		close_all_pipes(t_shell *shell);
-int		wait_all_pid(t_shell *shell);
-void	error_cmd_not_found(char **cmd);
-void	free_split(char **split);
-
-
+int		ft_parse_quotes(int i, int index_start,
+			char quote_type, t_shell *shell);
 #endif
