@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:48:19 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2021/11/05 16:52:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/09 01:39:51 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

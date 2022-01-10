@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 11:02:51 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 15:19:36 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_shell
 	struct s_list_pipes		*list_start;
 }	t_shell;
 
+/*
+
 typedef struct s_list_pipes
 {
 	int					*pipe_fd[2];
@@ -60,8 +62,13 @@ typedef struct s_list_pipes
 	struct s_list_pipes	*next;
 }	t_list_pipes;
 
+*/
+
 void	print_working_directory(void);
 char	*return_working_directory(void);
 int		change_directory(char *arg);
-
+void	ft_parsing(char *line, t_shell	*shell);
+void	ft_free(char *message, t_shell	*shell, int is_error);
+void	ft_echo(t_shell *shell);
+int		ft_exit(t_shell *shell);
 #endif

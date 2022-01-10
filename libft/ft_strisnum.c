@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_strisnum.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 15:24:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/08 16:11:27 by vchevill         ###   ########.fr       */
+/*   Created: 2022/01/09 14:57:22 by vchevill          #+#    #+#             */
+/*   Updated: 2022/01/09 14:57:24 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+int	ft_strisnum(const char *str)
 {
-	t_list	*start;
-	t_list	*new_elem;
+	int	i;
 
-	(void)del;
-	start = NULL;
-	while (lst != NULL)
+	i = 0;
+	if (str == NULL)
+		return (0);
+	if (str[0] == '-')
+		i++;
+	while (str[i])
 	{
-		new_elem = ft_lstnew((*f)(lst->content));
-		ft_lstadd_back(&start, new_elem);
-		lst = lst->next;
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
 	}
-	return (start);
+	return (1);
 }
