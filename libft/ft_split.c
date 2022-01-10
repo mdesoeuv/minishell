@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 21:35:21 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:58:28 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char	**ft_split_quotes(char *s, char c, t_shell *shell)
 	int		i;
 	int		j;
 	char	**tab;
-	int		size;
+	int		start_index;
 	int		is_quote;
 
 	if (malloc_return(&tab, s, c) == NULL)
@@ -162,7 +162,16 @@ char	**ft_split_quotes(char *s, char c, t_shell *shell)
 		if (s[i] != c)
 		{
 			is_quote = 0;
-			size = 0;
+			start_index = i;
+			while (s[i] && s[i] != c)
+			{
+				if (s[i] == '\'' || s[i] == '\"')
+				{
+					i = ft_parse_quotes(i, start_index, s, s[i], shell);
+				}
+				i++;
+			}
+			/*
 			while (s[i] && s[i] != c && i >= size++)
 			{
 				if (s[i] == '\'')
@@ -186,16 +195,16 @@ char	**ft_split_quotes(char *s, char c, t_shell *shell)
 				else if (s[i] == '$')
 					s = ft_variable_replace(s, i, shell);
 				i++;
-			}
-			if (is_quote == 1 && size - 2 > 1)
+			}*/
+			/*if (is_quote == 1 && size - 2 > 1)
 			{
 				tab[j] = ft_split_strdup(s, i - size + 1, size - 2);
 				if (tab[j++] == NULL)
 					return (free_return_null(tab, --j));
-			}
-			else if (size > 1)
+			}*/
+			if (i - start_index > 1)
 			{
-				tab[j] = ft_split_strdup(s, i - size, size);
+				tab[j] = ft_split_strdup(s, start_index, i - start_index);
 				if (tab[j++] == NULL)
 					return (free_return_null(tab, --j));
 			}
