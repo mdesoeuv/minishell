@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 16:15:09 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 16:28:25 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,31 +108,31 @@ char	**ft_split(char const *s, char c)
 	return (tab);
 }
 
-char	**ft_split_quotes(char *s, char c, t_shell *shell)
+char	**ft_split_quotes(char c, t_shell *shell)
 {
 	int		i;
 	int		j;
 	char	**tab;
 	int		start_index;
 
-	if (malloc_return(&tab, s, c) == NULL)
+	if (malloc_return(&tab, shell->cmd_tmp, c) == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s[i])
+	while (shell->cmd_tmp[i])
 	{
-		if (s[i] != c)
+		if (shell->cmd_tmp[i] != c)
 		{
 			start_index = i;
-			while (s[i] && s[i] != c)
+			while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != c)
 			{
-				if (s[i] == '\'' || s[i] == '\"')
-					i = ft_parse_quotes(i, start_index, s[i], shell);
+				if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
+					i = ft_parse_quotes(i, start_index, shell->cmd_tmp[i], shell);
 				i++;
 			}
 			if (i - start_index > 1)
 			{
-				tab[j] = ft_split_strdup(s, start_index, i - start_index);
+				tab[j] = ft_split_strdup(shell->cmd_tmp, start_index, i - start_index);
 				if (tab[j++] == NULL)
 					return (free_return_null(tab, --j));
 			}

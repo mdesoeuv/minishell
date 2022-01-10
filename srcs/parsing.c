@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/10 16:15:30 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 16:59:25 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
 {
 	char	**cmd_tab;
 
-	cmd_tab = ft_split_quotes(shell->cmd_tmp, ' ', shell);
+	cmd_tab = ft_split_quotes(' ', shell);
 	if (!cmd_tab)
 		ft_free("Error : malloc error\n", shell, 1);
 	new_pipe->command = cmd_tab;
@@ -28,7 +28,6 @@ void	ft_variable_replace(int i, t_shell *shell)
 	char	*variable_name;
 	char	*variable_result;
 	char	*tmp;
-	char	*new_command;
 
 	index_start = i + 1;
 	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != ' ' && shell->cmd_tmp[i] != '\"')
@@ -45,14 +44,14 @@ void	ft_variable_replace(int i, t_shell *shell)
 		tmp = ft_strndup(shell->cmd_tmp, index_start - 1);
 		if (!tmp)
 			ft_free("Error : malloc error\n", shell, 1);
-		new_command = ft_strjoin(tmp, variable_result);
-		if (!new_command)
+		tmp = ft_strjoin(tmp, variable_result);
+		if (!shell->cmd_tmp)
 			ft_free("Error : malloc error\n", shell, 1);
-		new_command = ft_strjoin(new_command, ft_substr(shell->cmd_tmp, index_start - 1, ft_strlen(shell->cmd_tmp) - index_start + 1));
-		if (!new_command)
+		shell->cmd_tmp = ft_strjoin(tmp, ft_substr(shell->cmd_tmp, index_start - 1, ft_strlen(shell->cmd_tmp) - index_start + 1));
+		if (!shell->cmd_tmp)
 			ft_free("Error : malloc error\n", shell, 1);
 		free(tmp);
-		shell->cmd_tmp = new_command;
+		return ;
 	}
 	ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp) - index_start - 1);
@@ -70,6 +69,7 @@ int	ft_parse_quotes(int i, int index_start,
 		{
 			if (quote_type == '\"' && shell->cmd_tmp[i] == '$')
 				ft_variable_replace(i, shell);
+
 			if (shell->cmd_tmp[i] == quote_type)
 			{
 				ft_memmove(&(shell->cmd_tmp[start_quote_index]), &(shell->cmd_tmp[start_quote_index + 1]), ft_strlen(shell->cmd_tmp) - start_quote_index);
