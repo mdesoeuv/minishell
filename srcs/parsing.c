@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/10 16:11:28 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 16:15:30 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	ft_parse_quotes(int i, int index_start,
 				ft_free("Error : unclosed quote\n", shell, 1);
 		}
 	}
-	dprintf(1, "command = %s , %c,%i\n", shell->cmd_tmp, shell->cmd_tmp[i], i);
 	return (i);
 }
 

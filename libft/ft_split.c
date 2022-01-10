@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 16:13:38 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 16:15:09 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,7 @@ char	**ft_split_quotes(char *s, char c, t_shell *shell)
 			while (s[i] && s[i] != c)
 			{
 				if (s[i] == '\'' || s[i] == '\"')
-				{
 					i = ft_parse_quotes(i, start_index, s[i], shell);
-					dprintf(1, "s = %s , %c,%i \n", s, s[i], i);
-				}
 				i++;
 			}
 			if (i - start_index > 1)
