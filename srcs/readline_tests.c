@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 15:30:57 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/09 21:31:14 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,20 @@ int	main(void)
 		add_history(line);
 		ft_parsing(line, &shell);
 		ft_print_shell_struct(&shell);
-		if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
-			print_working_directory();
-		else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
-			change_directory(line);
-		else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
-			ft_echo(&shell);
-		else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
+		if (shell.list_start->command[0])
 		{
-			is_exit = ft_exit(&shell);
-			if (is_exit == 0)
-				break ;
+			if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
+				print_working_directory();
+			else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
+				change_directory(line);
+			else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
+				ft_echo(&shell);
+			else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
+			{
+				is_exit = ft_exit(&shell);
+				if (is_exit == 0)
+					break ;
+			}
 		}
 		free(line);
 		line = readline("prompt? ");
