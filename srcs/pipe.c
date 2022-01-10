@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:48:50 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 18:26:27 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 	if (pipe_lst->file_out != NULL)
 	{
 		if (pipe_lst->chevron_nbr_out == 1)
-			pipe_lst->fd_file_out = open(pipe_lst->file_in, \
+			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else
-			pipe_lst->fd_file_out = open(pipe_lst->file_in, \
+			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
 				O_WRONLY | O_CREAT | O_APPEND, 0644);
 	}
 	if (pipe_lst->fd_file_in == -1)
@@ -107,8 +107,8 @@ int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 	else if (i != 0)
 		dup2(pipe_lst->pipe_fd[0], 0);
 	if (pipe_lst->file_out != NULL)
-		dup2(pipe_lst->fd_file_out, 0);
-	else if (i != shell->pipes_nbr)
+		dup2(pipe_lst->fd_file_out, 1);
+	else if (i != shell->pipes_nbr - 1)
 		dup2(pipe_lst->pipe_fd[1], 1);
 	return (0);
 }
@@ -147,6 +147,8 @@ int	cmd_process(t_shell *shell)
 	i = 0;
 	while (i < shell->pipes_nbr) // while (pipe_lst != NULL)
 	{
+		dprintf(1, "infile = %s\n", pipe_lst->file_in);
+		dprintf(1, "outfile = %s\n", pipe_lst->file_out);
 		pipe(pipe_lst->pipe_fd);
 		pipe_lst->pid = fork();
 		if (pipe_lst->pid < 0)
@@ -169,5 +171,6 @@ int	cmd_process(t_shell *shell)
 	}
 	close_all_pipes(shell);
 	wait_all_pid(shell);
+	// ft_lstclear(&(shell->list_start), free);
 	return (0);
 }
