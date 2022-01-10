@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/09 14:52:58 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/10 17:39:07 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-USER = victorchevillotte
+USER = mdesoeuv
 
 CC = gcc -Wall -Werror -Wextra
 
@@ -22,7 +22,9 @@ SRCS =	readline_tests.c \
 		parsing.c \
 		ft_free.c \
 		built_in_echo.c \
-		built_in_exit.c
+		built_in_exit.c \
+		pipe.c \
+		print_split.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 

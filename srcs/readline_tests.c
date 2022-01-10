@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/09 21:31:14 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:27:44 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,15 @@ void	ft_print_shell_struct(t_shell	*shell)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_shell	shell;
 	int		is_exit;
 
+	shell.envp = envp;
+	(void)argc;
+	(void)argv;
 	is_exit = 1;
 	line = readline("prompt? ");
 	while (line)
@@ -72,6 +75,8 @@ int	main(void)
 				if (is_exit == 0)
 					break ;
 			}
+			else
+				cmd_process(&shell);
 		}
 		free(line);
 		line = readline("prompt? ");
