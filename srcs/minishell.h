@@ -6,7 +6,11 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/01/11 16:51:39 by vchevill         ###   ########.fr       */
+=======
+/*   Updated: 2022/01/11 13:05:42 by mdesoeuv         ###   ########lyon.fr   */
+>>>>>>> mehdi
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +83,7 @@ typedef struct s_list_pipes
 void	sig_int(int code);
 void	sig_quit(int code);
 void	sig_init(void);
+void	ft_print_shell_struct(t_shell	shell);
 
 /* BUILT-IN */
 
@@ -110,6 +115,8 @@ int		wait_all_pid(t_shell *shell);
 int		cmd_process(t_shell *shell);	
 void	free_split(char **split);
 void	print_split(char **split);
+int		malloc_pipe_fd(t_shell *shell);
+void	close_unused_pipes(t_shell *shell, int i);
 
 extern t_sig	g_sig;
 #endif

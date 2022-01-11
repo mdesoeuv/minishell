@@ -1,0 +1,24 @@
+split =
+/Users/mdesoeuv/homebrew/bin
+/Users/mdesoeuv/.brew/bin
+/Users/mdesoeuv/.brew/bin
+/usr/local/bin
+/usr/bin
+/bin
+/usr/sbin
+/sbin
+/usr/local/munki
+/opt/X11/bin
+/Users/mdesoeuv/homebrew/bin
+/Users/mdesoeuv/.brew/bin
+
+concatened path = /Users/mdesoeuv/homebrew/bin/wc
+path tested = /Users/mdesoeuv/homebrew/bin/wc
+concatened path = /Users/mdesoeuv/.brew/bin/wc
+path tested = /Users/mdesoeuv/.brew/bin/wc
+concatened path = /Users/mdesoeuv/.brew/bin/wc
+path tested = /Users/mdesoeuv/.brew/bin/wc
+concatened path = /usr/local/bin/wc
+path tested = /usr/local/bin/wc
+concatened path = /usr/bin/wc
+path tested = /usr/bin/wc

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 17:11:52 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:16:42 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_list
 typedef struct s_list_pipes
 {
 	pid_t						pid;
-	int							pipe_fd[2];
 	char						**command;
 	char						*cmd_path;
 	char						*file_in;
@@ -42,7 +41,9 @@ typedef struct s_list_pipes
 typedef struct s_shell
 {
 	int					pipes_nbr;
+	int					**pipe_fd;
 	char				**envp;
+	struct s_list_pipes	*pipe_lst;
 	struct s_list_pipes	*list_start;
 	char				*cmd_tmp;
 }	t_shell;
