@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 18:26:27 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 11:40:43 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,20 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		else
 			break ;
 	}
-	free_split(possible_paths);
 	if (!possible_paths[i])
 		error_cmd_not_found(pipe_lst->command);
 	else if (execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp) == -1)
 		perror("minishell");
+	free_split(possible_paths);
 	free(pipe_lst->cmd_path);
 }
 
-int	manage_file_fd(t_list_pipes *pipe_lst)
+int	manage_file_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 {
 	if (pipe_lst->file_in != NULL)
 	{
+		if (i > 0)
+			close(shell->pipe_fd[i - 1][0]);
 		if (pipe_lst->chevron_nbr_in == 1)
 			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
 		else if (pipe_lst->chevron_nbr_in > 1)
@@ -88,6 +90,8 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 		perror("minishell");
 	if (pipe_lst->file_out != NULL)
 	{
+		if (i < shell->pipes_nbr - 1)
+			close(shell->pipe_fd[i][1]);
 		if (pipe_lst->chevron_nbr_out == 1)
 			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -104,21 +108,28 @@ int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 {
 	if (pipe_lst->file_in != NULL)
 		dup2(pipe_lst->fd_file_in, 0);
-	else if (i != 0)
-		dup2(pipe_lst->pipe_fd[0], 0);
+	else if (i > 0)
+		dup2(shell->pipe_fd[i - 1][0], 0);
 	if (pipe_lst->file_out != NULL)
 		dup2(pipe_lst->fd_file_out, 1);
-	else if (i != shell->pipes_nbr - 1)
-		dup2(pipe_lst->pipe_fd[1], 1);
+	else if (i < shell->pipes_nbr - 1)
+		dup2(shell->pipe_fd[i][1], 1);
 	return (0);
 }
 
 int	close_all_pipes(t_shell *shell)
 {
+	int	i;
+
+	i = 0;
+	while (i < shell->pipes_nbr - 1)
+	{
+		close(shell->pipe_fd[i][0]);
+		close(shell->pipe_fd[i][1]);
+		i++;
+	}
 	while (shell->list_start != NULL)
 	{
-		close(shell->list_start->pipe_fd[0]);
-		close(shell->list_start->pipe_fd[1]);
 		if (shell->list_start->file_in != NULL)
 			close(shell->list_start->fd_file_in);
 		if (shell->list_start->file_out != NULL)
@@ -144,12 +155,15 @@ int	cmd_process(t_shell *shell)
 	t_list_pipes	*pipe_lst;
 
 	pipe_lst = shell->list_start;
+	if (malloc_pipe_fd(shell) == -1)
+		return (-1);
 	i = 0;
 	while (i < shell->pipes_nbr) // while (pipe_lst != NULL)
 	{
 		dprintf(1, "infile = %s\n", pipe_lst->file_in);
 		dprintf(1, "outfile = %s\n", pipe_lst->file_out);
-		pipe(pipe_lst->pipe_fd);
+		if (i < shell->pipes_nbr - 1)
+			pipe(shell->pipe_fd[i]);
 		pipe_lst->pid = fork();
 		if (pipe_lst->pid < 0)
 		{
@@ -158,7 +172,8 @@ int	cmd_process(t_shell *shell)
 		}
 		else if (pipe_lst->pid == 0)
 		{
-			manage_file_fd(pipe_lst);
+			manage_file_fd(shell, pipe_lst, i);
+			close_unused_pipes(shell, i);
 			manage_dup_fd(shell, pipe_lst, i);
 			cmd_test_execute(shell, pipe_lst);
 			return (0);

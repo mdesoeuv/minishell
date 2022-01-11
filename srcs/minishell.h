@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:38:53 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 11:40:20 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,14 @@ int		ft_parse_quotes(int i, int index_start,
 void	concatenate_path(t_list_pipes *pipe_lst, char *path);
 void	error_cmd_not_found(char **cmd);
 void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
-int		manage_file_fd(t_list_pipes *pipe_lst);
+int		manage_file_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
 int		manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
 int		close_all_pipes(t_shell *shell);
 int		wait_all_pid(t_shell *shell);
 int		cmd_process(t_shell *shell);	
 void	free_split(char **split);
 void	print_split(char **split);
+int		malloc_pipe_fd(t_shell *shell);
+void	close_unused_pipes(t_shell *shell, int i);
 
 #endif
