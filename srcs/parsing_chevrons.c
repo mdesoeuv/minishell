@@ -6,11 +6,49 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:30:08 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 16:30:43 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:33:39 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
+{
+	char	**cmd_tab;
+
+	cmd_tab = ft_split_quotes(' ', shell);
+	if (!cmd_tab)
+		ft_free("Error : malloc error\n", shell, 1);
+	new_pipe->command = cmd_tab;
+}
+
+static char	*ft_file_in_out(t_shell *shell, int i)
+{
+	char	*file_name;
+	int		index_start;
+
+	index_start = i++;
+	while (shell->cmd_tmp[i] == ' ')
+	{
+		ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]),
+			ft_strlen(shell->cmd_tmp) - i);
+		index_start = i;
+	}
+	while (shell->cmd_tmp[i] != ' ' && shell->cmd_tmp[i])
+	{
+		if (shell->cmd_tmp[i] == '$')
+			ft_variable_replace(i, shell);
+		if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
+			i = ft_parse_quotes(i, index_start, shell->cmd_tmp[i], shell);
+		i++;
+	}
+	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
+	if (!file_name)
+		ft_free("Error : malloc error\n", shell, 1);
+	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
+		ft_strlen(shell->cmd_tmp) - index_start);
+	return (file_name);
+}
 
 static void	ft_new_pipe_chevron2_part2(t_shell	*shell,
 	int i, t_list_pipes	*new_pipe, int index_start)

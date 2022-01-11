@@ -6,21 +6,13 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 16:29:52 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:33:26 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
-{
-	char	**cmd_tab;
 
-	cmd_tab = ft_split_quotes(' ', shell);
-	if (!cmd_tab)
-		ft_free("Error : malloc error\n", shell, 1);
-	new_pipe->command = cmd_tab;
-}
 
 void	ft_variable_replace(int i, t_shell *shell)
 {
@@ -97,82 +89,6 @@ int	ft_parse_quotes(int i, int index_start,
 	}
 	return (i);
 }
-
-char	*ft_file_in_out(t_shell *shell, int i)
-{
-	char	*file_name;
-	int		index_start;
-
-	index_start = i++;
-	while (shell->cmd_tmp[i] == ' ')
-	{
-		ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]), ft_strlen(shell->cmd_tmp) - i);
-		index_start = i;
-	}
-	while (shell->cmd_tmp[i] != ' ' && shell->cmd_tmp[i])
-	{
-		if (shell->cmd_tmp[i] == '$')
-			ft_variable_replace(i, shell);
-		if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
-			i = ft_parse_quotes(i, index_start, shell->cmd_tmp[i], shell);
-		i++;
-	}
-	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
-	if (!file_name)
-		ft_free("Error : malloc error\n", shell, 1);
-	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
-		ft_strlen(shell->cmd_tmp) - index_start);
-	return (file_name);
-}
-/*
-void	ft_new_pipe_chevron2(t_list_pipes *new_pipe, t_shell *shell)
-{
-	int				i;
-	int				index_start;
-	int				count_chevron;
-
-	i = -1;
-	count_chevron = 0;
-	while (shell->cmd_tmp[++i])
-	{
-		if (shell->cmd_tmp[i] == '>')
-		{
-			count_chevron--;
-			index_start = i;
-			ft_memmove(&(shell->cmd_tmp)[i], &(shell->cmd_tmp)[i + 1], ft_strlen(shell->cmd_tmp) - i);
-			while (shell->cmd_tmp[i] && shell->cmd_tmp[i] == '>')
-			{
-				ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]), ft_strlen(shell->cmd_tmp) - i);
-				count_chevron--;
-			}
-			break ;
-		}
-	}
-	while (shell->cmd_tmp[++i])
-	{
-		if (shell->cmd_tmp[i] == '>')
-		{
-			ft_free("Error : trop de chevrons > parse errror near >\n",
-				shell, -1);
-			return ;
-		}
-	}
-	new_pipe->chevron_nbr_out = count_chevron;
-	if (count_chevron < 0)
-	{
-		if (count_chevron < 2)
-		{
-			ft_free("Error : trop de chevrons > parse errror near >\n",
-				shell, -1);
-			return ;
-		}	
-		new_pipe->file_out = ft_file_in_out(shell, index_start);
-		new_pipe->chevron_nbr_out = count_chevron;
-	}
-	ft_new_pipe_name_args(new_pipe, shell);
-}
-*/
-
 
 /* ft_parsing parse les quotes et découpe en pipes*/
 void	ft_parsing(char *line, t_shell	*shell)
