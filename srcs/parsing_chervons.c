@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_chevrons.C                                 :+:      :+:    :+:   */
+/*   parsing_chervons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 16:30:08 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 16:33:39 by vchevill         ###   ########.fr       */
+/*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
+/*   Updated: 2022/01/11 16:36:09 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
-{
-	char	**cmd_tab;
-
-	cmd_tab = ft_split_quotes(' ', shell);
-	if (!cmd_tab)
-		ft_free("Error : malloc error\n", shell, 1);
-	new_pipe->command = cmd_tab;
-}
 
 static char	*ft_file_in_out(t_shell *shell, int i)
 {
@@ -75,7 +65,8 @@ static void	ft_new_pipe_chevron2_part2(t_shell	*shell,
 	ft_new_pipe_name_args(new_pipe, shell);
 }
 
-static void	ft_new_pipe_chevron2(t_list_pipes	*new_pipe, t_shell	*shell, int i)
+static void	ft_new_pipe_chevron2(t_list_pipes	*new_pipe,
+	t_shell	*shell, int i)
 {
 	int	index_start;
 
