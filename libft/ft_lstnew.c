@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:18:12 by mdesoeuv          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/01/11 16:11:00 by vchevill         ###   ########.fr       */
-=======
-/*   Updated: 2022/01/11 15:42:54 by mdesoeuv         ###   ########lyon.fr   */
->>>>>>> mehdi
+/*   Updated: 2022/01/11 18:19:16 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

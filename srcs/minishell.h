@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/01/11 16:51:39 by vchevill         ###   ########.fr       */
-=======
-/*   Updated: 2022/01/11 13:05:42 by mdesoeuv         ###   ########lyon.fr   */
->>>>>>> mehdi
+/*   Updated: 2022/01/11 18:20:29 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
