@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/10 19:05:53 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:29:52 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	*ft_file_in_out(t_shell *shell, int i)
 		ft_strlen(shell->cmd_tmp) - index_start);
 	return (file_name);
 }
-
+/*
 void	ft_new_pipe_chevron2(t_list_pipes *new_pipe, t_shell *shell)
 {
 	int				i;
@@ -149,59 +149,30 @@ void	ft_new_pipe_chevron2(t_list_pipes *new_pipe, t_shell *shell)
 		}
 	}
 	while (shell->cmd_tmp[++i])
+	{
 		if (shell->cmd_tmp[i] == '>')
-			ft_free("Error : trop de chevrons > parse errror near >\n", shell, 1);
+		{
+			ft_free("Error : trop de chevrons > parse errror near >\n",
+				shell, -1);
+			return ;
+		}
+	}
 	new_pipe->chevron_nbr_out = count_chevron;
 	if (count_chevron < 0)
 	{
-		if (count_chevron < -2)
-			ft_free("Error : trop de chevrons > parse errror near >\n", shell, 1);
+		if (count_chevron < 2)
+		{
+			ft_free("Error : trop de chevrons > parse errror near >\n",
+				shell, -1);
+			return ;
+		}	
 		new_pipe->file_out = ft_file_in_out(shell, index_start);
-		new_pipe->chevron_nbr_out = count_chevron * -1;
+		new_pipe->chevron_nbr_out = count_chevron;
 	}
 	ft_new_pipe_name_args(new_pipe, shell);
 }
+*/
 
-void	ft_new_pipe_chevron1(t_shell	*shell)
-{
-	int				i;
-	int				index_start;
-	int				count_chevron;
-	t_list_pipes	*new_pipe;
-
-	new_pipe = ft_lstnew_pipes();
-	new_pipe->command = NULL;
-	ft_lstadd_back_pipes(&(shell->list_start), new_pipe);
-	i = -1;
-	count_chevron = 0;
-	while (shell->cmd_tmp[++i])
-	{
-		if (shell->cmd_tmp[i] == '<')
-		{
-			index_start = i;
-			count_chevron++;
-			ft_memmove(&(shell->cmd_tmp[i]), &shell->cmd_tmp[i + 1], ft_strlen(shell->cmd_tmp) - i);
-			while (shell->cmd_tmp[i] && shell->cmd_tmp[i] == '<')
-			{
-				ft_memmove(&shell->cmd_tmp[i], &shell->cmd_tmp[i + 1], ft_strlen(shell->cmd_tmp) - i);
-				count_chevron++;
-			}
-			break;
-		}
-	}
-	while (shell->cmd_tmp[++i])
-		if (shell->cmd_tmp[i] == '<')
-			ft_free("Error : trop de chevrons < parse errror near <\n", shell, 1);
-	new_pipe->chevron_nbr_in = count_chevron;
-	if (count_chevron > 0)
-	{
-		if (count_chevron > 2)
-			ft_free("Error : trop de chevrons < parse errror near <\n", shell, 1);
-		new_pipe->file_in = ft_file_in_out(shell, index_start);
-		new_pipe->chevron_nbr_in = count_chevron;
-	}
-	ft_new_pipe_chevron2(new_pipe, shell);
-}
 
 /* ft_parsing parse les quotes et découpe en pipes*/
 void	ft_parsing(char *line, t_shell	*shell)
@@ -213,26 +184,16 @@ void	ft_parsing(char *line, t_shell	*shell)
 	start = 0;
 	shell->list_start = NULL;
 	shell->pipes_nbr = 1;
-	while (line[i + 1])
-	{
-		if ((line[i] == '\'' && line[i + 1] == '\'' ) || (line[i] == '\"' && line[i + 1] == '\"' ))
-		{
-			ft_memmove(&line[i], &line[i + 2], ft_strlen(line) - i);
-			i = i - 2;
-		}
-		i++;
-	}
-	i = -1;
 	while (line[++i])
 	{
 		if (line[i] == '|')
 		{
 			shell->pipes_nbr++;
 			shell->cmd_tmp = ft_substr(line, start, i - start);
-			ft_new_pipe_chevron1(shell);
+			ft_new_pipe_chevron1(shell, -1);
 			start = i + 1;
 		}
 	}
 	shell->cmd_tmp = ft_substr(line, start, i - start + 1);
-	ft_new_pipe_chevron1(shell);
+	ft_new_pipe_chevron1(shell, -1);
 }
