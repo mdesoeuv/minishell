@@ -2,4 +2,4 @@
 objs/
 */*.o
 minishell
-signal.c
+.vscode
