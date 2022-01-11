@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 12:42:28 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 13:05:24 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int	cmd_process(t_shell *shell)
 	if (malloc_pipe_fd(shell) == -1)
 		return (-1);
 	i = 0;
+	ft_print_shell_struct(*shell);
 	while (i < shell->pipes_nbr && pipe_lst != NULL) // while (pipe_lst != NULL)
 	{
 		dprintf(1, "\n== loop %d ==\n\n", i);

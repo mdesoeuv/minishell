@@ -6,42 +6,42 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:27:44 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 13:06:23 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_print_shell_struct(t_shell	*shell)
+void	ft_print_shell_struct(t_shell	shell)
 {
-	int	i;
+	int		i;
 
-	printf("nbr pipes = %i \n", shell->pipes_nbr);
+	printf("nbr pipes = %i \n", shell.pipes_nbr);
 	printf("args_command =");
 	i = -1;
-	while (shell->list_start->command[++i])
-		printf("%s|", shell->list_start->command[i]);
+	while (shell.list_start->command[++i])
+		printf("%s|", shell.list_start->command[i]);
 	printf("\n");
 	//printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
 	//printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
-	if (shell->list_start->chevron_nbr_in != 0)
-		printf("file_in = %s\n", shell->list_start->file_in);
-	if (shell->list_start->chevron_nbr_out != 0)
-		printf("file_out = %s\n", shell->list_start->file_out);
-	while (shell->list_start->next)
+	if (shell.list_start->chevron_nbr_in != 0)
+		printf("file_in = %s\n", shell.list_start->file_in);
+	if (shell.list_start->chevron_nbr_out != 0)
+		printf("file_out = %s\n", shell.list_start->file_out);
+	while (shell.list_start->next)
 	{
-		shell->list_start = shell->list_start->next;
+		shell.list_start = shell.list_start->next;
 		printf("args_command =");
 		i = -1;
-		while (shell->list_start->command[++i])
-			printf("%s|", shell->list_start->command[i]);
+		while (shell.list_start->command[++i])
+			printf("%s|", shell.list_start->command[i]);
 		printf("\n");
 		//printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
 		//printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
-		if (shell->list_start->chevron_nbr_in != 0)
-			printf("file_in = %s\n", shell->list_start->file_in);
-		if (shell->list_start->chevron_nbr_out != 0)
-			printf("file_out = %s\n", shell->list_start->file_out);
+		if (shell.list_start->chevron_nbr_in != 0)
+			printf("file_in = %s\n", shell.list_start->file_in);
+		if (shell.list_start->chevron_nbr_out != 0)
+			printf("file_out = %s\n", shell.list_start->file_out);
 	}
 }
 
@@ -60,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		add_history(line);
 		ft_parsing(line, &shell);
-		ft_print_shell_struct(&shell);
+		ft_print_shell_struct(shell);
 		if (shell.list_start->command[0])
 		{
 			if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)

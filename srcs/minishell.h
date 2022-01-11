@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 12:42:08 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 13:05:42 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_list_pipes
 }	t_list_pipes;
 
 */
+
+void	ft_print_shell_struct(t_shell	shell);
 
 /* BUILT-IN */
 
