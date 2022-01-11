@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:18:09 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 09:22:06 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_shell
 	char				**envp;
 	struct s_list_pipes	*list_start;
 	char				*cmd_tmp;
+	int					**pipe_fd;
 }	t_shell;
 
 void			*ft_memalloc(size_t size);
