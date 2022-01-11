@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 15:53:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 17:37:16 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	int		i;
 	char	**possible_paths;
 
+	dprintf(1, "cmd test exe\n");
+	ft_print_shell_struct(*shell);
 	possible_paths = ft_split(getenv("PATH"), ':');
 	if (!possible_paths)
 		return ;
-	print_split(possible_paths);
+	// print_split(possible_paths);
 	i = 0;
 	while (possible_paths[i])
 	{
@@ -68,7 +70,8 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		error_cmd_not_found(pipe_lst->command);
 	else if (execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp) == -1)
 		perror("minishell");
-	free_split(possible_paths);
+	dprintf(1, "cmd executed \n");
+	free_split(possible_paths); // code non executé apres le execve
 	free(pipe_lst->cmd_path);
 }
 
@@ -106,12 +109,22 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 
 int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 {
+	if (i > 0)
+		close(shell->pipe_fd[i - 1][1]);
+	close(shell->pipe_fd[i][0]);
 	if (pipe_lst->file_in != NULL)
+	{
 		dup2(pipe_lst->fd_file_in, 0);
+		if (i > 0)
+			close(shell->pipe_fd[i - 1][0]);
+	}
 	else if (i > 0)
 		dup2(shell->pipe_fd[i - 1][0], 0);
 	if (pipe_lst->file_out != NULL)
+	{
 		dup2(pipe_lst->fd_file_out, 1);
+		close(shell->pipe_fd[i][1]);
+	}
 	else if (i < shell->pipes_nbr - 1)
 		dup2(shell->pipe_fd[i][1], 1);
 	return (0);
@@ -122,6 +135,8 @@ int	close_all_pipes(t_shell *shell)
 	int				i;
 	t_list_pipes	*start_lst;
 
+	dprintf(1, "closing all pipes\n");
+	ft_print_shell_struct(*shell);
 	start_lst = shell->list_start;
 	i = 0;
 	while (i < shell->pipes_nbr) // verifier
@@ -139,6 +154,7 @@ int	close_all_pipes(t_shell *shell)
 		shell->list_start = shell->list_start->next;
 	}
 	shell->list_start = start_lst;
+	dprintf(1, "all pipes closed !\n");
 	return (0);
 }
 
@@ -148,14 +164,17 @@ int	wait_all_pid(t_shell *shell)
 	t_list_pipes	*pipe_tmp;
 
 	i = 0;
+	dprintf(1, "waiting all pid\n");
 	pipe_tmp = shell->list_start;
-	while (i < shell->pipes_nbr)
+	while (shell->list_start)
 	{
+		dprintf(1, "waited for %d\n", shell->list_start->pid);
 		waitpid(shell->list_start->pid, NULL, 0);
 		shell->list_start = shell->list_start->next;
 		i++;
 	}
 	shell->list_start = pipe_tmp;
+	dprintf(1, "all pid finished !\n");
 	return (0);
 }
 
@@ -178,43 +197,41 @@ int	cmd_process(t_shell *shell)
 	t_list_pipes	*pipe_lst_tmp;
 
 	pipe_lst_tmp = shell->list_start;
-	shell->pipe_lst = shell->list_start;
 	if (malloc_pipe_fd(shell) == -1)
 		return (-1);
 	i = 0;
-	ft_print_shell_struct(*shell);
-	while (i < shell->pipes_nbr && shell->pipe_lst != NULL) // while (shell->pipe_lst != NULL)
+	while (i < shell->pipes_nbr)
 	{
 		dprintf(1, "\n== loop %d ==\n\n", i);
-		dprintf(1, "infile = %s\n", shell->pipe_lst->file_in);
-		dprintf(1, "outfile = %s\n", shell->pipe_lst->file_out);
+		ft_print_shell_struct(*shell);
+		dprintf(1, "infile = %s\n", shell->list_start->file_in);
+		dprintf(1, "outfile = %s\n", shell->list_start->file_out);
 		pipe(shell->pipe_fd[i]);
-		shell->pipe_lst->pid = fork();
-		if (shell->pipe_lst->pid < 0)
+		shell->list_start->pid = fork();
+		if (shell->list_start->pid < 0)
 		{
 			perror("minishell");
 			exit(EXIT_FAILURE); // to replace with ft_exit
 		}
-		else if (shell->pipe_lst->pid == 0)
+		else if (shell->list_start->pid == 0)
 		{
-			dprintf(1, "child fork executing cmd %d\n", i);
+			dprintf(1, "==child fork executing cmd %d => %s\n", i, shell->list_start->command[0]);
 			// close_unused_pipes(shell, i);
-			manage_file_fd(shell->pipe_lst);
-			manage_dup_fd(shell, shell->pipe_lst, i);
-			cmd_test_execute(shell, shell->pipe_lst);
-			dprintf(1, "child fork cmd %d executed !\n", i);
+			manage_file_fd(shell->list_start);
+			manage_dup_fd(shell, shell->list_start, i);
+			cmd_test_execute(shell, shell->list_start);
+			dprintf(1, "child fork cmd %d executed !==\n", i);
 			return (0);
 		}
 		else
 		{
-			dprintf(1, "parent fork number %d\n", i);
 			i++;
-			shell->pipe_lst = shell->pipe_lst->next;
+			shell->list_start = shell->list_start->next;
 		}
 	}
+	shell->list_start = pipe_lst_tmp;
 	close_all_pipes(shell);
 	wait_all_pid(shell);
-	shell->list_start = pipe_lst_tmp;
 	free_fd_tab(shell);
 	// ft_lstclear(&(shell->list_start), free);
 	return (0);

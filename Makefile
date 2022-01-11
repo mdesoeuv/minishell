@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/11 15:54:09 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/11 18:10:00 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 USER = mdesoeuv
 
-CC = gcc -Wall -Werror -Wextra
+CC = gcc -Wall -Werror -Wextra -g3 -fsanitize=address
 
 SRCS =	readline_tests.c \
 		built_in_pwd.c \
@@ -38,14 +38,14 @@ LIB = libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB)
-			$(CC) -fsanitize=address -g3 $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
+			$(CC)  $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
 
 libft	:	
 			$(MAKE) -C libft
 
 objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			@mkdir -p objs
-			$(CC) -c $< -o $@
+			$(CC) -c $< -o $@ 
 			
 clean	:
 			rm -rf objs/
