@@ -6,11 +6,13 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 18:51:40 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:20:47 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_sig	g_sig;
 
 void	ft_print_shell_struct(t_shell	*shell)
 {
@@ -52,6 +54,9 @@ int	main(void)
 	int		is_exit;
 
 	is_exit = 1;
+	sig_init();
+	signal(SIGINT, &sig_int);
+	signal(SIGQUIT, &sig_quit);
 	line = readline("prompt? ");
 	while (line)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:38:53 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 10:25:15 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ typedef struct s_cmd
 	char	*cmd_out;
 }	t_cmd;
 
+typedef struct	s_sig
+{
+	int				sigint;
+	int				exit_status;
+	pid_t			pid;
+}				t_sig;
+
 /*
 
 typedef struct s_shell
@@ -67,6 +74,13 @@ typedef struct s_list_pipes
 
 */
 
+/* SIGNALS */
+
+void	sig_int(int code);
+void	sig_quit(int code);
+void	sig_init(void);
+
+
 /* BUILT-IN */
 
 void	print_working_directory(void);
@@ -91,5 +105,8 @@ int		wait_all_pid(t_shell *shell);
 int		cmd_process(t_shell *shell);	
 void	free_split(char **split);
 void	print_split(char **split);
+
+extern t_sig g_sig;
+
 
 #endif
