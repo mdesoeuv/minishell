@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/11 18:25:06 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/11 18:28:20 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 USER = mdesoeuv
 
-CC = gcc -Wall -Werror -Wextra #-g3 -fsanitize=address
+CC = gcc -Wall -Werror -Wextra -g3 -fsanitize=address
 
 SRCS =	readline_tests.c \
 		built_in_pwd.c \
