@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 11:48:38 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 11:58:46 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	close_unused_pipes(t_shell *shell, int i)
 		close(shell->pipe_fd[i - 1][1]);
 	if (i < shell->pipes_nbr - 1)
 		close(shell->pipe_fd[i][0]);
-	dprintf(1, "there\n");
 }
 
 /* pipe_fd contains one more slot than needed */

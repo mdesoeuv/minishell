@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 11:47:01 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 12:00:56 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	manage_file_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 		perror("minishell");
 	if (pipe_lst->file_out != NULL)
 	{
-		if (i < shell->pipes_nbr - 1)
+		if (i < shell->pipes_nbr - 2)
 			close(shell->pipe_fd[i][1]);
 		if (pipe_lst->chevron_nbr_out == 1)
 			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
@@ -160,6 +160,7 @@ int	cmd_process(t_shell *shell)
 	i = 0;
 	while (i < shell->pipes_nbr) // while (pipe_lst != NULL)
 	{
+		dprintf(1, "\n== loop %d ==\n\n", i);
 		dprintf(1, "infile = %s\n", pipe_lst->file_in);
 		dprintf(1, "outfile = %s\n", pipe_lst->file_out);
 		if (i < shell->pipes_nbr - 1)
@@ -172,17 +173,17 @@ int	cmd_process(t_shell *shell)
 		}
 		else if (pipe_lst->pid == 0)
 		{
-			dprintf(1, "child fork\n");
-			manage_file_fd(shell, pipe_lst, i);
-			dprintf(1, "here\n");
+			dprintf(1, "child fork executing cmd %d\n", i);
 			close_unused_pipes(shell, i);
+			dprintf(1, "there\n");
+			manage_file_fd(shell, pipe_lst, i);
 			manage_dup_fd(shell, pipe_lst, i);
 			cmd_test_execute(shell, pipe_lst);
 			return (0);
 		}
 		else
 		{
-			dprintf(1, "parent fork\n");
+			dprintf(1, "parent fork number %d\n", i);
 			i++;
 			pipe_lst = pipe_lst->next;
 		}
