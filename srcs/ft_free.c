@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 16:01:29 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:56:25 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,21 @@ void	ft_free(char *message, t_shell	*shell, int is_error)
 
 	i = -1;
 	ft_putstr(message);
-	/*if (shell->cmd_tmp)
+	if (shell->cmd_tmp)
 		free(shell->cmd_tmp);
-	if (shell->list_start->command[0])
+	if (shell->list_start->command && shell->list_start->command[0])
 		while (shell->list_start->command[++i])
 			free(shell->list_start->command[i]);
 	if (shell->list_start->chevron_nbr_in != 0)
 		free(shell->list_start->file_in);
 	if (shell->list_start->chevron_nbr_out != 0)
-		free(shell->list_start->file_out);*/
+		free(shell->list_start->file_out);
 	while (shell->list_start->next)
 	{
 		i = -1;
-		shell->list_start = shell->list_start->next;
-		if (shell->list_start->command[0])
+		if (shell->cmd_tmp)
+			free(shell->cmd_tmp);
+		if (shell->list_start->command && shell->list_start->command[0])
 			while (shell->list_start->command[++i])
 				free(shell->list_start->command[i]);
 		if (shell->list_start->chevron_nbr_in != 0)

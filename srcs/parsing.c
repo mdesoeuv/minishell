@@ -6,47 +6,45 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 16:33:26 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:53:37 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-void	ft_variable_replace(int i, t_shell *shell)
+void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
 {
-	int		index_start;
-	char	*variable_name;
-	char	*variable_result;
-	char	*tmp;
+	char	**cmd_tab;
 
-	index_start = i + 1;
-	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != ' ' && shell->cmd_tmp[i] != '\"')
-		i++;
-	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
-	if (!variable_name)
+	cmd_tab = ft_split_quotes(' ', shell);
+	if (!cmd_tab)
 		ft_free("Error : malloc error\n", shell, 1);
-	variable_result = getenv(variable_name);
-	free(variable_name);
-	if (variable_result)
+	new_pipe->command = cmd_tab;
+}
+
+static void	ft_parse_quotes_unclosed(int i, char quote_type, t_shell *shell)
+{
+	ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]),
+		ft_strlen(shell->cmd_tmp) - i);
+	if (!shell->cmd_tmp[i + 1])
 	{
-		ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
-			ft_strlen(shell->cmd_tmp) - index_start - 1);
-		tmp = ft_strndup(shell->cmd_tmp, index_start - 1);
-		if (!tmp)
-			ft_free("Error : malloc error\n", shell, 1);
-		tmp = ft_strjoin(tmp, variable_result);
-		if (!shell->cmd_tmp)
-			ft_free("Error : malloc error\n", shell, 1);
-		shell->cmd_tmp = ft_strjoin(tmp, ft_substr(shell->cmd_tmp, index_start - 1, ft_strlen(shell->cmd_tmp) - index_start + 1));
-		if (!shell->cmd_tmp)
-			ft_free("Error : malloc error\n", shell, 1);
-		free(tmp);
+		ft_free("Error : unclosed quote\n", shell, -1);
 		return ;
 	}
-	ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
-		ft_strlen(shell->cmd_tmp) - index_start - 1);
+	while (shell->cmd_tmp[++i])
+	{
+		if (shell->cmd_tmp[i] == quote_type)
+		{
+			ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]),
+				ft_strlen(shell->cmd_tmp) - i);
+			break ;
+		}
+		else if (!shell->cmd_tmp[i + 1])
+		{
+			ft_free("Error : unclosed quote\n", shell, -1);
+			return ;
+		}
+	}
 }
 
 int	ft_parse_quotes(int i, int index_start,
@@ -63,30 +61,19 @@ int	ft_parse_quotes(int i, int index_start,
 				ft_variable_replace(i, shell);
 			if (shell->cmd_tmp[i] == quote_type)
 			{
-				ft_memmove(&(shell->cmd_tmp[start_quote_index]), &(shell->cmd_tmp[start_quote_index + 1]), ft_strlen(shell->cmd_tmp) - start_quote_index);
+				ft_memmove(&(shell->cmd_tmp[start_quote_index]),
+					&(shell->cmd_tmp[start_quote_index + 1]),
+					ft_strlen(shell->cmd_tmp) - start_quote_index);
 				i--;
-				ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]), ft_strlen(shell->cmd_tmp) - i);
+				ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]),
+					ft_strlen(shell->cmd_tmp) - i);
 				i--;
 				break ;
 			}
 		}
 	}
 	else if (shell->cmd_tmp[i - 1] != ' ')
-	{
-		ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]), ft_strlen(shell->cmd_tmp) - i); 
-		if (!shell->cmd_tmp[i + 1])
-			ft_free("Error : unclosed quote\n", shell, 1);
-		while (shell->cmd_tmp[++i])
-		{
-			if (shell->cmd_tmp[i] == quote_type)
-			{
-				ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]), ft_strlen(shell->cmd_tmp) - i);
-				break ;
-			}
-			else if (!shell->cmd_tmp[i + 1])
-				ft_free("Error : unclosed quote\n", shell, 1);
-		}
-	}
+		ft_parse_quotes_unclosed(i, quote_type, shell);
 	return (i);
 }
 
