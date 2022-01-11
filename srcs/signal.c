@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 10:59:50 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:18:19 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sig_int(int code) // ctrl-C
 	/*if (g_sig.pid == 0)// s'il y a du piping en cours
 	{
 		ft_putstr_fd("\n", 1);
-		ft_putstr_fd("prompt? ", 1);
+		ft_putstr_fd("minishell: ", 1);
 		g_sig.exit_status = 1;
 	}
 	else

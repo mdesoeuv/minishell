@@ -6,7 +6,7 @@
 #    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/11 10:08:56 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/11 16:52:43 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRCS =	readline_tests.c \
 		built_in_exit.c \
 		pipe.c \
 		print_split.c \
-		signal.c
+		signal.c \
+		parsing_chevron.c \
+		parsing_variable.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 

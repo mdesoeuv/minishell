@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 10:25:15 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:51:39 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_cmd
 	char	*cmd_out;
 }	t_cmd;
 
-typedef struct	s_sig
+typedef struct s_sig
 {
 	int				sigint;
 	int				exit_status;
@@ -80,7 +80,6 @@ void	sig_int(int code);
 void	sig_quit(int code);
 void	sig_init(void);
 
-
 /* BUILT-IN */
 
 void	print_working_directory(void);
@@ -90,8 +89,14 @@ void	ft_parsing(char *line, t_shell	*shell);
 void	ft_free(char *message, t_shell	*shell, int is_error);
 void	ft_echo(t_shell *shell);
 int		ft_exit(t_shell *shell);
+
+/* PARSING */
+
 int		ft_parse_quotes(int i, int index_start,
 			char quote_type, t_shell *shell);
+void	ft_new_pipe_chevron1(t_shell	*shell, int i);
+void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
+void	ft_variable_replace(int i, t_shell *shell);
 
 /* PIPE */
 
@@ -106,7 +111,5 @@ int		cmd_process(t_shell *shell);
 void	free_split(char **split);
 void	print_split(char **split);
 
-extern t_sig g_sig;
-
-
+extern t_sig	g_sig;
 #endif
