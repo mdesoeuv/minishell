@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 11:40:43 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 11:47:01 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,9 @@ int	cmd_process(t_shell *shell)
 		}
 		else if (pipe_lst->pid == 0)
 		{
+			dprintf(1, "child fork\n");
 			manage_file_fd(shell, pipe_lst, i);
+			dprintf(1, "here\n");
 			close_unused_pipes(shell, i);
 			manage_dup_fd(shell, pipe_lst, i);
 			cmd_test_execute(shell, pipe_lst);
@@ -180,6 +182,7 @@ int	cmd_process(t_shell *shell)
 		}
 		else
 		{
+			dprintf(1, "parent fork\n");
 			i++;
 			pipe_lst = pipe_lst->next;
 		}

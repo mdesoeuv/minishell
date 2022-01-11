@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 11:40:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 11:48:38 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 void	close_unused_pipes(t_shell *shell, int i)
 {
-	if (i > 0)
+	if (i > 0 && i < shell->pipes_nbr - 1)
 		close(shell->pipe_fd[i - 1][1]);
-	close(shell->pipe_fd[i][0]);
+	if (i < shell->pipes_nbr - 1)
+		close(shell->pipe_fd[i][0]);
+	dprintf(1, "there\n");
 }
+
+/* pipe_fd contains one more slot than needed */
 
 int	malloc_pipe_fd(t_shell *shell)
 {
 	int	i;
 
 	i = 0;
-	shell->pipe_fd = malloc(sizeof(int *) * (shell->pipes_nbr - 1));
+	shell->pipe_fd = malloc(sizeof(int *) * (shell->pipes_nbr));
 	if (!(shell->pipe_fd))
 		return (-1);
 	while (i < shell->pipes_nbr - 1)
