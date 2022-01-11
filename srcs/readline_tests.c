@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 10:56:12 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:59:58 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(void)
 	sig_init();
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
-	line = readline("prompt? ");
+	line = readline("minishell: ");
 	while (line)
 	{
 		add_history(line);
@@ -79,7 +79,7 @@ int	main(void)
 			}
 		}
 		free(line);
-		line = readline("prompt? ");
+		line = readline("minishell: ");
 	}
 	free(line);
 	return (0);
