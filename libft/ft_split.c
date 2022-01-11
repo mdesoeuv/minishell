@@ -6,14 +6,13 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:03:13 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 17:11:37 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../srcs/minishell.h"
 
-static char	*ft_split_strdup(char const *s, int i, int len)
+char	*ft_split_strdup(char const *s, int i, int len)
 {
 	char	*copy;
 	int		max;
@@ -59,7 +58,7 @@ static int	ft_wordcount(char const *s, char c)
 	return (count);
 }
 
-static char	**malloc_return(char ***tab, char const *s, char c)
+char	**malloc_return(char ***tab, char const *s, char c)
 {
 	*tab = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
 	if (!tab)
@@ -68,7 +67,7 @@ static char	**malloc_return(char ***tab, char const *s, char c)
 		return (*tab);
 }
 
-static char	**free_return_null(char **tab, int j)
+char	**free_return_null(char **tab, int j)
 {
 	while (j-- > 0)
 		free(tab[j]);
@@ -100,44 +99,6 @@ char	**ft_split(char const *s, char c)
 			tab[j] = ft_split_strdup(s, i - size, size);
 			if (tab[j++] == NULL)
 				return (free_return_null(tab, --j));
-		}
-		else
-			i++;
-	}
-	tab[j] = 0;
-	return (tab);
-}
-
-char	**ft_split_quotes(char c, t_shell *shell)
-{
-	int		i;
-	int		j;
-	char	**tab;
-	int		start_index;
-
-	if (malloc_return(&tab, shell->cmd_tmp, c) == NULL)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (shell->cmd_tmp[i])
-	{
-		if (shell->cmd_tmp[i] != c)
-		{
-			start_index = i;
-			while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != c)
-			{
-				if (shell->cmd_tmp[i] == '$')
-					ft_variable_replace(i, shell);
-				if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
-					i = ft_parse_quotes(i, start_index, shell->cmd_tmp[i], shell);
-				i++;
-			}
-			if (i - start_index > 1)
-			{
-				tab[j] = ft_split_strdup(shell->cmd_tmp, start_index, i - start_index);
-				if (tab[j++] == NULL)
-					return (free_return_null(tab, --j));
-			}
 		}
 		else
 			i++;
