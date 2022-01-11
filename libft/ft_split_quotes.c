@@ -6,14 +6,14 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 17:10:44 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 17:12:38 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "../srcs/minishell.h"
 
-static int	ft_split_quotes_variable_replace(char c, t_shell *shell, 
+static int	ft_split_quotes_variable_replace(char c, t_shell *shell,
 	int i, int start_index)
 {
 	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != c)
