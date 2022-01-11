@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 10:20:47 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:39:00 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	main(void)
 
 	is_exit = 1;
 	sig_init();
-	signal(SIGINT, &sig_int);
-	signal(SIGQUIT, &sig_quit);
+	//signal(SIGINT, &sig_int);
+	//signal(SIGQUIT, &sig_quit);
 	line = readline("prompt? ");
 	while (line)
 	{
