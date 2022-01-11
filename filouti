@@ -1,12 +1,38 @@
+split =
+/Users/mdesoeuv/homebrew/bin
+/Users/mdesoeuv/.brew/bin
+/Users/mdesoeuv/.brew/bin
+/usr/local/bin
+/usr/bin
+/bin
+/usr/sbin
+/sbin
+/usr/local/munki
+/opt/X11/bin
+/Users/mdesoeuv/homebrew/bin
+/Users/mdesoeuv/.brew/bin
+
+concatened path = /Users/mdesoeuv/homebrew/bin/cat
+path tested = /Users/mdesoeuv/homebrew/bin/cat
+concatened path = /Users/mdesoeuv/.brew/bin/cat
+path tested = /Users/mdesoeuv/.brew/bin/cat
+concatened path = /Users/mdesoeuv/.brew/bin/cat
+path tested = /Users/mdesoeuv/.brew/bin/cat
+concatened path = /usr/local/bin/cat
+path tested = /usr/local/bin/cat
+concatened path = /usr/bin/cat
+path tested = /usr/bin/cat
+concatened path = /bin/cat
+path tested = /bin/cat
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/11 18:31:01 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/11 11:39:55 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +40,7 @@ NAME = minishell
 
 USER = mdesoeuv
 
-CC = gcc -Wall -Werror -Wextra -fsanitize=address -g3
+CC = gcc -Wall -Werror -Wextra
 
 SRCS =	readline_tests.c \
 		built_in_pwd.c \
@@ -25,9 +51,6 @@ SRCS =	readline_tests.c \
 		built_in_exit.c \
 		pipe.c \
 		print_split.c \
-		signal.c \
-		parsing_chevron.c \
-		parsing_variable.c \
 		pipe_dup_close.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
@@ -41,14 +64,14 @@ LIB = libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB)
-			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
+			$(CC) -fsanitize=address -g3 $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
 
 libft	:	
 			$(MAKE) -C libft
 
 objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			@mkdir -p objs
-			$(CC) -c $< -o $@ 
+			$(CC) -c $< -o $@
 			
 clean	:
 			rm -rf objs/
@@ -61,3 +84,4 @@ fclean	:	clean
 re		:	fclean all
 
 .PHONY	:	libft all clean re fclean
+			
