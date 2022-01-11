@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 11:23:23 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 15:50:24 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_shell
 	int					pipes_nbr;
 	int					**pipe_fd;
 	char				**envp;
+	struct s_list_pipes	*pipe_lst;
 	struct s_list_pipes	*list_start;
 	char				*cmd_tmp;
 }	t_shell;

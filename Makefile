@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/11 11:39:55 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/11 15:54:09 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,4 +58,3 @@ fclean	:	clean
 re		:	fclean all
 
 .PHONY	:	libft all clean re fclean
-			
