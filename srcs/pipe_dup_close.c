@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 12:43:18 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 09:49:44 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	malloc_pipe_fd(t_shell *shell)
 	int	i;
 
 	i = 0;
-	shell->pipe_fd = malloc(sizeof(int *) * (shell->pipes_nbr));
+	shell->pipe_fd = malloc(sizeof(int *) * (shell->pipes_nbr - 1));
 	if (!(shell->pipe_fd))
 		return (-1);
-	while (i < shell->pipes_nbr)
+	while (i < shell->pipes_nbr - 1)
 	{
 		shell->pipe_fd[i] = malloc(sizeof(int) * 2);
 		if (!(shell->pipe_fd[i]))

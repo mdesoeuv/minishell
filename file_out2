@@ -1,9 +1,0 @@
-cmd test exe
-nbr pipes = 2 
-args_command =wc|
-file_out = file_out2
-concatened path = /usr/local/bin/wc
-path tested = /usr/local/bin/wc
-concatened path = /usr/bin/wc
-path tested = /usr/bin/wc
-      71     208    2050
