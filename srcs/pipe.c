@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 20:44:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 21:20:43 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	manage_all_file_fd(t_shell *shell)
 		{
 			if (shell->list_start->chevron_nbr_in == 1)
 			{
-				shell->list_start->fd_file_in = open(shell->list_start->file_in, O_RDONLY);
+				shell->list_start->fd_file_in = open(shell->list_start->file_in, O_RDONLY, S_IRWXU);
 				dprintf(1, "opened file = %s\n", shell->list_start->file_in);
 			}
 			else if (shell->list_start->chevron_nbr_in > 1)
@@ -121,7 +121,7 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 	{
 		if (pipe_lst->chevron_nbr_in == 1)
 		{
-			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
+			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY, S_IRWXU);
 			dprintf(1, "opened file = %s\n", pipe_lst->file_in);
 		}
 		else if (pipe_lst->chevron_nbr_in > 1)
@@ -130,16 +130,20 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 			pipe_lst->fd_file_in = 0;
 		}
 	}
-	// if (pipe_lst->fd_file_in == -1)
-	// 	perror("minishell");
+	if (pipe_lst->fd_file_in < 0)
+	{
+		dprintf(2, "FILE OPENING ERROR : %s\n", pipe_lst->file_in);
+		close(pipe_lst->fd_file_in);
+		exit(0);
+	}
 	if (pipe_lst->file_out != NULL)
 	{
 		if (pipe_lst->chevron_nbr_out == 1)
 			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				O_WRONLY | O_CREAT | O_TRUNC, 0644); // S_IRWXU
 		else
 			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
-				O_WRONLY | O_APPEND, 0644);
+				O_WRONLY | O_APPEND, 0644); // S_IRWXU
 	}
 	// if (pipe_lst->fd_file_in == -1)
 	// 	perror("minishell");
@@ -282,7 +286,7 @@ int	cmd_process(t_shell *shell)
 		if (malloc_pipe_fd(shell) == -1)
 			return (-1);
 	i = 0;
-	manage_all_file_fd(shell);
+	// manage_all_file_fd(shell);
 	while (i < shell->cmd_nbr)
 	{
 		dprintf(1, "\n== loop %d ==\n\n", i);
@@ -299,15 +303,23 @@ int	cmd_process(t_shell *shell)
 		else if (shell->list_start->pid == 0)
 		{
 			dprintf(1, "==child fork executing cmd %d => %s\n", i, shell->list_start->command[0]);
+			manage_file_fd(shell->list_start);
 			manage_dup_fd(shell, shell->list_start, i);
-			if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
-			{
-				close(shell->pipe_fd[i][0]);
-				close(shell->pipe_fd[i][1]);
-			}
+			// if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
+			// {
+			// 	close(shell->pipe_fd[i][0]);
+			// 	close(shell->pipe_fd[i][1]);
+			// }
+			if (shell->list_start->file_in != NULL)
+				close(shell->pipe_lst->fd_file_in);
+			// if (shell->cmd_nbr > 1 && i < shell->cmd_nbr && i > 0)
+			// {
+			// 	close(shell->pipe_fd[i - 1][0]);
+			// 	close(shell->pipe_fd[i - 1][1]);
+			// }
 			cmd_test_execute(shell, shell->list_start);
 			dprintf(1, "child fork cmd %d executed !==\n", i);
-			exit(0);
+			exit(0); // to replace
 		}
 		else
 		{
