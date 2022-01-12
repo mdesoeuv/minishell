@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_chervons.c                                 :+:      :+:    :+:   */
+/*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 16:36:09 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/12 09:08:23 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 static void	ft_new_pipe_chevron2_part2(t_shell	*shell,
 	int i, t_list_pipes	*new_pipe, int index_start)
 {
-	while (shell->cmd_tmp[++i])
+	while (shell->cmd_tmp[i++])
 	{
 		if (shell->cmd_tmp[i] == '>')
 		{
@@ -94,7 +94,7 @@ static void	ft_new_pipe_chevron2(t_list_pipes	*new_pipe,
 static void	ft_new_pipe_chevron1_part2(t_shell	*shell,
 	int i, t_list_pipes	*new_pipe, int index_start)
 {
-	while (shell->cmd_tmp[++i])
+	while (shell->cmd_tmp[i++])
 	{
 		if (shell->cmd_tmp[i] == '<')
 		{
