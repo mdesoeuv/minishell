@@ -1,0 +1,43 @@
+cmd test exe
+nbr pipes = 4 
+args_command =cat|
+file_out =  file1
+args_command =cat|Makefile|
+file_out =  file2
+args_command =cat|message.txtexit|
+concatened path = /usr/local/bin/cat
+path tested = /usr/local/bin/cat
+concatened path = /usr/bin/cat
+path tested = /usr/bin/cat
+concatened path = /bin/cat
+path tested = /bin/cat
+cmd test exe
+nbr pipes = 4 
+args_command =ls|-la|
+args_command =cat|
+file_out =  file1
+args_command =cat|Makefile|
+file_out =  file2
+args_command =cat|message.txtexit|
+concatened path = /usr/local/bin/ls
+path tested = /usr/local/bin/ls
+concatened path = /usr/bin/ls
+path tested = /usr/bin/ls
+concatened path = /bin/ls
+path tested = /bin/ls
+total 232
+-rw-r--r--    1 mehdi  staff       0 Jan 12 16:15  file1
+drwxr-xr-x   15 mehdi  staff     480 Jan 12 16:15 .
+drwxr-xr-x   13 mehdi  staff     416 Jan 11 16:26 ..
+drwxr-xr-x   15 mehdi  staff     480 Jan 12 16:15 .git
+-rw-r--r--    1 mehdi  staff      93 Jan 12 10:50 .gitignore
+drwxr-xr-x    3 mehdi  staff      96 Jan 12 10:49 .vscode
+-rw-r--r--    1 mehdi  staff    1836 Jan 12 10:49 Makefile
+drwxr-xr-x  162 mehdi  staff    5184 Jan 12 13:54 libft
+-rw-r--r--    1 mehdi  staff    1077 Jan 12 10:49 message.txt
+-rwxr-xr-x    1 mehdi  staff  121568 Jan 12 16:13 minishell
+drwxr-xr-x    3 mehdi  staff      96 Jan  9 20:46 minishell.dSYM
+-rw-r--r--    1 mehdi  staff      48 Jan 12 10:49 notsuported
+drwxr-xr-x   15 mehdi  staff     480 Jan 12 16:13 objs
+drwxr-xr-x   16 mehdi  staff     512 Jan 12 13:53 srcs
+-rw-r--r--    1 mehdi  staff     340 Jan 12 10:49 tests_mehdi
