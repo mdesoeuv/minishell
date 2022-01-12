@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 11:31:15 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 11:36:49 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int    main(int argc, char **argv, char **envp)
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
 	shell.envp = envp;
+	shell.return_val = 0;
 	line = readline("minishell: ");
 	while (line)
 	{
@@ -80,9 +81,9 @@ int    main(int argc, char **argv, char **envp)
 				if (is_exit == 0)
 					break ;
 			}
-			else
-				cmd_process(&shell);
-			 shell->return_val = 0;
+			//else
+			//	cmd_process(&shell);
+			 shell.return_val = 0;
 		}
 		free(line);
 		line = readline("minishell: ");

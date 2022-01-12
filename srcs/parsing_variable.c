@@ -6,19 +6,17 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/12 11:24:31 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 13:23:36 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_cmd_variable_change(int index_start, t_shell *shell,
-	char *variable_result, int i)
+	char *variable_result)
 {
 	char	*tmp;
 
-	ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
-		ft_strlen(shell->cmd_tmp) - index_start - 1);
 	tmp = ft_strndup(shell->cmd_tmp, index_start - 1);
 	if (!tmp)
 		ft_free("Error : malloc error\n", shell, 1);
@@ -45,13 +43,17 @@ void	ft_variable_replace(int i, t_shell *shell)
 	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!variable_name)
 		ft_free("Error : malloc error\n", shell, 1);
-	if (variable_result == "?")
-		variable_result = shell->return_val;
-	variable_result = getenv(variable_name);
-	free(variable_name);
-	if (variable_result)
-		ft_cmd_variable_change(index_start, shell, variable_result, i);
-	else
+	if (ft_strcmp(variable_name, "?") == 0)
+	{
 		ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
 			ft_strlen(shell->cmd_tmp) - index_start - 1);
+		variable_result = ft_strdup("0");
+	}
+	else
+		variable_result = getenv(variable_name);
+	free(variable_name);
+	ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
+		ft_strlen(shell->cmd_tmp));
+	if (variable_result)
+		ft_cmd_variable_change(index_start, shell, variable_result);
 }
