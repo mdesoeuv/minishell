@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 17:12:38 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/12 10:16:58 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static int	ft_split_quotes_variable_replace(char c, t_shell *shell,
 		if (shell->cmd_tmp[i] == '$')
 			ft_variable_replace(i, shell);
 		if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
+		{
 			i = ft_parse_quotes(i, start_index,
 					shell->cmd_tmp[i], shell);
+		}
 		i++;
 	}
 	return (i);
