@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 09:50:09 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 10:32:53 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,42 +47,45 @@ void	ft_print_shell_struct(t_shell	shell)
 	}
 }
 
-int    main(void)
+int    main(int argc, char **argv, char **envp)
 {
-    char    *line;
-    t_shell    shell;
-    int        is_exit;
+	char		*line;
+	t_shell		shell;
+	int			is_exit;
 
-    is_exit = 1;
-    sig_init();
-    signal(SIGINT, &sig_int);
-    signal(SIGQUIT, &sig_quit);
-    line = readline("minishell: ");
-    while (line)
-    {
-        add_history(line);
-        ft_parsing(line, &shell);
-        if (shell.list_start->command && shell.list_start->command[0])
-        {
-            ft_print_shell_struct(shell);
-            if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
-                print_working_directory();
-            else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
-                change_directory(line);
-            else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
-                ft_echo(&shell);
-            else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
-            {
-                is_exit = ft_exit(&shell);
-                if (is_exit == 0)
-                    break ;
-            }
-			//else
-			//	cmd_process(&shell);
-        }
-        free(line);
-        line = readline("minishell: ");
-    }
-    free(line);
-    return (0);
+	(void)argc;
+	(void)argv;
+	is_exit = 1;
+	sig_init();
+	signal(SIGINT, &sig_int);
+	signal(SIGQUIT, &sig_quit);
+	shell.envp = envp;
+	line = readline("minishell: ");
+	while (line)
+	{
+		add_history(line);
+		ft_parsing(line, &shell);
+		if (shell.list_start->command && shell.list_start->command[0])
+		{
+			ft_print_shell_struct(shell);
+			if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
+				print_working_directory();
+			else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
+				change_directory(line);
+			else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
+				ft_echo(&shell);
+			else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
+			{
+				is_exit = ft_exit(&shell);
+				if (is_exit == 0)
+					break ;
+			}
+			else
+				cmd_process(&shell);
+		}
+		free(line);
+		line = readline("minishell: ");
+	}
+	free(line);
+	return (0);
 }
