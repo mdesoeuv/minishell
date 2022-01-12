@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 10:32:53 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 10:58:33 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_print_shell_struct(t_shell	shell)
 {
 	int		i;
 
-	printf("nbr pipes = %i \n", shell.pipes_nbr);
+	printf("nbr pipes = %i \n", shell.cmd_nbr);
 	printf("args_command =");
 	i = -1;
 	while (shell.list_start->command[++i])

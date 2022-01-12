@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/12 09:31:19 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 10:55:07 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	ft_variable_replace(int i, t_shell *shell)
 		&& shell->cmd_tmp[i] != '\"')
 		i++;
 	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
-		//dprintf(1, "variable_name = %s", variable_name);
-
 	if (!variable_name)
 		ft_free("Error : malloc error\n", shell, 1);
 	variable_result = getenv(variable_name);
