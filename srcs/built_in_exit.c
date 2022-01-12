@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 11:00:52 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/12 14:56:35 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_exit(t_shell *shell)
 {
 	int	return_num;
 
-	ft_putstr_fd("exit", 1);// TO DO ajouter retour a la ligne
+	ft_putstr_fd("exit", 1);
 	return_num = 0;
 	if (shell->list_start->command[1]
 		&& ft_strisnum(shell->list_start->command[1]) == 0)
