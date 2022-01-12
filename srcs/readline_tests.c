@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 15:23:40 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 21:55:19 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_print_shell_struct(t_shell	shell)
 	// printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
 	// printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
 	if (shell.list_start->chevron_nbr_in != 0)
-		printf("file_in = %s\n", shell.list_start->file_in);
+		printf("file_in =|%s|\n", shell.list_start->file_in);
 	if (shell.list_start->chevron_nbr_out != 0)
-		printf("file_out = %s\n", shell.list_start->file_out);
+		printf("file_out =|%s|\n", shell.list_start->file_out);
 	while (shell.list_start->next)
 	{
 		shell.list_start = shell.list_start->next;
@@ -41,9 +41,9 @@ void	ft_print_shell_struct(t_shell	shell)
 		// printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
 		// printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
 		if (shell.list_start->chevron_nbr_in != 0)
-			printf("file_in = %s\n", shell.list_start->file_in);
+			printf("file_in =|%s|\n", shell.list_start->file_in);
 		if (shell.list_start->chevron_nbr_out != 0)
-			printf("file_out = %s\n", shell.list_start->file_out);
+			printf("file_out =|%s|\n", shell.list_start->file_out);
 	}
 }
 
@@ -83,7 +83,7 @@ int    main(int argc, char **argv, char **envp)
 			}
 			else
 				cmd_process(&shell);
-			 shell.return_val = 0;
+			shell.return_val = 0;
 		}
 		free(line);
 		line = readline("minishell: ");

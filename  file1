@@ -1,0 +1,47 @@
+cmd test exe
+nbr pipes = 4 
+args_command =cat|
+file_out =  file1
+args_command =cat|Makefile|
+file_out =  file2
+args_command =cat|message.txt|
+concatened path = /Users/victorchevillotte/.nvm/versions/node/v16.13.1/bin/cat
+path tested = /Users/victorchevillotte/.nvm/versions/node/v16.13.1/bin/cat
+concatened path = /usr/local/bin/cat
+path tested = /usr/local/bin/cat
+concatened path = /usr/bin/cat
+path tested = /usr/bin/cat
+concatened path = /bin/cat
+path tested = /bin/cat
+cmd test exe
+nbr pipes = 4 
+args_command =ls|-la|
+args_command =cat|
+file_out =  file1
+args_command =cat|Makefile|
+file_out =  file2
+args_command =cat|message.txt|
+concatened path = /Users/victorchevillotte/.nvm/versions/node/v16.13.1/bin/ls
+path tested = /Users/victorchevillotte/.nvm/versions/node/v16.13.1/bin/ls
+concatened path = /usr/local/bin/ls
+path tested = /usr/local/bin/ls
+concatened path = /usr/bin/ls
+path tested = /usr/bin/ls
+concatened path = /bin/ls
+path tested = /bin/ls
+total 296
+drwxr-xr-x@  15 victorchevillotte  staff     480 12 jan 21:52 .
+drwx------@   9 victorchevillotte  staff     288 12 jan 21:52 ..
+-rw-r--r--@   1 victorchevillotte  staff    6148  9 jan 14:54 .DS_Store
+drwxr-xr-x@  15 victorchevillotte  staff     480 12 jan 21:51 .git
+-rw-r--r--    1 victorchevillotte  staff      93 12 jan 21:51 .gitignore
+drwxr-xr-x@   3 victorchevillotte  staff      96 11 jan 16:30 .vscode
+-rw-r--r--    1 victorchevillotte  staff    1836 11 jan 20:36 Makefile
+drwxr-xr-x@ 199 victorchevillotte  staff    6368 12 jan 21:52 libft
+-rw-r--r--    1 victorchevillotte  staff    1077 11 jan 18:30 message.txt
+-rwxr-xr-x    1 victorchevillotte  staff  121760 12 jan 21:51 minishell
+drwxr-xr-x@   3 victorchevillotte  staff      96 11 jan 18:30 minishell.dSYM
+-rw-r--r--    1 victorchevillotte  staff      48 12 jan 21:51 notsuported
+drwxr-xr-x@  15 victorchevillotte  staff     480 12 jan 21:52 objs
+drwxr-xr-x@  16 victorchevillotte  staff     512 12 jan 21:52 srcs
+-rw-r--r--    1 victorchevillotte  staff     340 10 jan 18:48 tests_mehdi
