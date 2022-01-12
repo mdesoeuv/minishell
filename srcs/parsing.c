@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 17:04:55 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/12 10:16:41 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
 	new_pipe->command = cmd_tab;
 }
 
-static void	ft_parse_quotes_unclosed(int i, char quote_type, t_shell *shell)
+static int	ft_parse_quotes_unclosed(int i, char quote_type, t_shell *shell)
 {
 	ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]),
 		ft_strlen(shell->cmd_tmp) - i);
 	if (!shell->cmd_tmp[i + 1])
 	{
 		ft_free("Error : unclosed quote\n", shell, -1);
-		return ;
+		return (i);
 	}
 	while (shell->cmd_tmp[++i])
 	{
@@ -42,9 +42,10 @@ static void	ft_parse_quotes_unclosed(int i, char quote_type, t_shell *shell)
 		else if (!shell->cmd_tmp[i + 1])
 		{
 			ft_free("Error : unclosed quote\n", shell, -1);
-			return ;
+			return (i);
 		}
 	}
+	return (i);
 }
 
 int	ft_parse_quotes(int i, int index_start,
@@ -73,7 +74,7 @@ int	ft_parse_quotes(int i, int index_start,
 		}
 	}
 	else if (shell->cmd_tmp[i - 1] != ' ')
-		ft_parse_quotes_unclosed(i, quote_type, shell);
+		i = ft_parse_quotes_unclosed(i, quote_type, shell);
 	return (i);
 }
 
