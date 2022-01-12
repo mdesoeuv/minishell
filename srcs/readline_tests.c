@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 11:36:49 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 13:38:33 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int    main(int argc, char **argv, char **envp)
 					break ;
 			}
 			//else
-			//	cmd_process(&shell);
+				//cmd_process(&shell);
 			 shell.return_val = 0;
 		}
 		free(line);
