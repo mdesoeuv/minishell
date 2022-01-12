@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 10:32:53 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 11:36:49 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_print_shell_struct(t_shell	shell)
 {
 	int		i;
 
-	printf("nbr pipes = %i \n", shell.pipes_nbr);
+	printf("nbr pipes = %i \n", shell.cmd_nbr);
 	printf("args_command =");
 	i = -1;
 	while (shell.list_start->command[++i])
@@ -60,6 +60,7 @@ int    main(int argc, char **argv, char **envp)
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
 	shell.envp = envp;
+	shell.return_val = 0;
 	line = readline("minishell: ");
 	while (line)
 	{
@@ -80,8 +81,9 @@ int    main(int argc, char **argv, char **envp)
 				if (is_exit == 0)
 					break ;
 			}
-			else
-				cmd_process(&shell);
+			//else
+			//	cmd_process(&shell);
+			 shell.return_val = 0;
 		}
 		free(line);
 		line = readline("minishell: ");

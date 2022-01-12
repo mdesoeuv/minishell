@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/12 10:16:58 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 13:22:31 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**ft_split_quotes(char c, t_shell *shell, int i, int j)
 		{
 			start_index = i;
 			i = ft_split_quotes_variable_replace(c, shell, i, start_index);
-			if (i - start_index > 1)
+			if (i - start_index > 0)
 			{
 				tab[j] = ft_split_strdup(shell->cmd_tmp,
 						start_index, i - start_index);

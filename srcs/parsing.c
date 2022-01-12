@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/12 10:16:41 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 11:53:15 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_parse_quotes(int i, int index_start,
 		start_quote_index = i;
 		while (shell->cmd_tmp[++i])
 		{
+			dprintf(1,"shell->cmd_tmp[i]=%i, i= %i, ", shell->cmd_tmp[i],i);
 			if (quote_type == '\"' && shell->cmd_tmp[i] == '$')
 				ft_variable_replace(i, shell);
 			if (shell->cmd_tmp[i] == quote_type)
@@ -87,12 +88,12 @@ void	ft_parsing(char *line, t_shell	*shell)
 	i = -1;
 	start = 0;
 	shell->list_start = NULL;
-	shell->pipes_nbr = 1;
+	shell->cmd_nbr = 1;
 	while (line[++i])
 	{
 		if (line[i] == '|')
 		{
-			shell->pipes_nbr++;
+			shell->cmd_nbr++;
 			shell->cmd_tmp = ft_substr(line, start, i - start);
 			ft_new_pipe_chevron1(shell, -1);
 			start = i + 1;
