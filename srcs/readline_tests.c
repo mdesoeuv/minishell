@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 18:26:19 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/11 20:38:36 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int    main(void)
                 if (is_exit == 0)
                     break ;
             }
-			else
-				cmd_process(&shell);
+			//else
+			//	cmd_process(&shell);
         }
         free(line);
         line = readline("minishell: ");
