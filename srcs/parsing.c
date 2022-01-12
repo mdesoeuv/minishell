@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/12 13:43:10 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 15:55:50 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,35 @@ int	ft_parse_quotes(int i, int index_start,
 	return (i);
 }
 
+int	ft_parsing_subfct(char *line, t_shell	*shell, int i, int start)
+{
+	if (line[i] == '\"')
+	{
+		while (line[++i] && line[i] != '\"')
+		{
+			if (!line[++i])
+			{
+				shell->cmd_tmp = ft_substr(line, start, i - start + 1);
+				ft_new_pipe_chevron1(shell, -1);
+				return (-1);
+			}
+		}
+	}
+	else if (line[i] == '\'')
+	{
+		while (line[++i] && line[i] != '\'')
+		{
+			if (!line[++i])
+			{
+				shell->cmd_tmp = ft_substr(line, start, i - start + 1);
+				ft_new_pipe_chevron1(shell, -1);
+				return (-1);
+			}
+		}
+	}
+	return (i);
+}
+
 /* ft_parsing parse les quotes et découpe en pipes*/
 void	ft_parsing(char *line, t_shell	*shell)
 {
@@ -90,6 +119,9 @@ void	ft_parsing(char *line, t_shell	*shell)
 	shell->cmd_nbr = 1;
 	while (line[++i])
 	{
+		i = ft_parsing_subfct(line, shell, i, start);
+		if (i == -1)
+			return ;
 		if (line[i] == '|')
 		{
 			shell->cmd_nbr++;
