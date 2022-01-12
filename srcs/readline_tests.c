@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 09:15:13 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 09:26:55 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,19 @@ void	ft_print_shell_struct(t_shell	shell)
 	}
 }
 
-int    main(void)
+int    main(int argc, char **argv, char **envp)
 {
 	char		*line;
 	t_shell		shell;
 	int			is_exit;
 
+	(void)argc;
+	(void)argv;
 	is_exit = 1;
 	sig_init();
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
+	shell.envp = envp;
 	line = readline("minishell: ");
 	while (line)
 	{
