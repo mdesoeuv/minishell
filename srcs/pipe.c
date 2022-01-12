@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 18:23:54 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 20:44:29 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 	if (pipe_lst->file_in != NULL)
 	{
 		dup2(pipe_lst->fd_file_in, 0);
-		// close(pipe_lst->fd_file_in);
+		close(pipe_lst->fd_file_in);
 		if (i > 0 && shell->cmd_nbr > 1)
 			close(shell->pipe_fd[i - 1][0]);
 	}
@@ -300,9 +300,14 @@ int	cmd_process(t_shell *shell)
 		{
 			dprintf(1, "==child fork executing cmd %d => %s\n", i, shell->list_start->command[0]);
 			manage_dup_fd(shell, shell->list_start, i);
+			if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
+			{
+				close(shell->pipe_fd[i][0]);
+				close(shell->pipe_fd[i][1]);
+			}
 			cmd_test_execute(shell, shell->list_start);
 			dprintf(1, "child fork cmd %d executed !==\n", i);
-			return (0);
+			exit(0);
 		}
 		else
 		{
@@ -319,9 +324,9 @@ int	cmd_process(t_shell *shell)
 	}
 	shell->list_start = pipe_lst_tmp;
 	// close_dup_pipes(shell);
-	wait_all_pid(shell);
-	close_file_pipes(shell);
 	// close_all_dup_pipes(shell);
+	wait_all_pid(shell);
+	// close_file_pipes(shell);
 	if (shell->cmd_nbr > 1)
 		free_fd_tab(shell);
 	// ft_lstclear(&(shell->list_start), free);
