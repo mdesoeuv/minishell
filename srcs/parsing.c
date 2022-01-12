@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/12 10:16:41 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 10:58:33 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ void	ft_parsing(char *line, t_shell	*shell)
 	i = -1;
 	start = 0;
 	shell->list_start = NULL;
-	shell->pipes_nbr = 1;
+	shell->cmd_nbr = 1;
 	while (line[++i])
 	{
 		if (line[i] == '|')
 		{
-			shell->pipes_nbr++;
+			shell->cmd_nbr++;
 			shell->cmd_tmp = ft_substr(line, start, i - start);
 			ft_new_pipe_chevron1(shell, -1);
 			start = i + 1;
