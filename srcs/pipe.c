@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 09:21:46 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 09:56:52 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,23 +109,25 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 
 int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 {
-	if (i > 0)
+	if (i > 0 && shell->pipes_nbr > 1)
 		close(shell->pipe_fd[i - 1][1]);
-	close(shell->pipe_fd[i][0]);
+	if (shell->pipes_nbr > 1 && i < shell->pipes_nbr - 1)
+		close(shell->pipe_fd[i][0]);
 	if (pipe_lst->file_in != NULL)
 	{
 		dup2(pipe_lst->fd_file_in, 0);
-		if (i > 0)
+		if (i > 0 && shell->pipes_nbr > 1)
 			close(shell->pipe_fd[i - 1][0]);
 	}
-	else if (i > 0)
+	else if (i > 0 && shell->pipes_nbr > 1)
 		dup2(shell->pipe_fd[i - 1][0], 0);
 	if (pipe_lst->file_out != NULL)
 	{
 		dup2(pipe_lst->fd_file_out, 1);
-		close(shell->pipe_fd[i][1]);
+		if (shell->pipes_nbr > 1 && i < shell->pipes_nbr - 1)
+			close(shell->pipe_fd[i][1]);
 	}
-	else if (i < shell->pipes_nbr - 1)
+	else if (i < shell->pipes_nbr - 1 && shell->pipes_nbr > 1)
 		dup2(shell->pipe_fd[i][1], 1);
 	return (0);
 }
@@ -138,24 +140,29 @@ int	close_all_pipes(t_shell *shell)
 	dprintf(1, "closing all pipes\n");
 	ft_print_shell_struct(*shell);
 	start_lst = shell->list_start;
+	// if (shell->pipes_nbr > 1)
+	// {
+	// 	i = 0;
+	// 	while (i < shell->pipes_nbr - 1) // verifier
+	// 	{
+	// 		close(shell->pipe_fd[i][0]);
+	// 		close(shell->pipe_fd[i][1]);
+	// 		i++;
+	// 	}
+	// }
 	i = 0;
-	while (i < shell->pipes_nbr) // verifier
-	{
-		close(shell->pipe_fd[i][0]);
-		close(shell->pipe_fd[i][1]);
-		i++;
-	}
 	while (shell->list_start != NULL)
 	{
 		if (shell->list_start->file_in != NULL)
 			close(shell->list_start->fd_file_in);
-			// if (i > 0)
-			// 	close(shell->pipe_fd[i - 1][0]);
+		else if (shell->pipes_nbr > 1 && i > 0)
+			close(shell->pipe_fd[i - 1][0]);
 		if (shell->list_start->file_out != NULL)
 			close(shell->list_start->fd_file_out);
-			// if (i < shell->pipes_nbr - 1)
-			// 	close(shell->pipe_fd[i][1]);
+		else if (shell->pipes_nbr > 1 && i < shell->pipes_nbr - 1)
+			close(shell->pipe_fd[i][1]);
 		shell->list_start = shell->list_start->next;
+		i++;
 	}
 	shell->list_start = start_lst;
 	dprintf(1, "all pipes closed !\n");
@@ -187,7 +194,7 @@ void	free_fd_tab(t_shell *shell)
 	int	i;
 
 	i = 0;
-	while (i < shell->pipes_nbr)
+	while (i < shell->pipes_nbr - 1)
 	{
 		free(shell->pipe_fd[i]);
 		i++;
@@ -201,8 +208,9 @@ int	cmd_process(t_shell *shell)
 	t_list_pipes	*pipe_lst_tmp;
 
 	pipe_lst_tmp = shell->list_start;
-	if (malloc_pipe_fd(shell) == -1)
-		return (-1);
+	if (shell->pipes_nbr > 1)
+		if (malloc_pipe_fd(shell) == -1)
+			return (-1);
 	i = 0;
 	while (i < shell->pipes_nbr)
 	{
@@ -210,7 +218,8 @@ int	cmd_process(t_shell *shell)
 		ft_print_shell_struct(*shell);
 		dprintf(1, "infile = %s\n", shell->list_start->file_in);
 		dprintf(1, "outfile = %s\n", shell->list_start->file_out);
-		pipe(shell->pipe_fd[i]);
+		if (shell->pipes_nbr > 1 && i < shell->pipes_nbr - 1)
+			pipe(shell->pipe_fd[i]);
 		shell->list_start->pid = fork();
 		if (shell->list_start->pid < 0)
 		{
@@ -236,7 +245,8 @@ int	cmd_process(t_shell *shell)
 	shell->list_start = pipe_lst_tmp;
 	close_all_pipes(shell);
 	wait_all_pid(shell);
-	free_fd_tab(shell);
+	if (shell->pipes_nbr > 1)
+		free_fd_tab(shell);
 	// ft_lstclear(&(shell->list_start), free);
 	return (0);
 }

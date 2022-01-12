@@ -4,3 +4,6 @@ objs/
 minishell
 .vscode
 libft.a
+libft/libft.a
+ file_test
+ test
