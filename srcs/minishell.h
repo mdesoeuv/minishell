@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 10:58:03 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 11:07:02 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		cmd_process(t_shell *shell);
 void	free_split(char **split);
 void	print_split(char **split);
 int		malloc_pipe_fd(t_shell *shell);
-void	close_unused_pipes(t_shell *shell, int i);
+void	close_unused_pipes(t_shell *shell, t_list_pipes *pipe_lst, int i);
 
 extern t_sig	g_sig;
 #endif
