@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/12 21:55:19 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/13 14:04:22 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_print_shell_struct(t_shell	shell)
 	while (shell.list_start->command[++i])
 		printf("%s|", shell.list_start->command[i]);
 	printf("\n");
-	// printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
-	// printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
+	printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
+	printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
 	if (shell.list_start->chevron_nbr_in != 0)
 		printf("file_in =|%s|\n", shell.list_start->file_in);
 	if (shell.list_start->chevron_nbr_out != 0)
@@ -38,8 +38,8 @@ void	ft_print_shell_struct(t_shell	shell)
 		while (shell.list_start->command[++i])
 			printf("%s|", shell.list_start->command[i]);
 		printf("\n");
-		// printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
-		// printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
+		printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
+		printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
 		if (shell.list_start->chevron_nbr_in != 0)
 			printf("file_in =|%s|\n", shell.list_start->file_in);
 		if (shell.list_start->chevron_nbr_out != 0)

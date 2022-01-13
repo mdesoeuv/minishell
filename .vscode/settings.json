@@ -1,8 +1,0 @@
-{
-	"C_Cpp.errorSquiggles": "Disabled",
-	"files.associations": {
-		"libft.h": "c",
-		"readline.h": "c",
-		"parsing_chevrons.C": "cpp"
-	}
-}

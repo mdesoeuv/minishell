@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/13 13:06:59 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 13:33:45 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	char	*file_name;
 	int		index_start;
 
-	index_start = i++;
+	index_start = i;
 	while (shell->cmd_tmp[i] == ' ')
 	{
 		ft_memmove(&(shell->cmd_tmp[i]), &(shell->cmd_tmp[i + 1]),
@@ -45,7 +45,19 @@ static void	ft_new_pipe_chevron2_part2(t_shell	*shell,
 {
 	while (shell->cmd_tmp[i++])
 	{
-		if (shell->cmd_tmp[i] == '>')
+		if (shell->cmd_tmp[i] == '\"')
+		{
+			i++;
+			while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != '\"')
+				i++;
+		}
+		else if (shell->cmd_tmp[i] == '\'')
+		{
+			i++;
+			while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != '\'')
+				i++;
+		}
+		else if (shell->cmd_tmp[i] == '>')
 		{
 			ft_free("Error : trop de chevrons > parse errror near >\n",
 				shell, -1);
