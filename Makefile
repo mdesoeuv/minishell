@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/13 13:39:49 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/13 14:50:26 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS =	readline_tests.c \
 		signal.c \
 		parsing_chevron.c \
 		parsing_variable.c \
-		pipe_dup_close.c
+		pipe_dup_close.c \
+		cmd_process.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 

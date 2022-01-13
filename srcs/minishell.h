@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 11:07:02 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 14:54:31 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	free_split(char **split);
 void	print_split(char **split);
 int		malloc_pipe_fd(t_shell *shell);
 void	close_unused_pipes(t_shell *shell, t_list_pipes *pipe_lst, int i);
+int		manage_all_file_fd(t_shell *shell);
+void	free_fd_tab(t_shell *shell);
 
 extern t_sig	g_sig;
 #endif
