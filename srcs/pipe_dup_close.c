@@ -6,11 +6,22 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 14:48:51 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 17:38:32 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	close_unused_pipes(t_shell *shell, t_list_pipes *pipe_lst, int i)
+{
+	if (i > 0)
+		close(shell->pipe_fd[i - 1][1]);
+	close(shell->pipe_fd[i][0]);
+	if (pipe_lst->file_in != NULL)
+		close(shell->pipe_fd[i - 1][0]);
+	if (pipe_lst->file_out != NULL)
+		close(shell->pipe_fd[i][1]);
+}
 
 int	manage_all_file_fd(t_shell *shell)
 {
@@ -22,7 +33,8 @@ int	manage_all_file_fd(t_shell *shell)
 		if (shell->list_start->file_in != NULL)
 		{
 			if (shell->list_start->chevron_nbr_in == 1)
-				shell->list_start->fd_file_in = open(shell->list_start->file_in, O_RDONLY, S_IRWXU);
+				shell->list_start->fd_file_in = \
+				open(shell->list_start->file_in, O_RDONLY, S_IRWXU);
 			else if (shell->list_start->chevron_nbr_in > 1)
 			{
 				ft_putstr("<< not yet managed\n");
@@ -46,16 +58,7 @@ int	manage_all_file_fd(t_shell *shell)
 	return (0);
 }
 
-void	close_unused_pipes(t_shell *shell, t_list_pipes *pipe_lst, int i)
-{
-	if (i > 0)
-		close(shell->pipe_fd[i - 1][1]);
-	close(shell->pipe_fd[i][0]);
-	if (pipe_lst->file_in != NULL)
-		close(shell->pipe_fd[i - 1][0]);
-	if (pipe_lst->file_out != NULL)
-		close(shell->pipe_fd[i][1]);
-}
+/* S_IRWXU ? */
 
 int	manage_file_fd(t_list_pipes *pipe_lst)
 {
@@ -64,7 +67,6 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 		if (pipe_lst->chevron_nbr_in == 1)
 		{
 			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY, S_IRWXU);
-			dprintf(1, "opened file = %s\n", pipe_lst->file_in);
 		}
 		else if (pipe_lst->chevron_nbr_in > 1)
 		{
@@ -165,7 +167,6 @@ int	close_file_pipes(t_shell *shell)
 	int				i;
 	t_list_pipes	*start_lst;
 
-	dprintf(1, "closing file pipes\n");
 	ft_print_shell_struct(*shell);
 	start_lst = shell->list_start;
 	i = 0;
@@ -179,6 +180,5 @@ int	close_file_pipes(t_shell *shell)
 		i++;
 	}
 	shell->list_start = start_lst;
-	dprintf(1, "all file pipes closed !\n");
 	return (0);
 }

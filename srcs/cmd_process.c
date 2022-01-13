@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 16:57:08 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 18:01:27 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	concatenate_path(t_list_pipes *pipe_lst, char *path)
 		pipe_lst->command[0]);
 	if (!(pipe_lst->cmd_path))
 		exit(EXIT_FAILURE); // to replace with built_in function
-	dprintf(1, "concatened path = %s\n", pipe_lst->cmd_path);
 }
 
 void	error_cmd_not_found(char **cmd, char **possible_paths)
@@ -58,7 +57,7 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		|| pipe_lst->command[0][0] == '/'))
 	{
 		concatenate_path(pipe_lst, possible_paths[i]);
-		dprintf(1, "path tested = %s\n", pipe_lst->cmd_path);
+		// dprintf(1, "path tested = %s\n", pipe_lst->cmd_path);
 		if (access(pipe_lst->cmd_path, F_OK) == -1)
 		{
 			free(pipe_lst->cmd_path);
@@ -80,15 +79,11 @@ int	cmd_process(t_shell *shell)
 	t_list_pipes	*pipe_lst_tmp;
 
 	pipe_lst_tmp = shell->list_start;
-	if (shell->cmd_nbr > 1)
-		if (malloc_pipe_fd(shell) == -1)
-			return (-1);
-	i = 0;
+	malloc_pipe_fd(shell);
 	manage_all_file_fd(shell);
+	i = 0;
 	while (i < shell->cmd_nbr)
 	{
-		// dprintf(1, "\n== loop %d ==\n\n", i);
-		ft_print_shell_struct(*shell);
 		if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
 			pipe(shell->pipe_fd[i]);
 		shell->list_start->pid = fork();
@@ -99,7 +94,6 @@ int	cmd_process(t_shell *shell)
 		}
 		else if (shell->list_start->pid == 0)
 		{
-			// dprintf(1, "==child fork executing cmd %d => %s\n", i, shell->list_start->command[0]);
 			manage_dup_fd(shell, shell->list_start, i);
 			cmd_test_execute(shell, shell->list_start);
 			dprintf(1, "child fork cmd %d not executed !==\n", i);
