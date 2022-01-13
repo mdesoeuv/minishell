@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 15:44:48 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 16:55:26 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			ft_variable_replace(int i, t_shell *shell);
 /* PIPE */
 
 void			concatenate_path(t_list_pipes *pipe_lst, char *path);
-void			error_cmd_not_found(char **cmd);
+void			error_cmd_not_found(char **cmd, char **possible_paths);
 void			cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
 int				manage_file_fd(t_list_pipes *pipe_lst);
 int				manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);

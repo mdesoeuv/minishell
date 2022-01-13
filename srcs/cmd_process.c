@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 15:36:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 16:57:08 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	concatenate_path(t_list_pipes *pipe_lst, char *path)
 	dprintf(1, "concatened path = %s\n", pipe_lst->cmd_path);
 }
 
-void	error_cmd_not_found(char **cmd)
+void	error_cmd_not_found(char **cmd, char **possible_paths)
 {
 	int	i;
 
 	i = 0;
-	ft_putstr_fd("pipex: command not found:", 2);
+	ft_putstr_fd("minishell: command not found:", 2);
 	while (cmd[i])
 	{
 		ft_putstr_fd(" ", 2);
@@ -40,6 +40,7 @@ void	error_cmd_not_found(char **cmd)
 		i++;
 	}
 	ft_putstr_fd("\n", 2);
+	free_split(possible_paths);
 }
 
 void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
@@ -50,9 +51,11 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	possible_paths = ft_split(getenv("PATH"), ':');
 	if (!possible_paths)
 		return ;
-	// print_split(possible_paths);
+	if (pipe_lst->command[0][0] != '.' || pipe_lst->command[0][0] != '/')
+		pipe_lst->cmd_path = pipe_lst->command[0];
 	i = 0;
-	while (possible_paths[i])
+	while (possible_paths[i] && !(pipe_lst->command[0][0] == '.' \
+		|| pipe_lst->command[0][0] == '/'))
 	{
 		concatenate_path(pipe_lst, possible_paths[i]);
 		dprintf(1, "path tested = %s\n", pipe_lst->cmd_path);
@@ -64,13 +67,11 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		else
 			break ;
 	}
-	if (!possible_paths[i])
-		error_cmd_not_found(pipe_lst->command);
-	else if (execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp) == -1)
+	if (!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1)
+		return (error_cmd_not_found(pipe_lst->command, possible_paths));
+	free_split(possible_paths);
+	if (execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp) == -1)
 		perror("minishell");
-	free_split(possible_paths); // code non executé apres le execve
-	if (shell->cmd_nbr > 1)
-		free(pipe_lst->cmd_path);
 }
 
 int	cmd_process(t_shell *shell)
