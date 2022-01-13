@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 11:13:08 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 14:27:53 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	manage_all_file_fd(t_shell *shell)
 					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			else
 				shell->list_start->fd_file_out = open(shell->list_start->file_out, \
-					O_WRONLY | O_APPEND, 0644);
+					O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
 		shell->list_start = shell->list_start->next;
 	}
@@ -154,7 +154,7 @@ int	manage_file_fd(t_list_pipes *pipe_lst)
 				O_WRONLY | O_CREAT | O_TRUNC, 0644); // S_IRWXU
 		else
 			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
-				O_WRONLY | O_APPEND, 0644); // S_IRWXU
+				O_WRONLY | O_CREAT | O_APPEND, 0644); // S_IRWXU
 	}
 	// if (pipe_lst->fd_file_in == -1)
 	// 	perror("minishell");
@@ -182,7 +182,7 @@ int	manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i)
 	if (pipe_lst->file_out != NULL)
 	{
 		dup2(pipe_lst->fd_file_out, 1);
-		// close(pipe_lst->fd_file_out);
+		close(pipe_lst->fd_file_out);
 		if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
 			close(shell->pipe_fd[i][1]);
 	}
@@ -315,7 +315,7 @@ int	cmd_process(t_shell *shell)
 		if (malloc_pipe_fd(shell) == -1)
 			return (-1);
 	i = 0;
-	// manage_all_file_fd(shell);
+	manage_all_file_fd(shell);
 	while (i < shell->cmd_nbr)
 	{
 		dprintf(1, "\n== loop %d ==\n\n", i);
@@ -332,7 +332,7 @@ int	cmd_process(t_shell *shell)
 		else if (shell->list_start->pid == 0)
 		{
 			dprintf(1, "==child fork executing cmd %d => %s\n", i, shell->list_start->command[0]);
-			manage_file_fd(shell->list_start);
+			// manage_file_fd(shell->list_start);
 			manage_dup_fd(shell, shell->list_start, i);
 			// if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
 			// {
@@ -364,12 +364,9 @@ int	cmd_process(t_shell *shell)
 		}
 	}
 	shell->list_start = pipe_lst_tmp;
-	// close_dup_pipes(shell);
-	// close_all_dup_pipes(shell);
 	wait_all_pid(shell);
 	// close_file_pipes(shell);
 	if (shell->cmd_nbr > 1)
 		free_fd_tab(shell);
-	// ft_lstclear(&(shell->list_start), free);
 	return (0);
 }
