@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/11 17:11:37 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/13 14:46:19 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**ft_split(char const *s, char c)
 			size = 0;
 			while (s[i] && s[i] != c && i >= size++)
 				i++;
-			tab[j] = ft_split_strdup(s, i - size, size);
+			tab[j] = ft_substr(s, i - size, size);
 			if (tab[j++] == NULL)
 				return (free_return_null(tab, --j));
 		}
