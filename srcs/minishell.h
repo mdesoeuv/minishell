@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 15:41:49 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 15:44:48 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void			print_split(char **split);
 int				malloc_pipe_fd(t_shell *shell);
 void			close_unused_pipes(t_shell *shell,
 					t_list_pipes *pipe_lst, int i);
+int				manage_all_file_fd(t_shell *shell);
+void			free_fd_tab(t_shell *shell);
 
 /*UTILS*/
 
