@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 14:04:22 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 15:49:46 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int    main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, &sig_quit);
 	shell.envp = envp;
 	shell.return_val = 0;
-	line = readline("minishell: ");
+	line = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (line)
 	{
 		add_history(line);
@@ -86,7 +86,7 @@ int    main(int argc, char **argv, char **envp)
 			shell.return_val = 0;
 		}
 		free(line);
-		line = readline("minishell: ");
+		line = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	}
 	free(line);
 	return (0);
