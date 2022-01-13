@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:37:18 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 11:05:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 15:41:37 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }							t_list;
-
-typedef struct s_list_pipes
-{
-	pid_t						pid;
-	char						**command;
-	char						*cmd_path;
-	char						*file_in;
-	int							fd_file_in;
-	int							chevron_nbr_in;
-	char						*file_out;
-	int							fd_file_out;
-	int							chevron_nbr_out;
-	struct s_list_pipes			*next;
-}	t_list_pipes;
-
-typedef struct s_shell
-{
-	int					cmd_nbr;
-	int					return_val;
-	int					**pipe_fd;
-	char				**envp;
-	struct s_list_pipes	*pipe_lst;
-	struct s_list_pipes	*list_start;
-	char				*cmd_tmp;
-}	t_shell;
 
 void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
@@ -110,9 +85,6 @@ t_list			*ft_lstnew(void *content);
 void			ft_lstdelone(t_list *alst, void (*del)(void *));
 void			ft_lstclear(t_list **alst, void (*del)(void *));
 void			ft_lstadd_front(t_list **alst, t_list *new_elem);
-void			ft_lstadd_back_pipes(t_list_pipes **alst,
-					t_list_pipes *new_elem);
-t_list_pipes	*ft_lstnew_pipes(void);
 void			ft_lstadd_back(t_list **alst, t_list *new_elem);
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
@@ -133,9 +105,6 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_abs(int n);
 int				ft_if(int condition, int true, int false);
-char			**ft_split_quotes(char c, t_shell *shell, int i, int j);
-int				ft_strisnum(const char *str);
-void			ft_variable_replace(int i, t_shell *shell);
 char			**free_return_null(char **tab, int j);
 char			**malloc_return(char ***tab, char const *s, char c);
 char			*ft_split_strdup(char const *s, int i, int len);

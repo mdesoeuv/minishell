@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:18:12 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 10:59:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 15:36:10 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,4 @@ t_list	*ft_lstnew(void *content)
 	return (new_elem);
 }
 
-t_list_pipes	*ft_lstnew_pipes(void)
-{
-	t_list_pipes	*new_elem;
 
-	new_elem = (t_list_pipes *)malloc(sizeof(t_list_pipes));
-	if (!new_elem)
-		return (NULL);
-	new_elem->file_in = NULL;
-	new_elem->file_out = NULL;
-	new_elem->command = NULL;
-	new_elem->chevron_nbr_in = 0;
-	new_elem->chevron_nbr_out = 0;
-	new_elem->fd_file_in = 0;
-	new_elem->fd_file_out = 1;
-	new_elem->next = NULL;
-	return (new_elem);
-}
