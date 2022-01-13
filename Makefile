@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/10 17:39:07 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/11 20:36:58 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 USER = mdesoeuv
 
-CC = gcc -Wall -Werror -Wextra
+CC = gcc -Wall -Werror -Wextra -fsanitize=address -g3
 
 SRCS =	readline_tests.c \
 		built_in_pwd.c \
@@ -24,7 +24,11 @@ SRCS =	readline_tests.c \
 		built_in_echo.c \
 		built_in_exit.c \
 		pipe.c \
-		print_split.c
+		print_split.c \
+		signal.c \
+		parsing_chevron.c \
+		parsing_variable.c \
+		pipe_dup_close.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 
@@ -37,14 +41,14 @@ LIB = libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB)
-			$(CC) -fsanitize=address -g3 $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
+			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
 
 libft	:	
 			$(MAKE) -C libft
 
 objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			@mkdir -p objs
-			$(CC) -c $< -o $@
+			$(CC) -c $< -o $@ 
 			
 clean	:
 			rm -rf objs/
@@ -57,4 +61,3 @@ fclean	:	clean
 re		:	fclean all
 
 .PHONY	:	libft all clean re fclean
-			

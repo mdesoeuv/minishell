@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 15:49:39 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/09 14:57:45 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/11 18:16:50 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS=	ft_isblank.c ft_isspace.c ft_calloc.c ft_strlcpy.c ft_toupper.c \
 		ft_strjoin_free_s1.c ft_strndup.c ft_strjoin_free_s2.c ft_is_duplicate.c \
 		ft_min.c ft_max.c ft_abs.c ft_if.c ft_strjoin_free.c \
 		ft_lstlast.c ft_lstsize.c ft_lstadd_back.c ft_lstadd_front.c \
-		ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstnew.c ft_lstmap.c ft_strisnum.c
+		ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstnew.c ft_lstmap.c ft_strisnum.c \
+		ft_split_quotes.c
 
 OBJS= $(SRCS:.c=.o)
 

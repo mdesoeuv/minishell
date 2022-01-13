@@ -3,66 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   readline_tests.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/10 17:27:44 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 21:55:19 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_print_shell_struct(t_shell	*shell)
-{
-	int	i;
+t_sig	g_sig;
 
-	printf("nbr pipes = %i \n", shell->pipes_nbr);
+void	ft_print_shell_struct(t_shell	shell)
+{
+	int		i;
+
+	printf("nbr pipes = %i \n", shell.cmd_nbr);
 	printf("args_command =");
 	i = -1;
-	while (shell->list_start->command[++i])
-		printf("%s|", shell->list_start->command[i]);
+	while (shell.list_start->command[++i])
+		printf("%s|", shell.list_start->command[i]);
 	printf("\n");
-	//printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
-	//printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
-	if (shell->list_start->chevron_nbr_in != 0)
-		printf("file_in = %s\n", shell->list_start->file_in);
-	if (shell->list_start->chevron_nbr_out != 0)
-		printf("file_out = %s\n", shell->list_start->file_out);
-	while (shell->list_start->next)
+	// printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
+	// printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
+	if (shell.list_start->chevron_nbr_in != 0)
+		printf("file_in =|%s|\n", shell.list_start->file_in);
+	if (shell.list_start->chevron_nbr_out != 0)
+		printf("file_out =|%s|\n", shell.list_start->file_out);
+	while (shell.list_start->next)
 	{
-		shell->list_start = shell->list_start->next;
+		shell.list_start = shell.list_start->next;
 		printf("args_command =");
 		i = -1;
-		while (shell->list_start->command[++i])
-			printf("%s|", shell->list_start->command[i]);
+		while (shell.list_start->command[++i])
+			printf("%s|", shell.list_start->command[i]);
 		printf("\n");
-		//printf("chevron_nbr_in = %i\n", shell->list_start->chevron_nbr_in);
-		//printf("chevron_nbr_out = %i\n", shell->list_start->chevron_nbr_out);
-		if (shell->list_start->chevron_nbr_in != 0)
-			printf("file_in = %s\n", shell->list_start->file_in);
-		if (shell->list_start->chevron_nbr_out != 0)
-			printf("file_out = %s\n", shell->list_start->file_out);
+		// printf("chevron_nbr_in = %i\n", shell.list_start->chevron_nbr_in);
+		// printf("chevron_nbr_out = %i\n", shell.list_start->chevron_nbr_out);
+		if (shell.list_start->chevron_nbr_in != 0)
+			printf("file_in =|%s|\n", shell.list_start->file_in);
+		if (shell.list_start->chevron_nbr_out != 0)
+			printf("file_out =|%s|\n", shell.list_start->file_out);
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int    main(int argc, char **argv, char **envp)
 {
-	char	*line;
-	t_shell	shell;
-	int		is_exit;
+	char		*line;
+	t_shell		shell;
+	int			is_exit;
 
-	shell.envp = envp;
 	(void)argc;
 	(void)argv;
 	is_exit = 1;
-	line = readline("prompt? ");
+	sig_init();
+	signal(SIGINT, &sig_int);
+	signal(SIGQUIT, &sig_quit);
+	shell.envp = envp;
+	shell.return_val = 0;
+	line = readline("minishell: ");
 	while (line)
 	{
 		add_history(line);
 		ft_parsing(line, &shell);
-		ft_print_shell_struct(&shell);
-		if (shell.list_start->command[0])
+		if (shell.list_start->command && shell.list_start->command[0])
 		{
+			ft_print_shell_struct(shell);
 			if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
 				print_working_directory();
 			else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
@@ -77,9 +83,10 @@ int	main(int argc, char **argv, char **envp)
 			}
 			else
 				cmd_process(&shell);
+			shell.return_val = 0;
 		}
 		free(line);
-		line = readline("prompt? ");
+		line = readline("minishell: ");
 	}
 	free(line);
 	return (0);
