@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 18:10:45 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 18:11:32 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void	error_cmd_not_found(char **cmd, char **possible_paths)
 	ft_putstr_fd("\n", 2);
 	free_split(possible_paths);
 }
+
+int	is_this_fonction_built_in(char *function_name)
+{
+	
+}
+
 
 void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 {
