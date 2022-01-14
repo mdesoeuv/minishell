@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 15:03:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 16:10:25 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int				ft_exit(t_shell *shell);
 int				ft_env(t_shell *shell, char *command);
 int				ft_export(t_shell *shell, char *s);
 int				ft_unset(t_shell *shell, char *s);
+char			*ft_getenv(t_shell *shell, char *var_name);
 int				is_value_in_envp(t_shell *shell, char *s);
 int				get_env_size(t_shell *shell);
 

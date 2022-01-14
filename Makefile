@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/14 14:52:12 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/14 16:09:56 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS =	main.c \
 		built_in_unset.c \
 		built_in_export.c \
 		built_in_env.c \
+		built_in_getenv.c \
 		parsing.c \
 		ft_free.c \
 		built_in_echo.c \
@@ -46,7 +47,7 @@ LIB = libft/libft.a
 
 all : libft $(NAME)
 
-$(NAME)	:	$(OBJS_FILES) $(LIB)
+$(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
 			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
 
 libft	:	
