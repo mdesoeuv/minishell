@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 16:55:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:47:58 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void			ft_parsing(char *line, t_shell	*shell);
 void			ft_free(char *message, t_shell	*shell, int is_error);
 void			ft_echo(t_shell *shell);
 int				ft_exit(t_shell *shell);
+int				ft_export(t_shell *shell, char *s);
+int				ft_unset(t_shell *shell, char *s);
+int				is_value_in_envp(t_shell *shell, char *s);
 
 /* PARSING */
 

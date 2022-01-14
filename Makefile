@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/13 15:43:01 by vchevill         ###   ########lyon.fr    #
+#    Updated: 2022/01/14 10:48:27 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ CC = gcc -Wall -Werror -Wextra -fsanitize=address -g3
 SRCS =	readline_tests.c \
 		built_in_pwd.c \
 		built_in_cd.c \
+		built_in_unset.c \
+		built_in_export.c \
 		parsing.c \
 		ft_free.c \
 		built_in_echo.c \
