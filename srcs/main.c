@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline_tests.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 13:19:21 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 14:56:03 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int    main(int argc, char **argv, char **envp)
 				ft_export(&shell, shell.list_start->command[1]);
 			else if (ft_strcmp(shell.list_start->command[0], "unset") == 0)
 				ft_unset(&shell, shell.list_start->command[1]);
+			else if (ft_strcmp(shell.list_start->command[0], "env") == 0)
+				ft_env(&shell, shell.list_start->command[1]);
 			else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
 			{
 				is_exit = ft_exit(&shell);

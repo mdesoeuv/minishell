@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/14 13:36:13 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/14 14:52:12 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =	main.c \
 		built_in_cd.c \
 		built_in_unset.c \
 		built_in_export.c \
+		built_in_env.c \
 		parsing.c \
 		ft_free.c \
 		built_in_echo.c \

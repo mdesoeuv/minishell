@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 13:05:15 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 15:13:38 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ int	cmd_process(t_shell *shell)
 		{
 			manage_dup_fd(shell, shell->list_start, i);
 			cmd_test_execute(shell, shell->list_start);
-			dprintf(1, "child fork cmd %d not executed !==\n", i);
-			ft_exit(shell);
+			exit(0);
 		}
 		else
 		{
