@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/13 14:30:07 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 13:18:05 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,12 @@ void	ft_parsing(char *line, t_shell	*shell)
 		if (line[i] == '|')
 		{
 			shell->cmd_nbr++;
-			shell->cmd_tmp = ft_substr(line, start, i - start);
+			shell->cmd_tmp = ft_substr(line, start, i - start); // leaks ?
 			ft_new_pipe_chevron1(shell, chevron_start_i);
 			start = i + 1;
 			chevron_start_i = -1;
 		}
 	}
-	shell->cmd_tmp = ft_substr(line, start, i - start + 1);
+	shell->cmd_tmp = ft_substr(line, start, i - start + 1); // leaks ?
 	ft_new_pipe_chevron1(shell, chevron_start_i);
 }

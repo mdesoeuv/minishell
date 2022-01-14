@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/13 13:33:45 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 13:18:35 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	return (file_name);
 }
 
-static void	ft_new_pipe_chevron2_part2(t_shell	*shell,
+static void	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 	int i, t_list_pipes	*new_pipe, int index_start)
 {
 	while (shell->cmd_tmp[i++])

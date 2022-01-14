@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 11:09:15 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 13:19:21 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int    main(int argc, char **argv, char **envp)
 			else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
 			{
 				is_exit = ft_exit(&shell);
+				free(line);
 				if (is_exit == 0)
 					break ;
 			}

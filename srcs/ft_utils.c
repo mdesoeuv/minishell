@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/13 17:59:49 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 13:32:00 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_list_pipes	*ft_lstnew_pipes(void)
 	new_elem->file_in = NULL;
 	new_elem->file_out = NULL;
 	new_elem->command = NULL;
+	new_elem->cmd_path = NULL;
 	new_elem->chevron_nbr_in = 0;
 	new_elem->chevron_nbr_out = 0;
 	new_elem->fd_file_in = 0;
