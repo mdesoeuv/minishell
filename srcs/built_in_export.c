@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 10:38:01 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:54:34 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	is_value_in_envp(t_shell *shell, char *s)
 int	ft_export(t_shell *shell, char *s)
 {
 	char	*search_ret;
-	int		envp_index;
 
 	if (!s || ft_isalpha(s[0]) == 0)
 	{

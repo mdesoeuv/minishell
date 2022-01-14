@@ -6,13 +6,13 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:33:06 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 10:45:17 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:53:55 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	remove_envp(t_shell *shell, char *s, int envp_index)
+int	remove_envp(t_shell *shell, int envp_index)
 {
 	int		i;
 	int		env_size;
@@ -51,5 +51,6 @@ int	ft_unset(t_shell *shell, char *s)
 	envp_index = is_value_in_envp(shell, s);
 	if (envp_index < 0)
 		return (0);
-	remove_envp(shell, s, envp_index);
+	remove_envp(shell, envp_index);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 10:47:58 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:54:19 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int				ft_exit(t_shell *shell);
 int				ft_export(t_shell *shell, char *s);
 int				ft_unset(t_shell *shell, char *s);
 int				is_value_in_envp(t_shell *shell, char *s);
+int				get_env_size(t_shell *shell);
 
 /* PARSING */
 
@@ -117,6 +118,10 @@ t_list_pipes	*ft_lstnew_pipes(void);
 char			**ft_split_quotes(char c, t_shell *shell, int i, int j);
 int				ft_strisnum(const char *str);
 void			ft_variable_replace(int i, t_shell *shell);
+
+/*DEBUG*/
+
+void			display_split(char *message, char **split);
 
 extern t_sig	g_sig;
 #endif
