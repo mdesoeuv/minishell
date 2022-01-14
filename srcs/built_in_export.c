@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 10:54:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:57:30 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	ft_export(t_shell *shell, char *s)
 {
 	char	*search_ret;
 
+	display_split("before export", shell->envp);
 	if (!s || ft_isalpha(s[0]) == 0)
 	{
 		ft_putstr_fd("minishell: export: `", 2);
@@ -82,5 +83,6 @@ int	ft_export(t_shell *shell, char *s)
 		return (0);
 	ft_unset(shell, s);
 	add_envp(shell, s);
+	display_split("after export", shell->envp);
 	return (0);
 }

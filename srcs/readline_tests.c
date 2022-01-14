@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 18:02:14 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 11:09:15 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,29 @@ void	ft_print_shell_struct(t_shell	shell)
 	}
 }
 
+int	copy_set_envp(t_shell *shell, char **envp)
+{
+	int		i;
+	int		envp_size;
+	char	**new_envp;
+
+	envp_size = get_env_size(shell);
+	new_envp = malloc(sizeof(char *) * (envp_size + 1));
+	if (!new_envp)
+		ft_exit(shell);
+	i = 0;
+	while (envp[i])
+	{
+		new_envp[i] = ft_strdup(envp[i]);
+		if (!new_envp[i])
+			ft_exit(shell);
+		i++;
+	}
+	new_envp[i] = NULL;
+	shell->envp = new_envp;
+	return (1);
+}
+
 int    main(int argc, char **argv, char **envp)
 {
 	char		*line;
@@ -60,6 +83,7 @@ int    main(int argc, char **argv, char **envp)
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
 	shell.envp = envp;
+	copy_set_envp(&shell, envp);
 	shell.return_val = 0;
 	line = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (line)
@@ -75,6 +99,10 @@ int    main(int argc, char **argv, char **envp)
 				change_directory(line);
 			else if (ft_strcmp(shell.list_start->command[0], "echo") == 0)
 				ft_echo(&shell);
+			else if (ft_strcmp(shell.list_start->command[0], "export") == 0)
+				ft_export(&shell, shell.list_start->command[1]);
+			else if (ft_strcmp(shell.list_start->command[0], "unset") == 0)
+				ft_unset(&shell, shell.list_start->command[1]);
 			else if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
 			{
 				is_exit = ft_exit(&shell);
