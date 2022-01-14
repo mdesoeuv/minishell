@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 18:01:27 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 08:57:53 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,5 @@ int	cmd_process(t_shell *shell)
 	shell->list_start = pipe_lst_tmp;
 	wait_all_pid(shell);
 	// close_file_pipes(shell);
-	if (shell->cmd_nbr > 1)
-		free_fd_tab(shell);
 	return (0);
 }

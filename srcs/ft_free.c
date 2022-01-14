@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/11 16:56:25 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/14 08:58:25 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_free(char *message, t_shell	*shell, int is_error)
 
 	i = -1;
 	ft_putstr(message);
+	if (shell->cmd_nbr > 1)
+		free_fd_tab(shell);
 	if (shell->cmd_tmp)
 		free(shell->cmd_tmp);
 	if (shell->list_start->command && shell->list_start->command[0])
@@ -39,6 +41,7 @@ void	ft_free(char *message, t_shell	*shell, int is_error)
 			free(shell->list_start->file_in);
 		if (shell->list_start->chevron_nbr_out != 0)
 			free(shell->list_start->file_out);
+		free(shell->list_start->cmd_path);
 	}
 	if (is_error != -1)
 		exit(is_error);
