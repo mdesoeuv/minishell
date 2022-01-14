@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/14 08:58:25 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:25:37 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	ft_free(char *message, t_shell	*shell, int is_error)
 	if (shell->cmd_tmp)
 		free(shell->cmd_tmp);
 	if (shell->list_start->command && shell->list_start->command[0])
-		while (shell->list_start->command[++i])
-			free(shell->list_start->command[i]);
+		free_split(shell->list_start->command);
+		// while (shell->list_start->command[++i])
+		// 	free(shell->list_start->command[i]);
 	if (shell->list_start->chevron_nbr_in != 0)
 		free(shell->list_start->file_in);
 	if (shell->list_start->chevron_nbr_out != 0)
@@ -35,8 +36,9 @@ void	ft_free(char *message, t_shell	*shell, int is_error)
 		if (shell->cmd_tmp)
 			free(shell->cmd_tmp);
 		if (shell->list_start->command && shell->list_start->command[0])
-			while (shell->list_start->command[++i])
-				free(shell->list_start->command[i]);
+			free_split(shell->list_start->command);
+			// while (shell->list_start->command[++i])
+			// 	free(shell->list_start->command[i]);
 		if (shell->list_start->chevron_nbr_in != 0)
 			free(shell->list_start->file_in);
 		if (shell->list_start->chevron_nbr_out != 0)
@@ -57,6 +59,5 @@ void	free_split(char **split)
 		free(split[i]);
 		i++;
 	}
-	free(split[i]);
 	free(split);
 }
