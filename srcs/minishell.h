@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 16:10:25 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 10:43:15 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void			print_working_directory(void);
 char			*return_working_directory(void);
 int				change_directory(char *arg);
 void			ft_parsing(char *line, t_shell	*shell);
-void			ft_free(char *message, t_shell	*shell, int is_error);
+void			ft_free(char *message, t_shell *shell,
+					int return_val, int is_exit);
 void			ft_echo(t_shell *shell);
 int				ft_exit(t_shell *shell);
 int				ft_env(t_shell *shell, char *command);
