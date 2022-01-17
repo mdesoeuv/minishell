@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 12:27:52 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:33:10 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	}
 	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!file_name)
-		ft_free("Error : malloc error\n", shell, 1, 0);
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp) - index_start);
 	return (file_name);
@@ -123,7 +123,7 @@ int	ft_new_pipe_chevron1(t_shell	*shell, int i)
 
 	new_pipe = ft_lstnew_pipes();
 	if (!new_pipe)
-		return (ft_free("Error : malloc error\n", shell, 1, 0));
+		return (ft_free("Error : malloc error\n", shell, 1, 1));
 	ft_lstadd_back_pipes(&(shell->list_start), new_pipe);
 	index_start = 0;
 	while (shell->cmd_tmp[++i])
