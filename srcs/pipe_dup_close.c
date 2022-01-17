@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_dup_close.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 12:49:46 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:54:10 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,37 +60,33 @@ int	manage_all_file_fd(t_shell *shell)
 
 /* S_IRWXU ? */
 
-int	manage_file_fd(t_list_pipes *pipe_lst)
+int	manage_file_fd(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (pipe_lst->file_in != NULL)
 	{
 		if (pipe_lst->chevron_nbr_in == 1)
 		{
-			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY, S_IRWXU);
+			pipe_lst->fd_in = open(pipe_lst->file_in, O_RDONLY);
 		}
 		else if (pipe_lst->chevron_nbr_in > 1)
 		{
 			ft_putstr("<< not yet managed\n");
-			pipe_lst->fd_file_in = 0;
+			pipe_lst->fd_in = 0;
 		}
 	}
-	if (pipe_lst->fd_file_in < 0)
-	{
-		dprintf(2, "FILE OPENING ERROR : %s\n", pipe_lst->file_in);
-		close(pipe_lst->fd_file_in);
-		exit(0);
-	}
+	else
+		pipe_lst->fd_in = dup(shell->save_fd_in);
 	if (pipe_lst->file_out != NULL)
 	{
 		if (pipe_lst->chevron_nbr_out == 1)
-			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
+			pipe_lst->fd_out = open(pipe_lst->file_out, \
 				O_WRONLY | O_CREAT | O_TRUNC, 0644); // S_IRWXU
 		else
-			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
+			pipe_lst->fd_out = open(pipe_lst->file_out, \
 				O_WRONLY | O_CREAT | O_APPEND, 0644); // S_IRWXU
 	}
-	// if (pipe_lst->fd_file_in == -1)
-	// 	perror("minishell");
+	else
+		pipe_lst->fd_out = dup(shell->save_fd_out);
 	return (0);
 }
 

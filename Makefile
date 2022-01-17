@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/14 16:09:56 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/17 17:15:57 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS =	main.c \
 		pipe_dup_close.c \
 		ft_utils.c \
 		cmd_process.c \
-		debug_functions.c
+		debug_functions.c \
+		new_cmd_process.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 

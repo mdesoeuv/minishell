@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 14:44:59 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 17:14:58 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int    main(int argc, char **argv, char **envp)
 			if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
 				is_exit = ft_exit(&shell);
 			else
-				cmd_process(&shell);
+				new_cmd_process(&shell);
 			shell.return_val = 0;
 		}
 		ft_free("", &shell, shell.return_val, 0);

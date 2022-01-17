@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 15:27:50 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 17:52:41 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_list_pipes
 	char						**command;
 	char						*cmd_path;
 	char						*file_in;
+	int							fd_in;
+	int							fd_out;
 	int							fd_file_in;
 	int							chevron_nbr_in;
 	char						*file_out;
@@ -103,7 +105,7 @@ void			ft_variable_replace(int i, t_shell *shell);
 void			concatenate_path(t_list_pipes *pipe_lst, char *path);
 void			error_cmd_not_found(char **cmd, char **possible_paths);
 void			cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
-int				manage_file_fd(t_list_pipes *pipe_lst);
+int				manage_file_fd(t_shell *shell, t_list_pipes *pipe_lst);
 int				manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
 int				close_all_pipes(t_shell *shell);
 int				wait_all_pid(t_shell *shell);
@@ -117,6 +119,8 @@ int				manage_all_file_fd(t_shell *shell);
 void			free_fd_tab(t_shell *shell);
 int				close_file_pipes(t_shell *shell);
 void			ft_free_cmd(t_shell *shell);
+int				execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst);
+void			new_cmd_process(t_shell *shell);
 
 /*UTILS*/
 

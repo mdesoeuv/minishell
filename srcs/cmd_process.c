@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 16:17:36 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 17:15:25 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
 		return (ft_unset(shell, pipe_lst->command[1]));
 	else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
 		return (ft_env(shell, pipe_lst->command[1]));
-	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
-	{
-		shell->is_exit = ft_exit(shell); // TO DO exit return value
-		shell->return_val = shell->is_exit;
-		return (shell->return_val);
-	}
 	return (-100);
 }
 
