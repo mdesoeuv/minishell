@@ -6,13 +6,13 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 10:42:17 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 12:07:19 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free(char *message, t_shell *shell, int return_val, int is_exit)
+int	ft_free(char *message, t_shell *shell, int return_val, int is_exit)
 {
 	int	i;
 
@@ -25,6 +25,7 @@ void	ft_free(char *message, t_shell *shell, int return_val, int is_exit)
 		free_split(shell->envp);
 		exit(shell->return_val);
 	}
+	return (-1);
 }
 
 void	free_split(char **split)
