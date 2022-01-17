@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/14 12:51:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 12:28:51 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	ft_exit(t_shell *shell)
 		ft_putendl_fd("\nminishell: exit: too many arguments\n", 1);
 	}
 	else if (shell->list_start->command[1])
-		ft_free("\n", shell, ft_atoi(shell->list_start->command[1]));
+		ft_free("\n", shell, ft_atoi(shell->list_start->command[1]), 1);
 	else
-		ft_free("\n", shell, 0);
+		ft_free("\n", shell, 0, 1);
 	return (return_num);
 }

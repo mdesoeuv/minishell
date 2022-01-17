@@ -6,51 +6,26 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 10:11:01 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 13:20:14 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free(char *message, t_shell	*shell, int is_error)
+int	ft_free(char *message, t_shell *shell, int return_val, int is_exit)
 {
 	int	i;
 
 	i = -1;
+	shell->return_val = return_val;
 	ft_putstr(message);
-	shell->return_val = is_error;
-	if (shell->cmd_nbr > 1)
-		free_fd_tab(shell);
-	if (shell->cmd_tmp)
-		free(shell->cmd_tmp);
-	if (shell->list_start->command && shell->list_start->command[0])
-		free_split(shell->list_start->command);
-		// while (shell->list_start->command[++i])
-		// 	free(shell->list_start->command[i]);
-	if (shell->list_start->chevron_nbr_in != 0)
-		free(shell->list_start->file_in);
-	if (shell->list_start->chevron_nbr_out != 0)
-		free(shell->list_start->file_out);
-	while (shell->list_start->next) // je ne comprends pas cette partie
-	{
-		i = -1;
-		if (shell->cmd_tmp)
-			free(shell->cmd_tmp);
-		if (shell->list_start->command && shell->list_start->command[0])
-			free_split(shell->list_start->command);
-			// while (shell->list_start->command[++i])
-			// 	free(shell->list_start->command[i]);
-		if (shell->list_start->chevron_nbr_in != 0)
-			free(shell->list_start->file_in);
-		if (shell->list_start->chevron_nbr_out != 0)
-			free(shell->list_start->file_out);
-		free(shell->list_start->cmd_path);
-	}
-	if (is_error != -1)
+	ft_free_cmd(shell);
+	if (shell->return_val == 255 || is_exit)
 	{
 		free_split(shell->envp);
-		exit(is_error);
+		exit(shell->return_val);
 	}
+	return (-1);
 }
 
 void	free_split(char **split)
