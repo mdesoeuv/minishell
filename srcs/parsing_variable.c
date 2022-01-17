@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 10:45:51 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 12:32:07 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_variable_replace(int i, t_shell *shell)
 	if (ft_strcmp(variable_name, "?") == 0)
 		variable_result = ft_strdup("0");
 	else
-		variable_result = ft_getenv(shell, variable_name); // replaced with custom getenv
+		variable_result = ft_getenv(shell, variable_name);
 	free(variable_name);
 	ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp));

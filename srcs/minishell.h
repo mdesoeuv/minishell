@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 10:43:15 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 12:32:16 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void			ft_print_shell_struct(t_shell	shell);
 void			print_working_directory(void);
 char			*return_working_directory(void);
 int				change_directory(char *arg);
-void			ft_parsing(char *line, t_shell	*shell);
-void			ft_free(char *message, t_shell *shell,
+int				ft_parsing(char *line, t_shell	*shell);
+int				ft_free(char *message, t_shell *shell,
 					int return_val, int is_exit);
 void			ft_echo(t_shell *shell);
 int				ft_exit(t_shell *shell);
@@ -91,8 +91,8 @@ int				get_env_size(t_shell *shell);
 
 int				ft_parse_quotes(int i, int index_start,
 					char quote_type, t_shell *shell);
-void			ft_new_pipe_chevron1(t_shell	*shell, int i);
-void			ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
+int				ft_new_pipe_chevron1(t_shell	*shell, int i);
+int				ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
 void			ft_variable_replace(int i, t_shell *shell);
 
 /* PIPE */
@@ -122,7 +122,6 @@ void			ft_lstadd_back_pipes(t_list_pipes **alst,
 t_list_pipes	*ft_lstnew_pipes(void);
 char			**ft_split_quotes(char c, t_shell *shell, int i, int j);
 int				ft_strisnum(const char *str);
-void			ft_variable_replace(int i, t_shell *shell);
 
 /*DEBUG*/
 
