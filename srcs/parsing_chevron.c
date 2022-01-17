@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/14 13:18:35 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 10:44:59 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	}
 	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!file_name)
-		ft_free("Error : malloc error\n", shell, 1);
+		ft_free("Error : malloc error\n", shell, 1, 0);
 	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp) - index_start);
 	return (file_name);
@@ -60,7 +60,7 @@ static void	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 		else if (shell->cmd_tmp[i] == '>')
 		{
 			ft_free("Error : trop de chevrons > parse errror near >\n",
-				shell, -1);
+				shell, 1, 0);
 			return ;
 		}
 	}
@@ -69,7 +69,7 @@ static void	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 		if (new_pipe->chevron_nbr_out > 2)
 		{
 			ft_free("Error : trop de chevrons > parse errror near >\n",
-				shell, -1);
+				shell, 1, 0);
 			return ;
 		}	
 		new_pipe->file_out = ft_file_in_out(shell, index_start);
@@ -111,7 +111,7 @@ static void	ft_new_pipe_chevron1_part2(t_shell	*shell,
 		if (shell->cmd_tmp[i] == '<')
 		{
 			ft_free("Error : trop de chevrons < parse errror near <\n",
-				shell, -1);
+				shell, 1, 0);
 			return ;
 		}
 	}
@@ -120,7 +120,7 @@ static void	ft_new_pipe_chevron1_part2(t_shell	*shell,
 		if (new_pipe->chevron_nbr_in > 2)
 		{
 			ft_free("Error : trop de chevrons < parse errror near <\n",
-				shell, -1);
+				shell, 1, 0);
 			return ;
 		}	
 		new_pipe->file_in = ft_file_in_out(shell, index_start);

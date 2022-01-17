@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/14 13:18:05 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 10:43:48 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
 
 	cmd_tab = ft_split_quotes(' ', shell, 0, 0);
 	if (!cmd_tab)
-		ft_free("Error : malloc error\n", shell, 1);
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	new_pipe->command = cmd_tab;
 }
 
@@ -28,7 +28,7 @@ static int	ft_parse_quotes_unclosed(int i, char quote_type, t_shell *shell)
 		ft_strlen(shell->cmd_tmp) - i);
 	if (!shell->cmd_tmp[i + 1])
 	{
-		ft_free("Error : unclosed quote\n", shell, -1);
+		ft_free("Error : unclosed quote\n", shell, 1, 0);
 		return (i);
 	}
 	while (shell->cmd_tmp[++i])
@@ -41,7 +41,7 @@ static int	ft_parse_quotes_unclosed(int i, char quote_type, t_shell *shell)
 		}
 		else if (!shell->cmd_tmp[i + 1])
 		{
-			ft_free("Error : unclosed quote\n", shell, -1);
+			ft_free("Error : unclosed quote\n", shell, 1, 0);
 			return (i);
 		}
 	}

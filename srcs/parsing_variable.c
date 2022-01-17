@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/14 16:09:37 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 10:45:51 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	ft_cmd_variable_change(int index_start, t_shell *shell,
 
 	tmp = ft_strndup(shell->cmd_tmp, index_start - 1);
 	if (!tmp)
-		ft_free("Error : malloc error\n", shell, 1);
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	tmp = ft_strjoin(tmp, variable_result);
 	if (!shell->cmd_tmp)
-		ft_free("Error : malloc error\n", shell, 1);
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	shell->cmd_tmp = ft_strjoin(tmp, ft_substr(shell->cmd_tmp, index_start - 1,
 				ft_strlen(shell->cmd_tmp) - index_start + 1));
 	if (!shell->cmd_tmp)
-		ft_free("Error : malloc error\n", shell, 1);
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	free(tmp);
 }
 
@@ -42,7 +42,7 @@ void	ft_variable_replace(int i, t_shell *shell)
 		i++;
 	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!variable_name)
-		ft_free("Error : malloc error\n", shell, 1);
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	if (ft_strcmp(variable_name, "?") == 0)
 		variable_result = ft_strdup("0");
 	else
