@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/14 13:30:27 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 10:11:01 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_free(char *message, t_shell	*shell, int is_error)
 
 	i = -1;
 	ft_putstr(message);
+	shell->return_val = is_error;
 	if (shell->cmd_nbr > 1)
 		free_fd_tab(shell);
 	if (shell->cmd_tmp)

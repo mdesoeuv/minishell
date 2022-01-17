@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 18:11:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 10:29:32 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,39 @@ void	error_cmd_not_found(char **cmd, char **possible_paths)
 	free_split(possible_paths);
 }
 
-int	is_this_fonction_built_in(char *function_name)
-{
-	
-}
+/*	returns 0 if not built-in, else returns function's index */
 
+int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
+{
+	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
+		return (print_working_directory());
+	else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
+		return (change_directory(pipe_lst->command[1]));
+	else if (ft_strcmp(pipe_lst->command[0], "echo") == 0)
+		return (ft_echo(shell));
+	else if (ft_strcmp(pipe_lst->command[0], "export") == 0)
+		return (ft_export(shell, pipe_lst->command[1]));
+	else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
+		return (ft_unset(shell, pipe_lst->command[1]));
+	else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
+		return (ft_env(shell, pipe_lst->command[1]));
+	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
+	{
+		shell->is_exit = ft_exit(shell); // TO DO exit return value
+		shell->return_val = shell->is_exit;
+		return (shell->return_val);
+	}
+	return (-100);
+}
 
 void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	int		i;
 	char	**possible_paths;
 
+	shell->return_val = execute_if_built_in(shell, pipe_lst);
+	if (shell->return_val != -100)
+		return ;
 	possible_paths = ft_split(getenv("PATH"), ':');
 	if (!possible_paths)
 		return ;
@@ -102,7 +124,7 @@ int	cmd_process(t_shell *shell)
 		{
 			manage_dup_fd(shell, shell->list_start, i);
 			cmd_test_execute(shell, shell->list_start);
-			exit(0);
+			ft_free_cmd(shell);
 		}
 		else
 		{
