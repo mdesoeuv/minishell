@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 12:07:19 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 12:46:52 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@ void	free_split(char **split)
 
 void	ft_free_cmd(t_shell *shell)
 {
-	t_list_pipes	*start;
+	t_list_pipes	*cursor;
 
-	start = shell->list_start;
 	if (shell->cmd_nbr > 1)
 		free_fd_tab(shell);
 	if (shell->cmd_tmp)
 		free(shell->cmd_tmp);
 	while (shell->list_start)
 	{
+		cursor = shell->list_start;
 		free_split(shell->list_start->command);
 		free(shell->list_start->cmd_path);
 		free(shell->list_start->file_in);
 		free(shell->list_start->file_out);
 		shell->list_start = shell->list_start->next;
+		free(cursor);
 	}
-	shell->list_start = start;
 }
