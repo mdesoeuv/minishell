@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 14:06:15 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:26:08 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	copy_set_envp(t_shell *shell, char **envp)
 	envp_size = get_env_size(shell);
 	new_envp = malloc(sizeof(char *) * (envp_size + 1));
 	if (!new_envp)
-		ft_exit(shell);
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	i = 0;
 	while (envp[i])
 	{
 		new_envp[i] = ft_strdup(envp[i]);
 		if (!new_envp[i])
-			ft_exit(shell);
+			ft_free("Error : malloc error\n", shell, 1, 1);
 		i++;
 	}
 	new_envp[i] = NULL;
@@ -72,7 +72,6 @@ int	copy_set_envp(t_shell *shell, char **envp)
 
 int    main(int argc, char **argv, char **envp)
 {
-	char		*line;
 	t_shell		shell;
 	int			is_exit;
 
@@ -85,23 +84,24 @@ int    main(int argc, char **argv, char **envp)
 	shell.envp = envp;
 	copy_set_envp(&shell, envp);
 	shell.return_val = 0;
-	line = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
-	while (line)
+	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
+	while (shell.readline)
 	{
-		add_history(line);
+		add_history(shell.readline);
 
-		if (ft_parsing(line, &shell) != -1 && shell.list_start->command && shell.list_start->command[0])
+		if (ft_parsing(shell.readline, &shell) != -1 && shell.list_start->command && shell.list_start->command[0])
 		{
+			sig_init();
 			ft_print_shell_struct(shell);
 			if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
-				is_exit = ft_exit(&shell, line);
+				is_exit = ft_exit(&shell);
 			else
 				cmd_process(&shell);
 			shell.return_val = 0;
 		}
-		free(line);
-		line = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
+		free(shell.readline);
+		shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	}
-	free(line);
+	free(shell.readline);
 	return (shell.return_val);
 }
