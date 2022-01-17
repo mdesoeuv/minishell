@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 13:36:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 14:07:47 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int				ft_parsing(char *line, t_shell	*shell);
 int				ft_free(char *message, t_shell *shell,
 					int return_val, int is_exit);
 int				ft_echo(t_shell *shell);
-int				ft_exit(t_shell *shell);
+int				ft_exit(t_shell *shell, char *prompt_line);
 int				ft_env(t_shell *shell, char *command);
 int				ft_export(t_shell *shell, char *s);
 int				ft_unset(t_shell *shell, char *s);
