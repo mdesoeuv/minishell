@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:29:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/14 14:44:06 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 09:45:00 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	nb_args(char **args)
 	return (size);
 }
 
-void	ft_echo(t_shell *shell)
+int	ft_echo(t_shell *shell)
 {
 	int		i;
 	int		option_n;
@@ -39,7 +39,7 @@ void	ft_echo(t_shell *shell)
 		}
 		while (shell->list_start->command[i])
 		{
-			ft_putstr(shell->list_start->command[i]); //TO DO : verser dans un fichier si file out
+			ft_putstr(shell->list_start->command[i]);
 			if (shell->list_start->command[i + 1]
 				&& shell->list_start->command[i][0] != '\0')
 				ft_putchar(' ');
@@ -48,4 +48,5 @@ void	ft_echo(t_shell *shell)
 	}
 	if (option_n == 0)
 		ft_putchar('\n');
+	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in2.c                                        :+:      :+:    :+:   */
+/*   built_in_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/06 15:05:51 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 09:41:18 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,12 @@ char	*offset_dup(char *s, size_t offset)
 	return (path);
 }
 
-int	change_directory(char *arg)
+int	change_directory(char *path)
 {
 	int		ret_value;
-	char	*trimmed_arg;
 
-	trimmed_arg = offset_dup(arg, 3);
-	if (!trimmed_arg)
-		return (-1);
-	ret_value = chdir(trimmed_arg);
+	ret_value = chdir(path);
 	if (ret_value < 0)
 		perror("cd");
-	free(trimmed_arg);
 	return (ret_value);
 }

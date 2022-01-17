@@ -6,7 +6,11 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/01/17 09:45:23 by mdesoeuv         ###   ########lyon.fr   */
+=======
 /*   Updated: 2022/01/17 12:32:16 by vchevill         ###   ########.fr       */
+>>>>>>> f695ea088d45fdc2363487ffd964e11642d7ecd6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +60,7 @@ typedef struct s_shell
 {
 	int					cmd_nbr;
 	int					return_val;
+	int					is_exit;
 	int					**pipe_fd;
 	char				**envp;
 	struct s_list_pipes	*pipe_lst;
@@ -72,8 +77,8 @@ void			ft_print_shell_struct(t_shell	shell);
 
 /* BUILT-IN */
 
-void			print_working_directory(void);
-char			*return_working_directory(void);
+int				print_working_directory(void);
+// char			*return_working_directory(void);
 int				change_directory(char *arg);
 int				ft_parsing(char *line, t_shell	*shell);
 int				ft_free(char *message, t_shell *shell,

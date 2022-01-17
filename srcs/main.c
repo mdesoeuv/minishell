@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 13:31:11 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:34:37 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,10 @@ int    main(int argc, char **argv, char **envp)
 {
 	char		*line;
 	t_shell		shell;
-	int			is_exit;
 
 	(void)argc;
 	(void)argv;
-	is_exit = 1;
+	shell.is_exit = 1;
 	sig_init();
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
@@ -116,8 +115,11 @@ int    main(int argc, char **argv, char **envp)
 			shell.return_val = 0;
 		}
 		free(line);
+		cmd_process(&shell);
+		if (shell.is_exit == 0)
+			break ;
 		line = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	}
 	free(line);
-	return (0);
+	return (shell.return_val);
 }
