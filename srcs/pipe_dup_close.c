@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_dup_close.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 17:38:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 12:49:46 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int	close_file_pipes(t_shell *shell)
 	int				i;
 	t_list_pipes	*start_lst;
 
-	ft_print_shell_struct(*shell);
+	//ft_print_shell_struct(*shell);
 	start_lst = shell->list_start;
 	i = 0;
 	while (shell->list_start != NULL)

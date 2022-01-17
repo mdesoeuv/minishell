@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 12:36:41 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:31:11 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,7 @@ int    main(int argc, char **argv, char **envp)
 	while (line)
 	{
 		add_history(line);
-		if (ft_parsing(line, &shell) == -1)
-		{
-			free(line);
-			line = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
-			break ;
-		}
-		if (shell.list_start->command && shell.list_start->command[0])
+		if (ft_parsing(line, &shell) != -1 && shell.list_start->command && shell.list_start->command[0])
 		{
 			ft_print_shell_struct(shell);
 			if (ft_strcmp(shell.list_start->command[0], "pwd") == 0)
