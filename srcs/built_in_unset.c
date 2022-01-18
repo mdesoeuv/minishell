@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:33:06 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 09:47:30 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/18 14:14:45 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	remove_envp(t_shell *shell, int envp_index)
 	while (shell->envp[i])
 	{
 		if (i != envp_index)
-			new_envp[i] = shell->envp[j++];
+			new_envp[j++] = shell->envp[i];
 		else
 			free(shell->envp[i]);
 		i++;
