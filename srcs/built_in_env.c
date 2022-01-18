@@ -6,11 +6,37 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:45:42 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 15:03:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/18 15:16:51 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	sort_env(t_shell *shell)
+{
+	int		i;
+	int		j;
+	int		env_size;
+	char	*tmp;
+
+	i = 0;
+	env_size = get_env_size(shell);
+	while (i < env_size - 1)
+	{
+		j = i + 1;
+		while (j < env_size)
+		{
+			if (ft_strcmp(shell->envp[i], shell->envp[j]) > 0)
+			{
+				tmp = shell->envp[i];
+				shell->envp[i] = shell->envp[j];
+				shell->envp[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 int	ft_env(t_shell *shell, char *command)
 {
