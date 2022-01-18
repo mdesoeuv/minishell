@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 09:44:08 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/18 14:19:37 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	change_directory(t_shell *shell, char *path)
 
 	old_path = return_working_directory();
 	old_path = ft_strjoin_free_s2("OLDPWD=", old_path);
-	dprintf(2, "-----OLDPWD ==%s----------\n", old_path);
 	if (!old_path)
 		ft_free("minishell: cannot allocate memory\n", \
 			shell, shell->return_val, 1);
@@ -51,12 +50,11 @@ int	change_directory(t_shell *shell, char *path)
 		perror("cd");
 	curr_path = return_working_directory();
 	curr_path = ft_strjoin_free_s2("PWD=", curr_path);
-	dprintf(2, "-----PWD ==%s----------\n", curr_path);
 	if (!old_path)
 		ft_free("minishell: cannot allocate memory\n", \
 			shell, shell->return_val, 1);
 	ft_export(shell, curr_path);
-	// free(curr_path);
-	// free(old_path);
+	free(curr_path);
+	free(old_path);
 	return (ret_value);
 }
