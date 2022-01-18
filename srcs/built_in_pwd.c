@@ -6,14 +6,14 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:43:20 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 09:40:45 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/18 09:22:26 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-**	MAX_PATH = 1024 in OSX
+**	MAX_PATH = 1024 in OSX => To replace with getcwd()?
 */
 
 int	print_working_directory(void)
@@ -26,9 +26,9 @@ int	print_working_directory(void)
 	return (0);
 }
 
-// char	*return_working_directory(void)
-// {
-// 	char	path[1025];
+char	*return_working_directory(void)
+{
+	char	path[1025];
 
-// 	return (ft_strdup(getcwd(path, 1024)));
-// }
+	return (ft_strdup(getcwd(path, 1024)));
+}

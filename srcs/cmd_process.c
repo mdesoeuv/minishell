@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 16:17:36 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/18 09:36:55 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
 	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
 		return (print_working_directory());
 	else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
-		return (change_directory(pipe_lst->command[1]));
+		return (change_directory(shell, pipe_lst->command[1]));
 	else if (ft_strcmp(pipe_lst->command[0], "echo") == 0)
 		return (ft_echo(shell));
 	else if (ft_strcmp(pipe_lst->command[0], "export") == 0)

@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:33:06 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 11:14:24 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/18 09:47:30 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	remove_envp(t_shell *shell, int envp_index)
 	env_size = get_env_size(shell);
 	new_envp = malloc(sizeof(char *) * (env_size));
 	if (!new_envp)
-		ft_exit(shell);
+		ft_free("minishell: cannot allocate memory\n", shell, 1, 1);
 	i = 0;
 	j = 0;
 	while (shell->envp[i])
@@ -43,7 +43,7 @@ int	ft_unset(t_shell *shell, char *s)
 {
 	int	envp_index;
 
-	// display_split("before unset", shell->envp);
+	display_split("before unset", shell->envp);
 	if (!s || ft_isalpha(s[0]) == 0)
 	{
 		ft_putstr_fd("minishell: unset: ", 2);
@@ -55,6 +55,6 @@ int	ft_unset(t_shell *shell, char *s)
 	if (envp_index < 0)
 		return (0);
 	remove_envp(shell, envp_index);
-	// display_split("after unset", shell->envp);
+	display_split("after unset", shell->envp);
 	return (0);
 }
