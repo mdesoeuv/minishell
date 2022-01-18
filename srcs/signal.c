@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 14:34:06 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:36:15 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -25,7 +24,7 @@ void	sig_int(int code) // ctrl-C
 void	sig_quit(int code)// ctrl -
 {
 	(void)code;
-	return;
+	return ;
 }
 
 void	sig_init(void)
