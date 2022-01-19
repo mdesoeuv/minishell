@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 16:21:11 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 08:58:21 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	add_envp(t_shell *shell, char *s)
 	env_size = get_env_size(shell);
 	new_envp = malloc(sizeof(char *) * (env_size + 2));
 	if (!new_envp)
-		ft_exit(shell);
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	i = 0;
 	while (shell->envp[i])
 	{
@@ -41,7 +41,7 @@ int	add_envp(t_shell *shell, char *s)
 	free(shell->envp);
 	new_envp[i] = ft_strdup(s);
 	if (!new_envp[i])
-		ft_exit(shell);
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	i++;
 	new_envp[i] = NULL;
 	shell->envp = new_envp;

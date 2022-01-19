@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:33:06 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 14:20:01 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 08:58:49 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	remove_envp(t_shell *shell, int envp_index)
 	env_size = get_env_size(shell);
 	new_envp = malloc(sizeof(char *) * (env_size));
 	if (!new_envp)
-		ft_free("minishell: cannot allocate memory\n", shell, 1, 1);
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	i = 0;
 	j = 0;
 	while (shell->envp[i])
