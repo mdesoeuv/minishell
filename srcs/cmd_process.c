@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 09:36:55 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 09:02:23 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	if (!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1)
 		return (error_cmd_not_found(pipe_lst->command, possible_paths));
 	free_split(possible_paths);
-	if (execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp) == -1)
+	g_sig.exit_status = execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp);
+	if (g_sig.exit_status == -1)
 		perror("minishell");
 }
 
