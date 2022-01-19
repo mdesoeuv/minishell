@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/19 09:02:23 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 09:59:21 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	cmd_process(t_shell *shell)
 	{
 		if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
 			pipe(shell->pipe_fd[i]);
+		g_sig.pid = 1;
 		shell->list_start->pid = fork();
 		if (shell->list_start->pid < 0)
 		{
@@ -142,5 +143,6 @@ int	cmd_process(t_shell *shell)
 	shell->list_start = pipe_lst_tmp;
 	wait_all_pid(shell);
 	close_file_pipes(shell);
+	g_sig.pid = 0;
 	return (0);
 }

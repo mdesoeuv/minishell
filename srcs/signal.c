@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/18 15:36:15 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 09:58:17 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	sig_int(int code) // ctrl-C
 {
 	(void)code;
-	ft_putstr_fd("\n", 1);
-	ft_putstr_fd("\033[0;36m\033[1m minishell ▸ \033[0m", 1);
+	if (g_sig.pid == 0)
+	{
+		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\033[0;36m\033[1m minishell ▸ \033[0m", 1);
+	}
 	g_sig.exit_status = 130;
 	g_sig.sigint = 1;
 }
