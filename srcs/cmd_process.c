@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/19 09:59:21 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 11:02:30 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void	concatenate_path(t_list_pipes *pipe_lst, char *path)
 		exit(EXIT_FAILURE); // to replace with built_in function
 }
 
-void	error_cmd_not_found(char **cmd, char **possible_paths)
+void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd, char **possible_paths)
 {
 	int	i;
 
+	(void)pipe_lst;
 	i = 0;
 	ft_putstr_fd("minishell: command not found:", 2);
 	while (cmd[i])
@@ -40,8 +41,40 @@ void	error_cmd_not_found(char **cmd, char **possible_paths)
 	}
 	ft_putstr_fd("\n", 2);
 	free_split(possible_paths);
+	dprintf(2, "HERE\n");
+	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
+	{
+		dprintf(2, "THERE\n");
+		free(pipe_lst->cmd_path);
+		pipe_lst->cmd_path = NULL;
+	}
+	else
+		pipe_lst->cmd_path = NULL;
 }
 
+void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd, char **possible_paths)
+{
+	int	i;
+
+	(void)pipe_lst;
+	i = 0;
+	ft_putstr_fd("minishell: permission denied: ", 2);
+	while (cmd[i])
+	{
+		ft_putstr_fd(" ", 2);
+		ft_putstr_fd(cmd[i], 2);
+		i++;
+	}
+	ft_putstr_fd("\n", 2);
+	free_split(possible_paths);
+	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
+	{
+		free(pipe_lst->cmd_path);
+		pipe_lst->cmd_path = NULL;
+	}
+	else
+		pipe_lst->cmd_path = NULL;
+}
 /*	returns 0 if not built-in, else returns function's index */
 
 int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
@@ -96,7 +129,9 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 			break ;
 	}
 	if (!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1)
-		return (error_cmd_not_found(pipe_lst->command, possible_paths));
+		return (error_cmd_not_found(pipe_lst, pipe_lst->command, possible_paths));
+	if (access(pipe_lst->cmd_path, X_OK) == -1)
+		return (error_cmd_not_executable(pipe_lst, pipe_lst->command, possible_paths));
 	free_split(possible_paths);
 	g_sig.exit_status = execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp);
 	if (g_sig.exit_status == -1)
@@ -119,10 +154,7 @@ int	cmd_process(t_shell *shell)
 		g_sig.pid = 1;
 		shell->list_start->pid = fork();
 		if (shell->list_start->pid < 0)
-		{
-			perror("minishell");
-			ft_exit(shell);
-		}
+			ft_free("minishell: fork error\n", shell, 1, 1);
 		else if (shell->list_start->pid == 0)
 		{
 			manage_dup_fd(shell, shell->list_start, i);

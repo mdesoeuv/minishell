@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 14:58:37 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 10:20:48 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,24 @@ char	*cd_tilde(t_shell *shell, char *path)
 	return (absolute_path);
 }
 
-void	cd_print_error_msg(char *path)
+int	access_check(char *path)
 {
-	ft_putstr_fd("cd: no such file or directory: ", 2);
-	ft_putendl_fd(path, 2);
+	int	ret_value;
+
+	ret_value = 1;
+	if (access(path, F_OK) == -1)
+	{
+		ft_putstr_fd("cd: no such file or directory: ", 2);
+		ft_putendl_fd(path, 2);
+		ret_value = -1;
+	}
+	else if (access(path, R_OK) == -1)
+	{
+		ft_putstr_fd("cd: permission denied: ", 2);
+		ft_putendl_fd(path, 2);
+		ret_value = -1;
+	}
+	return (ret_value);
 }
 
 int	change_directory(t_shell *shell, char *path)
@@ -59,6 +73,8 @@ int	change_directory(t_shell *shell, char *path)
 	char	*curr_path;
 	char	*tmp_path;
 
+	if (access_check(path) == -1)
+		return (1);
 	old_path = return_working_directory();
 	old_path = ft_strjoin_free_s2("OLDPWD=", old_path);
 	if (!old_path)
@@ -68,8 +84,6 @@ int	change_directory(t_shell *shell, char *path)
 	if (tmp_path != NULL)
 		path = tmp_path;
 	ret_value = chdir(path);
-	if (ret_value < 0)
-		cd_print_error_msg(path);
 	curr_path = return_working_directory();
 	curr_path = ft_strjoin_free_s2("PWD=", curr_path);
 	if (!old_path)

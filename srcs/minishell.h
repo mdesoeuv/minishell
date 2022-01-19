@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 15:17:08 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 10:32:19 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void			ft_variable_replace(int i, t_shell *shell);
 /* PIPE */
 
 void			concatenate_path(t_list_pipes *pipe_lst, char *path);
-void			error_cmd_not_found(char **cmd, char **possible_paths);
+void			error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd, char **possible_paths);
 void			cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
 int				manage_file_fd(t_list_pipes *pipe_lst);
 int				manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);

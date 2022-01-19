@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 14:26:37 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/19 10:44:42 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	ft_free_cmd(t_shell *shell)
 	while (shell->list_start)
 	{
 		cursor = shell->list_start;
-		free_split(shell->list_start->command);
-		free(shell->list_start->cmd_path);
+		if (shell->list_start->command != NULL)
+			free_split(shell->list_start->command);
+		if (shell->list_start->cmd_path)
+			free(shell->list_start->cmd_path);
 		free(shell->list_start->file_in);
 		free(shell->list_start->file_out);
 		shell->list_start = shell->list_start->next;

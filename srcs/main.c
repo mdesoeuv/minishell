@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 15:18:56 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/19 10:21:04 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int    main(int argc, char **argv, char **envp)
 			if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
 				is_exit = ft_exit(&shell);
 			else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)
-				change_directory(&shell, shell.list_start->command[1]);
+				g_sig.exit_status = change_directory(&shell, shell.list_start->command[1]);
 			else if (ft_strcmp(shell.list_start->command[0], "unset") == 0)
 				ft_unset(&shell, shell.list_start->command[1]);
 			else if (ft_strcmp(shell.list_start->command[0], "export") == 0)
