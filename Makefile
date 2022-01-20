@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/14 16:09:56 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/20 15:30:10 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 USER = mdesoeuv
 
-CC = gcc -Wall -Werror -Wextra -fsanitize=address -g3
+CC = gcc -Wall -Werror -Wextra -g #-fsanitize=address -g3
 
 SRCS =	main.c \
 		built_in_pwd.c \
@@ -35,7 +35,8 @@ SRCS =	main.c \
 		pipe_dup_close.c \
 		ft_utils.c \
 		cmd_process.c \
-		debug_functions.c
+		debug_functions.c \
+		here_doc.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 
@@ -46,6 +47,7 @@ OBJS_FILES = $(addprefix objs/, $(OBJS))
 LIB = libft/libft.a
 
 all : libft $(NAME)
+		@mkdir -p tmp
 
 $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
 			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
@@ -59,6 +61,7 @@ objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			
 clean	:
 			rm -rf objs/
+			rm -rf tmp/
 			make clean -C libft
 			
 fclean	:	clean

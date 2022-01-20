@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 11:17:09 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 15:19:49 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ int				ft_dodge_quotes(char *line, int i);
 
 /* PIPE */
 
-void			concatenate_path(t_list_pipes *pipe_lst, char *path);
+void			concatenate_path(t_shell *shell, t_list_pipes \
+	*pipe_lst, char *path);
 void			error_cmd_not_found(t_list_pipes *pipe_lst,
 					char **cmd, char **possible_paths);
 void			cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
@@ -121,6 +122,7 @@ int				manage_all_file_fd(t_shell *shell);
 void			free_fd_tab(t_shell *shell);
 int				close_file_pipes(t_shell *shell);
 void			ft_free_cmd(t_shell *shell);
+int				here_doc(t_shell *shell, t_list_pipes *pipe_lst);
 
 /*UTILS*/
 

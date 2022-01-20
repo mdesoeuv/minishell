@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/19 10:21:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 14:46:15 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int    main(int argc, char **argv, char **envp)
 		{
 			sig_init();
 			ft_print_shell_struct(shell);
+			g_sig.sigint = 1;
 			if (ft_strcmp(shell.list_start->command[0], "exit") == 0)
 				is_exit = ft_exit(&shell);
 			else if (ft_strcmp(shell.list_start->command[0], "cd") == 0)

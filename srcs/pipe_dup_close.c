@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_dup_close.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/17 12:49:46 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:21:59 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	manage_all_file_fd(t_shell *shell)
 				open(shell->list_start->file_in, O_RDONLY, S_IRWXU);
 			else if (shell->list_start->chevron_nbr_in > 1)
 			{
-				ft_putstr("<< not yet managed\n");
-				shell->list_start->fd_file_in = 0;
+				here_doc(shell, shell->list_start);
+				shell->list_start->fd_file_in = open("tmp/heredoc", O_RDONLY);
 			}
 		}
 		if (shell->list_start->file_out != NULL)
