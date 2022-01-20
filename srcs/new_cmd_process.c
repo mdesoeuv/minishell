@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/19 21:37:11 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 17:59:01 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	restore_fd(t_shell *shell)
 void	fd_child(t_list_pipes *pipe_lst, int pipe_fd[2], int *fd_prev_pipe)
 {
 	close(pipe_fd[0]);
-	if (fd_prev_pipe != -1)
+	if (*fd_prev_pipe != -1)
 	{
-		close(0);
-		dup(*fd_prev_pipe);
+		dup2(*fd_prev_pipe, 0);
 		close(*fd_prev_pipe);
+		// close(0);
 	}
 	if (pipe_lst->next)
 	{
-		close(1);
-		dup(pipe_fd[1]);
+		// close(1);
+		dup2(pipe_fd[1], 1);
 		close(pipe_fd[1]);
 	}
 }
