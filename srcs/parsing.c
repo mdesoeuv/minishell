@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/20 10:50:34 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 11:09:04 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,11 @@ int	ft_parsing(char *line, t_shell	*shell)
 {
 	int				i;
 	int				start;
-	int				chevron_start_i;
 
 	i = -1;
 	start = 0;
 	shell->list_start = NULL;
 	shell->cmd_nbr = 1;
-	chevron_start_i = 0;
 	while (line[++i])
 	{
 		i = ft_dodge_quotes(line, i);
