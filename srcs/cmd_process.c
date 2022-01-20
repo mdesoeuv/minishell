@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 15:18:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 19:27:45 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,17 @@ void	error_cmd_not_executable(t_list_pipes *pipe_lst, \
 	}
 	else
 		pipe_lst->cmd_path = NULL;
+}
+
+void	eval_child_status(int child_status)
+{
+	if (WIFEXITED(child_status) != 0)
+		g_sig.exit_status = WEXITSTATUS(child_status);
+	else
+	{
+		if (WIFSIGNALED(child_status) != 0)
+			g_sig.exit_status = WTERMSIG(child_status) + 128;
+	}
 }
 
 /*	returns 0 if not built-in, else returns function's index */

@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 15:19:49 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 19:27:39 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_shell
 void			sig_int(int code);
 void			sig_quit(int code);
 void			sig_init(void);
+void			eval_child_status(int child_status);
 void			ft_print_shell_struct(t_shell	shell);
 
 /* BUILT-IN */
