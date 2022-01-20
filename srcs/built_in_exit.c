@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/17 14:31:21 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:21:16 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_exit(t_shell *shell)
 		ft_putstr_fd("\nminishell: exit: ", 1);
 		ft_putstr_fd(shell->list_start->command[1], 1);
 		ft_putendl_fd(" : numeric argument required\n", 1);
+		g_sig.exit_status = 255;
 		return_num = 1;
 	}
 	else if (shell->list_start->command[1] && shell->list_start->command[2])
