@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:18:12 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 15:36:10 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 11:16:26 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,3 @@ t_list	*ft_lstnew(void *content)
 	new_elem->next = NULL;
 	return (new_elem);
 }
-
-

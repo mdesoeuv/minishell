@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 10:50:23 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 11:17:09 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ int				ft_dodge_quotes(char *line, int i);
 /* PIPE */
 
 void			concatenate_path(t_list_pipes *pipe_lst, char *path);
-void			error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd, char **possible_paths);
+void			error_cmd_not_found(t_list_pipes *pipe_lst,
+					char **cmd, char **possible_paths);
 void			cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
 int				manage_file_fd(t_list_pipes *pipe_lst);
 int				manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
