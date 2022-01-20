@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 10:39:21 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 10:50:23 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,10 @@ void			sort_env(t_shell *shell);
 
 int				ft_parse_quotes(int i, int index_start,
 					char quote_type, t_shell *shell);
-int				ft_new_pipe_chevron1(t_shell	*shell);
+int				ft_new_pipe_chevron(t_shell	*shell);
 int				ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
 void			ft_variable_replace(int i, t_shell *shell);
+int				ft_dodge_quotes(char *line, int i);
 
 /* PIPE */
 

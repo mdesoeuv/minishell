@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/20 10:37:37 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 10:50:34 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,8 @@ int	ft_parse_quotes(int i, int index_start,
 	return (i);
 }
 
-static int	ft_parsing_subfct(char *line, int i)
+int	ft_dodge_quotes(char *line, int i)
 {
-	int	start_i;
-
-	start_i = i;
 	if (line[i] == '\"')
 	{
 		i++;
@@ -90,8 +87,6 @@ static int	ft_parsing_subfct(char *line, int i)
 		while (line[i] && line[i] != '\'')
 			i++;
 	}
-	if (start_i != i)
-		i *= -1;
 	return (i);
 }
 
@@ -109,22 +104,20 @@ int	ft_parsing(char *line, t_shell	*shell)
 	chevron_start_i = 0;
 	while (line[++i])
 	{
-		i = ft_parsing_subfct(line, i);
-		if (i < 0)
-			i *= -1;
+		i = ft_dodge_quotes(line, i);
 		if (line[i] == '|')
 		{
 			shell->cmd_nbr++;
 			shell->cmd_tmp = ft_substr(line, start, i - start);
 			if (!shell->cmd_tmp)
 				return (ft_free("Error : malloc error\n", shell, 1, 0));
-			if (ft_new_pipe_chevron1(shell) == -1)
+			if (ft_new_pipe_chevron(shell) == -1)
 				return (-1);
 			start = i + 1;
 		}
 	}
 	shell->cmd_tmp = ft_substr(line, start, i - start + 1);
-	if (ft_new_pipe_chevron1(shell) == -1)
+	if (ft_new_pipe_chevron(shell) == -1)
 		return (-1);
 	return (0);
 }
