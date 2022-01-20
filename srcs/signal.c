@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/19 09:58:17 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 13:26:14 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	sig_int(int code) // ctrl-C
 	g_sig.sigint = 1;
 }
 
-void	sig_quit(int code)// ctrl -
+void	sig_quit(int code)// ctrl anti slash
 {
+	ft_putstr("  \b\b");
 	(void)code;
 	return ;
 }
