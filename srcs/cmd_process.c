@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 19:27:45 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 19:43:07 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 }
 
 void	error_cmd_not_found(t_list_pipes *pipe_lst, \
-	char **cmd, char **possible_paths)
+	char **cmd)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, \
 		i++;
 	}
 	ft_putstr_fd("\n", 2);
-	free_split(possible_paths);
+	// free_split(possible_paths);
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
 		free(pipe_lst->cmd_path);
@@ -49,10 +49,11 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, \
 	}
 	else
 		pipe_lst->cmd_path = NULL;
+	g_sig.exit_status = 127;
 }
 
 void	error_cmd_not_executable(t_list_pipes *pipe_lst, \
-	char **cmd, char **possible_paths)
+	char **cmd)
 {
 	int	i;
 
@@ -66,7 +67,7 @@ void	error_cmd_not_executable(t_list_pipes *pipe_lst, \
 		i++;
 	}
 	ft_putstr_fd("\n", 2);
-	free_split(possible_paths);
+	// free_split(possible_paths);
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
 		free(pipe_lst->cmd_path);
@@ -74,6 +75,7 @@ void	error_cmd_not_executable(t_list_pipes *pipe_lst, \
 	}
 	else
 		pipe_lst->cmd_path = NULL;
+	g_sig.exit_status = 126;
 }
 
 void	eval_child_status(int child_status)
@@ -135,13 +137,11 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 			break ;
 	}
 	if (!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1)
-		return (error_cmd_not_found(pipe_lst, pipe_lst->command, possible_paths));
-	if (access(pipe_lst->cmd_path, X_OK) == -1)
-		return (error_cmd_not_executable(pipe_lst, pipe_lst->command, possible_paths));
+		error_cmd_not_found(pipe_lst, pipe_lst->command);
+	else if (access(pipe_lst->cmd_path, X_OK) == -1)
+		error_cmd_not_executable(pipe_lst, pipe_lst->command);
 	free_split(possible_paths);
-	g_sig.exit_status = execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp);
-	if (g_sig.exit_status == -1)
-		perror("minishell");
+	execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp);
 }
 
 int	cmd_process(t_shell *shell)
@@ -165,7 +165,7 @@ int	cmd_process(t_shell *shell)
 		{
 			manage_dup_fd(shell, shell->list_start, i);
 			cmd_test_execute(shell, shell->list_start);
-			ft_free("", shell, shell->return_val, 1);
+			ft_free("", shell, g_sig.exit_status, 1);
 		}
 		else
 		{
