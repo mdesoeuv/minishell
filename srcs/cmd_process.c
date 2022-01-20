@@ -6,27 +6,28 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/19 11:02:30 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 15:18:16 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	concatenate_path(t_list_pipes *pipe_lst, char *path)
+void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 {
 	pipe_lst->cmd_path = ft_strjoin("", path);
 	if (!(pipe_lst->cmd_path))
-		exit(EXIT_FAILURE); // to replace with built_in function
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	pipe_lst->cmd_path = ft_strjoin_free_s1(pipe_lst->cmd_path, "/");
 	if (!(pipe_lst->cmd_path))
-		exit(EXIT_FAILURE); // to replace with built_in function
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	pipe_lst->cmd_path = ft_strjoin_free_s1(pipe_lst->cmd_path, \
 		pipe_lst->command[0]);
 	if (!(pipe_lst->cmd_path))
-		exit(EXIT_FAILURE); // to replace with built_in function
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 }
 
-void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd, char **possible_paths)
+void	error_cmd_not_found(t_list_pipes *pipe_lst, \
+	char **cmd, char **possible_paths)
 {
 	int	i;
 
@@ -41,10 +42,8 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd, char **possible_pat
 	}
 	ft_putstr_fd("\n", 2);
 	free_split(possible_paths);
-	dprintf(2, "HERE\n");
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
-		dprintf(2, "THERE\n");
 		free(pipe_lst->cmd_path);
 		pipe_lst->cmd_path = NULL;
 	}
@@ -52,7 +51,8 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd, char **possible_pat
 		pipe_lst->cmd_path = NULL;
 }
 
-void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd, char **possible_paths)
+void	error_cmd_not_executable(t_list_pipes *pipe_lst, \
+	char **cmd, char **possible_paths)
 {
 	int	i;
 
@@ -75,6 +75,7 @@ void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd, char **possibl
 	else
 		pipe_lst->cmd_path = NULL;
 }
+
 /*	returns 0 if not built-in, else returns function's index */
 
 int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
@@ -91,12 +92,6 @@ int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
 		return (ft_unset(shell, pipe_lst->command[1]));
 	else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
 		return (ft_env(shell, pipe_lst->command[1]));
-	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
-	{
-		shell->is_exit = ft_exit(shell); // TO DO exit return value
-		shell->return_val = shell->is_exit;
-		return (shell->return_val);
-	}
 	return (-100);
 }
 
@@ -117,7 +112,7 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	while (possible_paths[i] && !(pipe_lst->command[0][0] == '.' \
 		|| pipe_lst->command[0][0] == '/'))
 	{
-		concatenate_path(pipe_lst, possible_paths[i]);
+		concatenate_path(shell, pipe_lst, possible_paths[i]);
 		// dprintf(1, "path tested = %s\n", pipe_lst->cmd_path);
 		if (access(pipe_lst->cmd_path, F_OK) == -1)
 		{
