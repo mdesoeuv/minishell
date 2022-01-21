@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/21 14:21:05 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/21 17:00:23 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,15 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 
 static void	ft_create_file(int chevron_nbr_out, char *file_name)
 {
-	int fd;
-	
+	int	fd;
+
 	if (chevron_nbr_out == 1)
-           fd = open(file_name, \
-                O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    else
-        fd = open(file_name, \
-            O_WRONLY | O_APPEND | O_CREAT, 0644);
+		fd = open(file_name, \
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else
+		fd = open(file_name, \
+			O_WRONLY | O_APPEND | O_CREAT, 0644);
 	close(fd);
-	
 }
 
 static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
