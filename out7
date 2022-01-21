@@ -69,3 +69,5 @@ fclean	:	clean
 re		:	fclean all
 
 .PHONY	:	libft all clean re fclean
+[?2004h[0;36m[1m minishell ▸ [0m^C[?2004l
+[0;36m[1m minishell ▸ [0m[?2004h[?2004l

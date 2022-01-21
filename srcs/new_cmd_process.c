@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 10:02:47 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 10:20:30 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	restore_fd(t_shell *shell)
 	close(shell->save_stdout);
 }
 
-int	fd_child(t_shell *shell, t_list_pipes *pipe_lst, int fd_prev_pipe, int pipe_fd[2])
+int	fd_redirect(t_shell *shell, t_list_pipes *pipe_lst, int fd_prev_pipe, int pipe_fd[2])
 {
 	int	fd_read;
 
@@ -48,33 +48,35 @@ int	fd_child(t_shell *shell, t_list_pipes *pipe_lst, int fd_prev_pipe, int pipe_
 	return (fd_read);
 }
 
-int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
+int	open_in_out(t_list_pipes *pipe_lst)
 {
 	if (pipe_lst->file_in)
 	{
 		if (pipe_lst->chevron_nbr_in == 1)
-			pipe_lst->fd_in = \
+			pipe_lst->fd_file_in = \
 			open(pipe_lst->file_in, O_RDONLY);
 		else if (pipe_lst->chevron_nbr_in > 1)
 		{
 			ft_putstr("<< not yet managed\n");
 			pipe_lst->fd_file_in = 0;
 		}
+		close(0);
+		dup2(pipe_lst->fd_file_in, 0);
+		close(pipe_lst->fd_file_in);
 	}
-	else
-		pipe_lst->fd_in = dup(shell->save_stdin);
 	if (pipe_lst->file_out != NULL)
 	{
 		if (pipe_lst->chevron_nbr_out == 1)
-			pipe_lst->fd_out = open(pipe_lst->file_out, \
+			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else
-			pipe_lst->fd_out = open(pipe_lst->file_out, \
+			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
 				O_WRONLY | O_APPEND | O_CREAT, 0644);
+		close(1);
+		dup2(pipe_lst->fd_file_out, 1);
+		close(pipe_lst->fd_file_out);
 	}
-	else
-		pipe_lst->fd_out = dup(shell->save_stdout);
-	if (pipe_lst->fd_in < 0 || pipe_lst->fd_out < 0)
+	if (pipe_lst->fd_file_in < 0 || pipe_lst->fd_file_out < 0)
 	{
 		perror("minishell");
 		return (-1);
@@ -115,7 +117,8 @@ void	new_cmd_process(t_shell *shell)
 	{
 		if (pipe(pipe_fd) == -1)
 			ft_free("minishell: pipe error\n", shell, 1, 1);
-		fd_prev_pipe = fd_child(shell, shell->list_start, fd_prev_pipe, pipe_fd);
+		fd_prev_pipe = fd_redirect(shell, shell->list_start, fd_prev_pipe, pipe_fd);
+		open_in_out(shell->list_start);
 		if (execute_if_built_in(shell, shell->list_start) == -100)
 			execute(shell, shell->list_start);
 		// close(fd_prev_pipe);
@@ -126,5 +129,6 @@ void	new_cmd_process(t_shell *shell)
 	}
 	shell->list_start = start;
 	wait_all_pid(shell);
+	close_file_pipes(shell);
 	restore_fd(shell);
 }
