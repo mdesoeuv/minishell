@@ -1,9 +1,0 @@
-cat < test_file | ls -l -a | wc -l > fileout1
-cat < test_file | ls -l -a | wc -l >> fileout2
-< test_file cat | echo -e 
-cat Makefile | wc -l > fileout | sleep 4 | < Makefile cat > fileout3 | ls -la
-< Makefile cat > fileout3 | ls -la
-mkdir -p "file with spaces"
-mkdir -p "file"without"spaces"
-echo '$PATH' > fileout4
-echo "$PATH" > fileout4

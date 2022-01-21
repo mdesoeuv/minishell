@@ -10,3 +10,4 @@ libft/libft.a
 libft/libft.a
 *.a
 test
+tmp/heredoc

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 11:12:56 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 17:07:20 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int    main(int argc, char **argv, char **envp)
 	while (shell.readline)
 	{
 		add_history(shell.readline);
-		if (ft_parsing(shell.readline, &shell) != -1 && shell.list_start->command && shell.list_start->command[0])
+		if (ft_parsing(shell.readline, &shell) != -1 && shell.list_start->command)
 		{
 			sig_init();
 			ft_print_shell_struct(shell);

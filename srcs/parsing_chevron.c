@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/20 19:37:25 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 17:00:23 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	return (file_name);
 }
 
+static void	ft_create_file(int chevron_nbr_out, char *file_name)
+{
+	int	fd;
+
+	if (chevron_nbr_out == 1)
+		fd = open(file_name, \
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else
+		fd = open(file_name, \
+			O_WRONLY | O_APPEND | O_CREAT, 0644);
+	close(fd);
+}
+
 static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 	t_list_pipes	*new_pipe, int i)
 {		
@@ -55,12 +68,26 @@ static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 	if (new_pipe->chevron_nbr_out > 0)
 	{
 		if (new_pipe->chevron_nbr_out > 2)
-			return (ft_free("Error : trop de chevrons > parse errror near >\n",
+			return (ft_free("minishell: syntax error near unexpected token >\n",
 					shell, 1, 0));
 		new_pipe->file_out = ft_file_in_out(shell, i);
-		// creation
+		ft_create_file(new_pipe->chevron_nbr_out, new_pipe->file_out);
 	}
 	return (0);
+}
+
+static void	ft_check_if_file_exists(char *file_name)
+{
+	if (access(file_name, F_OK) == -1)
+	{
+		ft_putstr_fd("minishell: no such file or directory: ", 2);
+		ft_putendl_fd(file_name, 2);
+	}
+	else if (access(file_name, R_OK) == -1)
+	{
+		ft_putstr_fd("minishell: permission denied: ", 2);
+		ft_putendl_fd(file_name, 2);
+	}
 }
 
 static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
@@ -78,10 +105,10 @@ static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
 	if (new_pipe->chevron_nbr_in > 0)
 	{
 		if (new_pipe->chevron_nbr_in > 2)
-			return (ft_free("Error : trop de chevrons < parse errror near <\n",
+			return (ft_free("minishell: syntax error near unexpected token <\n",
 					shell, 1, 0));
 		new_pipe->file_in = ft_file_in_out(shell, i);
-		// check if exist
+		ft_check_if_file_exists(new_pipe->file_in);
 	}
 	return (0);
 }

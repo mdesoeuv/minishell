@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/21 16:03:40 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 16:56:02 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	ft_parsing(char *line, t_shell	*shell)
 
 	i = -1;
 	start = 0;
+	shell->list_start = NULL;
 	shell->list_start = NULL;
 	shell->cmd_nbr = 1;
 	while (line[++i])
