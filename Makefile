@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/20 15:30:10 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/21 11:15:16 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS =	main.c \
 		pipe_dup_close.c \
 		ft_utils.c \
 		cmd_process.c \
+		new_cmd_process.c \
 		debug_functions.c \
 		here_doc.c
 

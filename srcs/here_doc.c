@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 15:21:51 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 11:25:08 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	here_doc(t_shell *shell, t_list_pipes *pipe_lst)
 	line = readline(prompt);
 	while (ft_strcmp(line, ending_line) != 0)
 	{
+		dprintf(2, "ererer\n");
 		total_line = ft_strjoin_free(total_line, line);
 		total_line = ft_strjoin_free_s1(total_line, "\n");
 		if (!total_line)

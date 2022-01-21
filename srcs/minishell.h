@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 10:47:15 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 11:15:46 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_list_pipes
 	pid_t						pid;
 	char						**command;
 	char						*cmd_path;
+	int							to_execute;
 	char						*file_in;
 	int							fd_file_in;
 	int							chevron_nbr_in;
@@ -107,12 +108,14 @@ void			concatenate_path(t_shell *shell, t_list_pipes \
 	*pipe_lst, char *path);
 void			error_cmd_not_found(t_list_pipes *pipe_lst,
 					char **cmd);
+int				execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst);
 void			cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
 int				manage_file_fd(t_list_pipes *pipe_lst);
 int				manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
 int				close_all_pipes(t_shell *shell);
 int				wait_all_pid(t_shell *shell);
-int				cmd_process(t_shell *shell);	
+int				cmd_process(t_shell *shell);
+void			new_cmd_process(t_shell *shell);
 void			free_split(char **split);
 void			print_split(char **split);
 int				malloc_pipe_fd(t_shell *shell);

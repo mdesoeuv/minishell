@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 10:24:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 11:23:42 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	fd_redirect(t_shell *shell, t_list_pipes *pipe_lst, int fd_prev_pipe, int pi
 	return (fd_read);
 }
 
-int	open_in_out(t_list_pipes *pipe_lst)
+int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (pipe_lst->file_in)
 	{
@@ -57,8 +57,8 @@ int	open_in_out(t_list_pipes *pipe_lst)
 			open(pipe_lst->file_in, O_RDONLY);
 		else if (pipe_lst->chevron_nbr_in > 1)
 		{
-			ft_putstr("<< not yet managed\n");
-			pipe_lst->fd_file_in = 0;
+			here_doc(shell, pipe_lst);
+			pipe_lst->fd_file_in = open("tmp/heredoc", O_RDONLY);
 		}
 		close(0);
 		dup2(pipe_lst->fd_file_in, 0);
@@ -86,13 +86,10 @@ int	open_in_out(t_list_pipes *pipe_lst)
 
 void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 {
-	// if (execute_if_built_in(shell, pipe_lst) != -100)
-	// 	return ;
 	pipe_lst->pid = fork();
 	if (pipe_lst->pid < 0)
 	{
-		perror("minishell");
-		ft_free("", shell, shell->return_val, 1);
+		ft_free("minishell: fork error\n", shell, 1, 1);
 	}
 	else if (pipe_lst->pid == 0)
 	{
@@ -115,10 +112,11 @@ void	new_cmd_process(t_shell *shell)
 	fd_prev_pipe = 0;
 	while (shell->list_start)
 	{
+		g_sig.pid = 1;
 		if (pipe(pipe_fd) == -1)
 			ft_free("minishell: pipe error\n", shell, 1, 1);
 		fd_prev_pipe = fd_redirect(shell, shell->list_start, fd_prev_pipe, pipe_fd);
-		open_in_out(shell->list_start);
+		open_in_out(shell, shell->list_start);
 		if (execute_if_built_in(shell, shell->list_start) == -100)
 			execute(shell, shell->list_start);
 		close(pipe_fd[0]);
@@ -130,4 +128,5 @@ void	new_cmd_process(t_shell *shell)
 	wait_all_pid(shell);
 	close_file_pipes(shell);
 	restore_fd(shell);
+	g_sig.pid = 0;
 }
