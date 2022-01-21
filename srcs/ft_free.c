@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/19 10:44:42 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 16:58:36 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	ft_free_cmd(t_shell *shell)
 {
 	t_list_pipes	*cursor;
 
-	if (shell->cmd_nbr > 1)
-		free_fd_tab(shell);
 	if (shell->cmd_tmp)
 		free(shell->cmd_tmp);
 	while (shell->list_start)

@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 16:00:50 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 16:57:34 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_fd(t_shell *shell)
 {
-	malloc_pipe_fd(shell);
+	// malloc_pipe_fd(shell);
 	shell->save_stdin = dup(0);
 	shell->save_stdout = dup(1);
 }

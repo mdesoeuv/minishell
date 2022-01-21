@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 15:08:40 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 16:58:14 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	restore_std(t_shell *shell)
 {
 	shell->tmp_stdin = dup(0);
-	// close(0);
 	shell->tmp_stdout = dup(1);
-	// close(1);
 	dup2(shell->save_stdin, 0);
 	close(shell->save_stdin);
 	dup2(shell->save_stdout, 1);
@@ -28,9 +26,7 @@ int	restore_std(t_shell *shell)
 void	restore_prev_std(t_shell *shell)
 {
 	shell->save_stdin = dup(0);
-	// close(0);
 	shell->save_stdout = dup(1);
-	// close(1);
 	dup2(shell->tmp_stdin, 0);
 	close(shell->tmp_stdin);
 	dup2(shell->tmp_stdout, 1);
