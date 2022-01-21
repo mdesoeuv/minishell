@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:33:06 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/19 08:58:49 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 09:22:34 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_unset(t_shell *shell, char *s)
 	int	envp_index;
 
 	// display_split("before unset", shell->envp);
-	if (!s || ft_isalpha(s[0]) == 0)
+	if (!s || !(ft_isalpha(s[0]) == 1 || s[0] == '_'))
 	{
 		ft_putstr_fd("minishell: unset: ", 2);
 		ft_putstr_fd(s, 2);
