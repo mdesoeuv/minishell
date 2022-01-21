@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 15:48:46 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 16:00:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,8 @@ int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 		dup2(pipe_lst->fd_file_out, 1);
 		close(pipe_lst->fd_file_out);
 	}
-	// if (pipe_lst->fd_file_in < 0 || pipe_lst->fd_file_out < 0)
-	// {
-	// 	perror("minishell");
-	// 	return (-1);
-	// }
+	if (pipe_lst->fd_file_in < 0)
+		pipe_lst->to_execute = 0;
 	return (0);
 }
 
@@ -122,8 +119,11 @@ void	new_cmd_process(t_shell *shell)
 		fd_prev_pipe = fd_redirect(shell, shell->list_start, \
 			fd_prev_pipe, pipe_fd);
 		open_in_out(shell, shell->list_start);
-		if (execute_if_built_in(shell, shell->list_start) == -100)
-			execute(shell, shell->list_start);
+		if (shell->list_start->to_execute == 1)
+		{
+			if (execute_if_built_in(shell, shell->list_start) == -100)
+				execute(shell, shell->list_start);
+		}
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
 		shell->list_start = shell->list_start->next;
