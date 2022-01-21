@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/20 15:40:59 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 16:03:40 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	ft_dodge_quotes(char *line, int i)
 }
 
 /* ft_parsing parse les quotes et découpe en pipes*/
+
 int	ft_parsing(char *line, t_shell	*shell)
 {
 	int				i;
