@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 14:00:36 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 15:43:20 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_list_pipes
 	char						**command;
 	char						*cmd_path;
 	int							to_execute;
+	int							cmd_index;
 	char						*file_in;
 	int							fd_file_in;
 	int							chevron_nbr_in;
