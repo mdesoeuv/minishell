@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 17:59:01 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 10:02:47 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,25 @@ void	restore_fd(t_shell *shell)
 	close(shell->save_stdout);
 }
 
-void	fd_child(t_list_pipes *pipe_lst, int pipe_fd[2], int *fd_prev_pipe)
+int	fd_child(t_shell *shell, t_list_pipes *pipe_lst, int fd_prev_pipe, int pipe_fd[2])
 {
+	int	fd_read;
+
+	fd_read = dup(pipe_fd[0]);
 	close(pipe_fd[0]);
-	if (*fd_prev_pipe != -1)
-	{
-		dup2(*fd_prev_pipe, 0);
-		close(*fd_prev_pipe);
-		// close(0);
-	}
+	dup2(fd_prev_pipe, 0);
+	close(fd_prev_pipe);
 	if (pipe_lst->next)
 	{
-		// close(1);
 		dup2(pipe_fd[1], 1);
 		close(pipe_fd[1]);
 	}
+	else
+	{
+		close(pipe_fd[1]);
+		dup2(shell->save_stdout, 1);
+	}
+	return (fd_read);
 }
 
 int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
@@ -104,18 +108,18 @@ void	new_cmd_process(t_shell *shell)
 
 	i = 0;
 	start = shell->list_start;
-	pipe_fd[0] = -1;
 	init_fd(shell);
+	pipe_fd[0] = 0;
 	fd_prev_pipe = 0;
 	while (shell->list_start)
 	{
-		fd_prev_pipe = pipe_fd[0];
 		if (pipe(pipe_fd) == -1)
 			ft_free("minishell: pipe error\n", shell, 1, 1);
-		fd_child(shell->list_start, pipe_fd, &fd_prev_pipe);
+		fd_prev_pipe = fd_child(shell, shell->list_start, fd_prev_pipe, pipe_fd);
 		if (execute_if_built_in(shell, shell->list_start) == -100)
 			execute(shell, shell->list_start);
-		close(fd_prev_pipe);
+		// close(fd_prev_pipe);
+		close(pipe_fd[0]);
 		close(pipe_fd[1]);
 		shell->list_start = shell->list_start->next;
 		i++;
