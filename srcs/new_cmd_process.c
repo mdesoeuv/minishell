@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 11:23:42 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 15:29:38 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	fd_redirect(t_shell *shell, t_list_pipes *pipe_lst, int fd_prev_pipe, int pi
 	int	fd_read;
 
 	fd_read = dup(pipe_fd[0]);
-	close(pipe_fd[0]);
+	// close(pipe_fd[0]);
 	dup2(fd_prev_pipe, 0);
 	close(fd_prev_pipe);
 	if (pipe_lst->next)
@@ -59,6 +59,7 @@ int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 		{
 			here_doc(shell, pipe_lst);
 			pipe_lst->fd_file_in = open("tmp/heredoc", O_RDONLY);
+			dprintf(1, "file fd = %d\n", pipe_lst->fd_file_in);
 		}
 		close(0);
 		dup2(pipe_lst->fd_file_in, 0);
@@ -76,11 +77,11 @@ int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 		dup2(pipe_lst->fd_file_out, 1);
 		close(pipe_lst->fd_file_out);
 	}
-	if (pipe_lst->fd_file_in < 0 || pipe_lst->fd_file_out < 0)
-	{
-		perror("minishell");
-		return (-1);
-	}
+	// if (pipe_lst->fd_file_in < 0 || pipe_lst->fd_file_out < 0)
+	// {
+	// 	perror("minishell");
+	// 	return (-1);
+	// }
 	return (0);
 }
 
@@ -94,7 +95,7 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 	else if (pipe_lst->pid == 0)
 	{
 		cmd_test_execute(shell, pipe_lst);
-		ft_free("minishell: execve error\n", shell, 1, 1);
+		ft_free("", shell, 1, 1);
 	}
 }
 

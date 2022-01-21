@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 11:15:46 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 14:00:36 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_shell
 	int					is_exit;
 	int					save_stdin;
 	int					save_stdout;
+	int					tmp_stdin;
+	int					tmp_stdout;
 	int					**pipe_fd;
 	char				**envp;
 	struct s_list_pipes	*list_start;
