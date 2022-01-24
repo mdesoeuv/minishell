@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 15:43:20 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 14:00:39 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum e_bool
 
 typedef struct s_sig
 {
+	char			*readline;
 	int				sigint;
 	int				exit_status;
 	pid_t			pid;
@@ -56,8 +57,8 @@ typedef struct s_list_pipes
 
 typedef struct s_shell
 {
+
 	int					cmd_nbr;
-	char				*readline;
 	int					return_val;
 	int					is_exit;
 	int					save_stdin;
