@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 16:57:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 10:41:40 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,7 @@ int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 			pipe_lst->fd_file_in = \
 			open(pipe_lst->file_in, O_RDONLY);
 		else if (pipe_lst->chevron_nbr_in > 1)
-		{
-			here_doc(shell, pipe_lst);
-			pipe_lst->fd_file_in = open("tmp/heredoc", O_RDONLY);
-			dprintf(1, "file fd = %d\n", pipe_lst->fd_file_in);
-		}
+			pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
 		close(0);
 		dup2(pipe_lst->fd_file_in, 0);
 		close(pipe_lst->fd_file_in);

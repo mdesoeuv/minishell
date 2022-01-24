@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 10:45:22 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 15:21:59 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 10:28:57 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	manage_all_file_fd(t_shell *shell)
 				open(shell->list_start->file_in, O_RDONLY, S_IRWXU);
 			else if (shell->list_start->chevron_nbr_in > 1)
 			{
-				here_doc(shell, shell->list_start);
-				shell->list_start->fd_file_in = open("tmp/heredoc", O_RDONLY);
+				shell->list_start->fd_file_in = here_doc_v2(shell, shell->list_start);
 			}
 		}
 		if (shell->list_start->file_out != NULL)

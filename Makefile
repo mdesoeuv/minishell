@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/21 13:37:43 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/24 10:28:11 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS =	main.c \
 		cmd_process.c \
 		new_cmd_process.c \
 		debug_functions.c \
+		here_doc_v2.c \
 		here_doc.c
 
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
