@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 16:38:50 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 17:05:36 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 	return (0);
 }
 
-void	redirect_file_in_out(t_shell *shell, t_list_pipes *pipe_lst)
+void	redirect_file_in_out(t_list_pipes *pipe_lst)
 {
 	if (pipe_lst->file_in)
 	{
@@ -121,6 +121,7 @@ void	new_cmd_process(t_shell *shell)
 	i = 0;
 	start = shell->list_start;
 	init_fd(shell);
+	open_in_out_all(shell);
 	fd_prev_pipe = 0;
 	while (shell->list_start)
 	{
@@ -130,7 +131,8 @@ void	new_cmd_process(t_shell *shell)
 			ft_free("minishell: pipe error\n", shell, 1, 1);
 		fd_prev_pipe = fd_redirect(shell, shell->list_start, \
 			fd_prev_pipe, pipe_fd);
-		open_in_out(shell, shell->list_start);
+		redirect_file_in_out(shell->list_start);
+		// open_in_out(shell, shell->list_start);
 		if (shell->list_start->to_execute == 1)
 		{
 			if (execute_if_built_in(shell, shell->list_start) == -100)
