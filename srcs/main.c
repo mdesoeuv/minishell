@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 11:00:50 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/24 12:25:38 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,21 @@ void	ft_print_shell_struct(t_shell	shell)
 int	ft_incr_shell_env(t_shell *shell)
 {
 	char	*getenv;
-	int		shell_lvl;
+	char	*shell_lvl;
 	char	*final_res;
 
 	getenv = ft_getenv(shell, "SHLVL");
 	if (!getenv)
 		getenv = "1";
 	ft_unset(shell, "SHLVL");
-	shell_lvl = ft_atoi(getenv) + 1;
-	final_res = ft_strjoin("SHLVL=", getenv);
+	shell_lvl = ft_itoa(ft_atoi(getenv) + 1);
+	if (!shell_lvl)
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
+	final_res = ft_strjoin_free_s2("SHLVL=", shell_lvl);
+	if (!final_res)
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	ft_export(shell, final_res);
+	free(final_res);
 	return (1);
 }
 
