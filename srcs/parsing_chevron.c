@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/21 17:00:23 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:30:53 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
 			return (ft_free("minishell: syntax error near unexpected token <\n",
 					shell, 1, 0));
 		new_pipe->file_in = ft_file_in_out(shell, i);
-		ft_check_if_file_exists(new_pipe->file_in);
+		if (new_pipe->chevron_nbr_in == 1)
+			ft_check_if_file_exists(new_pipe->file_in);
 	}
 	return (0);
 }

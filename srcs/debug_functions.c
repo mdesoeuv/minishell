@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:49:14 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/14 10:52:02 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 16:24:59 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,17 @@ void	display_split(char *message, char **split)
 		i++;
 	}
 	ft_putendl("--end");
+}
+
+void	print_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		ft_putendl(split[i]);
+		i++;
+	}
+	ft_putendl("");
 }

@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 15:35:52 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 16:24:19 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (!pipe_lst->command[0])
 		return (-999);
+	if (pipe_lst->to_execute == 0)
+		return (-100);
 	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
 		return (print_working_directory());
 	else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
@@ -113,9 +115,8 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	int		i;
 	char	**possible_paths;
 
-	// shell->return_val = execute_if_built_in(shell, pipe_lst);
-	// if (shell->return_val != -100)
-	// 	return ;
+	if (pipe_lst->to_execute == 0)
+		return ;
 	possible_paths = ft_split(getenv("PATH"), ':');
 	if (!possible_paths)
 		return ;
@@ -126,7 +127,6 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		|| pipe_lst->command[0][0] == '/'))
 	{
 		concatenate_path(shell, pipe_lst, possible_paths[i]);
-		// dprintf(1, "path tested = %s\n", pipe_lst->cmd_path);
 		if (access(pipe_lst->cmd_path, F_OK) == -1)
 		{
 			free(pipe_lst->cmd_path);
