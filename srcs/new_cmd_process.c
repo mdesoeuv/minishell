@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 16:28:23 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 16:38:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 	if (pipe_lst->file_in)
 	{
 		if (pipe_lst->chevron_nbr_in == 1)
-			pipe_lst->fd_file_in = \
-			open(pipe_lst->file_in, O_RDONLY);
+			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
 		else if (pipe_lst->chevron_nbr_in > 1)
 			pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
 		close(0);
@@ -79,6 +78,23 @@ int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 		pipe_lst->to_execute = 0;
 	return (0);
 }
+
+void	redirect_file_in_out(t_shell *shell, t_list_pipes *pipe_lst)
+{
+	if (pipe_lst->file_in)
+	{
+		close(0);
+		dup2(pipe_lst->fd_file_in, 0);
+		close(pipe_lst->fd_file_in);
+	}
+	if (pipe_lst->file_out != NULL)
+	{
+		close(1);
+		dup2(pipe_lst->fd_file_out, 1);
+		close(pipe_lst->fd_file_out);
+	}
+}
+
 
 void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 {
