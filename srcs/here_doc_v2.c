@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 11:00:20 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 11:35:40 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	restore_prev_std(t_shell *shell)
 	dup2(shell->tmp_stdout, 1);
 	close(shell->tmp_stdout);
 }
+
+// int	heredoc_process()
 
 int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 {

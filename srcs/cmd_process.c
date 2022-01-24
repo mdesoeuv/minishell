@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 17:38:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 11:27:46 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 }
 
-void	error_cmd_not_found(t_list_pipes *pipe_lst, \
-	char **cmd)
+void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 {
 	int	i;
 
-	(void)pipe_lst;
+	pipe_lst->to_execute = 0;
 	i = 0;
 	ft_putstr_fd("minishell: command not found:", 2);
 	while (cmd[i])
@@ -41,7 +40,6 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, \
 		i++;
 	}
 	ft_putstr_fd("\n", 2);
-	// free_split(possible_paths);
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
 		free(pipe_lst->cmd_path);
@@ -52,12 +50,11 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, \
 	g_sig.exit_status = 127;
 }
 
-void	error_cmd_not_executable(t_list_pipes *pipe_lst, \
-	char **cmd)
+void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd)
 {
 	int	i;
 
-	(void)pipe_lst;
+	pipe_lst->to_execute = 0;
 	i = 0;
 	ft_putstr_fd("minishell: permission denied: ", 2);
 	while (cmd[i])
@@ -67,7 +64,6 @@ void	error_cmd_not_executable(t_list_pipes *pipe_lst, \
 		i++;
 	}
 	ft_putstr_fd("\n", 2);
-	// free_split(possible_paths);
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
 		free(pipe_lst->cmd_path);
