@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 15:38:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 17:12:06 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int				close_file_pipes(t_shell *shell);
 void			ft_free_cmd(t_shell *shell);
 int				here_doc(t_shell *shell, t_list_pipes *pipe_lst);
 int				here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst);
+int				open_in_out_all(t_shell *shell);
 
 /*UTILS*/
 
