@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 17:47:41 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 11:00:50 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,22 @@ void	ft_print_shell_struct(t_shell	shell)
 	}
 }
 
+int	ft_incr_shell_env(t_shell *shell)
+{
+	char	*getenv;
+	int		shell_lvl;
+	char	*final_res;
+
+	getenv = ft_getenv(shell, "SHLVL");
+	if (!getenv)
+		getenv = "1";
+	ft_unset(shell, "SHLVL");
+	shell_lvl = ft_atoi(getenv) + 1;
+	final_res = ft_strjoin("SHLVL=", getenv);
+	ft_export(shell, final_res);
+	return (1);
+}
+
 int	copy_set_envp(t_shell *shell, char **envp)
 {
 	int		i;
@@ -67,6 +83,7 @@ int	copy_set_envp(t_shell *shell, char **envp)
 	}
 	new_envp[i] = NULL;
 	shell->envp = new_envp;
+	ft_incr_shell_env(shell);
 	return (1);
 }
 
