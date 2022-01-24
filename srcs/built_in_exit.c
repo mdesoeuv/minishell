@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/20 20:21:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 11:52:46 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_exit(t_shell *shell)
 {
 	int	return_num;
 
+	g_sig.sigint = 1;
 	ft_putstr_fd("exit", 1);
 	return_num = 0;
 	if (shell->list_start->command[1]
