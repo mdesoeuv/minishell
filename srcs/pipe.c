@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/20 19:33:55 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 15:49:20 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,38 @@ int	wait_all_pid(t_shell *shell)
 	return (0);
 }
 
-int	malloc_pipe_fd(t_shell *shell)
-{
-	int	i;
+// int	malloc_pipe_fd(t_shell *shell)
+// {
+// 	int	i;
 
-	i = 0;
-	if (shell->cmd_nbr <= 1)
-	{
-		shell->pipe_fd = NULL;
-		return (0);
-	}
-	shell->pipe_fd = malloc(sizeof(int *) * (shell->cmd_nbr - 1));
-	if (!(shell->pipe_fd))
-		return (-1);
-	while (i < shell->cmd_nbr - 1)
-	{
-		shell->pipe_fd[i] = malloc(sizeof(int) * 2);
-		if (!(shell->pipe_fd[i]))
-			return (-1);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	if (shell->cmd_nbr <= 1)
+// 	{
+// 		shell->pipe_fd = NULL;
+// 		return (0);
+// 	}
+// 	shell->pipe_fd = malloc(sizeof(int *) * (shell->cmd_nbr - 1));
+// 	if (!(shell->pipe_fd))
+// 		return (-1);
+// 	while (i < shell->cmd_nbr - 1)
+// 	{
+// 		shell->pipe_fd[i] = malloc(sizeof(int) * 2);
+// 		if (!(shell->pipe_fd[i]))
+// 			return (-1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
-void	free_fd_tab(t_shell *shell)
-{
-	int	i;
+// void	free_fd_tab(t_shell *shell)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < shell->cmd_nbr - 1)
-	{
-		free(shell->pipe_fd[i]);
-		i++;
-	}
-	free(shell->pipe_fd);
-}
+// 	i = 0;
+// 	while (i < shell->cmd_nbr - 1)
+// 	{
+// 		free(shell->pipe_fd[i]);
+// 		i++;
+// 	}
+// 	free(shell->pipe_fd);
+// }
