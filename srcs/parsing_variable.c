@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/20 15:55:18 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 11:34:42 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	ft_cmd_variable_change(int index_start, t_shell *shell,
 	free(shell->cmd_tmp);
 	shell->cmd_tmp = tmp2;
 	free(tmp);
-	free(variable_result);
 }
 
 void	ft_variable_replace(int i, t_shell *shell)
@@ -58,7 +57,7 @@ void	ft_variable_replace(int i, t_shell *shell)
 		variable_result = ft_getenv(shell, variable_name);
 	free(variable_name);
 	ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
-		ft_strlen(shell->cmd_tmp));
+		ft_strlen(shell->cmd_tmp) - index_start - 1);
 	if (variable_result)
 		ft_cmd_variable_change(index_start, shell, variable_result);
 }
