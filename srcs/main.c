@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 11:00:50 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:53:12 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ int    main(int argc, char **argv, char **envp)
 	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (shell.readline)
 	{
+		if (g_sig.sigint == 1)
+			shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 		add_history(shell.readline);
 		if (ft_parsing(shell.readline, &shell) != -1 && shell.list_start->command)
 		{
 			sig_init();
 			ft_print_shell_struct(shell);
-			g_sig.sigint = 1;
 			new_cmd_process(&shell);
 		}
 		ft_free("", &shell, shell.return_val, 0);

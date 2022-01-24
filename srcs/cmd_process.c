@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/21 17:38:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/24 12:00:35 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	eval_child_status(int child_status)
 
 int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
 {
+	if (!pipe_lst->command[0])
+		return (-999);
 	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
 		return (print_working_directory());
 	else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
