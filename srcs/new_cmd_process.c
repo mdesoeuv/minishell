@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 17:05:36 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 11:23:34 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,34 @@ int	fd_redirect(t_shell *shell, t_list_pipes *pipe_lst, \
 	return (fd_read);
 }
 
-int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
-{
-	if (pipe_lst->file_in)
-	{
-		if (pipe_lst->chevron_nbr_in == 1)
-			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
-		else if (pipe_lst->chevron_nbr_in > 1)
-			pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
-		close(0);
-		dup2(pipe_lst->fd_file_in, 0);
-		close(pipe_lst->fd_file_in);
-	}
-	if (pipe_lst->file_out != NULL)
-	{
-		if (pipe_lst->chevron_nbr_out == 1)
-			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else
-			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
-				O_WRONLY | O_APPEND | O_CREAT, 0644);
-		close(1);
-		dup2(pipe_lst->fd_file_out, 1);
-		close(pipe_lst->fd_file_out);
-	}
-	if (pipe_lst->fd_file_in < 0)
-		pipe_lst->to_execute = 0;
-	return (0);
-}
+// int	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
+// {
+// 	if (pipe_lst->file_in)
+// 	{
+// 		if (pipe_lst->chevron_nbr_in == 1)
+// 			pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
+// 		else if (pipe_lst->chevron_nbr_in > 1)
+// 			pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
+// 		close(0);
+// 		dup2(pipe_lst->fd_file_in, 0);
+// 		close(pipe_lst->fd_file_in);
+// 	}
+// 	if (pipe_lst->file_out != NULL)
+// 	{
+// 		if (pipe_lst->chevron_nbr_out == 1)
+// 			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
+// 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 		else
+// 			pipe_lst->fd_file_out = open(pipe_lst->file_out, \
+// 				O_WRONLY | O_APPEND | O_CREAT, 0644);
+// 		close(1);
+// 		dup2(pipe_lst->fd_file_out, 1);
+// 		close(pipe_lst->fd_file_out);
+// 	}
+// 	if (pipe_lst->fd_file_in < 0)
+// 		pipe_lst->to_execute = 0;
+// 	return (0);
+// }
 
 void	redirect_file_in_out(t_list_pipes *pipe_lst)
 {
@@ -94,7 +94,6 @@ void	redirect_file_in_out(t_list_pipes *pipe_lst)
 		close(pipe_lst->fd_file_out);
 	}
 }
-
 
 void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 {
@@ -132,7 +131,6 @@ void	new_cmd_process(t_shell *shell)
 		fd_prev_pipe = fd_redirect(shell, shell->list_start, \
 			fd_prev_pipe, pipe_fd);
 		redirect_file_in_out(shell->list_start);
-		// open_in_out(shell, shell->list_start);
 		if (shell->list_start->to_execute == 1)
 		{
 			if (execute_if_built_in(shell, shell->list_start) == -100)

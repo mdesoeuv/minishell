@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 17:02:25 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 11:27:26 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 		heredoc_process(shell, ending_line, pipe_fd);
 	}
 	close(pipe_fd[1]);
-	wait(NULL);
+	waitpid(pid, NULL, 0);
 	return (pipe_fd[0]);
 }
