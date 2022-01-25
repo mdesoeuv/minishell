@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/25 14:50:05 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 15:15:44 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@
 static int	ft_split_quotes_variable_replace( t_shell *shell,
 	int i, int start_index)
 {
-	while (shell->cmd_tmp[i])
+	while (i >= 0 && shell->cmd_tmp[i])
 	{
+
 		if (shell->cmd_tmp[i] == '$')
+		{
 			ft_variable_replace(i, shell);
+			i++;
+		}
 		if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
 		{
 			i = ft_parse_quotes(i, start_index,
 					shell->cmd_tmp[i], shell);
 		}
-		i++;
+		else
+			i++;
 	}
 	return (i);
 }
@@ -38,7 +43,8 @@ char	**ft_split_quotes(char c, t_shell *shell, int i, int j)
 	if (malloc_return(&tab, shell->cmd_tmp, c) == NULL)
 		return (NULL);
 	start_index = i;
-	ft_split_quotes_variable_replace(shell, i, start_index);
+	if (ft_split_quotes_variable_replace(shell, i, start_index) == -1)
+		ft_free("Error : unclosed quote\n", shell, 1, 1);
 	while (shell->cmd_tmp[i])
 	{
 		if (shell->cmd_tmp[i] == c)

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/25 13:21:22 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 15:14:54 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ static void	ft_cmd_variable_change(int index_start, t_shell *shell,
 				ft_strlen(shell->cmd_tmp) - index_start + 1));
 	if (!tmp2)
 		ft_free("Error : malloc error\n", shell, 1, 1);
-	free(shell->cmd_tmp);
+	if (shell->cmd_tmp)
+	{
+		free(shell->cmd_tmp);
+		shell->cmd_tmp = NULL;
+	}
 	shell->cmd_tmp = tmp2;
 	free(tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/21 16:56:02 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:15:08 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,11 @@ int	ft_parsing(char *line, t_shell	*shell)
 			if (ft_new_pipe_chevron(shell) == -1)
 				return (-1);
 			start = i + 1;
-			free(shell->cmd_tmp);
+			if (shell->cmd_tmp)
+			{
+				free(shell->cmd_tmp);
+				shell->cmd_tmp = NULL;
+			}
 		}
 	}
 	shell->cmd_tmp = ft_substr(line, start, i - start + 1);
