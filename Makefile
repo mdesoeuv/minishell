@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/24 16:25:09 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/25 11:38:48 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,14 @@ SRCS =	main.c \
 		ft_free.c \
 		built_in_echo.c \
 		built_in_exit.c \
-		pipe.c \
 		signal.c \
 		parsing_chevron.c \
 		parsing_variable.c \
-		pipe_dup_close.c \
 		ft_utils.c \
 		cmd_process.c \
-		new_cmd_process.c \
+		pipe1.c \
+		pipe2.c \
+		exec.c \
 		debug_functions.c \
 		heredoc.c
 

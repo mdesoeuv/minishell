@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/24 17:55:17 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 11:39:06 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,44 +204,3 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	free_split(possible_paths);
 	execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp);
 }
-
-// int	cmd_process(t_shell *shell)
-// {
-// 	int				i;
-// 	t_list_pipes	*pipe_lst_tmp;
-
-// 	pipe_lst_tmp = shell->list_start;
-// 	malloc_pipe_fd(shell);
-// 	manage_all_file_fd(shell);
-// 	i = 0;
-// 	while (i < shell->cmd_nbr)
-// 	{
-// 		if (shell->cmd_nbr > 1 && i < shell->cmd_nbr - 1)
-// 			pipe(shell->pipe_fd[i]);
-// 		g_sig.pid = 1;
-// 		shell->list_start->pid = fork();
-// 		if (shell->list_start->pid < 0)
-// 			ft_free("minishell: fork error\n", shell, 1, 1);
-// 		else if (shell->list_start->pid == 0)
-// 		{
-// 			manage_dup_fd(shell, shell->list_start, i);
-// 			cmd_test_execute(shell, shell->list_start);
-// 			ft_free("", shell, g_sig.exit_status, 1);
-// 		}
-// 		else
-// 		{
-// 			if (shell->cmd_nbr > 1 && i < shell->cmd_nbr && i > 0)
-// 			{
-// 				close(shell->pipe_fd[i - 1][0]);
-// 				close(shell->pipe_fd[i - 1][1]);
-// 			}
-// 			i++;
-// 			shell->list_start = shell->list_start->next;
-// 		}
-// 	}
-// 	shell->list_start = pipe_lst_tmp;
-// 	wait_all_pid(shell);
-// 	close_file_pipes(shell);
-// 	g_sig.pid = 0;
-// 	return (0);
-// }
