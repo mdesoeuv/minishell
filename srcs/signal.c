@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/24 14:17:08 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/25 11:46:58 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,16 @@ void	sig_init(void)
 	g_sig.sigint = 0;
 	g_sig.pid = 0;
 	g_sig.exit_status = 0;
+}
+
+
+void	eval_child_status(int child_status)
+{
+	if (WIFEXITED(child_status) != 0)
+		g_sig.exit_status = WEXITSTATUS(child_status);
+	else
+	{
+		if (WIFSIGNALED(child_status) != 0)
+			g_sig.exit_status = WTERMSIG(child_status) + 128;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:30:08 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/13 14:46:19 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 13:10:40 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static int	ft_wordcount(char const *s, char c)
 
 char	**malloc_return(char ***tab, char const *s, char c)
 {
+	if (!s)
+		return (NULL);
 	*tab = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
 	if (!tab)
 		return (NULL);
