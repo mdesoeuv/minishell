@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 11:42:08 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 11:51:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ int				manage_file_fd(t_list_pipes *pipe_lst);
 int				manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
 int				close_all_pipes(t_shell *shell);
 int				wait_all_pid(t_shell *shell);
-int				cmd_process(t_shell *shell);
-void			new_cmd_process(t_shell *shell);
 void			free_split(char **split);
 void			print_split(char **split);
 int				malloc_pipe_fd(t_shell *shell);
@@ -140,8 +138,8 @@ void			redirect_file_in_out(t_list_pipes *pipe_lst);
 
 /*EXECUTION*/
 
-
-
+void			new_cmd_process(t_shell *shell);
+int				execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst);
 
 /*UTILS*/
 
