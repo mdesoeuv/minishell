@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 11:46:54 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 13:15:18 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,14 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 
 	if (pipe_lst->to_execute == 0)
 		return ;
-	possible_paths = ft_split(getenv("PATH"), ':');
-	if (!possible_paths)
+	if (ft_getenv(shell, "PATH") == NULL)
+	{
+		error_cmd_not_found(pipe_lst, pipe_lst->command);
 		return ;
+	}
+	possible_paths = ft_split(ft_getenv(shell, "PATH"), ':');
+	if (!possible_paths)
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	if (pipe_lst->command[0][0] != '.' || pipe_lst->command[0][0] != '/')
 		pipe_lst->cmd_path = pipe_lst->command[0];
 	i = 0;
