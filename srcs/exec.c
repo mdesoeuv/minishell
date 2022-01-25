@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 12:12:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 13:55:41 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,26 @@ void	end_cmd_process(t_shell *shell)
 	g_sig.pid = 0;
 }
 
+void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
+	int *fd_prev_pipe, int *i)
+{
+	shell->list_start->cmd_index = *i;
+	g_sig.pid = 1;
+	if (pipe(pipe_fd) == -1)
+		ft_free("minishell: pipe error\n", shell, 1, 1);
+	*fd_prev_pipe = fd_redirect(shell, shell->list_start, \
+		*fd_prev_pipe, pipe_fd);
+	redirect_file_in_out(shell->list_start);
+	if (shell->list_start->to_execute == 1)
+	{
+		if (execute_if_built_in(shell, shell->list_start) == -100)
+			execute(shell, shell->list_start);
+	}
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	*i += 1;
+}
+
 void	new_cmd_process(t_shell *shell)
 {
 	t_list_pipes	*start;
@@ -49,20 +69,7 @@ void	new_cmd_process(t_shell *shell)
 	fd_prev_pipe = 0;
 	while (shell->list_start)
 	{
-		shell->list_start->cmd_index = i++;
-		g_sig.pid = 1;
-		if (pipe(pipe_fd) == -1)
-			ft_free("minishell: pipe error\n", shell, 1, 1);
-		fd_prev_pipe = fd_redirect(shell, shell->list_start, \
-			fd_prev_pipe, pipe_fd);
-		redirect_file_in_out(shell->list_start);
-		if (shell->list_start->to_execute == 1)
-		{
-			if (execute_if_built_in(shell, shell->list_start) == -100)
-				execute(shell, shell->list_start);
-		}
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
+		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
 		shell->list_start = shell->list_start->next;
 	}
 	shell->list_start = start;
