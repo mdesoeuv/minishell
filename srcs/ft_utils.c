@@ -6,17 +6,17 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/25 13:21:00 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 14:50:05 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "minishell.h"
 
-static int	ft_split_quotes_variable_replace(char c, t_shell *shell,
+static int	ft_split_quotes_variable_replace( t_shell *shell,
 	int i, int start_index)
 {
-	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != c)
+	while (shell->cmd_tmp[i])
 	{
 		if (shell->cmd_tmp[i] == '$')
 			ft_variable_replace(i, shell);
@@ -37,12 +37,12 @@ char	**ft_split_quotes(char c, t_shell *shell, int i, int j)
 
 	if (malloc_return(&tab, shell->cmd_tmp, c) == NULL)
 		return (NULL);
+	start_index = i;
+	ft_split_quotes_variable_replace(shell, i, start_index);
 	while (shell->cmd_tmp[i])
 	{
-		if (shell->cmd_tmp[i] != c)
+		if (shell->cmd_tmp[i] == c)
 		{
-			start_index = i;
-			i = ft_split_quotes_variable_replace(c, shell, i, start_index);
 			if (i - start_index > 0)
 			{
 				tab[j] = ft_substr(shell->cmd_tmp,
@@ -50,9 +50,16 @@ char	**ft_split_quotes(char c, t_shell *shell, int i, int j)
 				if (tab[j++] == NULL)
 					return (free_return_null(tab, --j));
 			}
+			start_index = ++i;
 		}
 		else
 			i++;
+	}
+	if (i - start_index > 0)
+	{
+		tab[j] = ft_substr(shell->cmd_tmp, start_index, i - start_index);
+		if (tab[j++] == NULL)
+			return (free_return_null(tab, --j));
 	}
 	tab[j] = 0;
 	return (tab);
