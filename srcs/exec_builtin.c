@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 11:46:18 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 15:12:29 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ int	is_it_builtin(t_list_pipes *pipe_lst)
 
 int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid < 0)
+	pipe_lst->pid = fork();
+	if (pipe_lst->pid < 0)
 		ft_free("minishell: fork error\n", shell, 1, 1);
-	else if (pid == 0)
+	else if (pipe_lst->pid == 0)
 	{
 		if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
 			print_working_directory();

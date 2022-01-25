@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:43:20 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/18 09:22:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 14:29:04 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 
 int	print_working_directory(void)
 {
-	char	path[1025];
+	char	path[PATH_MAX];
 	char	*result;
 
-	result = getcwd(path, 1024);
+	result = getcwd(path, PATH_MAX);
 	ft_putendl_fd(result, 1);
 	return (0);
 }
 
 char	*return_working_directory(void)
 {
-	char	path[1025];
+	char	path[PATH_MAX];
 
-	return (ft_strdup(getcwd(path, 1024)));
+	return (ft_strdup(getcwd(path, PATH_MAX)));
 }
