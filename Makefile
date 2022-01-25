@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/25 11:38:48 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/25 11:44:04 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ OBJS_FILES = $(addprefix objs/, $(OBJS))
 LIB = libft/libft.a
 
 all : libft $(NAME)
-		@mkdir -p tmp
 
 $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
 			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib -I/Users/$(USER)/homebrew/opt/readline/include 
