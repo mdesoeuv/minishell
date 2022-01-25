@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 13:03:11 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/25 13:32:47 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,18 @@ int	copy_set_envp(t_shell *shell, char **envp)
 	return (1);
 }
 
+void	set_shell_path(t_shell *shell)
+{
+	char	*shell_path;
+
+	shell_path = return_working_directory();
+	shell_path = ft_strjoin_free_s2("SHELL=", shell_path);
+	if (!shell_path)
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
+	ft_export(shell, shell_path);
+	free(shell_path);
+}
+
 int    main(int argc, char **argv, char **envp)
 {
 	t_shell		shell;
@@ -104,6 +116,7 @@ int    main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, &sig_quit);
 	shell.envp = envp;
 	copy_set_envp(&shell, envp);
+	set_shell_path(&shell);
 	shell.return_val = 0;
 	g_sig.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (g_sig.readline)
