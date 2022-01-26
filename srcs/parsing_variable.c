@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 16:19:22 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	ft_cmd_variable_change(int index_start, t_shell *shell,
 		shell->cmd_tmp = NULL;
 	}
 	shell->cmd_tmp = tmp2;
+	free(variable_result);
 	free(tmp);
 }
 
