@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 12:00:00 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:01:31 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exit(t_shell *shell, t_list_pipes *pipe)
 	int	return_num;
 
 	g_sig.sigint = 1;
-	if (shell->cmd_nbr < 1)
+	if (shell->cmd_nbr < 2)
 		ft_putstr_fd("exit\n", 1);
 	return_num = 0;
 	if (pipe->command[1]
