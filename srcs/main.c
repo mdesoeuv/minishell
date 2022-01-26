@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 14:06:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 10:48:14 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int    main(int argc, char **argv, char **envp)
 		add_history(g_sig.readline);
 		if (ft_parsing(g_sig.readline, &shell) != -1 && shell.list_start->command)
 		{
-			// ft_print_shell_struct(shell);
+			ft_print_shell_struct(shell);
 			new_cmd_process(&shell);
 		}
 		ft_free("", &shell, shell.return_val, 0);

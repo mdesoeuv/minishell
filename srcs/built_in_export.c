@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 13:24:10 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 10:56:00 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,14 @@ void	print_sorted_env(t_shell *shell)
 int	ft_export(t_shell *shell, char *s)
 {
 	char	*search_ret;
+	int		i;
 
-	if (!s)
+	if (!s[0])
 	{
 		print_sorted_env(shell);
 		return (0);
 	}
+	i = 1;
 	if (!(ft_isalpha(s[0]) == 1 || s[0] == '_'))
 	{
 		ft_putstr_fd("minishell: export: `", 2);
@@ -103,11 +105,44 @@ int	ft_export(t_shell *shell, char *s)
 		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (1);
 	}
-	search_ret = ft_strchr(s, '=');
-	if (search_ret == NULL || search_ret + 1 == NULL)
-		return (0);
 	ft_unset(shell, s);
 	add_envp(shell, s);
 	sort_env(shell);
 	return (0);
+}
+
+int	ft_export_multi(t_shell *shell, char **command)
+{
+	char	*search_ret;
+	int		i;
+	int		return_val;
+
+	return_val = 0;
+	dprintf(2, "cmd 0 = %s\n", command[0]);
+	dprintf(2, "cmd 1 = %s\n", command[1]);
+	if (!command[1])
+	{
+		print_sorted_env(shell);
+		return (0);
+	}
+	i = 1;
+	while (command[i])
+	{
+		if (!(ft_isalpha(command[i][0]) == 1 || command[i][0] == '_'))
+		{
+			ft_putstr_fd("minishell: export: `", 2);
+			ft_putstr_fd(command[i], 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
+			return_val = 1;
+		}
+		else
+		{
+			search_ret = ft_strchr(command[i], '='); //
+			ft_unset(shell, command[i]);
+			add_envp(shell, command[i]);
+		}
+		i++;
+	}
+	sort_env(shell);
+	return (return_val);
 }
