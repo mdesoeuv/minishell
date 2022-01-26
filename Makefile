@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/26 10:20:28 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/26 13:51:44 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = minishell
 
@@ -37,6 +38,11 @@ SRCS =	main.c \
 		debug_functions.c \
 		heredoc.c
 
+ifneq ($(shell uname), Linux)
+READLINE_LIB_DIR_FLAG = -L$(shell brew --prefix readline)/lib
+READLINE_INC_DIR_FLAG = -I$(shell brew --prefix readline)/include
+endif
+
 SRCS_FILES = $(addprefix srcs/, $(SRCS))
 
 OBJS = $(SRCS:.c=.o)
@@ -48,14 +54,14 @@ LIB = libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
-			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline 
+			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline 
 
 libft	:	
 			$(MAKE) -C libft
 
 objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			@mkdir -p objs
-			$(CC) -c $< -o $@ 
+			$(CC) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
 			
 clean	:
 			rm -rf objs/
