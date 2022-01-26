@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/25 11:46:58 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 09:58:34 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ void	sig_int(int code)
 	(void)code;
 	if (g_sig.pid == 0)
 	{
-		if (g_sig.readline)
-		{
-			free(g_sig.readline);
-			g_sig.readline = NULL;
-		}
+		rl_replace_line("", 0);
 		ft_putstr_fd("\n", 1);
 		ft_putstr_fd("\033[0;36m\033[1m minishell ▸ \033[0m", 1);
+		rl_on_new_line();
+		rl_redisplay();
 	}
 	g_sig.exit_status = 130;
 	g_sig.sigint = 1;
