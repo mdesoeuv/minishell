@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/19 10:20:48 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:14:06 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	change_directory(t_shell *shell, char *path)
 	char	*curr_path;
 	char	*tmp_path;
 
+	tmp_path = cd_tilde(shell, path);
+	if (tmp_path != NULL)
+		path = tmp_path;
 	if (access_check(path) == -1)
 		return (1);
 	old_path = return_working_directory();
@@ -80,9 +83,6 @@ int	change_directory(t_shell *shell, char *path)
 	if (!old_path)
 		ft_free("memory allocation error\n", shell, 1, 1);
 	ft_export(shell, old_path);
-	tmp_path = cd_tilde(shell, path);
-	if (tmp_path != NULL)
-		path = tmp_path;
 	ret_value = chdir(path);
 	curr_path = return_working_directory();
 	curr_path = ft_strjoin_free_s2("PWD=", curr_path);
