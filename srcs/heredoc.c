@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 12:17:17 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:49:25 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	close(pipe_fd[0]);
 	restore_std(shell);
+	signal(SIGINT, &heredoc_sig_int);
 	line = readline("> ");
 	while (line && ft_strcmp(line, ending_line) != 0)
 	{
@@ -50,10 +51,9 @@ int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 		total_line = ft_strjoin_free_s1(total_line, "\n");
 		if (!total_line)
 			ft_free("minishell: memory allocation error\n", shell, 1, 1);
-		// if (g_sig.sigint == 1)
-		// 	exit(1);
 		line = readline("> ");
 	}
+	signal(SIGINT, &sig_int);
 	write(pipe_fd[1], total_line, ft_strlen(total_line));
 	free(line);
 	free(total_line);

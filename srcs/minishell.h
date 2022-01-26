@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:16:03 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:54:48 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct s_shell
 /* SIGNALS */
 
 void			sig_int(int code);
-void			sig_quit(int code);
 void			eval_child_status(int child_status);
 void			ft_print_shell_struct(t_shell	shell);
+void			heredoc_sig_int(int code);
 
 /* BUILT-IN */
 

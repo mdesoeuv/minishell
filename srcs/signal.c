@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 14:16:29 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:54:43 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	sig_int(int code)
 {
 	(void)code;
+	dprintf(1, "jjejeje");
 	if (g_return_val != -1)
 	{
 		printf("\n");
@@ -25,13 +26,13 @@ void	sig_int(int code)
 	g_return_val = 130;
 }
 
-void	sig_quit(int code)
+void	heredoc_sig_int(int code)
 {
-	ft_putstr("  \b\b");
 	(void)code;
-	return ;
+	ft_putchar_fd('\n', STDERR_FILENO);
+	g_return_val = 1;
+	exit(g_return_val);
 }
-
 
 void	eval_child_status(int child_status)
 {
