@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 13:51:59 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:02:26 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	sig_int(int code)
 {
 	(void)code;
-	ft_putstr_fd("\n", 1);
-	ft_putstr_fd("\033[0;36m\033[1m minishell ▸ \033[0m", 1);
-	// rl_replace_line("", 0);
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 	return_val = 130;
 }
 
