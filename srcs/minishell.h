@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 13:04:21 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 13:17:42 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_list_pipes
 	char						**command;
 	char						*cmd_path;
 	int							to_execute;
+	int							is_builtin;
 	int							cmd_index;
 	char						*file_in;
 	int							fd_file_in;

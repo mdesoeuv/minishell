@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 12:56:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 13:08:10 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
 {
 	shell->list_start->cmd_index = *i;
 	if (pipe(pipe_fd) == -1)
-		ft_free("minishell: pipe error\n", shell, 1, 1);
+		ft_free("minishell: pipe error\n", shell, return_val, 1);
 	*fd_prev_pipe = fd_redirect(shell, shell->list_start, \
 		*fd_prev_pipe, pipe_fd);
 	redirect_file_in_out(shell->list_start);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/25 16:44:19 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 13:18:53 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ t_list_pipes	*ft_lstnew_pipes(void)
 	new_elem->command = NULL;
 	new_elem->cmd_path = NULL;
 	new_elem->to_execute = 1;
+	new_elem->is_builtin = 1;
 	new_elem->chevron_nbr_in = 0;
 	new_elem->chevron_nbr_out = 0;
 	new_elem->fd_file_in = 0;

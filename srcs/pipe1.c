@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   pipe1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 11:22:44 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 13:16:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	wait_all_pid(t_shell *shell)
 		i++;
 	}
 	waitpid(shell->list_start->pid, &child_status, 0);
+	if (shell->list_start->is_builtin == 0 || shell->cmd_nbr > 1)
+		eval_child_status(child_status);
 	shell->list_start = pipe_tmp;
-	eval_child_status(child_status);
 	return (0);
 }
 
