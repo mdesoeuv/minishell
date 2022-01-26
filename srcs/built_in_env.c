@@ -6,11 +6,22 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:45:42 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 10:58:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 11:09:45 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
+int	get_env_size(t_shell *shell)
+{
+	int	i;
+
+	i = 0;
+	while (shell->envp[i])
+		i++;
+	return (i);
+}
 
 void	sort_env(t_shell *shell)
 {
@@ -34,6 +45,27 @@ void	sort_env(t_shell *shell)
 			}
 			j++;
 		}
+		i++;
+	}
+}
+
+void	print_sorted_env(t_shell *shell)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	sort_env(shell);
+	while (shell->envp[i])
+	{
+		ft_putstr("declare -x ");
+		j = 0;
+		while (shell->envp[i][j] && shell->envp[i][j] != '=')
+			j++;
+		write(1, shell->envp[i], j);
+		write(1, "=\"", 2);
+		ft_putstr(&(shell->envp[i][++j]));
+		write(1, "\"\n", 2);
 		i++;
 	}
 }

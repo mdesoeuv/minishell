@@ -6,21 +6,11 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 10:56:00 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 11:13:51 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	get_env_size(t_shell *shell)
-{
-	int	i;
-
-	i = 0;
-	while (shell->envp[i])
-		i++;
-	return (i);
-}
 
 int	add_envp(t_shell *shell, char *s)
 {
@@ -66,30 +56,8 @@ int	is_value_in_envp(t_shell *shell, char *s)
 	return (-1);
 }
 
-void	print_sorted_env(t_shell *shell)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	sort_env(shell);
-	while (shell->envp[i])
-	{
-		ft_putstr("declare -x ");
-		j = 0;
-		while (shell->envp[i][j] && shell->envp[i][j] != '=')
-			j++;
-		write(1, shell->envp[i], j);
-		write(1, "=\"", 2);
-		ft_putstr(&(shell->envp[i][++j]));
-		write(1, "\"\n", 2);
-		i++;
-	}
-}
-
 int	ft_export(t_shell *shell, char *s)
 {
-	char	*search_ret;
 	int		i;
 
 	if (!s[0])
@@ -111,15 +79,18 @@ int	ft_export(t_shell *shell, char *s)
 	return (0);
 }
 
+void	unset_add(t_shell *shell, char *command)
+{
+	ft_unset(shell, command);
+	add_envp(shell, command);
+}
+
 int	ft_export_multi(t_shell *shell, char **command)
 {
-	char	*search_ret;
 	int		i;
 	int		return_val;
 
 	return_val = 0;
-	dprintf(2, "cmd 0 = %s\n", command[0]);
-	dprintf(2, "cmd 1 = %s\n", command[1]);
 	if (!command[1])
 	{
 		print_sorted_env(shell);
@@ -136,13 +107,8 @@ int	ft_export_multi(t_shell *shell, char **command)
 			return_val = 1;
 		}
 		else
-		{
-			search_ret = ft_strchr(command[i], '='); //
-			ft_unset(shell, command[i]);
-			add_envp(shell, command[i]);
-		}
+			unset_add(shell, command[i]);
 		i++;
 	}
-	sort_env(shell);
 	return (return_val);
 }
