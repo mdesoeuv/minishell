@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 13:55:41 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 12:17:08 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ void	end_cmd_process(t_shell *shell)
 	wait_all_pid(shell);
 	close_file_pipes(shell);
 	restore_fd(shell);
-	g_sig.pid = 0;
 }
 
 void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
 	int *fd_prev_pipe, int *i)
 {
 	shell->list_start->cmd_index = *i;
-	g_sig.pid = 1;
 	if (pipe(pipe_fd) == -1)
 		ft_free("minishell: pipe error\n", shell, 1, 1);
 	*fd_prev_pipe = fd_redirect(shell, shell->list_start, \

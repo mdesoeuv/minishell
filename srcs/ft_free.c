@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/25 15:14:44 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 12:16:21 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int ft_free(char *message, t_shell *shell, int return_val, int is_exit)
 	i = -1;
 	shell->return_val = return_val;
 	ft_putstr(message);
-	if (g_sig.readline)
+	if (shell->readline)
 	{
-		free(g_sig.readline);
-		g_sig.readline = NULL;
+		free(shell->readline);
+		shell->readline = NULL;
 	}
 	ft_free_cmd(shell);
 	if (shell->return_val == 255 || is_exit)

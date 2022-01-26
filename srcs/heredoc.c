@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 11:27:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 12:17:17 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 		ft_free("minishell: fork error\n", shell, 1, 1);
 	if (pid == 0)
 	{
-		g_sig.pid = 0;
 		heredoc_process(shell, ending_line, pipe_fd);
 	}
 	close(pipe_fd[1]);

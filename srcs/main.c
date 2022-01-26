@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 10:48:14 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 12:15:33 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_sig	g_sig;
+int 	return_val;
 
 int	ft_incr_shell_env(t_shell *shell)
 {
@@ -85,19 +85,19 @@ int    main(int argc, char **argv, char **envp)
 	copy_set_envp(&shell, envp);
 	set_shell_path(&shell);
 	shell.return_val = 0;
-	g_sig.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
-	while (g_sig.readline)
+	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
+	while (shell.readline)
 	{
-		add_history(g_sig.readline);
-		if (ft_parsing(g_sig.readline, &shell) != -1 && shell.list_start->command)
+		add_history(shell.readline);
+		if (ft_parsing(shell.readline, &shell) != -1 && shell.list_start->command)
 		{
 			ft_print_shell_struct(shell);
 			new_cmd_process(&shell);
 		}
 		ft_free("", &shell, shell.return_val, 0);
-		g_sig.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
+		shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	}
-	free(g_sig.readline);
+	free(shell.readline);
 	clear_history();
 	return (shell.return_val);
 }

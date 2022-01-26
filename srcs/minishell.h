@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 11:56:03 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:12:40 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ typedef enum e_bool
 	true
 }	t_bool;
 
-typedef struct s_sig
-{
-	char			*readline;
-	int				sigint;
-	int				exit_status;
-	pid_t			pid;
-}				t_sig;
 
 typedef struct s_list_pipes
 {
@@ -57,6 +50,7 @@ typedef struct s_list_pipes
 
 typedef struct s_shell
 {
+	char				*readline;
 	int					cmd_nbr;
 	int					return_val;
 	int					is_exit;
@@ -155,5 +149,5 @@ int				ft_strisnum(const char *str);
 
 void			display_split(char *message, char **split);
 
-extern t_sig	g_sig;
+extern int		return_val;
 #endif
