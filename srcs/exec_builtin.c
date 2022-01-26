@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 15:12:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 10:53:31 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,23 @@ int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 	else if (pipe_lst->pid == 0)
 	{
 		if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
-			print_working_directory();
+			shell->return_val = print_working_directory();
 		else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
-			change_directory(shell, pipe_lst->command[1]);
+			shell->return_val = change_directory(shell, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "echo") == 0)
-			ft_echo(shell);
+			shell->return_val = ft_echo(shell);
 		else if (ft_strcmp(pipe_lst->command[0], "export") == 0)
-			ft_export(shell, pipe_lst->command[1]);
+			shell->return_val = ft_export_multi(shell, pipe_lst->command);
 		else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
-			ft_unset(shell, pipe_lst->command[1]);
+			shell->return_val = ft_unset(shell, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
-			ft_env(shell, pipe_lst->command[1]);
+			shell->return_val = ft_env(shell, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
+		{
 			shell->is_exit = ft_exit(shell);
-		exit(0);
+			shell->return_val = shell->is_exit;
+		}
+		exit(shell->return_val);
 	}
 	return (0);
 }
@@ -61,23 +64,23 @@ int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
-		return (print_working_directory());
+		shell->return_val = print_working_directory();
 	else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
-		return (change_directory(shell, pipe_lst->command[1]));
+		shell->return_val = change_directory(shell, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "echo") == 0)
-		return (ft_echo(shell));
+		shell->return_val = ft_echo(shell);
 	else if (ft_strcmp(pipe_lst->command[0], "export") == 0)
-		return (ft_export(shell, pipe_lst->command[1]));
+		shell->return_val = ft_export_multi(shell, pipe_lst->command);
 	else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
-		return (ft_unset(shell, pipe_lst->command[1]));
+		shell->return_val = ft_unset(shell, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
-		return (ft_env(shell, pipe_lst->command[1]));
+		shell->return_val = ft_env(shell, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 	{
 		shell->is_exit = ft_exit(shell);
-		return (0);
+		shell->return_val = shell->is_exit;
 	}
-	return (0);
+	return (shell->return_val);
 }
 
 int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
