@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 10:53:31 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 11:31:14 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 		else if (ft_strcmp(pipe_lst->command[0], "export") == 0)
 			shell->return_val = ft_export_multi(shell, pipe_lst->command);
 		else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
-			shell->return_val = ft_unset(shell, pipe_lst->command[1]);
+			shell->return_val = ft_unset_multi(shell, pipe_lst->command);
 		else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
 			shell->return_val = ft_env(shell, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
@@ -72,7 +72,7 @@ int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
 	else if (ft_strcmp(pipe_lst->command[0], "export") == 0)
 		shell->return_val = ft_export_multi(shell, pipe_lst->command);
 	else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
-		shell->return_val = ft_unset(shell, pipe_lst->command[1]);
+		shell->return_val = ft_unset_multi(shell, pipe_lst->command);
 	else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
 		shell->return_val = ft_env(shell, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
