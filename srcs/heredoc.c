@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 15:05:18 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:30:50 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 	free(total_line);
 	close(pipe_fd[1]);
 	restore_prev_std(shell);
+	signal(SIGINT, &sig_int);
 	exit(0);
 }
 
@@ -76,7 +77,6 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 	if (pid == 0)
 	{
 		heredoc_process(shell, ending_line, pipe_fd);
-		signal(SIGINT, &sig_int);
 	}
 	close(pipe_fd[1]);
 	waitpid(pid, NULL, 0);

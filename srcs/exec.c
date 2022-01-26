@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 15:09:56 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:24:25 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	new_cmd_process(t_shell *shell)
 		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
 		shell->list_start = shell->list_start->next;
 	}
-	signal(SIGINT, &sig_int);
 	shell->list_start = start;
 	end_cmd_process(shell);
 }
