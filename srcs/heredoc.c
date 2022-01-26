@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:56:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:05:18 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 	pid = fork();
 	if (pid < 0)
 		ft_free("minishell: fork error\n", shell, 1, 1);
+	signal(SIGINT, SIG_IGN);
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_IGN);
 		heredoc_process(shell, ending_line, pipe_fd);
 		signal(SIGINT, &sig_int);
 	}

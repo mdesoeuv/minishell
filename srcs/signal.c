@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 14:57:15 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:05:43 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	sig_int(int code)
 {
 	(void)code;
-	dprintf(1, "sig int calssique\n");
 	if (g_return_val != -1)
 	{
 		printf("\n");
@@ -29,7 +28,6 @@ void	sig_int(int code)
 void	heredoc_sig_int(int code)
 {
 	(void)code;
-	ft_putchar_fd('\n', STDERR_FILENO);
 	g_return_val = 1;
 	exit(g_return_val);
 }
