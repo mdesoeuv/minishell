@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 12:15:33 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 13:02:26 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int    main(int argc, char **argv, char **envp)
 	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (shell.readline)
 	{
+		dprintf(1, "return_val main: %d\n", return_val);
 		add_history(shell.readline);
 		if (ft_parsing(shell.readline, &shell) != -1 && shell.list_start->command)
 		{

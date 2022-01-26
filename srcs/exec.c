@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 12:17:08 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 12:56:29 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 	{
 		if (pipe_lst->to_execute == 1)
 			cmd_test_execute(shell, pipe_lst);
-		ft_free("", shell, 1, 1);
+		ft_free("", shell, return_val, 1);
 	}
 }
 
