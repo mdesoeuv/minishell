@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 12:14:40 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 	}
 	else
 		pipe_lst->cmd_path = NULL;
-	return_val = 127;
+	g_return_val = 127;
 }
 
 void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd)
@@ -71,7 +71,7 @@ void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd)
 	}
 	else
 		pipe_lst->cmd_path = NULL;
-	return_val = 126;
+	g_return_val = 126;
 }
 
 void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 13:19:44 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:16:13 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int 	return_val;
+int	g_return_val;
 
 int	ft_incr_shell_env(t_shell *shell)
 {
@@ -78,13 +78,14 @@ int    main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	shell.is_exit = 1;
-	sig_init();
+	g_return_val = 0;
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
 	shell.envp = envp;
 	copy_set_envp(&shell, envp);
 	set_shell_path(&shell);
-	return_val = 0;
+	g_return_val = 0;
+	g_is_executing = 0;
 	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (shell.readline)
 	{
@@ -94,10 +95,10 @@ int    main(int argc, char **argv, char **envp)
 			// ft_print_shell_struct(shell);
 			new_cmd_process(&shell);
 		}
-		ft_free("", &shell, return_val, 0);
+		ft_free("", &shell, g_return_val, 0);
 		shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	}
 	free(shell.readline);
 	clear_history();
-	return (return_val);
+	return (g_return_val);
 }

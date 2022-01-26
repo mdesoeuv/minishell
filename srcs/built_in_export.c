@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 11:13:51 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void	unset_add(t_shell *shell, char *command)
 int	ft_export_multi(t_shell *shell, char **command)
 {
 	int		i;
-	int		return_val;
+	int		g_return_val;
 
-	return_val = 0;
+	g_return_val = 0;
 	if (!command[1])
 	{
 		print_sorted_env(shell);
@@ -104,11 +104,11 @@ int	ft_export_multi(t_shell *shell, char **command)
 			ft_putstr_fd("minishell: export: `", 2);
 			ft_putstr_fd(command[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
-			return_val = 1;
+			g_return_val = 1;
 		}
 		else
 			unset_add(shell, command[i]);
 		i++;
 	}
-	return (return_val);
+	return (g_return_val);
 }

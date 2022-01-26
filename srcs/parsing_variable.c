@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 12:16:57 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_variable_replace(int i, t_shell *shell)
 	if (!variable_name)
 		ft_free("Error : malloc error\n", shell, 1, 1);
 	if (ft_strcmp(variable_name, "?") == 0)
-		variable_result = ft_itoa(return_val);
+		variable_result = ft_itoa(g_return_val);
 	else
 		variable_result = ft_getenv(shell, variable_name);
 	free(variable_name);

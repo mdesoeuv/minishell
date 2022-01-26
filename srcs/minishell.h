@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 13:17:42 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:16:03 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_shell
 
 void			sig_int(int code);
 void			sig_quit(int code);
-void			sig_init(void);
 void			eval_child_status(int child_status);
 void			ft_print_shell_struct(t_shell	shell);
 
@@ -78,7 +77,7 @@ char			*return_working_directory(void);
 int				change_directory(t_shell *shell, char *arg);
 int				ft_parsing(char *line, t_shell	*shell);
 int				ft_free(char *message, t_shell *shell,
-					int return_val, int is_exit);
+					int g_return_val, int is_exit);
 int				ft_echo(t_shell *shell);
 int				ft_exit(t_shell *shell, t_list_pipes *pipe);
 int				ft_env(t_shell *shell, char *command);
@@ -149,5 +148,5 @@ int				ft_strisnum(const char *str);
 
 void			display_split(char *message, char **split);
 
-extern int		return_val;
+extern int		g_return_val;
 #endif

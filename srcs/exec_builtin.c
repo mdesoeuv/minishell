@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 13:20:13 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,23 @@ int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 	else if (pipe_lst->pid == 0)
 	{
 		if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
-			return_val = print_working_directory();
+			g_return_val = print_working_directory();
 		else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
-			return_val = change_directory(shell, pipe_lst->command[1]);
+			g_return_val = change_directory(shell, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "echo") == 0)
-			return_val = ft_echo(shell);
+			g_return_val = ft_echo(shell);
 		else if (ft_strcmp(pipe_lst->command[0], "export") == 0)
-			return_val = ft_export_multi(shell, pipe_lst->command);
+			g_return_val = ft_export_multi(shell, pipe_lst->command);
 		else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
-			return_val = ft_unset_multi(shell, pipe_lst->command);
+			g_return_val = ft_unset_multi(shell, pipe_lst->command);
 		else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
-			return_val = ft_env(shell, pipe_lst->command[1]);
+			g_return_val = ft_env(shell, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 		{
 			shell->is_exit = ft_exit(shell, pipe_lst);
-			return_val = shell->is_exit;
+			g_return_val = shell->is_exit;
 		}
-		exit(return_val);
+		exit(g_return_val);
 	}
 	return (0);
 }
@@ -67,23 +67,23 @@ int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
-		return_val = print_working_directory();
+		g_return_val = print_working_directory();
 	else if (ft_strcmp(pipe_lst->command[0], "cd") == 0)
-		return_val = change_directory(shell, pipe_lst->command[1]);
+		g_return_val = change_directory(shell, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "echo") == 0)
-		return_val = ft_echo(shell);
+		g_return_val = ft_echo(shell);
 	else if (ft_strcmp(pipe_lst->command[0], "export") == 0)
-		return_val = ft_export_multi(shell, pipe_lst->command);
+		g_return_val = ft_export_multi(shell, pipe_lst->command);
 	else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
-		return_val = ft_unset_multi(shell, pipe_lst->command);
+		g_return_val = ft_unset_multi(shell, pipe_lst->command);
 	else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
-		return_val = ft_env(shell, pipe_lst->command[1]);
+		g_return_val = ft_env(shell, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 	{
 		shell->is_exit = ft_exit(shell, pipe_lst);
-		return_val = shell->is_exit;
+		g_return_val = shell->is_exit;
 	}
-	return (return_val);
+	return (g_return_val);
 }
 
 int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)

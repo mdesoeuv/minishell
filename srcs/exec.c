@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 13:08:10 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 	{
 		if (pipe_lst->to_execute == 1)
 			cmd_test_execute(shell, pipe_lst);
-		ft_free("", shell, return_val, 1);
+		ft_free("", shell, g_return_val, 1);
 	}
 }
 
@@ -39,7 +39,7 @@ void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
 {
 	shell->list_start->cmd_index = *i;
 	if (pipe(pipe_fd) == -1)
-		ft_free("minishell: pipe error\n", shell, return_val, 1);
+		ft_free("minishell: pipe error\n", shell, g_return_val, 1);
 	*fd_prev_pipe = fd_redirect(shell, shell->list_start, \
 		*fd_prev_pipe, pipe_fd);
 	redirect_file_in_out(shell->list_start);
