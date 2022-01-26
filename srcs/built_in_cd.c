@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:06 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 14:22:32 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,22 @@ char	*offset_dup(char *s, size_t offset)
 char	*cd_tilde(t_shell *shell, char *path)
 {
 	char	*absolute_path;
+	char	*no_arg_path;
 
+	if (!path)
+	{
+		no_arg_path = ft_strdup("~");
+		if (!no_arg_path)
+			ft_free("minishell: memory allocation error\n", shell, 1, 1);
+		path = no_arg_path;
+	}
 	if (path[0] != '~')
 		return (NULL);
 	absolute_path = offset_dup(path, 1);
 	absolute_path = ft_strjoin_free_s2(ft_getenv(shell, "HOME"), absolute_path);
 	if (!absolute_path)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
+	free(no_arg_path);
 	return (absolute_path);
 }
 
