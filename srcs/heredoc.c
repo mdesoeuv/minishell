@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 12:17:17 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:47:40 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 		// 	exit(1);
 		line = readline("> ");
 	}
-	write(pipe_fd[1], total_line, ft_strlen(total_line));
 	free(line);
+	write(pipe_fd[1], total_line, ft_strlen(total_line));
 	free(total_line);
 	close(pipe_fd[1]);
 	restore_prev_std(shell);
