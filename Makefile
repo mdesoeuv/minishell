@@ -6,7 +6,7 @@
 #    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/26 09:55:30 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/26 10:20:28 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ LIB = libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
-			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline
+			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a -lreadline 
 
 libft	:	
 			$(MAKE) -C libft

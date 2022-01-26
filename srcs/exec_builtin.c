@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 11:31:14 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 11:56:57 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 			shell->return_val = ft_env(shell, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 		{
-			shell->is_exit = ft_exit(shell);
+			shell->is_exit = ft_exit(shell, pipe_lst);
 			shell->return_val = shell->is_exit;
 		}
 		exit(shell->return_val);
@@ -77,7 +77,7 @@ int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
 		shell->return_val = ft_env(shell, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 	{
-		shell->is_exit = ft_exit(shell);
+		shell->is_exit = ft_exit(shell, pipe_lst);
 		shell->return_val = shell->is_exit;
 	}
 	return (shell->return_val);
