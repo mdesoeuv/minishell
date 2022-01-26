@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 13:01:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 13:05:31 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
 	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 	{
 		shell->is_exit = ft_exit(shell, pipe_lst);
-		shell->return_val = shell->is_exit;
+		return_val = shell->is_exit;
 	}
 	dprintf(1, "return_val : %d\n", return_val);
 	return (return_val);

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 12:12:40 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 13:04:21 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_shell
 {
 	char				*readline;
 	int					cmd_nbr;
-	int					return_val;
 	int					is_exit;
 	int					save_stdin;
 	int					save_stdout;

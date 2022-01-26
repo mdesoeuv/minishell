@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 13:02:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 13:06:04 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,20 @@ int    main(int argc, char **argv, char **envp)
 	shell.envp = envp;
 	copy_set_envp(&shell, envp);
 	set_shell_path(&shell);
-	shell.return_val = 0;
+	return_val = 0;
 	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (shell.readline)
 	{
-		dprintf(1, "return_val main: %d\n", return_val);
 		add_history(shell.readline);
 		if (ft_parsing(shell.readline, &shell) != -1 && shell.list_start->command)
 		{
 			ft_print_shell_struct(shell);
 			new_cmd_process(&shell);
 		}
-		ft_free("", &shell, shell.return_val, 0);
+		ft_free("", &shell, return_val, 0);
 		shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	}
 	free(shell.readline);
 	clear_history();
-	return (shell.return_val);
+	return (return_val);
 }

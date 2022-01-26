@@ -6,18 +6,18 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 12:16:21 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 13:05:19 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_free(char *message, t_shell *shell, int return_val, int is_exit)
+int ft_free(char *message, t_shell *shell, int return_val_param, int is_exit)
 {
 	int i;
 
 	i = -1;
-	shell->return_val = return_val;
+	return_val = return_val_param;
 	ft_putstr(message);
 	if (shell->readline)
 	{
@@ -25,11 +25,11 @@ int ft_free(char *message, t_shell *shell, int return_val, int is_exit)
 		shell->readline = NULL;
 	}
 	ft_free_cmd(shell);
-	if (shell->return_val == 255 || is_exit)
+	if (return_val == 255 || is_exit)
 	{
 		clear_history();
 		free_split(shell->envp);
-		exit(shell->return_val);
+		exit(return_val);
 	}
 	return (-1);
 }
