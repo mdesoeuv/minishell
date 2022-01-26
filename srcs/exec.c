@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:33:11 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	new_cmd_process(t_shell *shell)
 	fd_prev_pipe = 0;
 	while (shell->list_start)
 	{
+		g_return_val = -1;
 		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
+		g_return_val = 0;
 		shell->list_start = shell->list_start->next;
 	}
 	shell->list_start = start;
