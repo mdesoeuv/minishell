@@ -6,11 +6,20 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:38:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 15:56:34 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	no_such_file_error(t_list_pipes *pipe_lst)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(pipe_lst->command[0], 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	pipe_lst->to_execute = 0;
+	g_return_val = 1;
+}
 
 void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 {
@@ -21,6 +30,8 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 	}
 	else if (pipe_lst->pid == 0)
 	{
+		if (ft_getenv(shell, "PATH") == NULL)
+			no_such_file_error(pipe_lst);
 		if (pipe_lst->to_execute == 1)
 			cmd_test_execute(shell, pipe_lst);
 		ft_free("", shell, g_return_val, 1);
@@ -67,9 +78,7 @@ void	new_cmd_process(t_shell *shell)
 	fd_prev_pipe = 0;
 	while (shell->list_start)
 	{
-		// g_return_val = -1;
 		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
-		// g_return_val = 0;
 		shell->list_start = shell->list_start->next;
 	}
 	shell->list_start = start;
