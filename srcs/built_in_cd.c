@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:22:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/26 16:47:29 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*cd_tilde(t_shell *shell, char *path)
 	char	*absolute_path;
 	char	*no_arg_path;
 
+	no_arg_path = NULL;
 	if (!path)
 	{
 		no_arg_path = ft_strdup("~");
@@ -52,6 +53,8 @@ char	*cd_tilde(t_shell *shell, char *path)
 	if (!absolute_path)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	free(no_arg_path);
+	if (ft_getenv(shell, "HOME") == NULL)
+		absolute_path[0] = 0;
 	return (absolute_path);
 }
 
@@ -60,6 +63,11 @@ int	access_check(char *path)
 	int	ret_value;
 
 	ret_value = 1;
+	if (path[0] == 0)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (1);
+	}
 	if (access(path, F_OK) == -1)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);
@@ -86,7 +94,10 @@ int	change_directory(t_shell *shell, char *path)
 	if (tmp_path != NULL)
 		path = tmp_path;
 	if (access_check(path) == -1)
+	{
+		free(tmp_path);
 		return (1);
+	}
 	old_path = return_working_directory();
 	old_path = ft_strjoin_free_s2("OLDPWD=", old_path);
 	if (!old_path)
