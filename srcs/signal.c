@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 15:17:05 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:53:40 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 void	sig_int(int code)
 {
 	(void)code;
-	dprintf(1,"yo\n");
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	g_return_val = 130;
+}
+
+void	sig_int_fork(int code)
+{
+	(void)code;
+	printf("\n");
+	rl_replace_line("", 0);
 	g_return_val = 130;
 }
 

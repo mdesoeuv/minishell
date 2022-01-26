@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 15:04:20 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:54:13 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int    main(int argc, char **argv, char **envp)
 	shell.is_exit = 1;
 	g_return_val = 0;
 	signal(SIGINT, &sig_int);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, 0);
 	shell.envp = envp;
 	copy_set_envp(&shell, envp);
 	set_shell_path(&shell);
@@ -93,6 +93,7 @@ int    main(int argc, char **argv, char **envp)
 		{
 			// ft_print_shell_struct(shell);
 			new_cmd_process(&shell);
+			signal(SIGINT, &sig_int);
 		}
 		ft_free("", &shell, g_return_val, 0);
 		shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");

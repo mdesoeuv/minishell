@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 15:24:25 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:54:12 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	new_cmd_process(t_shell *shell)
 	init_fd(shell);
 	open_in_out_all(shell);
 	fd_prev_pipe = 0;
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, sig_int_fork);
 	while (shell->list_start)
 	{
 		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
