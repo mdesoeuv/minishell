@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 11:53:57 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:14:10 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@
 # include <termios.h>
 # include "../libft/libft.h"
 
-typedef enum e_bool
+typedef struct s_split
 {
-	false,
-	true
-}	t_bool;
+	int		i;
+	int		j;
+	char	**tab;
+	int		start_index;
+}	t_split;
 
 typedef struct s_list_pipes
 {
@@ -142,7 +144,7 @@ int				execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst);
 void			ft_lstadd_back_pipes(t_list_pipes **alst,
 					t_list_pipes *new_elem);
 t_list_pipes	*ft_lstnew_pipes(void);
-char			**ft_split_quotes(char c, t_shell *shell, int i, int j);
+char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
 
 /*DEBUG*/

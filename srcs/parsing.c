@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 11:53:47 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:14:42 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
 {
 	char	**cmd_tab;
 
-	cmd_tab = ft_split_quotes(' ', shell, 0, 0);
+	cmd_tab = ft_split_quotes(' ', shell);
 	if (!cmd_tab)
 		return (ft_free("Error : malloc error\n", shell, 1, 1));
 	new_pipe->command = cmd_tab;

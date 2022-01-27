@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 11:52:08 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:19:41 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,40 +33,50 @@ static int	ft_split_quotes_variable_replace( t_shell *shell,
 	return (i);
 }
 
-char	**ft_split_quotes(char c, t_shell *shell, int i, int j)
+static char	**ft_split_quotes_2(char c, t_shell *shell, t_split *split)
 {
-	char	**tab;
-	int		start_index;
-
-	if (malloc_return(&tab, shell->cmd_tmp, c) == NULL)
-		return (NULL);
-	start_index = i;
-	if (ft_split_quotes_variable_replace(shell, i, start_index) == -1)
-		ft_free("Error : unclosed quote\n", shell, 1, 1);
-	while (shell->cmd_tmp[i])
+	while (shell->cmd_tmp[(*split).i])
 	{
-		if (shell->cmd_tmp[i] == c)
+		if (shell->cmd_tmp[(*split).i] == c)
 		{
-			if (i - start_index > 0)
+			if ((*split).i - (*split).start_index > 0)
 			{
-				tab[j] = ft_substr(shell->cmd_tmp,
-						start_index, i - start_index);
-				if (tab[j++] == NULL)
-					return (free_return_null(tab, --j));
+				(*split).tab[(*split).j] = ft_substr(shell->cmd_tmp,
+						(*split).start_index,
+						(*split).i - (*split).start_index);
+				if ((*split).tab[((*split).j)++] == NULL)
+					return (free_return_null((*split).tab, --((*split).j)));
 			}
-			start_index = ++i;
+			(*split).start_index = ++((*split).i);
 		}
 		else
-			i++;
+			((*split).i)++;
 	}
-	if (i - start_index > 0)
+	return ((*split).tab);
+}
+
+char	**ft_split_quotes(char c, t_shell *shell)
+{
+	t_split	split;
+
+	split.i = 0;
+	split.j = 0;
+	if (malloc_return(&(split.tab), shell->cmd_tmp, c) == NULL)
+		return (NULL);
+	split.start_index = split.i;
+	if (ft_split_quotes_variable_replace
+		(shell, split.i, split.start_index) == -1)
+		ft_free("Error : unclosed quote\n", shell, 1, 1);
+	ft_split_quotes_2(c, shell, &split);
+	if (split.i - split.start_index > 0)
 	{
-		tab[j] = ft_substr(shell->cmd_tmp, start_index, i - start_index);
-		if (tab[j++] == NULL)
-			return (free_return_null(tab, --j));
+		split.tab[split.j] = ft_substr
+			(shell->cmd_tmp, split.start_index, split.i - split.start_index);
+		if (split.tab[(split.j)++] == NULL)
+			return (free_return_null(split.tab, --(split.j)));
 	}
-	tab[j] = 0;
-	return (tab);
+	split.tab[split.j] = 0;
+	return (split.tab);
 }
 
 int	ft_strisnum(const char *str)
