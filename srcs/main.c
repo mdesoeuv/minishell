@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:35:35 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:37:13 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	copy_set_envp(t_shell *shell, char **envp)
 	return (1);
 }
 
-static oid	set_shell_path(t_shell *shell)
+static void	set_shell_path(t_shell *shell)
 {
 	char	*shell_path;
 
