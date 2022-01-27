@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:45:42 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 11:09:45 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 10:07:52 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	ft_env(t_shell *shell, char *command)
 		ft_putendl_fd("minishell: env: no argument supported", 2);
 		return (0);
 	}
+	sort_env(shell);
 	i = 0;
 	while (shell->envp[i])
 	{	
