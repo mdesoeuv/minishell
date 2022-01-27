@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 11:46:59 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:53:47 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ int	ft_dodge_quotes(char *line, int i)
 			i++;
 	}
 	return (i);
+}
+
+void	ft_create_file(int chevron_nbr_out, char *file_name)
+{
+	int	fd;
+
+	if (chevron_nbr_out == 1)
+		fd = open(file_name, \
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else
+		fd = open(file_name, \
+			O_WRONLY | O_APPEND | O_CREAT, 0644);
+	close(fd);
 }
 
 static void	ft_init_parsing(t_shell	*shell)

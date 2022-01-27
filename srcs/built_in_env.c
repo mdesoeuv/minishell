@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:45:42 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 10:07:52 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 11:52:28 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	get_env_size(t_shell *shell)
 {

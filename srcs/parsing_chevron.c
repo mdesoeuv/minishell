@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/24 16:30:53 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 11:53:35 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,6 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp) - index_start);
 	return (file_name);
-}
-
-static void	ft_create_file(int chevron_nbr_out, char *file_name)
-{
-	int	fd;
-
-	if (chevron_nbr_out == 1)
-		fd = open(file_name, \
-			O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else
-		fd = open(file_name, \
-			O_WRONLY | O_APPEND | O_CREAT, 0644);
-	close(fd);
 }
 
 static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\

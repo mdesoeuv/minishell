@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 13:18:53 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 11:52:08 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	ft_split_quotes_variable_replace( t_shell *shell,
 {
 	while (i >= 0 && shell->cmd_tmp[i])
 	{
-
 		if (shell->cmd_tmp[i] == '$')
 		{
 			ft_variable_replace(i, shell);

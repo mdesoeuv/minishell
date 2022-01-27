@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:29:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 11:38:52 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:52:45 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_echo_2(t_shell *shell, int *i, int *j, int *option_n)
 		}
 	}
 }
-
 
 int	ft_echo(t_shell *shell)
 {
