@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 09:18:20 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	is_value_in_envp(t_shell *shell, char *s)
 	i = 0;
 	while (shell->envp[i])
 	{
-		if (ft_strncmp(s, shell->envp[i], name_len) == 0)
+		if (ft_strncmp(s, shell->envp[i], name_len) == 0 && \
+			(shell->envp[i][name_len] == 0 || shell->envp[i][name_len] == '='))
 			return (i);
 		i++;
 	}
