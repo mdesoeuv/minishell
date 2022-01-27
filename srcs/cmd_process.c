@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 09:48:37 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,15 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 
 	if (pipe_lst->to_execute == 0)
 		return ;
-	if (ft_getenv(shell, "PATH") == NULL)
-	{
-		error_cmd_not_found(pipe_lst, pipe_lst->command);
-		return ;
-	}
-	possible_paths = ft_split(ft_getenv(shell, "PATH"), ':');
+	// if (ft_getenv(shell, "PATH") == NULL)
+	// {
+	// 	error_cmd_not_found(pipe_lst, pipe_lst->command);
+	// 	return ;
+	// }
+	if (ft_getenv(shell, "PATH") != NULL)
+		possible_paths = ft_split(ft_getenv(shell, "PATH"), ':');
+	else
+		possible_paths = ft_split(" ", ':');
 	if (!possible_paths)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	if (pipe_lst->command[0][0] != '.' || pipe_lst->command[0][0] != '/')
