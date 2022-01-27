@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/27 10:46:19 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/27 11:47:54 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS =	main.c \
 		signal.c \
 		parsing_chevron.c \
 		parsing_variable.c \
+		parsing_quotes.c \
 		ft_utils.c \
 		pipe1.c \
 		pipe2.c \

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 15:52:47 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:43:07 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void			sig_int(int code);
 void			eval_child_status(int child_status);
 void			ft_print_shell_struct(t_shell	shell);
 void			heredoc_sig_int(int code);
-void	sig_int_fork(int code);
+void			sig_int_fork(int code);
 
 /* BUILT-IN */
 
 int				print_working_directory(void);
 char			*return_working_directory(void);
 int				change_directory(t_shell *shell, char *arg);
-int				ft_parsing(char *line, t_shell	*shell);
+int				ft_parsing(char *line, t_shell	*shell, int i, int start);
 int				ft_free(char *message, t_shell *shell,
 					int g_return_val, int is_exit);
 int				ft_echo(t_shell *shell);
