@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 16:47:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 10:18:17 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	access_check(char *path)
 	if (path[0] == 0)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-		return (1);
+		return (-1);
 	}
 	if (access(path, F_OK) == -1)
 	{
