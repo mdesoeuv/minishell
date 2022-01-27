@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:32:05 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:59:34 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,30 @@ static void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd)
 	g_return_val = 126;
 }
 
+void	cmd_concatenate_test(t_shell *shell, char **possible_paths, \
+	t_list_pipes *pipe_lst, int *i)
+{
+	*i = 0;
+	while (possible_paths[*i] && !(pipe_lst->command[0][0] == '.' \
+		|| pipe_lst->command[0][0] == '/'))
+	{
+		concatenate_path(shell, pipe_lst, possible_paths[*i]);
+		if (access(pipe_lst->cmd_path, F_OK) == -1)
+		{
+			free(pipe_lst->cmd_path);
+			pipe_lst->cmd_path = NULL;
+			*i += 1;
+		}
+		else
+			break ;
+	}
+}
+
 void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	int		i;
 	char	**possible_paths;
 
-	if (pipe_lst->to_execute == 0)
-		return ;
-	// if (ft_getenv(shell, "PATH") == NULL)
-	// {
-	// 	error_cmd_not_found(pipe_lst, pipe_lst->command);
-	// 	return ;
-	// }
 	if (ft_getenv(shell, "PATH") != NULL)
 		possible_paths = ft_split(ft_getenv(shell, "PATH"), ':');
 	else
@@ -94,20 +106,7 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	if (pipe_lst->command[0][0] != '.' || pipe_lst->command[0][0] != '/')
 		pipe_lst->cmd_path = pipe_lst->command[0];
-	i = 0;
-	while (possible_paths[i] && !(pipe_lst->command[0][0] == '.' \
-		|| pipe_lst->command[0][0] == '/'))
-	{
-		concatenate_path(shell, pipe_lst, possible_paths[i]);
-		if (access(pipe_lst->cmd_path, F_OK) == -1)
-		{
-			free(pipe_lst->cmd_path);
-			pipe_lst->cmd_path = NULL;
-			i++;
-		}
-		else
-			break ;
-	}
+	cmd_concatenate_test(shell, possible_paths, pipe_lst, &i);
 	if (!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1)
 		error_cmd_not_found(pipe_lst, pipe_lst->command);
 	else if (access(pipe_lst->cmd_path, X_OK) == -1)
