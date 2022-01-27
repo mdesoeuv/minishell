@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 10:50:20 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 10:55:19 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_incr_shell_env(t_shell *shell)
 	getenv = ft_getenv(shell, "SHLVL");
 	if (!getenv)
 		getenv = "1";
-	ft_unset(shell, "SHLVL");
 	shell_lvl = ft_itoa(ft_atoi(getenv) + 1);
 	if (!shell_lvl)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
