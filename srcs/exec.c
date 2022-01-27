@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 13:41:40 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 17:49:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
 		if (execute_if_built_in(shell, shell->list_start) == -100)
 			execute(shell, shell->list_start);
 	}
+	close(1);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	*i += 1;
