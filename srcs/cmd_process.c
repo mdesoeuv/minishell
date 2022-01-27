@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:59:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 13:20:21 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void	cmd_concatenate_test(t_shell *shell, char **possible_paths, \
 		concatenate_path(shell, pipe_lst, possible_paths[*i]);
 		if (access(pipe_lst->cmd_path, F_OK) == -1)
 		{
-			free(pipe_lst->cmd_path);
+			if (!(pipe_lst->command[0][0] == '.' || \
+				pipe_lst->command[0][0] == '/'))
+				free(pipe_lst->cmd_path);
 			pipe_lst->cmd_path = NULL;
 			*i += 1;
 		}
