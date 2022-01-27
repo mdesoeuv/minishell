@@ -6,14 +6,14 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 16:19:22 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 13:10:57 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_cmd_variable_change(int index_start, t_shell *shell,
-	char *variable_result)
+	char *variable_result, int is_malloc)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -34,7 +34,8 @@ static void	ft_cmd_variable_change(int index_start, t_shell *shell,
 		shell->cmd_tmp = NULL;
 	}
 	shell->cmd_tmp = tmp2;
-	free(variable_result);
+	if (is_malloc == 1)
+		free(variable_result);
 	free(tmp);
 }
 
@@ -43,8 +44,10 @@ void	ft_variable_replace(int i, t_shell *shell)
 	int		index_start;
 	char	*variable_name;
 	char	*variable_result;
+	int		is_malloc;
 
 	index_start = i + 1;
+	is_malloc = 0;
 	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != ' '
 		&& shell->cmd_tmp[i] != '\"')
 		i++;
@@ -52,12 +55,15 @@ void	ft_variable_replace(int i, t_shell *shell)
 	if (!variable_name)
 		ft_free("Error : malloc error\n", shell, 1, 1);
 	if (ft_strcmp(variable_name, "?") == 0)
+	{
+		is_malloc = 1;
 		variable_result = ft_itoa(g_return_val);
+	}	
 	else
 		variable_result = ft_getenv(shell, variable_name);
 	free(variable_name);
 	ft_memmove(&(shell->cmd_tmp[index_start - 1]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp) - (index_start - 1));
 	if (variable_result)
-		ft_cmd_variable_change(index_start, shell, variable_result);
+		ft_cmd_variable_change(index_start, shell, variable_result, is_malloc);
 }
