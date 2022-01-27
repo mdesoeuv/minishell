@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 10:18:17 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 10:40:11 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,29 @@ int	access_check(char *path)
 	return (ret_value);
 }
 
+int	set_old_path(t_shell *shell, char *tmp_path)
+{
+	char	*old_path;
+
+	old_path = return_working_directory();
+	if (!old_path)
+	{
+		free(tmp_path);
+		ft_free("memory allocation error\n", shell, 1, 1);
+	}
+	old_path = ft_strjoin_free_s2("OLDPWD=", old_path);
+	if (!old_path)
+	{
+		free(tmp_path);
+		ft_free("memory allocation error\n", shell, 1, 1);
+	}
+	ft_export(shell, old_path);
+	free(old_path);
+}
+
 int	change_directory(t_shell *shell, char *path)
 {
 	int		ret_value;
-	char	*old_path;
 	char	*curr_path;
 	char	*tmp_path;
 
@@ -98,19 +117,17 @@ int	change_directory(t_shell *shell, char *path)
 		free(tmp_path);
 		return (1);
 	}
-	old_path = return_working_directory();
-	old_path = ft_strjoin_free_s2("OLDPWD=", old_path);
-	if (!old_path)
-		ft_free("memory allocation error\n", shell, 1, 1);
-	ft_export(shell, old_path);
+	set_old_path(shell, tmp_path);
 	ret_value = chdir(path);
 	curr_path = return_working_directory();
 	curr_path = ft_strjoin_free_s2("PWD=", curr_path);
-	if (!old_path)
+	if (!curr_path)
+	{
+		free(tmp_path);
 		ft_free("memory allocation error\n", shell, 1, 1);
+	}
 	ft_export(shell, curr_path);
 	free(curr_path);
-	free(old_path);
 	free(tmp_path);
 	return (ret_value);
 }
