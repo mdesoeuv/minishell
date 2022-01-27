@@ -6,7 +6,7 @@
 #    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/27 11:47:54 by vchevill         ###   ########.fr        #
+#    Updated: 2022/01/27 12:22:36 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS =	main.c \
 		parsing_chevron.c \
 		parsing_variable.c \
 		parsing_quotes.c \
+		ft_split_mshell.c \
 		ft_utils.c \
 		pipe1.c \
 		pipe2.c \

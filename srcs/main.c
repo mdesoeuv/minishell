@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 11:48:17 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:27:33 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,32 @@ void	set_shell_path(t_shell *shell)
 	free(shell_path);
 }
 
-int    main(int argc, char **argv, char **envp)
+static void	ft_init_main(t_shell *shell, int *argc, char ***argv, char ***envp)
 {
-	t_shell		shell;
-
-	(void)argc;
-	(void)argv;
-	shell.is_exit = 1;
+	(void)(*argc);
+	(void)(*argv);
+	shell->is_exit = 1;
 	g_return_val = 0;
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, 0);
-	shell.envp = envp;
-	copy_set_envp(&shell, envp);
-	set_shell_path(&shell);
+	shell->envp = (*envp);
+	copy_set_envp(shell, (*envp));
+	set_shell_path(shell);
 	g_return_val = 0;
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_shell		shell;
+
+	ft_init_main(&shell, &argc, &argv, &envp);
 	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (shell.readline)
 	{
 		add_history(shell.readline);
-		if (ft_parsing(shell.readline, &shell, -1, 0) != -1 && shell.list_start->command)
+		if (ft_parsing(shell.readline, &shell, -1, 0) != -1
+			&& shell.list_start->command)
 		{
-			// ft_print_shell_struct(shell);
 			new_cmd_process(&shell);
 			signal(SIGINT, &sig_int);
 		}
