@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 11:53:35 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:57:43 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 		if (new_pipe->chevron_nbr_out > 2)
 			return (ft_free("minishell: syntax error near unexpected token >\n",
 					shell, 1, 0));
+		free(new_pipe->file_out);
 		new_pipe->file_out = ft_file_in_out(shell, i);
 		ft_create_file(new_pipe->chevron_nbr_out, new_pipe->file_out);
 	}
