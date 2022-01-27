@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 10:40:11 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 10:46:56 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	access_check(char *path)
 	return (ret_value);
 }
 
-int	set_old_path(t_shell *shell, char *tmp_path)
+void	set_old_path(t_shell *shell, char *tmp_path)
 {
 	char	*old_path;
 
