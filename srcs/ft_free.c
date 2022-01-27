@@ -6,15 +6,15 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:50:55 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
+int	ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	g_return_val = g_return_val_param;
@@ -34,13 +34,13 @@ int ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
 	return (-1);
 }
 
-void free_split(char **split)
+void	free_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!split)
-		return;
+		return ;
 	while (split[i])
 	{
 		free(split[i]);
@@ -49,9 +49,9 @@ void free_split(char **split)
 	free(split);
 }
 
-void ft_free_cmd(t_shell *shell)
+void	ft_free_cmd(t_shell *shell)
 {
-	t_list_pipes *cursor;
+	t_list_pipes	*cursor;
 
 	if (shell->cmd_tmp)
 	{
