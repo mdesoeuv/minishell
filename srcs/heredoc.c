@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 15:58:56 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 12:35:11 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	restore_std(t_shell *shell)
+static int	restore_std(t_shell *shell)
 {
 	shell->tmp_stdin = dup(0);
 	shell->tmp_stdout = dup(1);
@@ -23,7 +23,7 @@ int	restore_std(t_shell *shell)
 	return (0);
 }
 
-void	restore_prev_std(t_shell *shell)
+static void	restore_prev_std(t_shell *shell)
 {
 	shell->save_stdin = dup(0);
 	shell->save_stdout = dup(1);
@@ -33,7 +33,7 @@ void	restore_prev_std(t_shell *shell)
 	close(shell->tmp_stdout);
 }
 
-int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
+static int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 {
 	char	*total_line;
 	char	*line;

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:29:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 11:52:45 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:29:56 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	nb_args(char **args)
 	return (size);
 }
 
-void	ft_echo_2(t_shell *shell, int *i, int *j, int *option_n)
+static void	ft_echo_2(t_shell *shell, int *i, int *j, int *option_n)
 {
 	if (shell->list_start->command[*i]
 		&& ft_strncmp(shell->list_start->command[*i], "-n", 2) == 0)

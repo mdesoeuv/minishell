@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:27:33 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:35:35 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_return_val;
 
-int	ft_incr_shell_env(t_shell *shell)
+static int	ft_incr_shell_env(t_shell *shell)
 {
 	char	*getenv;
 	char	*shell_lvl;
@@ -34,7 +34,7 @@ int	ft_incr_shell_env(t_shell *shell)
 	return (1);
 }
 
-int	copy_set_envp(t_shell *shell, char **envp)
+static int	copy_set_envp(t_shell *shell, char **envp)
 {
 	int		i;
 	int		envp_size;
@@ -58,7 +58,7 @@ int	copy_set_envp(t_shell *shell, char **envp)
 	return (1);
 }
 
-void	set_shell_path(t_shell *shell)
+static oid	set_shell_path(t_shell *shell)
 {
 	char	*shell_path;
 

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 11:50:55 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:34:28 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-void	ft_free_cmd(t_shell *shell)
+static void	ft_free_cmd(t_shell *shell)
 {
 	t_list_pipes	*cursor;
 

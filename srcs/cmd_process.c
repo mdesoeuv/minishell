@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 09:48:37 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 12:32:05 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
+static void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 {
 	pipe_lst->cmd_path = ft_strjoin("", path);
 	if (!(pipe_lst->cmd_path))
@@ -26,7 +26,7 @@ void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 }
 
-void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
+static void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 	g_return_val = 127;
 }
 
-void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd)
+static void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd)
 {
 	int	i;
 

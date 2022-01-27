@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 10:46:56 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 12:29:42 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	parsing cd cmd
 */
 
-char	*offset_dup(char *s, size_t offset)
+static char	*offset_dup(char *s, size_t offset)
 {
 	size_t	len;
 	size_t	i;
@@ -33,7 +33,7 @@ char	*offset_dup(char *s, size_t offset)
 	return (path);
 }
 
-char	*cd_tilde(t_shell *shell, char *path)
+static char	*cd_tilde(t_shell *shell, char *path)
 {
 	char	*absolute_path;
 	char	*no_arg_path;
@@ -58,7 +58,7 @@ char	*cd_tilde(t_shell *shell, char *path)
 	return (absolute_path);
 }
 
-int	access_check(char *path)
+static int	access_check(char *path)
 {
 	int	ret_value;
 
@@ -83,7 +83,7 @@ int	access_check(char *path)
 	return (ret_value);
 }
 
-void	set_old_path(t_shell *shell, char *tmp_path)
+static void	set_old_path(t_shell *shell, char *tmp_path)
 {
 	char	*old_path;
 

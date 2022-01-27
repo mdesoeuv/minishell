@@ -6,13 +6,13 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 11:48:54 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:34:09 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	no_such_file_error(t_list_pipes *pipe_lst)
+static void	no_such_file_error(t_list_pipes *pipe_lst)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(pipe_lst->command[0], 2);
@@ -39,14 +39,14 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 	}
 }
 
-void	end_cmd_process(t_shell *shell)
+static void	end_cmd_process(t_shell *shell)
 {
 	wait_all_pid(shell);
 	close_file_pipes(shell);
 	restore_fd(shell);
 }
 
-void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
+static void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
 	int *fd_prev_pipe, int *i)
 {
 	shell->list_start->cmd_index = *i;

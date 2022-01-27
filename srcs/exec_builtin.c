@@ -6,13 +6,13 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:33:06 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_it_builtin(t_list_pipes *pipe_lst)
+static int	is_it_builtin(t_list_pipes *pipe_lst)
 {
 	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
 		return (1);
@@ -35,7 +35,7 @@ int	is_it_builtin(t_list_pipes *pipe_lst)
 	}
 }
 
-int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
+static int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	pipe_lst->pid = fork();
 	if (pipe_lst->pid < 0)
@@ -64,7 +64,7 @@ int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 	return (0);
 }
 
-int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
+static int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)
 		g_return_val = print_working_directory();

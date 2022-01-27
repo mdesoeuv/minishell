@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:33:06 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/26 11:28:33 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 12:31:08 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	remove_envp(t_shell *shell, int envp_index)
+static int	remove_envp(t_shell *shell, int envp_index)
 {
 	int		i;
 	int		j;
