@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_cmd_process.c                                  :+:      :+:    :+:   */
+/*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/25 11:34:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/27 13:45:34 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	fd_redirect(t_shell *shell, t_list_pipes *pipe_lst, \
 	int	fd_read;
 
 	fd_read = dup(pipe_fd[0]);
+	close(pipe_fd[0]);
 	if (pipe_lst->cmd_index > 0)
 	{
 		dup2(fd_prev_pipe, 0);
