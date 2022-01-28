@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/26 14:14:36 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 09:29:55 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	ft_exit(t_shell *shell, t_list_pipes *pipe)
 	{
 		ft_putstr_fd("minishell: exit: ", 1);
 		ft_putstr_fd(pipe->command[1], 1);
-		ft_putendl_fd(" : numeric argument required\n", 1);
+		ft_putstr_fd(" : numeric argument required\n", 1);
 		g_return_val = 255;
+		ft_free("", shell, g_return_val, 1);
 		return_num = 1;
 	}
 	else if (pipe->command[1] && pipe->command[2])

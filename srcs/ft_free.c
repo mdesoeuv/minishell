@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 12:38:18 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 09:26:43 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
 
 	i = -1;
 	g_return_val = g_return_val_param;
-	ft_putstr(message);
+	ft_putstr_fd(message, 2);
 	if (shell->readline)
 	{
 		free(shell->readline);
