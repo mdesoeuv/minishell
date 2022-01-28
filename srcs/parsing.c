@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 10:47:31 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 10:49:09 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ int	ft_parsing(char *line, t_shell	*shell, int i, int start)
 	{
 		i = ft_dodge_quotes(line, i);
 		if (i == -1)
-			return (ft_free("minishell : syntax error unclosed quote\n",
-					shell, 1, 0));
+			return (ft_free(SYNTAX_ERROR, shell, 1, 0));
 		if (line[i] == '|')
 		{
 			shell->cmd_nbr++;

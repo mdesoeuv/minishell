@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 10:45:46 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 10:48:49 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <dirent.h>
 # include <termios.h>
 # include "../libft/libft.h"
+
+# define SYNTAX_ERROR "minishell : syntax error unclosed quote\n"
 
 typedef struct s_split
 {
