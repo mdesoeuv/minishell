@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 14:01:58 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 15:28:53 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	is_directory(t_list_pipes *pipe_lst, char *path)
 	if (!dirptr)
 		return (0);
 	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(pipe_lst->command[0], 2);
-	ft_putstr_fd(": is a directory\n", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": Is a directory\n", 2);
 	pipe_lst->to_execute = 0;
 	closedir(dirptr);
 	g_return_val = 126;
