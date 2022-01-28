@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 15:25:14 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 16:14:18 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	return (file_name);
 }
 
+static int	is_possible_create(t_list_pipes *pipe_lst, char *filename)
+{
+	if (access(filename, F_OK) == -1)
+		return (1);
+	if (access(filename, R_OK) == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(filename, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+		return (0);
+	}
+	if (is_directory(pipe_lst, filename) == 1)
+		return (0);
+	return (1);
+}
+
 static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 	t_list_pipes	*new_pipe, int i)
 {		
@@ -59,30 +75,12 @@ static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 					shell, 1, 0));
 		free(new_pipe->file_out);
 		new_pipe->file_out = ft_file_in_out(shell, i);
-		ft_create_file(new_pipe->chevron_nbr_out, new_pipe->file_out);
+		if (is_possible_create(new_pipe, new_pipe->file_out) == 1)
+			ft_create_file(new_pipe->chevron_nbr_out, new_pipe->file_out);
+		else
+			new_pipe->to_execute = 0;
 	}
 	return (0);
-}
-
-int	ft_check_if_file_exists(t_list_pipes *pipe_lst, char *file_name)
-{
-	if (access(file_name, F_OK) == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
-		ft_putstr_fd(": no such file or directory\n", 2);
-		return (0);
-	}
-	else if (access(file_name, R_OK) == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
-		ft_putstr_fd(": permission denied\n", 2);
-		return (0);
-	}
-	else if (is_directory(pipe_lst, file_name) == 1)
-		return (0);
-	return (1);
 }
 
 static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
