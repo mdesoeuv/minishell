@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 10:07:32 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 10:26:35 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 }
 
-static void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
+void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 {
 	int	i;
 
@@ -110,7 +110,8 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 		pipe_lst->cmd_path = pipe_lst->command[0];
 	cmd_concatenate_test(shell, possible_paths, pipe_lst, &i);
 	if (!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1)
-		error_cmd_not_found(pipe_lst, pipe_lst->command);
+		no_such_file_error(pipe_lst);
+		// error_cmd_not_found(pipe_lst, pipe_lst->command);
 	else if (access(pipe_lst->cmd_path, X_OK) == -1)
 		error_cmd_not_executable(pipe_lst, pipe_lst->command);
 	free_split(possible_paths);
