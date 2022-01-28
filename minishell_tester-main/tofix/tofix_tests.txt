@@ -1,4 +1,0 @@
-echo
-echo ~
-echo $USER'$USER'text oui oui oui oui $USER oui $USER ''
-echo \" \" \" \"\"\" \'\'\'
