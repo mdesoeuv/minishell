@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 14:03:45 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 15:26:18 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int				ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
 void			ft_variable_replace(int i, t_shell *shell);
 int				ft_dodge_quotes(char *line, int i);
 void			ft_create_file(int chevron_nbr_out, char *file_name);
+int				ft_check_if_file_exists(t_list_pipes *pipe_lst, \
+	char *file_name);
 
 /* PIPE */
 
@@ -140,6 +142,7 @@ int				execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst);
 void			no_such_file_error(t_list_pipes *pipe_lst);
 int				cd_error_msg(char *message, char *path);
 void			error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd);
+int				is_directory(t_list_pipes *pipe_lst, char *path);
 
 /*UTILS*/
 

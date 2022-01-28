@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 10:45:39 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 15:25:14 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,25 @@ static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 	return (0);
 }
 
-static void	ft_check_if_file_exists(char *file_name)
+int	ft_check_if_file_exists(t_list_pipes *pipe_lst, char *file_name)
 {
 	if (access(file_name, F_OK) == -1)
 	{
-		ft_putstr_fd("minishell: no such file or directory: ", 2);
-		ft_putendl_fd(file_name, 2);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(": no such file or directory\n", 2);
+		return (0);
 	}
 	else if (access(file_name, R_OK) == -1)
 	{
-		ft_putstr_fd("minishell: permission denied: ", 2);
-		ft_putendl_fd(file_name, 2);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(": permission denied\n", 2);
+		return (0);
 	}
+	else if (is_directory(pipe_lst, file_name) == 1)
+		return (0);
+	return (1);
 }
 
 static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
@@ -98,7 +105,7 @@ static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
 		free(new_pipe->file_in);
 		new_pipe->file_in = ft_file_in_out(shell, i);
 		if (new_pipe->chevron_nbr_in == 1)
-			ft_check_if_file_exists(new_pipe->file_in);
+			ft_check_if_file_exists(new_pipe, new_pipe->file_in);
 	}
 	return (0);
 }
