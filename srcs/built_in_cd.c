@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:29:42 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:28:19 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-**	parsing cd cmd
-*/
 
 static char	*offset_dup(char *s, size_t offset)
 {
@@ -60,27 +56,22 @@ static char	*cd_tilde(t_shell *shell, char *path)
 
 static int	access_check(char *path)
 {
-	int	ret_value;
+	DIR	*dirptr;
 
-	ret_value = 1;
 	if (path[0] == 0)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (-1);
 	}
 	if (access(path, F_OK) == -1)
-	{
-		ft_putstr_fd("cd: no such file or directory: ", 2);
-		ft_putendl_fd(path, 2);
-		ret_value = -1;
-	}
-	else if (access(path, R_OK) == -1)
-	{
-		ft_putstr_fd("cd: permission denied: ", 2);
-		ft_putendl_fd(path, 2);
-		ret_value = -1;
-	}
-	return (ret_value);
+		return (cd_error_msg("No such file or directory", path));
+	if (access(path, R_OK) == -1)
+		return (cd_error_msg("Permission denied", path));
+	dirptr = opendir(path);
+	if (!dirptr)
+		return (cd_error_msg("Not a directory", path));
+	closedir(dirptr);
+	return (1);
 }
 
 static void	set_old_path(t_shell *shell, char *tmp_path)
