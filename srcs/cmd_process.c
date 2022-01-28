@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 10:26:35 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 11:59:42 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,11 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	if (pipe_lst->command[0][0] != '.' || pipe_lst->command[0][0] != '/')
 		pipe_lst->cmd_path = pipe_lst->command[0];
 	cmd_concatenate_test(shell, possible_paths, pipe_lst, &i);
-	if (!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1)
-		no_such_file_error(pipe_lst);
-		// error_cmd_not_found(pipe_lst, pipe_lst->command);
-	else if (access(pipe_lst->cmd_path, X_OK) == -1)
+	if (pipe_lst->to_execute == 1 && \
+		(!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1))
+		error_cmd_not_found(pipe_lst, pipe_lst->command);
+	else if (pipe_lst->to_execute == 1 && \
+		access(pipe_lst->cmd_path, X_OK) == -1)
 		error_cmd_not_executable(pipe_lst, pipe_lst->command);
 	free_split(possible_paths);
 	execve(pipe_lst->cmd_path, pipe_lst->command, shell->envp);
