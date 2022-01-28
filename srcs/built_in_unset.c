@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 10:33:06 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:31:08 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:19:12 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	ft_unset(t_shell *shell, char *s)
 {
 	int	envp_index;
 
-	if (!s || !(ft_isalpha(s[0]) == 1 || s[0] == '_'))
+	if (!s || !(ft_isalpha(s[0]) == 1 || s[0] == '_') \
+		|| not_valid_varname(s) == 1)
 	{
 		ft_putstr_fd("minishell: unset: ", 2);
 		ft_putstr_fd(s, 2);

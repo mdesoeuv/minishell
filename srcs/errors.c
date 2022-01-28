@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:59:03 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 14:03:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 17:16:58 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,18 @@ void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 	else
 		pipe_lst->cmd_path = NULL;
 	g_return_val = 127;
+}
+
+int	not_valid_varname(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != '=')
+	{
+		if (ft_is_charset(s[i], ";.+=}{*#@!^~") == 1)
+			return (1);
+		i++;
+	}
+	return (0);
 }

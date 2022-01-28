@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 15:26:18 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 17:17:29 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char			*ft_getenv(t_shell *shell, char *var_name);
 int				is_value_in_envp(t_shell *shell, char *s);
 int				get_env_size(t_shell *shell);
 void			sort_env(t_shell *shell);
+int				not_valid_varname(char *s);
 
 /* PARSING */
 
