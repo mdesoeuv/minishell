@@ -28,7 +28,7 @@ export TES=T=""
 export TE+S=T=""
 export TES\\\\T=123
 export TES.T=123
-export TES\\\$T=123
+export TES\\\$T=123 
 export TES\\\\T
 export TES.T=123
 export TES+T=123

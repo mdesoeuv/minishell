@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:59:03 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 17:16:58 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 17:34:20 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	not_valid_varname(char *s)
 	i = 0;
 	while (s[i] && s[i] != '=')
 	{
-		if (ft_is_charset(s[i], ";.+=}{*#@!^~") == 1)
+		if (ft_is_charset(s[i], "\\;.+=}{*#@!^~/") == 1)
 			return (1);
 		i++;
 	}
