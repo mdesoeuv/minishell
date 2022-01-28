@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:34:32 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 09:56:51 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				ft_free(char *message, t_shell *shell,
 					int g_return_val, int is_exit);
 int				ft_echo(t_shell *shell);
 int				ft_exit(t_shell *shell, t_list_pipes *pipe);
-int				ft_env(t_shell *shell, char *command);
+int				ft_env(t_shell *shell, t_list_pipes *pipe_lst, char *command);
 int				ft_export(t_shell *shell, char *s);
 int				ft_export_multi(t_shell *shell, char **command);
 void			print_sorted_env(t_shell *shell);
@@ -140,6 +140,7 @@ void			ft_lstadd_back_pipes(t_list_pipes **alst,
 t_list_pipes	*ft_lstnew_pipes(void);
 char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
+void			no_such_file_error(t_list_pipes *pipe_lst);
 
 /*DEBUG*/
 

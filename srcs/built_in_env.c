@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:45:42 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:30:23 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 09:53:37 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,21 @@ void	print_sorted_env(t_shell *shell)
 	}
 }
 
-int	ft_env(t_shell *shell, char *command)
+int	ft_env(t_shell *shell, t_list_pipes *pipe_lst, char *command)
 {
 	int		i;
 	char	*search_ret;
 
 	if (command != NULL)
 	{
-		ft_putendl_fd("minishell: env: no argument supported", 2);
-		return (0);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("env: ", 2);
+		if (pipe_lst->command[1])
+		{
+			ft_putstr_fd(pipe_lst->command[1], 2);
+		}
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (127);
 	}
 	sort_env(shell);
 	i = 0;

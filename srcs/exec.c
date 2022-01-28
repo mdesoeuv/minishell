@@ -6,19 +6,19 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 17:49:50 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 10:21:26 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	no_such_file_error(t_list_pipes *pipe_lst)
+void	no_such_file_error(t_list_pipes *pipe_lst)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(pipe_lst->command[0], 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
 	pipe_lst->to_execute = 0;
-	g_return_val = 1;
+	g_return_val = 127;
 }
 
 void	execute(t_shell *shell, t_list_pipes *pipe_lst)
@@ -26,6 +26,11 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 	if (ft_getenv(shell, "PATH") == NULL
 		&& !(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 		no_such_file_error(pipe_lst);
+	if (pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/')
+	{
+		if (access(pipe_lst->cmd_path, F_OK) == -1)
+			no_such_file_error(pipe_lst);
+	}
 	pipe_lst->pid = fork();
 	if (pipe_lst->pid < 0)
 	{

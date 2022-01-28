@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 12:33:06 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 09:51:16 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 		else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
 			g_return_val = ft_unset_multi(shell, pipe_lst->command);
 		else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
-			g_return_val = ft_env(shell, pipe_lst->command[1]);
+			g_return_val = ft_env(shell, pipe_lst, pipe_lst->command[1]);
 		else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 		{
 			shell->is_exit = ft_exit(shell, pipe_lst);
@@ -77,7 +77,7 @@ static int	exec_builtin(t_shell *shell, t_list_pipes *pipe_lst)
 	else if (ft_strcmp(pipe_lst->command[0], "unset") == 0)
 		g_return_val = ft_unset_multi(shell, pipe_lst->command);
 	else if (ft_strcmp(pipe_lst->command[0], "env") == 0)
-		g_return_val = ft_env(shell, pipe_lst->command[1]);
+		g_return_val = ft_env(shell, pipe_lst, pipe_lst->command[1]);
 	else if (ft_strcmp(pipe_lst->command[0], "exit") == 0)
 	{
 		shell->is_exit = ft_exit(shell, pipe_lst);
