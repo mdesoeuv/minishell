@@ -6,14 +6,14 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/28 11:28:38 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/28 13:25:19 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = minishell
 
-CC = gcc -Wall -Werror -Wextra -fsanitize=address -g3
+CC = gcc -Wall -Werror -Wextra -g -fsanitize=address -g3
 
 SRCS =	main.c \
 		built_in_pwd.c \

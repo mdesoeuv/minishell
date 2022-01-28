@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 11:59:42 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 13:24:21 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,10 @@ static void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 
 void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 {
-	int	i;
-
 	pipe_lst->to_execute = 0;
-	i = 0;
-	ft_putstr_fd("minishell: command not found:", 2);
-	while (cmd[i])
-	{
-		ft_putstr_fd(" ", 2);
-		ft_putstr_fd(cmd[i], 2);
-		i++;
-	}
-	ft_putstr_fd("\n", 2);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
 		free(pipe_lst->cmd_path);
@@ -107,7 +99,7 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	if (!possible_paths)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	if (pipe_lst->command[0][0] != '.' || pipe_lst->command[0][0] != '/')
-		pipe_lst->cmd_path = pipe_lst->command[0];
+		pipe_lst->cmd_path = ft_strdup(pipe_lst->command[0]);
 	cmd_concatenate_test(shell, possible_paths, pipe_lst, &i);
 	if (pipe_lst->to_execute == 1 && \
 		(!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1))
