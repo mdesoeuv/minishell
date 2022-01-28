@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 11:30:42 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 14:03:45 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void			sig_int_fork(int code);
 int				print_working_directory(void);
 char			*return_working_directory(void);
 int				change_directory(t_shell *shell, char *arg);
-int				cd_error_msg(char *message, char *path);
 int				ft_parsing(char *line, t_shell	*shell, int i, int start);
 int				ft_free(char *message, t_shell *shell,
 					int g_return_val, int is_exit);
@@ -135,6 +134,12 @@ void			redirect_file_in_out(t_list_pipes *pipe_lst);
 
 void			new_cmd_process(t_shell *shell);
 int				execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst);
+
+/*ERRORS*/
+
+void			no_such_file_error(t_list_pipes *pipe_lst);
+int				cd_error_msg(char *message, char *path);
+void			error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd);
 
 /*UTILS*/
 

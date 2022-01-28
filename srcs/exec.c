@@ -6,19 +6,26 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 13:16:07 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 14:01:58 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	no_such_file_error(t_list_pipes *pipe_lst)
+int	is_directory(t_list_pipes *pipe_lst, char *path)
 {
+	DIR	*dirptr;
+
+	dirptr = opendir(path);
+	if (!dirptr)
+		return (0);
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(pipe_lst->command[0], 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
+	ft_putstr_fd(": is a directory\n", 2);
 	pipe_lst->to_execute = 0;
-	g_return_val = 127;
+	closedir(dirptr);
+	g_return_val = 126;
+	return (1);
 }
 
 void	execute(t_shell *shell, t_list_pipes *pipe_lst)
@@ -32,6 +39,11 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 		{
 			no_such_file_error(pipe_lst);
 			return ;
+		}
+		else
+		{
+			if (is_directory(pipe_lst, pipe_lst->command[0]) == 1)
+				return ;
 		}
 	}
 	pipe_lst->pid = fork();

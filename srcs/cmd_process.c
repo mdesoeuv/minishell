@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 13:24:21 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 14:03:26 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,12 @@ static void	concatenate_path(t_shell *shell, t_list_pipes *pipe_lst, char *path)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 }
 
-void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
-{
-	pipe_lst->to_execute = 0;
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
-	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
-	{
-		free(pipe_lst->cmd_path);
-		pipe_lst->cmd_path = NULL;
-	}
-	else
-		pipe_lst->cmd_path = NULL;
-	g_return_val = 127;
-}
-
 static void	error_cmd_not_executable(t_list_pipes *pipe_lst, char **cmd)
 {
-	int	i;
-
 	pipe_lst->to_execute = 0;
-	i = 0;
-	ft_putstr_fd("minishell: permission denied: ", 2);
-	while (cmd[i])
-	{
-		ft_putstr_fd(" ", 2);
-		ft_putstr_fd(cmd[i], 2);
-		i++;
-	}
-	ft_putstr_fd("\n", 2);
+	ft_putstr_fd("minishell:", 2);
+	ft_putstr_fd(cmd[0], 2);
+	ft_putstr_fd(": permission denied\n", 2);
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
 		free(pipe_lst->cmd_path);

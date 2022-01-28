@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/28 13:25:19 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/01/28 14:04:09 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ CC = gcc -Wall -Werror -Wextra -g -fsanitize=address -g3
 SRCS =	main.c \
 		built_in_pwd.c \
 		built_in_cd.c \
-		built_in_cd_error.c \
 		built_in_unset.c \
 		built_in_export.c \
 		built_in_env.c \
@@ -38,6 +37,7 @@ SRCS =	main.c \
 		exec.c \
 		exec_builtin.c \
 		cmd_process.c \
+		errors.c \
 		debug_functions.c \
 		heredoc.c
 

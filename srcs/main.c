@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 13:21:39 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 13:44:43 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,8 @@ static void	set_shell_path(t_shell *shell)
 	free(shell_path);
 }
 
-static void	ft_init_main(t_shell *shell, int *argc, char ***argv, char ***envp)
+static void	ft_init_main(t_shell *shell, char ***argv, char ***envp)
 {
-	(void)(*argc);
 	(void)(*argv);
 	shell->is_exit = 1;
 	g_return_val = 0;
@@ -88,7 +87,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell		shell;
 
-	ft_init_main(&shell, &argc, &argv, &envp);
+	if (argc != 1)
+		return (0);
+	ft_init_main(&shell, &argv, &envp);
 	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
 	while (shell.readline)
 	{
