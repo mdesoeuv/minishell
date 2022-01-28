@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:06:14 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 10:40:46 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 10:47:31 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell)
 	return (0);
 }
 
-int	ft_dodge_quotes(char *line, int i, t_shell	*shell)
+int	ft_dodge_quotes(char *line, int i)
 {
 	if (line[i] == '\"')
 	{
@@ -38,7 +38,7 @@ int	ft_dodge_quotes(char *line, int i, t_shell	*shell)
 			i++;
 	}
 	if (!line[i])
-		ft_free("Error : unclosed quote\n", shell, 1, 1);
+		return (-1);
 	return (i);
 }
 
@@ -70,7 +70,10 @@ int	ft_parsing(char *line, t_shell	*shell, int i, int start)
 	ft_init_parsing(shell);
 	while (line[++i])
 	{
-		i = ft_dodge_quotes(line, i, shell);
+		i = ft_dodge_quotes(line, i);
+		if (i == -1)
+			return (ft_free("minishell : syntax error unclosed quote\n",
+					shell, 1, 0));
 		if (line[i] == '|')
 		{
 			shell->cmd_nbr++;
