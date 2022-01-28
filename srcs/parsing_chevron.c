@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 12:59:17 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 10:39:53 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	ft_new_pipe_chevron(t_shell	*shell)
 	ft_lstadd_back_pipes(&(shell->list_start), new_pipe);
 	while (shell->cmd_tmp[++i])
 	{
-		i = ft_dodge_quotes(shell->cmd_tmp, i);
+		i = ft_dodge_quotes(shell->cmd_tmp, i, shell);
 		if (shell->cmd_tmp[i] == '<')
 		{	
 			if (ft_new_pipe_chevron1_part2(shell, new_pipe, i) == -1)
