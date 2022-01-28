@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 09:33:22 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 09:39:31 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	ft_exit(t_shell *shell, t_list_pipes *pipe)
 	else if (pipe->command[1])
 		ft_free("", shell, ft_atoi(pipe->command[1]), 1);
 	else
-		ft_free("", shell, 0, 1);
+		ft_free("", shell, g_return_val, 1);
 	return (return_num);
 }
