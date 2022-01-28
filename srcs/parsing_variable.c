@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 13:10:57 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/01/28 14:52:39 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_variable_replace(int i, t_shell *shell)
 	index_start = i + 1;
 	is_malloc = 0;
 	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != ' '
-		&& shell->cmd_tmp[i] != '\"')
+		&& shell->cmd_tmp[i] != '/' && shell->cmd_tmp[i] != '\"')
 		i++;
 	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!variable_name)
