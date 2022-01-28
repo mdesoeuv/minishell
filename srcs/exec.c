@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 10:21:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 10:28:49 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 		no_such_file_error(pipe_lst);
 	if (pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/')
 	{
-		if (access(pipe_lst->cmd_path, F_OK) == -1)
+		if (access(pipe_lst->command[0], F_OK) == -1)
 			no_such_file_error(pipe_lst);
 	}
 	pipe_lst->pid = fork();
