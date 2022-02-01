@@ -1,2 +1,3 @@
 unclosed quotes or >>> or any parsing error : 258
 ctrl \ : ne plus quitter le shell = ne rien faire
+une ligne de trop dans parsing.c
