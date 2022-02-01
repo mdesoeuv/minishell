@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 15:49:39 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/01 16:10:57 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/02/01 16:13:09 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ $(NAME):	$(addprefix $(OBJS_DIR), $(OBJS)) Makefile
 			ar rcs $(NAME) $(addprefix $(OBJS_DIR), $(OBJS))
 
 objs/%.o:	%.c libft.h
-			mkdir -p $(OBJS_DIR)
+			@mkdir -p $(OBJS_DIR)
 			$(CC) $(CFLAGS) -c $< -o $@
 
 clean:		
