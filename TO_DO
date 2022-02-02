@@ -8,3 +8,6 @@ heredoc renvoyer que le dernier heredoc dans les redirections
 readline : ligne qui se remplace
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 optionnel : exit: 999999999999999999999999999999999999999999999999999999999999: numeric argument required
+unclosed quotes or >>> or any parsing error : mettre valeur 258
+ctrl \ : ne plus quitter le shell = ne rien faire
+Norme : une ligne de trop dans parsing.c

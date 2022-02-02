@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 17:17:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 11:01:30 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ int				ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
 void			ft_variable_replace(int i, t_shell *shell);
 int				ft_dodge_quotes(char *line, int i);
 void			ft_create_file(int chevron_nbr_out, char *file_name);
-int				ft_check_if_file_exists(t_list_pipes *pipe_lst, \
-	char *file_name);
+int				ft_check_if_file_exists(t_list_pipes *pipe);
 
 /* PIPE */
 
