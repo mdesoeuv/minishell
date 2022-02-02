@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 11:23:05 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 17:02:38 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_check_if_file_exists(t_list_pipes *pipe, t_shell *shell)
 		shell->no_such_file = 1;
 		return (0);
 	}
-	else if (access(pipe->file_in, R_OK) == -1)
+	if (access(pipe->file_in, R_OK) == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_in, 2);
@@ -100,7 +100,7 @@ int	ft_check_if_file_exists(t_list_pipes *pipe, t_shell *shell)
 		shell->no_such_file = 1;
 		return (0);
 	}
-	else if (is_directory(pipe, pipe->file_in) == 1)
+	if (is_directory(pipe, pipe->file_in) == 1)
 	{
 		shell->no_such_file = 1;
 		return (0);
