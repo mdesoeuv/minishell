@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 12:03:23 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 12:06:21 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	sig_int_fork(int code)
 void	heredoc_sig_int(int code)
 {
 	(void)code;
+	printf("\n");
 	g_return_val = 1;
 	exit(g_return_val);
 }
