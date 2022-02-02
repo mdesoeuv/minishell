@@ -3,7 +3,8 @@ ctrl \ : ne plus quitter le shell = ne rien faire : OK SAUF POUR HEREDOC
 Norme : une ligne de trop dans parsing.c
 readline : ligne qui se remplace
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-"$"lol
+"$"lol VICTOR
+"" VICTOR
 cat <dsfsfds >out1 >out2  : TO CHECK => ERROR : cat Makefile >test1 >lol3 avec test1 qui est un repertoire TO CHECK
 heredoc renvoyer que le dernier heredoc dans les redirections : OK
 << mettre erreur : OK
