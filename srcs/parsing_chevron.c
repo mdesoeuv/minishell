@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 11:48:56 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 16:52:31 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ static int	is_possible_create(t_shell *shell, t_list_pipes *pipe)
 		return (0);
 	}
 	if (is_directory(pipe, pipe->file_out) == 1)
+	{
+		shell->no_such_file = 1;
 		return (0);
+	}	
 	return (1);
 }
 
