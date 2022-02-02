@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 11:04:49 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:19:34 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	return (file_name);
 }
 
-static int	is_possible_create(t_list_pipes *pipe)
+static int	is_possible_create(t_shell *shell, t_list_pipes *pipe)
 {
+	if (shell->no_such_file == 1)
+		return (0);
 	if (access(pipe->file_out, F_OK) == -1)
 		return (1);
 	if (access(pipe->file_out, R_OK) == -1)
@@ -49,6 +51,7 @@ static int	is_possible_create(t_list_pipes *pipe)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_out, 2);
 		ft_putstr_fd(": Permission denied\n", 2);
+		shell->no_such_file = 1;
 		return (0);
 	}
 	if (is_directory(pipe, pipe->file_out) == 1)
@@ -75,7 +78,7 @@ static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 					shell, 1, 0));
 		free(new_pipe->file_out);
 		new_pipe->file_out = ft_file_in_out(shell, i);
-		if (is_possible_create(new_pipe) == 1)
+		if (is_possible_create(shell, new_pipe) == 1)
 			ft_create_file(new_pipe->chevron_nbr_out, new_pipe->file_out);
 		else
 			new_pipe->to_execute = 0;
@@ -105,7 +108,7 @@ static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
 		free(new_pipe->file_in);
 		new_pipe->file_in = ft_file_in_out(shell, i);
 		if (new_pipe->chevron_nbr_in == 1)
-			ft_check_if_file_exists(new_pipe);
+			ft_check_if_file_exists(new_pipe, shell);
 	}
 	return (0);
 }

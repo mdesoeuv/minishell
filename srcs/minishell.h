@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 11:01:30 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:19:01 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_shell
 	int					save_stdout;
 	int					tmp_stdin;
 	int					tmp_stdout;
+	int					no_such_file;
 	char				**envp;
 	struct s_list_pipes	*list_start;
 	char				*cmd_tmp;
@@ -105,7 +106,7 @@ int				ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
 void			ft_variable_replace(int i, t_shell *shell);
 int				ft_dodge_quotes(char *line, int i);
 void			ft_create_file(int chevron_nbr_out, char *file_name);
-int				ft_check_if_file_exists(t_list_pipes *pipe);
+int				ft_check_if_file_exists(t_list_pipes *pipe, t_shell *shell);
 
 /* PIPE */
 
