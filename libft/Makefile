@@ -6,17 +6,17 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 15:49:39 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/28 17:06:09 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/02/01 16:13:09 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-CC= gcc
+CC:= gcc
 
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS:= -Wall -Wextra -Werror
 
-NAME= libft.a
+NAME:= libft.a
 
-SRCS=	ft_isblank.c ft_isspace.c ft_calloc.c ft_strlcpy.c ft_toupper.c \
+SRCS:=	ft_isblank.c ft_isspace.c ft_calloc.c ft_strlcpy.c ft_toupper.c \
 		ft_tolower.c ft_strtrim.c ft_substr.c ft_strstr.c ft_split.c \
 		ft_strrchr.c ft_strnstr.c ft_strnew.c ft_strnequ.c ft_strncpy.c \
 		ft_strncmp.c ft_strncat.c ft_strmapi.c ft_strmap.c ft_strlen.c \
@@ -34,23 +34,26 @@ SRCS=	ft_isblank.c ft_isspace.c ft_calloc.c ft_strlcpy.c ft_toupper.c \
 		ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstnew.c ft_lstmap.c \
 		ft_is_charset.c
 
-OBJS= $(SRCS:.c=.o)
+OBJS:= $(SRCS:.c=.o)
+
+OBJS_DIR:= objs/
 
 
 all: $(NAME)
 
-$(NAME):	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
+$(NAME):	$(addprefix $(OBJS_DIR), $(OBJS)) Makefile
+			ar rcs $(NAME) $(addprefix $(OBJS_DIR), $(OBJS))
 
-%.o:	%.c libft.h
-	$(CC) $(CFLAGS) -c $< -o $@
+objs/%.o:	%.c libft.h
+			@mkdir -p $(OBJS_DIR)
+			$(CC) $(CFLAGS) -c $< -o $@
 
 clean:		
-			rm -f $(OBJS)
+			rm -rf $(OBJS_DIR)
 
 fclean:		clean
 			rm -f $(NAME)
 
 re:			fclean all
 			
-.PHONY: all, re, clean, fclean
+.PHONY: 	all re clean fclean

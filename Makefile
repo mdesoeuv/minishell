@@ -6,16 +6,20 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/01/28 14:04:09 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/02/01 16:20:24 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = minishell
+NAME := minishell
 
-CC = gcc -Wall -Werror -Wextra -g -fsanitize=address -g3
+CC := gcc -Wall -Werror -Wextra 
 
-SRCS =	main.c \
+DEBUG1 := -fsanitize=address -g3
+
+#DEBUG2 := -g
+
+SRCS :=	main.c \
 		built_in_pwd.c \
 		built_in_cd.c \
 		built_in_unset.c \
@@ -42,29 +46,29 @@ SRCS =	main.c \
 		heredoc.c
 
 ifneq ($(shell uname), Linux)
-READLINE_LIB_DIR_FLAG = -L$(shell brew --prefix readline)/lib
-READLINE_INC_DIR_FLAG = -I$(shell brew --prefix readline)/include
+READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
+READLINE_INC_DIR_FLAG := -I$(shell brew --prefix readline)/include
 endif
 
-SRCS_FILES = $(addprefix srcs/, $(SRCS))
+SRCS_FILES := $(addprefix srcs/, $(SRCS))
 
-OBJS = $(SRCS:.c=.o)
+OBJS := $(SRCS:.c=.o)
 
-OBJS_FILES = $(addprefix objs/, $(OBJS))
+OBJS_FILES := $(addprefix objs/, $(OBJS))
 
-LIB = libft/libft.a
+LIB := libft/libft.a
 
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
-			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline 
+			$(CC) $(DEBUG1) $(DEBUG2) $(OBJS_FILES) -o $(NAME) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline 
 
 libft	:	
 			$(MAKE) -C libft
 
 objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			@mkdir -p objs
-			$(CC) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
+			$(CC) $(DEBUG1) $(DEBUG2) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
 			
 clean	:
 			rm -rf objs/
