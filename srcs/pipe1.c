@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 09:41:12 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 15:34:42 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	wait_all_pid(t_shell *shell)
 	if (shell->list_start->to_execute == 1 \
 		&& shell->list_start->is_builtin == 0)
 		eval_child_status(child_status);
-	while (i++ < exec_cmd_nbr - 1)
-		wait(NULL);
+	while (wait(NULL) != -1)
+		;
 	shell->list_start = pipe_tmp;
 	return (0);
 }
