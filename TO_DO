@@ -1,11 +1,12 @@
-unclosed quotes or >>> or any parsing error : mettre valeur 258 : TO CHECK
+unclosed quotes or >>> or any parsing error : mettre valeur 258 : OK => cf ligne 9
 ctrl \ : ne plus quitter le shell = ne rien faire
 Norme : une ligne de trop dans parsing.c
 readline : ligne qui se remplace
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 "$"lol
-cat <dsfsfds >out1 >out2  : TO CHECK
-heredoc renvoyer que le dernier heredoc dans les redirections : TO CHECK
-<< mettre erreur : TO CHECK
+cat <dsfsfds >out1 >out2  : TO CHECK => ERROR : cat Makefile >test1 >lol3 avec test1 qui est un repertoire
+heredoc renvoyer que le dernier heredoc dans les redirections : OK
+<< mettre erreur : OK => si que des pipes : pas d'erreur ?
 optionnel : exit: 999999999999999999999999999999999999999999999999999999999999: numeric argument required
-wait simple puis waitpid sur le dernier
+wait simple puis waitpid sur le dernier => la solution ne semble pas fonctionner
+taper entrée sur le prompt vide => nouveau prompt avec code erreur 1
