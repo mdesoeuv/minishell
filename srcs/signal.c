@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 11:59:40 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 12:03:23 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	heredoc_sig_int(int code)
 void	sig_quit(int code)
 {
 	(void)code;
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	eval_child_status(int child_status)
