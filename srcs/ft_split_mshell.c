@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:21:25 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 10:46:45 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:32:52 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	**ft_split_quotes_2(char c, t_shell *shell, t_split *split)
 				(shell, (*split).i, (*split).start_index);
 			if ((*split).i == -1)
 				ft_free("minishell : syntax error unclosed quote\n",
-					shell, 1, 1);
+					shell, 258, 1);
 		}
 	}
 	return ((*split).tab);

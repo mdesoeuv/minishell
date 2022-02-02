@@ -1,10 +1,11 @@
-unclosed quotes or >>> or any parsing error : 258
+unclosed quotes or >>> or any parsing error : mettre valeur 258 : TO CHECK
 ctrl \ : ne plus quitter le shell = ne rien faire
-une ligne de trop dans parsing.c
-cat <dsfsfds >out1 >out2
-wait simple puis waitpid sur le dernier
-heredoc renvoyer que le dernier heredoc dans les redirections
-"$"lol
+Norme : une ligne de trop dans parsing.c
 readline : ligne qui se remplace
 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+"$"lol
+cat <dsfsfds >out1 >out2  : TO CHECK
+heredoc renvoyer que le dernier heredoc dans les redirections : TO CHECK
+<< mettre erreur : TO CHECK
 optionnel : exit: 999999999999999999999999999999999999999999999999999999999999: numeric argument required
+wait simple puis waitpid sur le dernier

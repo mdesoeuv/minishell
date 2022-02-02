@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 17:20:18 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 11:23:05 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (pipe_lst->file_in)
 	{
+		if (pipe_lst->chevron_nbr_in > 1)
+			pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
 		if (pipe_lst->to_execute == 1)
 		{
 			if (pipe_lst->chevron_nbr_in == 1)
 				pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
-			else if (pipe_lst->chevron_nbr_in > 1)
-				pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
 		}
 	}
 	if (pipe_lst->file_out != NULL)
@@ -80,27 +80,29 @@ int	open_in_out_all(t_shell *shell)
 	return (0);
 }
 
-int	ft_check_if_file_exists(t_list_pipes *pipe_lst, char *file_name)
+int	ft_check_if_file_exists(t_list_pipes *pipe, t_shell *shell)
 {
-	if (access(file_name, F_OK) == -1)
+	if (shell->no_such_file == 1)
+		return (0);
+	if (access(pipe->file_in, F_OK) == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(pipe->file_in, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		pipe_lst->to_execute = 0;
+		shell->no_such_file = 1;
 		return (0);
 	}
-	else if (access(file_name, R_OK) == -1)
+	else if (access(pipe->file_in, R_OK) == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(pipe->file_in, 2);
 		ft_putstr_fd(": Permission denied\n", 2);
-		pipe_lst->to_execute = 0;
+		shell->no_such_file = 1;
 		return (0);
 	}
-	else if (is_directory(pipe_lst, file_name) == 1)
+	else if (is_directory(pipe, pipe->file_in) == 1)
 	{
-		pipe_lst->to_execute = 0;
+		shell->no_such_file = 1;
 		return (0);
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 10:45:05 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 12:06:21 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ void	sig_int_fork(int code)
 void	heredoc_sig_int(int code)
 {
 	(void)code;
+	printf("\n");
 	g_return_val = 1;
 	exit(g_return_val);
+}
+
+void	sig_quit(int code)
+{
+	(void)code;
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	eval_child_status(int child_status)

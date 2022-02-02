@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 17:17:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 11:59:59 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_shell
 	int					save_stdout;
 	int					tmp_stdin;
 	int					tmp_stdout;
+	int					no_such_file;
 	char				**envp;
 	struct s_list_pipes	*list_start;
 	char				*cmd_tmp;
@@ -73,7 +74,7 @@ void			eval_child_status(int child_status);
 void			ft_print_shell_struct(t_shell	shell);
 void			heredoc_sig_int(int code);
 void			sig_int_fork(int code);
-
+void			sig_quit(int code);
 /* BUILT-IN */
 
 int				print_working_directory(void);
@@ -105,8 +106,7 @@ int				ft_new_pipe_name_args(t_list_pipes *new_pipe, t_shell *shell);
 void			ft_variable_replace(int i, t_shell *shell);
 int				ft_dodge_quotes(char *line, int i);
 void			ft_create_file(int chevron_nbr_out, char *file_name);
-int				ft_check_if_file_exists(t_list_pipes *pipe_lst, \
-	char *file_name);
+int				ft_check_if_file_exists(t_list_pipes *pipe, t_shell *shell);
 
 /* PIPE */
 
@@ -153,6 +153,7 @@ t_list_pipes	*ft_lstnew_pipes(void);
 char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
 void			no_such_file_error(t_list_pipes *pipe_lst);
+int				ft_putstr_fd_shell(char *s, int fd);
 
 /*DEBUG*/
 
