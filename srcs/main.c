@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 13:44:43 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 21:56:19 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (0);
 	ft_init_main(&shell, &argv, &envp);
-	shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
+	shell.readline = readline("\001\033[0;36m\033[1m\002 minishell > \001\033[0m\002");
 	while (shell.readline)
 	{
 		add_history(shell.readline);
@@ -101,7 +101,7 @@ int	main(int argc, char **argv, char **envp)
 			signal(SIGINT, &sig_int);
 		}
 		ft_free("", &shell, g_return_val, 0);
-		shell.readline = readline("\033[0;36m\033[1m minishell ▸ \033[0m");
+		shell.readline = readline("\001\033[0;36m\033[1m\002 minishell > \001\033[0m\002");
 	}
 	free(shell.readline);
 	clear_history();

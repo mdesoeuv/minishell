@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 15:46:14 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/02 21:57:10 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int	wait_all_pid(t_shell *shell)
 	t_list_pipes	*pipe_tmp;
 	int				child_status;
 	int				exec_cmd_nbr;
-	int				wait_status;
+	// int				wait_status;
 
 	exec_cmd_nbr = executed_cmd_nbr(shell);
-	dprintf(2, "executed cmd = %d\n", exec_cmd_nbr);
+	// dprintf(2, "executed cmd = %d\n", exec_cmd_nbr);
 	i = 0;
 	pipe_tmp = shell->list_start;
 	while (shell->list_start->next)
