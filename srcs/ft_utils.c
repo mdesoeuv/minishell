@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/27 12:22:14 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:48:39 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ void	ft_lstadd_back_pipes(t_list_pipes **alst, t_list_pipes *new_elem)
 		(*alst)->next = new_elem;
 		*alst = start;
 	}
+}
+
+int	ft_putstr_fd_shell(char *s, int fd)
+{
+	if (!s)
+		return (-1);
+	write(fd, s, ft_strlen(s));
+	g_return_val = 258;
+	return (-1);
 }

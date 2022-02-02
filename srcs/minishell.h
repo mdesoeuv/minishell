@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 11:19:01 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:45:37 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ t_list_pipes	*ft_lstnew_pipes(void);
 char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
 void			no_such_file_error(t_list_pipes *pipe_lst);
+int				ft_putstr_fd_shell(char *s, int fd);
 
 /*DEBUG*/
 

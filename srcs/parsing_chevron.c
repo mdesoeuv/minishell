@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 11:19:34 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:48:56 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	}
 	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!file_name)
-		ft_free("Error : malloc error\n", shell, 1, 1);
+		ft_free("Error : malloc error\n", shell, 1, 1);	
 	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp) - index_start);
 	return (file_name);
@@ -75,9 +75,12 @@ static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 	{
 		if (new_pipe->chevron_nbr_out > 2)
 			return (ft_free("minishell: syntax error near unexpected token >\n",
-					shell, 1, 0));
+					shell, 258, 0));
 		free(new_pipe->file_out);
 		new_pipe->file_out = ft_file_in_out(shell, i);
+		if (ft_strcmp(new_pipe->file_out, "") == 0)
+			return (ft_putstr_fd_shell(
+					"minishell: syntax error unexpected token \n", 2));
 		if (is_possible_create(shell, new_pipe) == 1)
 			ft_create_file(new_pipe->chevron_nbr_out, new_pipe->file_out);
 		else
@@ -104,9 +107,12 @@ static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
 	{
 		if (new_pipe->chevron_nbr_in > 2)
 			return (ft_free("minishell: syntax error near unexpected token <\n",
-					shell, 1, 0));
+					shell, 258, 0));
 		free(new_pipe->file_in);
 		new_pipe->file_in = ft_file_in_out(shell, i);
+		if (ft_strcmp(new_pipe->file_in, "") == 0)
+			return (ft_putstr_fd_shell(
+					"minishell: syntax error unexpected token \n", 2));
 		if (new_pipe->chevron_nbr_in == 1)
 			ft_check_if_file_exists(new_pipe, shell);
 	}
