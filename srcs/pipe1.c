@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 11:21:32 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:23:05 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (pipe_lst->file_in)
 	{
+		if (pipe_lst->chevron_nbr_in > 1)
+			pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
 		if (pipe_lst->to_execute == 1)
 		{
 			if (pipe_lst->chevron_nbr_in == 1)
 				pipe_lst->fd_file_in = open(pipe_lst->file_in, O_RDONLY);
-			else if (pipe_lst->chevron_nbr_in > 1)
-				pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
 		}
 	}
 	if (pipe_lst->file_out != NULL)
