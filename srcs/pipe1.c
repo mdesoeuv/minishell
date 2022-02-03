@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 21:57:10 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 09:40:15 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ int	wait_all_pid(t_shell *shell)
 	t_list_pipes	*pipe_tmp;
 	int				child_status;
 	int				exec_cmd_nbr;
-	// int				wait_status;
+	int				wait_status;
 
 	exec_cmd_nbr = executed_cmd_nbr(shell);
-	// dprintf(2, "executed cmd = %d\n", exec_cmd_nbr);
 	i = 0;
 	pipe_tmp = shell->list_start;
 	while (shell->list_start->next)
@@ -52,8 +51,11 @@ int	wait_all_pid(t_shell *shell)
 	if (shell->list_start->to_execute == 1 \
 		&& shell->list_start->is_builtin == 0)
 		eval_child_status(child_status);
-	while (wait(NULL) != -1)
-		;
+	wait_status = wait(NULL);
+	while (wait_status != -1)
+		wait_status = wait(NULL);
+	if (errno != ECHILD)
+		ft_free("minishell: waiting process error\n", shell, 1, 1);
 	shell->list_start = pipe_tmp;
 	return (0);
 }

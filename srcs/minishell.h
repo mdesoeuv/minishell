@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 17:17:29 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 09:31:58 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <dirent.h>
 # include <termios.h>
+# include <errno.h> 
 # include "../libft/libft.h"
 
 # define SYNTAX_ERROR "minishell : syntax error unclosed quote\n"
