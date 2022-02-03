@@ -6,22 +6,11 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 11:33:11 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 11:04:09 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static int	restore_std(t_shell *shell)
-// {
-// 	shell->tmp_stdin = dup(0);
-// 	shell->tmp_stdout = dup(1);
-// 	dup2(shell->save_stdin, 0);
-// 	close(shell->save_stdin);
-// 	dup2(shell->save_stdout, 1);
-// 	close(shell->save_stdout);
-// 	return (0);
-// }
 
 static void	restore_prev_std(t_shell *shell)
 {
@@ -42,7 +31,6 @@ static int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 	if (!total_line)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	close(pipe_fd[0]);
-	// restore_std(shell);
 	signal(SIGINT, &heredoc_sig_int);
 	line = readline("> ");
 	while (line && ft_strcmp(line, ending_line) != 0)

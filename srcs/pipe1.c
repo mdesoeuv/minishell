@@ -3,16 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   pipe1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 10:22:55 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:05:04 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* waits for all childs to be terminated */
+
+int	executed_cmd_nbr(t_shell *shell)
+{
+	t_list_pipes	*pipe_tmp;
+	int				counter;
+
+	counter = 0;
+	pipe_tmp = shell->list_start;
+	while (shell->list_start)
+	{
+		if (shell->list_start->to_execute == 1)
+			counter++;
+		shell->list_start = shell->list_start->next;
+	}
+	shell->list_start = pipe_tmp;
+	return (counter);
+}
+
+int	wait_all_pid_v2(t_shell *shell)
+{
+	int				i;
+	t_list_pipes	*pipe_tmp;
+	int				child_status;
+	int				exec_cmd_nbr;
+	int				wait_status;
+
+	exec_cmd_nbr = executed_cmd_nbr(shell);
+	i = 0;
+	pipe_tmp = shell->list_start;
+	while (shell->list_start->next)
+	{
+		shell->list_start = shell->list_start->next;
+	}
+	if (shell->list_start->to_execute == 1)
+		waitpid(shell->list_start->pid, &child_status, 0);
+	if (shell->list_start->to_execute == 1 \
+		&& shell->list_start->is_builtin == 0)
+		eval_child_status(child_status);
+	wait_status = wait(NULL);
+	while (wait_status != -1)
+		wait_status = wait(NULL);
+	if (errno != ECHILD)
+		ft_free("minishell: waiting process error\n", shell, 1, 1);
+	shell->list_start = pipe_tmp;
+	return (0);
+}
 
 int	wait_all_pid(t_shell *shell)
 {
@@ -43,7 +89,6 @@ void	open_in_out(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (pipe_lst->file_in)
 	{
-		// ft_check_if_file_in_exists(pipe_lst);
 		if (pipe_lst->chevron_nbr_in > 1)
 			pipe_lst->fd_file_in = here_doc_v2(shell, pipe_lst);
 		if (pipe_lst->to_execute == 1)
@@ -80,58 +125,4 @@ int	open_in_out_all(t_shell *shell)
 	}
 	shell->list_start = start;
 	return (0);
-}
-
-int	ft_check_if_file_exists(t_list_pipes *pipe)
-{
-	if (pipe->to_execute == 0)
-		return (0);
-	if (access(pipe->file_in, F_OK) == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(pipe->file_in, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		pipe->to_execute = 0;
-		return (0);
-	}
-	if (access(pipe->file_in, R_OK) == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(pipe->file_in, 2);
-		ft_putstr_fd(": Permission denied\n", 2);
-		pipe->to_execute = 0;
-		return (0);
-	}
-	if (is_directory(pipe, pipe->file_in) == 1)
-	{
-		pipe->to_execute = 0;
-		return (0);
-	}
-	return (1);
-}
-
-int	ft_check_if_file_in_exists(t_list_pipes *pipe)
-{
-	if (access(pipe->file_in, F_OK) == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(pipe->file_in, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		pipe->to_execute = 0;
-		return (0);
-	}
-	if (access(pipe->file_in, R_OK) == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(pipe->file_in, 2);
-		ft_putstr_fd(": Permission denied\n", 2);
-		pipe->to_execute = 0;
-		return (0);
-	}
-	if (is_directory(pipe, pipe->file_in) == 1)
-	{
-		pipe->to_execute = 0;
-		return (0);
-	}
-	return (1);
 }

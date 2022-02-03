@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:59:03 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 17:34:20 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 11:04:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,32 @@ int	not_valid_varname(char *s)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_check_if_file_exists(t_list_pipes *pipe)
+{
+	if (pipe->to_execute == 0)
+		return (0);
+	if (access(pipe->file_in, F_OK) == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(pipe->file_in, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		pipe->to_execute = 0;
+		return (0);
+	}
+	if (access(pipe->file_in, R_OK) == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(pipe->file_in, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+		pipe->to_execute = 0;
+		return (0);
+	}
+	if (is_directory(pipe, pipe->file_in) == 1)
+	{
+		pipe->to_execute = 0;
+		return (0);
+	}
+	return (1);
 }

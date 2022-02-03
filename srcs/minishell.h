@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 10:23:39 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:03:33 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <dirent.h>
 # include <termios.h>
+# include <errno.h>
 # include "../libft/libft.h"
 
 # define SYNTAX_ERROR "minishell : syntax error unclosed quote\n"
@@ -107,7 +108,6 @@ void			ft_variable_replace(int i, t_shell *shell);
 int				ft_dodge_quotes(char *line, int i);
 void			ft_create_file(int chevron_nbr_out, char *file_name);
 int				ft_check_if_file_exists(t_list_pipes *pipe);
-int				ft_check_if_file_in_exists(t_list_pipes *pipe);
 /* PIPE */
 
 void			cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst);
@@ -115,6 +115,7 @@ int				manage_file_fd(t_list_pipes *pipe_lst);
 int				manage_dup_fd(t_shell *shell, t_list_pipes *pipe_lst, int i);
 int				close_all_pipes(t_shell *shell);
 int				wait_all_pid(t_shell *shell);
+int				wait_all_pid_v2(t_shell *shell);
 void			free_split(char **split);
 void			print_split(char **split);
 int				malloc_pipe_fd(t_shell *shell);
