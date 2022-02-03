@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 09:26:43 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 10:57:02 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
 		shell->readline = NULL;
 	}
 	ft_free_cmd(shell);
-	if (g_return_val == 255 || is_exit)
+	if (is_exit)
 	{
 		clear_history();
 		free_split(shell->envp);
