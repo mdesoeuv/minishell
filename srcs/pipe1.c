@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 10:14:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 10:22:55 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,16 @@ int	open_in_out_all(t_shell *shell)
 	return (0);
 }
 
-int	ft_check_if_file_exists(t_list_pipes *pipe, t_shell *shell)
+int	ft_check_if_file_exists(t_list_pipes *pipe)
 {
-	if (shell->no_such_file == 1)
+	if (pipe->to_execute == 0)
 		return (0);
 	if (access(pipe->file_in, F_OK) == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_in, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		shell->no_such_file = 1;
+		pipe->to_execute = 0;
 		return (0);
 	}
 	if (access(pipe->file_in, R_OK) == -1)
@@ -99,12 +99,12 @@ int	ft_check_if_file_exists(t_list_pipes *pipe, t_shell *shell)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_in, 2);
 		ft_putstr_fd(": Permission denied\n", 2);
-		shell->no_such_file = 1;
+		pipe->to_execute = 0;
 		return (0);
 	}
 	if (is_directory(pipe, pipe->file_in) == 1)
 	{
-		shell->no_such_file = 1;
+		pipe->to_execute = 0;
 		return (0);
 	}
 	return (1);

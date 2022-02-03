@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 16:52:31 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:23:48 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	return (file_name);
 }
 
-static int	is_possible_create(t_shell *shell, t_list_pipes *pipe)
+static int	is_possible_create(t_list_pipes *pipe)
 {
-	if (shell->no_such_file == 1)
+	if (pipe->to_execute == 0)
 		return (0);
 	if (access(pipe->file_out, F_OK) == -1)
 		return (1);
@@ -51,12 +51,12 @@ static int	is_possible_create(t_shell *shell, t_list_pipes *pipe)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_out, 2);
 		ft_putstr_fd(": Permission denied\n", 2);
-		shell->no_such_file = 1;
+		pipe->to_execute = 0;
 		return (0);
 	}
 	if (is_directory(pipe, pipe->file_out) == 1)
 	{
-		shell->no_such_file = 1;
+		pipe->to_execute = 0;
 		return (0);
 	}	
 	return (1);
@@ -84,7 +84,7 @@ static int	ft_new_pipe_chevron2_part2(t_shell	*shell,	\
 		if (ft_strcmp(new_pipe->file_out, "") == 0)
 			return (ft_putstr_fd_shell(
 					"minishell: syntax error unexpected token \n", 2));
-		if (is_possible_create(shell, new_pipe) == 1)
+		if (is_possible_create(new_pipe) == 1)
 			ft_create_file(new_pipe->chevron_nbr_out, new_pipe->file_out);
 		else
 			new_pipe->to_execute = 0;
@@ -117,7 +117,7 @@ static int	ft_new_pipe_chevron1_part2(t_shell	*shell,
 			return (ft_putstr_fd_shell(
 					"minishell: syntax error unexpected token \n", 2));
 		if (new_pipe->chevron_nbr_in == 1)
-			ft_check_if_file_exists(new_pipe, shell);
+			ft_check_if_file_exists(new_pipe);
 	}
 	return (0);
 }
