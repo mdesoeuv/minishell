@@ -11,4 +11,4 @@ heredoc renvoyer que le dernier heredoc dans les redirections : OK
 << mettre erreur : OK
 optionnel : exit: 999999999999999999999999999999999999999999999999999999999999: numeric argument required
 wait simple puis waitpid sur le dernier : OK
-ls | exit sdsfdsfd dsfadsfdsfa MEHDI
+ls | exit sdsfdsfd dsfadsfdsfa MEHDI : OK
