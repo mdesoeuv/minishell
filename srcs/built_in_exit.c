@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 09:39:31 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 10:27:13 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
