@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 12:06:21 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:41:07 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,8 @@ void	sig_quit(int code)
 	rl_redisplay();
 }
 
-void	eval_child_status(int child_status)
+void	sig_quit_heredoc(int code)
 {
-	if (WIFEXITED(child_status) != 0)
-		g_return_val = WEXITSTATUS(child_status);
-	else
-	{
-		if (WIFSIGNALED(child_status) != 0)
-			g_return_val = WTERMSIG(child_status) + 128;
-	}
+	(void)code;
+	rl_on_new_line();
 }

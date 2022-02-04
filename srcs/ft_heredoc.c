@@ -6,11 +6,17 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:02:36 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:43:23 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_change_sig(void)
+{
+	signal(SIGINT, &heredoc_sig_int);
+	signal(SIGQUIT, &sig_quit_heredoc);
+}
 
 static void	restore_prev_std(t_shell *shell)
 {
@@ -31,7 +37,7 @@ static int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 	if (!total_line)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	close(pipe_fd[0]);
-	signal(SIGINT, &heredoc_sig_int);
+	ft_change_sig();
 	line = readline("> ");
 	while (line && ft_strcmp(line, ending_line) != 0)
 	{
@@ -63,6 +69,7 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 	if (pid < 0)
 		ft_free("minishell: fork error\n", shell, 1, 1);
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	if (pid == 0)
 	{
 		heredoc_process(shell, ending_line, pipe_fd);

@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:21:54 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:34:07 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			ft_print_shell_struct(t_shell	shell);
 void			heredoc_sig_int(int code);
 void			sig_int_fork(int code);
 void			sig_quit(int code);
+void			sig_quit_heredoc(int code);
 
 /* BUILT-IN */
 int				print_working_directory(void);
