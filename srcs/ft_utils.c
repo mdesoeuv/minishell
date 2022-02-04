@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/04 14:44:53 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:14:04 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	set_shell_path(t_shell *shell)
 {
 	char	*shell_path;
 
-	shell_path = return_working_directory();
+	shell_path = return_working_directory(NULL, shell);
 	shell_path = ft_strjoin_free_s2("SHELL=", shell_path);
 	if (!shell_path)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
