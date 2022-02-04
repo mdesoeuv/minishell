@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 11:03:33 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 14:44:44 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
 void			no_such_file_error(t_list_pipes *pipe_lst);
 int				ft_putstr_fd_shell(char *s, int fd);
+void			set_shell_path(t_shell *shell);
 
 /*DEBUG*/
 

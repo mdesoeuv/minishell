@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/02 11:48:39 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:44:53 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,16 @@ int	ft_putstr_fd_shell(char *s, int fd)
 	write(fd, s, ft_strlen(s));
 	g_return_val = 258;
 	return (-1);
+}
+
+void	set_shell_path(t_shell *shell)
+{
+	char	*shell_path;
+
+	shell_path = return_working_directory();
+	shell_path = ft_strjoin_free_s2("SHELL=", shell_path);
+	if (!shell_path)
+		ft_free("minishell: memory allocation error\n", shell, 1, 1);
+	ft_export(shell, shell_path);
+	free(shell_path);
 }

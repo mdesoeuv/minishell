@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 14:09:55 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 14:44:19 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,6 @@ static int	copy_set_envp(t_shell *shell, char **envp)
 	shell->envp = new_envp;
 	ft_incr_shell_env(shell);
 	return (1);
-}
-
-static void	set_shell_path(t_shell *shell)
-{
-	char	*shell_path;
-
-	shell_path = return_working_directory();
-	shell_path = ft_strjoin_free_s2("SHELL=", shell_path);
-	if (!shell_path)
-		ft_free("minishell: memory allocation error\n", shell, 1, 1);
-	ft_export(shell, shell_path);
-	free(shell_path);
 }
 
 static void	ft_init_main(t_shell *shell, char ***argv, char ***envp)
@@ -120,7 +108,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		ft_check_if_empty(shell);
 		ft_free("", &shell, g_return_val, 0);
-		shell.readline = readline("\001\033[0;36m\033[1m\002minishell > \001\033[0m\002");
+		shell.readline = \
+			readline("\001\033[0;36m\033[1m\002minishell > \001\033[0m\002");
 	}
 	free(shell.readline);
 	clear_history();

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/01 16:20:24 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/02/04 14:46:29 by vchevill         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,8 @@ SRCS :=	main.c \
 		exec.c \
 		exec_builtin.c \
 		cmd_process.c \
-		errors.c \
-		debug_functions.c \
-		heredoc.c
+		ft_errors.c \
+		ft_heredoc.c
 
 ifneq ($(shell uname), Linux)
 READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
