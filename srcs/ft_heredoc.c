@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 11:04:09 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:02:36 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
 	while (line && ft_strcmp(line, ending_line) != 0)
 	{
 		total_line = ft_strjoin_free(total_line, line);
+		if (!total_line)
+			ft_free("minishell: memory allocation error\n", shell, 1, 1);
 		total_line = ft_strjoin_free_s1(total_line, "\n");
 		if (!total_line)
 			ft_free("minishell: memory allocation error\n", shell, 1, 1);
