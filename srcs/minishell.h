@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:12:02 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:21:54 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_list_pipes
 {
 	pid_t						pid;
 	char						**command;
-	char						*cmd_path;
-	int							to_execute;
+	char						*cmd_pa;
+	int							to_ex;
 	int							is_builtin;
 	int							cmd_index;
 	char						*file_in;

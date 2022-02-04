@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/04 15:14:04 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:21:54 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_list_pipes	*ft_lstnew_pipes(void)
 	new_elem->file_in = NULL;
 	new_elem->file_out = NULL;
 	new_elem->command = NULL;
-	new_elem->cmd_path = NULL;
-	new_elem->to_execute = 1;
+	new_elem->cmd_pa = NULL;
+	new_elem->to_ex = 1;
 	new_elem->is_builtin = 1;
 	new_elem->chevron_nbr_in = 0;
 	new_elem->chevron_nbr_out = 0;
