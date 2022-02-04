@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:11:46 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:13:29 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	change_directory(t_shell *shell, char *path)
 	}
 	set_old_path(shell, tmp_path);
 	ret_value = chdir(path);
-	curr_path = return_working_directory(curr_path, shell);
+	curr_path = return_working_directory(tmp_path, shell);
 	curr_path = ft_strjoin_free_s2("PWD=", curr_path);
 	if (!curr_path)
 	{
