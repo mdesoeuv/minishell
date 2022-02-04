@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 11:05:04 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 13:31:20 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int	wait_all_pid_v2(t_shell *shell)
 	wait_status = wait(NULL);
 	while (wait_status != -1)
 		wait_status = wait(NULL);
-	if (errno != ECHILD)
-		ft_free("minishell: waiting process error\n", shell, 1, 1);
 	shell->list_start = pipe_tmp;
 	return (0);
 }
