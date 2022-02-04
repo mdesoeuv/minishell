@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 10:18:05 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 14:09:55 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (0);
 	ft_init_main(&shell, &argv, &envp);
-	shell.readline = readline("\001\033[0;36m\033[1m\002 minishell > \001\033[0m\002");
+	shell.readline = readline("\001\033[0;36m\033[1m\002minishell > \001\033[0m\002");
 	while (shell.readline)
 	{
 		add_history(shell.readline);
@@ -120,7 +120,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		ft_check_if_empty(shell);
 		ft_free("", &shell, g_return_val, 0);
-		shell.readline = readline("\001\033[0;36m\033[1m\002 minishell > \001\033[0m\002");
+		shell.readline = readline("\001\033[0;36m\033[1m\002minishell > \001\033[0m\002");
 	}
 	free(shell.readline);
 	clear_history();
