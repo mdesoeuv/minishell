@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/02 14:40:10 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 11:08:25 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 
 static void	end_cmd_process(t_shell *shell)
 {
-	wait_all_pid(shell);
+	wait_all_pid_v2(shell);
 	close_file_pipes(shell);
 	restore_fd(shell);
 }

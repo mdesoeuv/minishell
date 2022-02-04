@@ -6,7 +6,11 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/02 21:48:39 by mdesoeuv         ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/02/03 10:12:27 by vchevill         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +94,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (0);
 	ft_init_main(&shell, &argv, &envp);
-	shell.readline = readline("\001\e[01;32m\002minishell > \001\e[00m\002");
+	shell.readline = readline("\001\033[0;36m\033[1m\002 minishell > \001\033[0m\002");
 	while (shell.readline)
 	{
 		add_history(shell.readline);
@@ -101,7 +105,7 @@ int	main(int argc, char **argv, char **envp)
 			signal(SIGINT, &sig_int);
 		}
 		ft_free("", &shell, g_return_val, 0);
-		shell.readline = readline("minishell > ");
+		shell.readline = readline("\001\033[0;36m\033[1m\002 minishell > \001\033[0m\002");
 	}
 	free(shell.readline);
 	clear_history();
