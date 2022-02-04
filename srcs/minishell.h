@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 14:44:44 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:12:02 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			sig_quit(int code);
 
 /* BUILT-IN */
 int				print_working_directory(void);
-char			*return_working_directory(void);
+char			*return_working_directory(char *freeval, t_shell *shell);
 int				change_directory(t_shell *shell, char *arg);
 int				ft_parsing(char *line, t_shell	*shell, int i, int start);
 int				ft_free(char *message, t_shell *shell,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:50:13 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 14:03:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:04:51 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	cmd_test_execute(t_shell *shell, t_list_pipes *pipe_lst)
 	if (!possible_paths)
 		ft_free("minishell: memory allocation error\n", shell, 1, 1);
 	if (pipe_lst->command[0][0] != '.' || pipe_lst->command[0][0] != '/')
-		pipe_lst->cmd_path = ft_strdup(pipe_lst->command[0]);
+		pipe_lst->cmd_path = ft_strdup(pipe_lst->command[0]);//ici
 	cmd_concatenate_test(shell, possible_paths, pipe_lst, &i);
 	if (pipe_lst->to_execute == 1 && \
 		(!possible_paths[i] || access(pipe_lst->cmd_path, F_OK) == -1))
