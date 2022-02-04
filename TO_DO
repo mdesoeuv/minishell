@@ -13,7 +13,7 @@ optionnel : exit: 999999999999999999999999999999999999999999999999999999999999: 
 wait simple puis waitpid sur le dernier : OK
 ls | exit sdsfdsfd dsfadsfdsfa MEHDI : OK
 
-"$dsffds" renvoie / /
+"$dsffds"
 echo text"'$USER'" ' $USER '
 echo '\" ' " \"\""
 echo \\\" \\\" \\\" \\\"\\\"\\\" \\\'\\\'\\\'

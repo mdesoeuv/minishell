@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:13 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/03 10:23:48 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:39:44 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_file_in_out(t_shell *shell, int i)
 	}
 	file_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!file_name)
-		ft_free("Error : malloc error\n", shell, 1, 1);	
+		ft_free("Error : malloc error\n", shell, 1, 1);
 	ft_memmove(&(shell->cmd_tmp[index_start]), &(shell->cmd_tmp[i]),
 		ft_strlen(shell->cmd_tmp) - index_start);
 	return (file_name);
