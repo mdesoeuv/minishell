@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 10:12:27 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/04 10:18:05 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,24 @@ static void	ft_init_main(t_shell *shell, char ***argv, char ***envp)
 	g_return_val = 0;
 }
 
+void static	ft_check_if_empty(t_shell shell)
+{
+	if (shell.cmd_nbr > 1)
+	{
+		while (shell.list_start)
+		{
+			if (shell.list_start->chevron_nbr_out > 0
+				|| shell.list_start->chevron_nbr_in > 0
+				|| shell.list_start->command[0])
+				return ;
+			shell.list_start = shell.list_start->next;
+		}
+		ft_putstr_fd("minishell :  syntax error unexpected token\n", 2);
+		g_return_val = 258;
+		return ;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell		shell;
@@ -100,6 +118,7 @@ int	main(int argc, char **argv, char **envp)
 			new_cmd_process(&shell);
 			signal(SIGINT, &sig_int);
 		}
+		ft_check_if_empty(shell);
 		ft_free("", &shell, g_return_val, 0);
 		shell.readline = readline("\001\033[0;36m\033[1m\002 minishell > \001\033[0m\002");
 	}
