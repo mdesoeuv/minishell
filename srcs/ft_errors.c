@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:59:03 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 11:04:50 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:21:54 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ void	no_such_file_error(t_list_pipes *pipe_lst)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(pipe_lst->command[0], 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
-	pipe_lst->to_execute = 0;
+	pipe_lst->to_ex = 0;
 	g_return_val = 127;
 }
 
 void	error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd)
 {
-	pipe_lst->to_execute = 0;
+	pipe_lst->to_ex = 0;
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	if (!(pipe_lst->command[0][0] == '.' || pipe_lst->command[0][0] == '/'))
 	{
-		free(pipe_lst->cmd_path);
-		pipe_lst->cmd_path = NULL;
+		free(pipe_lst->cmd_pa);
+		pipe_lst->cmd_pa = NULL;
 	}
 	else
-		pipe_lst->cmd_path = NULL;
+		pipe_lst->cmd_pa = NULL;
 	g_return_val = 127;
 }
 
@@ -62,14 +62,14 @@ int	not_valid_varname(char *s)
 
 int	ft_check_if_file_exists(t_list_pipes *pipe)
 {
-	if (pipe->to_execute == 0)
+	if (pipe->to_ex == 0)
 		return (0);
 	if (access(pipe->file_in, F_OK) == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_in, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		pipe->to_execute = 0;
+		pipe->to_ex = 0;
 		return (0);
 	}
 	if (access(pipe->file_in, R_OK) == -1)
@@ -77,12 +77,12 @@ int	ft_check_if_file_exists(t_list_pipes *pipe)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_in, 2);
 		ft_putstr_fd(": Permission denied\n", 2);
-		pipe->to_execute = 0;
+		pipe->to_ex = 0;
 		return (0);
 	}
 	if (is_directory(pipe, pipe->file_in) == 1)
 	{
-		pipe->to_execute = 0;
+		pipe->to_ex = 0;
 		return (0);
 	}
 	return (1);
