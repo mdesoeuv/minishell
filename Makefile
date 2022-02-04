@@ -6,7 +6,7 @@
 #    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/04 14:46:29 by vchevill         ###   ########lyon.fr    #
+#    Updated: 2022/02/04 15:52:17 by vchevill         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,6 @@
 NAME := minishell
 
 CC := gcc -Wall -Werror -Wextra 
-
-DEBUG1 := -fsanitize=address -g3
-
-#DEBUG2 := -g
 
 SRCS :=	main.c \
 		built_in_pwd.c \
@@ -60,14 +56,14 @@ LIB := libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
-			$(CC) $(DEBUG1) $(DEBUG2) $(OBJS_FILES) -o $(NAME) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline 
+			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline 
 
 libft	:	
 			$(MAKE) -C libft
 
 objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
 			@mkdir -p objs
-			$(CC) $(DEBUG1) $(DEBUG2) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
+			$(CC) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
 			
 clean	:
 			rm -rf objs/
