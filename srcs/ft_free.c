@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/04 15:21:39 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/05 20:12:57 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
 	ft_free_cmd(shell);
 	if (is_exit)
 	{
-		clear_history();
+		rl_clear_history();
 		free_split(shell->envp);
 		exit(g_return_val);
 	}
