@@ -6,6 +6,6 @@ fix la return value d'un ctrl c dans un heredoc au passage (remettre dans heredo
 makefile qui relink qd modif de la lib OK
 echo -n -n OK
 rl_clear_history OK
-Créer $PWD au lancement du Shell
-Ne pas quitter si trop de forks
-Cat ^\ : Quit 3
+Créer $PWD au lancement du Shell MEHDI
+Ne pas quitter si trop de forks MEHDI
+Cat ^\ : Quit 3 MEHDI
