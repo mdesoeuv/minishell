@@ -1,5 +1,5 @@
 pb de free not malloc var qd  export HEY="jjzjzzj jzjzjzj" puis ls -la $HEY VICTOR
-exit 99999 overflow MEHDI
+exit 99999 MOK
 env qui leak si lancement minishell puis ctrl D sans commande entre temps MEHDI
 fix la return value d'un ctrl c dans un heredoc au passage (remettre dans heredoc V2) MEHDI
 ^c ^d etc OK
