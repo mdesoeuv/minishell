@@ -1,6 +1,6 @@
 ^c ^d etc OK
 makefile qui relink qd modif de la lib OK
-pb de free not malloc var qd  $HEY = "jjzjzzj jzjzjzj" puis ls -la $HEY VICTOR
+pb de free not malloc var qd  export HEY="jjzjzzj jzjzjzj" puis ls -la $HEY VICTOR
 exit 99999 overflow MEHDI
 echo -n -n VICTOR
 rl_clear_history OK
