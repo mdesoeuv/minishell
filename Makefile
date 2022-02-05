@@ -6,7 +6,7 @@
 #    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/04 15:52:17 by vchevill         ###   ########lyon.fr    #
+#    Updated: 2022/02/05 20:09:52 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
 libft	:	
 			$(MAKE) -C libft
 
-objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
+objs/%.o:	srcs/%.c	srcs/minishell.h $(LIB)
 			@mkdir -p objs
 			$(CC) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
 			
