@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/05 18:11:59 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:43:23 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 	char	*ending_line;
 	int		pipe_fd[2];
 	pid_t	pid;
-	int		child_status;
 
 	ending_line = pipe_lst->file_in;
 	pipe(pipe_fd);
@@ -76,7 +75,6 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 		heredoc_process(shell, ending_line, pipe_fd);
 	}
 	close(pipe_fd[1]);
-	waitpid(pid, &child_status, 0);
-	eval_child_status(child_status);
+	waitpid(pid, NULL, 0);
 	return (pipe_fd[0]);
 }

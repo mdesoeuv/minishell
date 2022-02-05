@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 17:16:49 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 16:29:24 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	unset_add(t_shell *shell, char *command)
 {
 	ft_unset(shell, command);
 	add_envp(shell, command);
+	sort_env(shell);
 }
 
 int	ft_export_multi(t_shell *shell, char **command)
