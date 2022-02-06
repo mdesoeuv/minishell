@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:34:07 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/06 10:41:49 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ typedef struct s_shell
 	int					is_exit;
 	int					save_stdin;
 	int					save_stdout;
-	int					tmp_stdin;
-	int					tmp_stdout;
+	int					fork_error;
 	int					no_such_file;
 	char				**envp;
 	struct s_list_pipes	*list_start;

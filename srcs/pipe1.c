@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:25:19 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/06 17:09:56 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	wait_all_pid_v2(t_shell *shell)
 	{
 		shell->list_start = shell->list_start->next;
 	}
-	if (shell->list_start->to_ex == 1 && (shell->list_start->is_builtin \
+	if (shell->fork_error == 0 && shell->list_start->to_ex == 1 \
+		&& (shell->list_start->is_builtin \
 		== 0 || (shell->list_start->is_builtin == 1 && shell->cmd_nbr > 1)))
 	{
 		waitpid(shell->list_start->pid, &child_status, 0);

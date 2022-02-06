@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/05 20:42:01 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/06 10:44:52 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	restore_prev_std(t_shell *shell)
 {
 	shell->save_stdin = dup(0);
 	shell->save_stdout = dup(1);
-	dup2(shell->tmp_stdin, 0);
-	close(shell->tmp_stdin);
-	dup2(shell->tmp_stdout, 1);
-	close(shell->tmp_stdout);
+	// dup2(shell->tmp_stdin, 0);
+	// close(shell->tmp_stdin);
+	// dup2(shell->tmp_stdout, 1);
+	// close(shell->tmp_stdout);
 }
 
 static int	heredoc_process(t_shell *shell, char *ending_line, int pipe_fd[2])
@@ -68,7 +68,8 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid < 0)
-		ft_free("minishell: fork error\n", shell, 1, 1);
+		ft_free("minishell: fork: Resource temporarily \
+			unavailable\n", shell, 1, 0);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	if (pid == 0)

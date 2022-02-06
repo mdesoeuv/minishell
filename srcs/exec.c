@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:42:04 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/06 10:58:59 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 	}
 	pipe_lst->pid = fork();
 	if (pipe_lst->pid < 0)
-		ft_free("minishell: fork error\n", shell, 1, 1);
+	{
+		ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
+		shell->fork_error = 1;
+		g_return_val = 1;
+	}
 	else if (pipe_lst->pid == 0)
 	{
 		if (pipe_lst->to_ex == 1)
@@ -62,6 +66,7 @@ static void	end_cmd_process(t_shell *shell)
 	wait_all_pid_v2(shell);
 	close_file_pipes(shell);
 	restore_fd(shell);
+	shell->fork_error = 0;
 }
 
 static void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
@@ -78,7 +83,7 @@ static void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
 		if (execute_if_built_in(shell, shell->list_start) == -100)
 			execute(shell, shell->list_start);
 	}
-	close(1);
+	// close(1);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	*i += 1;
@@ -97,7 +102,7 @@ void	new_cmd_process(t_shell *shell)
 	open_in_out_all(shell);
 	fd_prev_pipe = 0;
 	signal(SIGINT, sig_int_fork);
-	while (shell->list_start)
+	while (shell->list_start && shell->fork_error == 0)
 	{
 		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
 		shell->list_start = shell->list_start->next;

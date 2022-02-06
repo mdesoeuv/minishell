@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 13:45:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/06 10:52:14 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	fd_redirect(t_shell *shell, t_list_pipes *pipe_lst, \
 	{
 		close(pipe_fd[1]);
 		dup2(shell->save_stdout, 1);
+		close(shell->save_stdout);
 	}
 	return (fd_read);
 }
