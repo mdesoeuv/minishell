@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:43:20 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:10:55 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 11:34:30 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,16 @@ char	*return_working_directory(char *freeval, t_shell *shell)
 		ft_free("memory allocation error\n", shell, 1, 1);
 	}
 	return (ret);
+}
+
+void	set_pwd(t_shell *shell)
+{
+	char	*pwd;
+
+	pwd = return_working_directory(NULL, shell);
+	pwd = ft_strjoin_free_s2("PWD=", pwd);
+	if (!pwd)
+		ft_free("memory allocation error\n", shell, 1, 1);
+	ft_export(shell, pwd);
+	free(pwd);
 }

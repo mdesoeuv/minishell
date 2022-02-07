@@ -6,18 +6,18 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:45:42 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 09:53:37 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 10:16:53 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_env_size(t_shell *shell)
+int	get_env_size(char **envp)
 {
 	int	i;
 
 	i = 0;
-	while (shell->envp[i])
+	while (envp[i])
 		i++;
 	return (i);
 }
@@ -30,7 +30,7 @@ void	sort_env(t_shell *shell)
 	char	*tmp;
 
 	i = 0;
-	env_size = get_env_size(shell);
+	env_size = get_env_size(shell->envp);
 	while (i < env_size - 1)
 	{
 		j = i + 1;

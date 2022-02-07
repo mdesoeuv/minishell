@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:45:33 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/05 21:39:05 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 11:37:04 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	is_overflow(char *nbr)
 {
 	long int	n;
 
+	if (!nbr)
+		return (0);
 	n = ft_atol(nbr);
 	if ((n == -1 && ft_strcmp(nbr, "-1") != 0) || \
 		((n == 0 && ft_strcmp(nbr, "0") != 0) && (n == 0 && \

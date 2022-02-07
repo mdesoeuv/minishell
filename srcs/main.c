@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/05 20:13:01 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/07 11:24:50 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	copy_set_envp(t_shell *shell, char **envp)
 	int		envp_size;
 	char	**new_envp;
 
-	envp_size = get_env_size(shell);
+	envp_size = get_env_size(envp);
 	new_envp = malloc(sizeof(char *) * (envp_size + 1));
 	if (!new_envp)
 		ft_free("Error : malloc error\n", shell, 1, 1);
@@ -58,16 +58,16 @@ static int	copy_set_envp(t_shell *shell, char **envp)
 	return (1);
 }
 
-static void	ft_init_main(t_shell *shell, char ***argv, char ***envp)
+static void	ft_init_main(t_shell *shell, char **argv, char **envp)
 {
-	(void)(*argv);
+	(void)(argv);
 	shell->is_exit = 1;
 	g_return_val = 0;
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
-	shell->envp = (*envp);
-	copy_set_envp(shell, (*envp));
+	copy_set_envp(shell, envp);
 	set_shell_path(shell);
+	set_pwd(shell);
 	g_return_val = 0;
 }
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1)
 		return (0);
-	ft_init_main(&shell, &argv, &envp);
+	ft_init_main(&shell, argv, envp);
 	shell.readline = readline("\001\033[0;36m\033[1m\002minishell > \001\033[0m\002");
 	while (shell.readline)
 	{

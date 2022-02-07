@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:34:07 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 11:25:24 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int				ft_unset(t_shell *shell, char *s);
 int				ft_unset_multi(t_shell *shell, char **command);
 char			*ft_getenv(t_shell *shell, char *var_name);
 int				is_value_in_envp(t_shell *shell, char *s);
-int				get_env_size(t_shell *shell);
+int				get_env_size(char **envp);
 void			sort_env(t_shell *shell);
 int				not_valid_varname(char *s);
 
@@ -157,6 +157,7 @@ int				ft_strisnum(const char *str);
 void			no_such_file_error(t_list_pipes *pipe_lst);
 int				ft_putstr_fd_shell(char *s, int fd);
 void			set_shell_path(t_shell *shell);
+void			set_pwd(t_shell *shell);
 
 /*DEBUG*/
 
