@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 13:59:03 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:41:26 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 11:47:59 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,6 @@ int	ft_check_if_file_exists(t_list_pipes *pipe)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pipe->file_in, 2);
 		ft_putstr_fd(": Permission denied\n", 2);
-		pipe->to_ex = 0;
-		return (0);
-	}
-	if (is_directory(pipe, pipe->file_in) == 1)
-	{
 		pipe->to_ex = 0;
 		return (0);
 	}
