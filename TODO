@@ -7,5 +7,5 @@ makefile qui relink qd modif de la lib OK
 echo -n -n OK
 rl_clear_history OK
 Créer $PWD au lancement du Shell : OK
-Ne pas quitter si trop de forks MEHDI
+Ne pas quitter si trop de forks : OK => continuer de tester
 Cat ^\ : Quit 3 MEHDI
