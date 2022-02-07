@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:42:14 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 13:14:16 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	exec_builtin_fork(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	pipe_lst->pid = fork();
 	if (pipe_lst->pid < 0)
-		ft_free("minishell: fork error\n", shell, 1, 1);
+		ft_fork_error(shell);
 	else if (pipe_lst->pid == 0)
 	{
 		if (ft_strcmp(pipe_lst->command[0], "pwd") == 0)

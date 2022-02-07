@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/07 12:16:26 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 13:07:57 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	ft_init_main(t_shell *shell, char **argv, char **envp)
 {
 	(void)(argv);
 	shell->is_exit = 1;
+	shell->fork_error = 0;
 	g_return_val = 0;
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);

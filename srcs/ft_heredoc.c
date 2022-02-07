@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:22:11 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/05 20:42:01 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 13:14:38 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ static void	ft_change_sig(void)
 {
 	signal(SIGINT, &heredoc_sig_int);
 	signal(SIGQUIT, &sig_quit_heredoc);
+}
+
+void	ft_fork_error(t_shell *shell)
+{
+	ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
+	shell->fork_error = 1;
+	g_return_val = 1;
 }
 
 static void	restore_prev_std(t_shell *shell)
@@ -68,7 +75,7 @@ int	here_doc_v2(t_shell *shell, t_list_pipes *pipe_lst)
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid < 0)
-		ft_free("minishell: fork error\n", shell, 1, 1);
+		ft_fork_error(shell);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	if (pid == 0)

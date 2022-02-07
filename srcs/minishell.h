@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/07 11:25:24 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 13:13:22 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_shell
 	char				*readline;
 	int					cmd_nbr;
 	int					is_exit;
+	int					fork_error;
 	int					save_stdin;
 	int					save_stdout;
 	int					tmp_stdin;
@@ -143,6 +144,7 @@ int				execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst);
 /*ERRORS*/
 
 void			no_such_file_error(t_list_pipes *pipe_lst);
+void			ft_fork_error(t_shell *shell);
 int				cd_error_msg(char *message, char *path);
 void			error_cmd_not_found(t_list_pipes *pipe_lst, char **cmd);
 int				is_directory(t_list_pipes *pipe_lst, char *path);
