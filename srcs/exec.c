@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 11:08:25 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:42:04 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_directory(t_list_pipes *pipe_lst, char *path)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(path, 2);
 	ft_putstr_fd(": Is a directory\n", 2);
-	pipe_lst->to_execute = 0;
+	pipe_lst->to_ex = 0;
 	closedir(dirptr);
 	g_return_val = 126;
 	return (1);
@@ -51,7 +51,7 @@ void	execute(t_shell *shell, t_list_pipes *pipe_lst)
 		ft_free("minishell: fork error\n", shell, 1, 1);
 	else if (pipe_lst->pid == 0)
 	{
-		if (pipe_lst->to_execute == 1)
+		if (pipe_lst->to_ex == 1)
 			cmd_test_execute(shell, pipe_lst);
 		ft_free("", shell, g_return_val, 1);
 	}
@@ -73,7 +73,7 @@ static void	cmd_middle_process(t_shell *shell, int pipe_fd[2], \
 	*fd_prev_pipe = fd_redirect(shell, shell->list_start, \
 		*fd_prev_pipe, pipe_fd);
 	redirect_file_in_out(shell->list_start);
-	if (shell->list_start->to_execute == 1)
+	if (shell->list_start->to_ex == 1)
 	{
 		if (execute_if_built_in(shell, shell->list_start) == -100)
 			execute(shell, shell->list_start);

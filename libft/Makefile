@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 15:49:39 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/01 16:13:09 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/02/05 21:01:54 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS:=	ft_isblank.c ft_isspace.c ft_calloc.c ft_strlcpy.c ft_toupper.c \
 		ft_min.c ft_max.c ft_abs.c ft_if.c ft_strjoin_free.c \
 		ft_lstlast.c ft_lstsize.c ft_lstadd_back.c ft_lstadd_front.c \
 		ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstnew.c ft_lstmap.c \
-		ft_is_charset.c
+		ft_is_charset.c ft_atol.c
 
 OBJS:= $(SRCS:.c=.o)
 

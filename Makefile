@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/01 16:20:24 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/02/05 20:09:52 by vchevill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,6 @@
 NAME := minishell
 
 CC := gcc -Wall -Werror -Wextra 
-
-DEBUG1 := -fsanitize=address -g3
-
-#DEBUG2 := -g
 
 SRCS :=	main.c \
 		built_in_pwd.c \
@@ -41,9 +37,8 @@ SRCS :=	main.c \
 		exec.c \
 		exec_builtin.c \
 		cmd_process.c \
-		errors.c \
-		debug_functions.c \
-		heredoc.c
+		ft_errors.c \
+		ft_heredoc.c
 
 ifneq ($(shell uname), Linux)
 READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
@@ -61,14 +56,14 @@ LIB := libft/libft.a
 all : libft $(NAME)
 
 $(NAME)	:	$(OBJS_FILES) $(LIB) Makefile
-			$(CC) $(DEBUG1) $(DEBUG2) $(OBJS_FILES) -o $(NAME) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline 
+			$(CC) $(OBJS_FILES) -o $(NAME) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline 
 
 libft	:	
 			$(MAKE) -C libft
 
-objs/%.o:	srcs/%.c	srcs/minishell.h libft/libft.h
+objs/%.o:	srcs/%.c	srcs/minishell.h $(LIB)
 			@mkdir -p objs
-			$(CC) $(DEBUG1) $(DEBUG2) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
+			$(CC) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
 			
 clean	:
 			rm -rf objs/

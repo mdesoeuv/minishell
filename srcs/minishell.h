@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/03 11:03:33 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/07 11:25:24 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_list_pipes
 {
 	pid_t						pid;
 	char						**command;
-	char						*cmd_path;
-	int							to_execute;
+	char						*cmd_pa;
+	int							to_ex;
 	int							is_builtin;
 	int							cmd_index;
 	char						*file_in;
@@ -76,10 +76,11 @@ void			ft_print_shell_struct(t_shell	shell);
 void			heredoc_sig_int(int code);
 void			sig_int_fork(int code);
 void			sig_quit(int code);
+void			sig_quit_heredoc(int code);
 
 /* BUILT-IN */
 int				print_working_directory(void);
-char			*return_working_directory(void);
+char			*return_working_directory(char *freeval, t_shell *shell);
 int				change_directory(t_shell *shell, char *arg);
 int				ft_parsing(char *line, t_shell	*shell, int i, int start);
 int				ft_free(char *message, t_shell *shell,
@@ -94,7 +95,7 @@ int				ft_unset(t_shell *shell, char *s);
 int				ft_unset_multi(t_shell *shell, char **command);
 char			*ft_getenv(t_shell *shell, char *var_name);
 int				is_value_in_envp(t_shell *shell, char *s);
-int				get_env_size(t_shell *shell);
+int				get_env_size(char **envp);
 void			sort_env(t_shell *shell);
 int				not_valid_varname(char *s);
 
@@ -155,6 +156,8 @@ char			**ft_split_quotes(char c, t_shell *shell);
 int				ft_strisnum(const char *str);
 void			no_such_file_error(t_list_pipes *pipe_lst);
 int				ft_putstr_fd_shell(char *s, int fd);
+void			set_shell_path(t_shell *shell);
+void			set_pwd(t_shell *shell);
 
 /*DEBUG*/
 

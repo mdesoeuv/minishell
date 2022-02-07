@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:45:33 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/28 09:51:16 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/04 15:42:14 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
 {
 	if (!pipe_lst->command[0])
 		return (-999);
-	if (pipe_lst->to_execute == 0)
+	if (pipe_lst->to_ex == 0)
 		return (-100);
 	if (is_it_builtin(pipe_lst) == 1)
 	{
@@ -100,4 +100,15 @@ int	execute_if_built_in(t_shell *shell, t_list_pipes *pipe_lst)
 			return (exec_builtin(shell, pipe_lst));
 	}
 	return (-100);
+}
+
+void	eval_child_status(int child_status)
+{
+	if (WIFEXITED(child_status) != 0)
+		g_return_val = WEXITSTATUS(child_status);
+	else
+	{
+		if (WIFSIGNALED(child_status) != 0)
+			g_return_val = WTERMSIG(child_status) + 128;
+	}
 }

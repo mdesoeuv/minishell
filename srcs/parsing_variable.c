@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:51:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/01/28 14:52:39 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:55:26 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ static void	ft_cmd_variable_change(int index_start, t_shell *shell,
 	free(tmp);
 }
 
+int static	ft_itoa_chgvar(char **variable_result, t_shell *shell)
+{
+	*variable_result = ft_itoa(g_return_val);
+	if (!(*variable_result))
+		ft_free("Error : malloc error\n", shell, 1, 1);
+	return (1);
+}
+
 void	ft_variable_replace(int i, t_shell *shell)
 {
 	int		index_start;
@@ -49,16 +57,16 @@ void	ft_variable_replace(int i, t_shell *shell)
 	index_start = i + 1;
 	is_malloc = 0;
 	while (shell->cmd_tmp[i] && shell->cmd_tmp[i] != ' '
-		&& shell->cmd_tmp[i] != '/' && shell->cmd_tmp[i] != '\"')
+		&& shell->cmd_tmp[i] != '/' && shell->cmd_tmp[i] != '\"'
+		&& shell->cmd_tmp[i] != '\'' && shell->cmd_tmp[i] != '=')
 		i++;
 	variable_name = ft_substr(shell->cmd_tmp, index_start, i - index_start);
 	if (!variable_name)
 		ft_free("Error : malloc error\n", shell, 1, 1);
+	if (variable_name[0] == '\0')
+		return ;
 	if (ft_strcmp(variable_name, "?") == 0)
-	{
-		is_malloc = 1;
-		variable_result = ft_itoa(g_return_val);
-	}	
+		is_malloc = ft_itoa_chgvar(&variable_result, shell);
 	else
 		variable_result = ft_getenv(shell, variable_name);
 	free(variable_name);

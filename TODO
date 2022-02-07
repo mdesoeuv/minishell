@@ -1,0 +1,11 @@
+pb de free not malloc var qd  export HEY="jjzjzzj jzjzjzj" puis ls -la $HEY VICTOR
+exit 99999 MOK
+env qui leak si lancement minishell puis ctrl D sans commande entre temps => intercepter ctld-D VICTOR
+fix la return value d'un ctrl c dans un heredoc au passage (remettre dans heredoc V2) : OK
+^c ^d etc OK
+makefile qui relink qd modif de la lib OK
+echo -n -n OK
+rl_clear_history OK
+Créer $PWD au lancement du Shell : OK
+Ne pas quitter si trop de forks MEHDI
+Cat ^\ : Quit 3 MEHDI

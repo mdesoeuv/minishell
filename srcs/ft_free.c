@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/03 10:57:02 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/05 20:12:57 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void	ft_free_cmd(t_shell *shell)
 		cursor = shell->list_start;
 		if (shell->list_start->command != NULL)
 			free_split(shell->list_start->command);
-		if (shell->list_start->cmd_path)
-			free(shell->list_start->cmd_path);
+		if (shell->list_start->cmd_pa)
+			free(shell->list_start->cmd_pa);
 		free(shell->list_start->file_in);
 		free(shell->list_start->file_out);
 		shell->list_start = shell->list_start->next;
@@ -65,7 +65,7 @@ int	ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
 	ft_free_cmd(shell);
 	if (is_exit)
 	{
-		clear_history();
+		rl_clear_history();
 		free_split(shell->envp);
 		exit(g_return_val);
 	}
