@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/08 21:49:49 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/08 22:03:30 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void	ft_init_main(t_shell *shell, char **argv, char **envp)
 	shell->is_exit = 1;
 	shell->fork_error = 0;
 	g_return_val = 0;
+	shell->cmd_tmp = NULL;
+	shell->list_start = NULL;
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
 	copy_set_envp(shell, envp);

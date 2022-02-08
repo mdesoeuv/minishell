@@ -1,6 +1,6 @@
 pb de free not malloc var qd  export HEY="jjzjzzj jzjzjzj" puis ls -la $HEY VICTOR
 exit 99999 MOK
-env qui leak si lancement minishell puis ctrl D sans commande entre temps => intercepter ctld-D VICTOR
+env qui leak si lancement minishell puis ctrl D sans commande entre temps A TESTER
 fix la return value d'un ctrl c dans un heredoc au passage (remettre dans heredoc V2) : OK
 ^c ^d etc OK
 makefile qui relink qd modif de la lib OK

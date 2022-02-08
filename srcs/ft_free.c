@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/05 20:12:57 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/08 22:02:28 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	ft_free_cmd(t_shell *shell)
 		free(shell->list_start->file_in);
 		free(shell->list_start->file_out);
 		shell->list_start = shell->list_start->next;
-		free(cursor);
+		if (cursor)
+			free(cursor);
 	}
 }
 
