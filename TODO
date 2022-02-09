@@ -8,5 +8,5 @@ echo -n -n OK
 rl_clear_history OK
 Créer $PWD au lancement du Shell : OK
 Ne pas quitter si trop de forks : OK => continuer de tester
-Cat ^\ : Quit 3 MEHDI
+Cat ^\ : Quit 3 MEHDI => OK sauf message d'erreur sur sortie 1 mais abime l'affichage si ctrl+c juste apres
 ctrl C avec 2 heredoc : ?
