@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:41 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/09 10:46:41 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 17:47:22 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,12 @@ typedef struct s_list_pipes
 typedef struct s_shell
 {
 	char				*readline;
+	int					no_heredoc;
 	int					cmd_nbr;
 	int					is_exit;
 	int					fork_error;
 	int					save_stdin;
 	int					save_stdout;
-	int					tmp_stdin;
-	int					tmp_stdout;
 	int					no_such_file;
 	char				**envp;
 	struct s_list_pipes	*list_start;
