@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 17:22:18 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/05 18:06:08 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 10:50:51 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,4 @@ void	heredoc_sig_int(int code)
 	printf("\n");
 	g_return_val = 1;
 	exit(g_return_val);
-}
-
-void	sig_quit(int code)
-{
-	(void)code;
-	rl_on_new_line();
-	rl_redisplay();
-	write(2, "  ", 2);
-	write(2, "\b\b", 2);
-}
-
-void	sig_quit_heredoc(int code)
-{
-	(void)code;
-	rl_on_new_line();
-	rl_redisplay();
-	write(2, "  ", 2);
-	write(2, "\b\b", 2);
 }

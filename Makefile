@@ -6,7 +6,7 @@
 #    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/09 08:38:12 by mdesoeuv         ###   ########lyon.fr    #
+#    Updated: 2022/02/09 10:51:37 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS :=	main.c \
 		ft_free.c \
 		built_in_echo.c \
 		built_in_exit.c \
-		signal.c \
+		signal_int.c \
+		signal_quit.c \
 		parsing_chevron.c \
 		parsing_variable.c \
 		parsing_quotes.c \

@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/07 13:09:05 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 10:49:24 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	end_cmd_process(t_shell *shell)
 	wait_all_pid_v2(shell);
 	close_file_pipes(shell);
 	restore_fd(shell);
+	signal(SIGQUIT, &sig_quit);
 	shell->fork_error = 0;
 }
 
@@ -98,6 +99,7 @@ void	new_cmd_process(t_shell *shell)
 	open_in_out_all(shell);
 	fd_prev_pipe = 0;
 	signal(SIGINT, sig_int_fork);
+	signal(SIGQUIT, sig_quit_fork);
 	while (shell->list_start && shell->fork_error == 0)
 	{
 		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
