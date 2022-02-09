@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 12:45:51 by mdesoeuv          #+#    #+#              #
-#    Updated: 2022/02/05 20:09:52 by vchevill         ###   ########.fr        #
+#    Updated: 2022/02/09 08:38:12 by mdesoeuv         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME := minishell
 
-CC := gcc -Wall -Werror -Wextra 
+CC := gcc -Wall -Werror -Wextra -fsanitize=address -g3
 
 SRCS :=	main.c \
 		built_in_pwd.c \
