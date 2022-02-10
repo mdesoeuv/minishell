@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:21:25 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/04 13:57:52 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:20:49 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,58 @@ static char	**ft_split_quotes_2(char c, t_shell *shell, t_split *split)
 	return ((*split).tab);
 }
 
+static int	ft_wordcount_mshell(char c, t_shell *shell, t_split *split)
+{
+	int	count;
+
+	count = 1;
+	while (shell->cmd_tmp[(*split).i])
+	{
+		if (shell->cmd_tmp[(*split).i] == c)
+		{
+			if ((*split).i - (*split).start_index > 0)
+				count++;
+			(*split).start_index = ++((*split).i);
+		}
+		else if (shell->cmd_tmp[(*split).i] == '\'')
+		{
+			((*split).i)++;
+			while (shell->cmd_tmp[(*split).i]
+				&& shell->cmd_tmp[(*split).i] != '\'')
+				((*split).i)++;
+		}
+		else if (shell->cmd_tmp[(*split).i] == '$')
+			ft_variable_replace((*split).i, shell);
+		else
+			((*split).i)++;
+	}
+	return (count);
+}
+
+char	**malloc_return_mshell(char ***tab,
+	char c, t_shell *shell, t_split *split)
+{
+	if (!shell->cmd_tmp)
+		return (NULL);
+	*tab = (char **)malloc(sizeof(char *)
+			* (ft_wordcount_mshell(c, shell, split) + 1));
+	if (!tab)
+		return (NULL);
+	else
+		return (*tab);
+}
+
 char	**ft_split_quotes(char c, t_shell *shell)
 {
 	t_split	split;
 
 	split.i = 0;
 	split.j = 0;
-	if (malloc_return(&(split.tab), shell->cmd_tmp, c) == NULL)
+	split.start_index = 0;
+	if (malloc_return_mshell(&(split.tab), c, shell, &split) == NULL)
 		return (NULL);
-	split.start_index = split.i;
+	split.i = 0;
+	split.start_index = 0;
 	ft_split_quotes_2(c, shell, &split);
 	if (split.i - split.start_index > 0)
 	{

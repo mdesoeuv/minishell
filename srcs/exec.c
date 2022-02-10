@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:32:38 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/09 17:52:00 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2022/02/10 11:20:24 by vchevill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	new_cmd_process(t_shell *shell)
 	fd_prev_pipe = 0;
 	signal(SIGINT, sig_int_fork);
 	signal(SIGQUIT, sig_quit_fork);
-	while (shell->list_start && shell->fork_error == 0 && shell->no_heredoc == 0)
+	while (shell->list_start && shell->fork_error == 0
+		&& shell->no_heredoc == 0)
 	{
 		cmd_middle_process(shell, pipe_fd, &fd_prev_pipe, &i);
 		shell->list_start = shell->list_start->next;
