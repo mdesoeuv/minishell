@@ -6,7 +6,7 @@
 /*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:21:25 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/10 11:20:49 by vchevill         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:50:42 by vchevill         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	ft_split_quotes_variable_replace( t_shell *shell,
 	if (shell->cmd_tmp[i] == '$')
 	{
 		ft_variable_replace(i, shell);
+		i++;
 	}
 	if (shell->cmd_tmp[i] == '\'' || shell->cmd_tmp[i] == '\"')
 	{
@@ -69,6 +70,7 @@ static int	ft_wordcount_mshell(char c, t_shell *shell, t_split *split)
 			if ((*split).i - (*split).start_index > 0)
 				count++;
 			(*split).start_index = ++((*split).i);
+			((*split).i)--;
 		}
 		else if (shell->cmd_tmp[(*split).i] == '\'')
 		{
@@ -76,11 +78,11 @@ static int	ft_wordcount_mshell(char c, t_shell *shell, t_split *split)
 			while (shell->cmd_tmp[(*split).i]
 				&& shell->cmd_tmp[(*split).i] != '\'')
 				((*split).i)++;
+			((*split).i)--;
 		}
 		else if (shell->cmd_tmp[(*split).i] == '$')
 			ft_variable_replace((*split).i, shell);
-		else
-			((*split).i)++;
+		((*split).i)++;
 	}
 	return (count);
 }
