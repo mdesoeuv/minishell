@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:00:17 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/11 09:55:54 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/02/11 11:34:09 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	main(int argc, char **argv, char **envp)
 		shell.readline = \
 			readline("\001\033[0;36m\033[1m\002minishell > \001\033[0m\002");
 	}
-	ft_putstr_fd("Exit\n", 2);
+	ft_putstr_fd("exit\n", 2);
 	ft_free("", &shell, g_return_val, 1);
 	return (g_return_val);
 }
