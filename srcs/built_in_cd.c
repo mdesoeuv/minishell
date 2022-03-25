@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vchevill <vchevill@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 11:53:58 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/04 15:13:29 by vchevill         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 17:31:15 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ static int	access_check(char *path)
 	}
 	if (access(path, F_OK) == -1)
 		return (cd_error_msg("No such file or directory", path));
-	if (access(path, R_OK) == -1)
-		return (cd_error_msg("Permission denied", path));
 	dirptr = opendir(path);
 	if (!dirptr)
 		return (cd_error_msg("Not a directory", path));
 	closedir(dirptr);
+	if (access(path, R_OK) == -1)
+		return (cd_error_msg("Permission denied", path));
 	return (1);
 }
 
