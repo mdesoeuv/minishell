@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:12:21 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/07 13:07:17 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 20:38:19 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,10 @@ int	executed_cmd_nbr(t_shell *shell)
 
 int	wait_all_pid_v2(t_shell *shell)
 {
-	int				i;
 	t_list_pipes	*pipe_tmp;
 	int				child_status;
-	int				exec_cmd_nbr;
 	int				wait_status;
 
-	exec_cmd_nbr = executed_cmd_nbr(shell);
-	i = 0;
 	pipe_tmp = shell->list_start;
 	while (shell->list_start->next)
 	{
@@ -62,18 +58,15 @@ int	wait_all_pid_v2(t_shell *shell)
 
 int	wait_all_pid(t_shell *shell)
 {
-	int				i;
 	t_list_pipes	*pipe_tmp;
 	int				child_status;
 
-	i = 0;
 	pipe_tmp = shell->list_start;
 	while (shell->list_start->next)
 	{
 		if (shell->list_start->to_ex == 1)
 			waitpid(shell->list_start->pid, NULL, 0);
 		shell->list_start = shell->list_start->next;
-		i++;
 	}
 	if (shell->list_start->to_ex == 1 && (shell->list_start->is_builtin \
 		== 0 || (shell->list_start->is_builtin == 1 && shell->cmd_nbr > 1)))

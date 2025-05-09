@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 01:24:22 by vchevill          #+#    #+#             */
-/*   Updated: 2022/02/09 17:48:06 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 20:37:25 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ static void	ft_free_cmd(t_shell *shell)
 
 int	ft_free(char *message, t_shell *shell, int g_return_val_param, int is_exit)
 {
-	int	i;
-
-	i = -1;
 	g_return_val = g_return_val_param;
 	shell->no_heredoc = 0;
 	ft_putstr_fd(message, 2);

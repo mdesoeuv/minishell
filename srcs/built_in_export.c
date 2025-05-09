@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:42:01 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/02/07 10:17:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 20:37:05 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,11 @@ int	is_value_in_envp(t_shell *shell, char *s)
 
 int	ft_export(t_shell *shell, char *s)
 {
-	int		i;
-
 	if (!s[0])
 	{
 		print_sorted_env(shell);
 		return (0);
 	}
-	i = 1;
 	if (!(ft_isalpha(s[0]) == 1 || s[0] == '_') || not_valid_varname(s) == 1)
 	{
 		ft_putstr_fd("minishell: export: `", 2);

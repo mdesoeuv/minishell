@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 11:13:50 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2021/11/03 09:44:36 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 20:36:28 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ static int	ft_isitcomplete(const char *haystack, const char *needle)
 char	*ft_strstr(const char *haystack, const char *needle)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	if (needle[0] == 0)
 		return ((char *)haystack);
 	while (haystack[i])

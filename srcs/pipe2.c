@@ -6,7 +6,7 @@
 /*   By: mdesoeuv <mdesoeuv@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:32:46 by mdesoeuv          #+#    #+#             */
-/*   Updated: 2022/01/27 13:45:34 by mdesoeuv         ###   ########lyon.fr   */
+/*   Updated: 2025/05/09 20:38:31 by mdesoeuv         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ void	redirect_file_in_out(t_list_pipes *pipe_lst)
 
 int	close_file_pipes(t_shell *shell)
 {
-	int				i;
 	t_list_pipes	*start_lst;
 
 	start_lst = shell->list_start;
-	i = 0;
 	while (shell->list_start != NULL)
 	{
 		if (shell->list_start->file_in != NULL)
@@ -81,7 +79,6 @@ int	close_file_pipes(t_shell *shell)
 		if (shell->list_start->file_out != NULL)
 			close(shell->list_start->fd_file_out);
 		shell->list_start = shell->list_start->next;
-		i++;
 	}
 	shell->list_start = start_lst;
 	return (0);
